@@ -1,4 +1,37 @@
+
 <html>
+<?php
+require_once ("../../conf/settings.php"); //please make sure the path is correct
+ // complete your answer here
+ $conn = @mysqli_connect($host,
+		$user,
+		$pswd,
+		$dbnm
+	);
+	if (!$conn) {
+			echo "<p>Database connection failure</p>";
+	} else {
+		$createquery = "CREATE TABLE IF NOT EXISTS glance (
+		  glance_id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+		  name VARCHAR(45) DEFAULT NULL,
+		  mon VARCHAR(45) DEFAULT NULL,
+		  tue varchar(40) DEFAULT NULL,
+		  wed VARCHAR(40) DEFAULT NULL,
+		  thu VARCHAR(40) DEFAULT NULL,
+		  fri VARCHAR(40) DEFAULT NULL
+		)";
+		$result = mysqli_query($conn, $createquery);
+		if (!$result) {
+				echo "<p>Something is wrong with creating table",	mysqli_error($conn), "</p>";
+			}
+			else
+			{
+				mysqli_free_result($result);
+			}
+			mysqli_close($conn);
+	}
+	
+?>
 <head>
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
@@ -8,6 +41,7 @@
 </head>
 <body>
 <script>
+
 function getMonday(d) {
   d = new Date(d);
   var day = d.getDay();
@@ -30,7 +64,7 @@ $(document).ready(function () {
 	var fri = document.getElementById("fri");
 	fri.innerHTML = (day+4)+" FRI";
     var counter = 0;
-	var counter2=0;
+	var counter2= $('#calendar tr').length-2;
 	
     $("#addrow").on("click", function () {
         var newRow = $("<tr>");
@@ -77,7 +111,7 @@ $("#addrowtocalendar").on("click", function () {
 function nameClicked(n)
 {
 	n.setAttribute("style","display:none;");
-	var nth = n.parentNode.parentNode.rowIndex-2;
+	var nth = n.parentNode.parentNode.rowIndex;
 	console.log(nth);
 	 var testq = document.getElementById("testq"+nth);
 	
@@ -86,7 +120,7 @@ function nameClicked(n)
 }
 function updateName(n)
 {
-	var nth = n.parentNode.parentNode.rowIndex-2;
+	var nth = n.parentNode.parentNode.rowIndex;
 	var ttest = document.getElementById("test"+nth);
 	ttest.innerHTML = n.value;
 	
@@ -95,7 +129,7 @@ function updateName(n)
 }
 function switchInput(n)
 {
-	var nth = n.parentNode.parentNode.rowIndex-2;
+	var nth = n.parentNode.parentNode.rowIndex;
 	var ttest = document.getElementById("test"+nth);
 	ttest.setAttribute("style","display:block;");
 	n.setAttribute("style","display:none;");
@@ -114,29 +148,42 @@ function switchInput(n)
 			</tr>
 		</thead>
 		<tbody>
-			<tr>
-				<td class="col-sm-4">
-					<input type="text" name="name" class="form-control" />
-				</td>
-				<td class="col-sm-4">
-				m
-				</td>
-				<td class="col-sm-4">
-				m
-				</td>
-				<td class="col-sm-4">
-				m
-				</td>
-				<td class="col-sm-4">
-				m
-				</td>
-				<td class="col-sm-4">
-				m
-				</td>
-				<td class="col-sm-2"><a class="deleteRow"></a>
-
-				</td>
-			</tr>
+			<?php
+		 	require_once ("../../conf/settings.php"); //please make sure the path is correct
+			 // complete your answer here
+			 $conn = @mysqli_connect($host,
+					$user,
+					$pswd,
+					$dbnm
+				);
+				if (!$conn) {
+						echo "<p>Database connection failure</p>";
+				} else {
+					$createquery = "SELECT * from glance";
+					$result = mysqli_query($conn, $createquery);
+					if (!$result) {
+									echo "<p>Something is wrong with selecting table",	mysqli_error($conn),  "</p>";
+								}
+								else
+								{
+									$cnt=1;
+										 while ($row = mysqli_fetch_assoc($result)){
+									echo "<tr>";
+									echo "<td><div id='test".$cnt."' onclick='nameClicked(this)'>".$row["name"]."</div><input type='text' id='testq".$cnt."' style='display:none' value='".$row["name"]."' onfocusout='switchInput(this)' onchange='updateName(this)' class='form-control' /></td>";
+									echo "<td>",$row["mon"],"</td>";
+									echo "<td>",$row["tue"],"</td>";
+									echo "<td>",$row["wed"],"</td>";
+									echo "<td>",$row["thu"],"</td>";
+									echo "<td>",$row["fri"],"</td>";
+									echo "</tr>";
+									$cnt++;
+										 }
+									mysqli_free_result($result);
+								}
+								mysqli_close($conn);
+				}
+			 
+			?>
 		</tbody>
 		<tfoot>
 			<tr>
