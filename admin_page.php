@@ -4,9 +4,22 @@
         <title>Glance</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        
+        <!--Adds the cursor move icon when the cursor is over a tr (row) element nestled in a tbody element -->
+        <style> 
+    tbody tr{
+      cursor: move; 
+      }
+
+      .role{
+        font-style: italic;
+      }
+      </style>
     </head>
     <body>
         <?php
@@ -64,18 +77,27 @@ include 'variables.php' //Contains current month for righ aligned display, and t
                     clientCount--;
                 });
 
-                //When the name of a client is clicked, turns into a text box.
-                $("#clienttable").on("click", ".clientNameBox", function () {
-                    var name = $(this).text(); //Save text value stored inside clicked client name
-                    $(this).closest("td").append("<input type='text' class='form control' value='" + name + "'> </input>"); //Select the closed td divider and add a input option, with the name of the client as the value
-                    $(this).toggle();
-                });
+                //When the name of a client or consultant is clicked, make that text editable.
+                $(document).on('click', '.row_data', function(event) 
+	{
+		event.preventDefault(); 
+
+		if($(this).attr('edit_type') == 'button')
+		{
+			return false; 
+		}
+
+		//make div editable
+		$(this).closest('div').attr('contenteditable', 'true');
+	
+		$(this).focus();
+    });
 
                 //Function to create consultant row. Takes consultant name as argument (NEED TO ADD ALLOCATION AT A LATER STAGE AS AN ARGUEMENT?)
                 function addConsultantRow(consultantName) {
                     consultantCount++; //Increase consultant count by one
                     var id = 'consultant' + consultantCount; //Create the consultant ID
-                    var consultantRow = "<tr id='" + id + "'><td>" + consultantName + "</td>"; //Start html for new client row
+                    var consultantRow = "<tr id='" + id + "'><td><div class='row_data' edit_type='click'>"+ consultantName +"</div><br><div class='role row_data' edit_type='click'>Developer</div></td>"; //Start html for new client row
                     for (z = 0; z < 5; z++) { //Create 5 columns for the new client row, with client dropdowns
                         consultantRow += "<td>";
                         consultantRow += "<select class='form-control' id='clientdropdown'>";
@@ -94,13 +116,17 @@ include 'variables.php' //Contains current month for righ aligned display, and t
                 function addClientRow(clientName) {
                     clientCount++; //Increase the number of rows in table
                     var id = "client" + clientCount; //Create row id
-                    var clientRow = "<tr id='" + id + "'>"; //Start row html
-                    clientRow += "<td ><div class='clientNameBox'>" + clientName + "</div></td>"; // Add consultant name and a click event passing the bonx to the nameClicked function
+                    var clientRow = "<tr id='" + id + "' draggable='true'>"; //Start row html
+                    clientRow += "<td ><div class='row_data' edit_type='click'>" + clientName + "</div></td>"; // Add consultant name and a click event passing the bonx to the nameClicked function
                     clientRow += "<td></td>"; // Add empty allocation colunm
                     clientRow += "<td><input type='button' class='btn-failure btn-lg' id='removeClientButton' value='Remove'/></td>";
                     clientRow += "</tr>"; //End row html
                     $("#clienttable").append(clientRow);
                 }
+                
+                $("tbody").sortable(); //Using the jquery UI library, makes items within tbody elements sortable
+                $(".contatiner-fluid").attr('contenteditable','true');
+
             });
         </script>
 
