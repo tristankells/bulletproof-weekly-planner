@@ -10,8 +10,8 @@
     </head>
     <body>
         <?php
-        include 'variables.php' //Contains current month for righ aligned display, and the days of the month, for the current days of the week;
-        ?>
+include 'variables.php' //Contains current month for righ aligned display, and the days of the month, for the current days of the week;
+?>
         <script>
             $(document).ready(function () { //Load the jquery when document is fully loaded
 
@@ -35,7 +35,7 @@
                     addConsultantRow(consultants[i]);
                 }
 
-                //Create client table from the starting list of clients 
+                //Create client table from the starting list of clients
                 for (i = 0; i < clients.length; i++)
                 {
                     addClientRow(clients[i]);
@@ -68,7 +68,7 @@
                 $("#clienttable").on("click", ".clientNameBox", function () {
                     var name = $(this).text(); //Save text value stored inside clicked client name
                     $(this).closest("td").append("<input type='text' class='form control' value='" + name + "'> </input>"); //Select the closed td divider and add a input option, with the name of the client as the value
-                    $(this).toggle();                         
+                    $(this).toggle();
                 });
 
                 //Function to create consultant row. Takes consultant name as argument (NEED TO ADD ALLOCATION AT A LATER STAGE AS AN ARGUEMENT?)
@@ -122,7 +122,7 @@
                                 <th><?php echo $days[4]; ?> <br>FRI</th>
                             </tr>
                         </thead>
-                        <tbody id="consultanttable"> 
+                        <tbody id="consultanttable">
 
                         </tbody>
                         <tr id="lastconsultantrow"> <!-- The last table row-->
@@ -142,7 +142,7 @@
                                         <th>Team Members</th>
                                     </tr>
                                 </thead>
-                                <tbody id="clienttable"> 
+                                <tbody id="clienttable">
                                 </tbody>
                                 <tr id="lastclientrow"> <!-- The last table row-->
                                     <td > <!--Adds the "Add client" button the to the bottom of the table"-->
