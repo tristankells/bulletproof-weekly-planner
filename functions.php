@@ -3,7 +3,8 @@
 function addClient($name, $abbreviation)
 {
     echo "<tr>";
-    echo "<td id='clientName'> $name ($abbreviation)</td>";
+    echo "<td id='clientName'>$name</td>";
+    echo "<td>($abbreviation)</td>";
     echo "<td> </td>";
     echo "<td><input type='button' id='removeClient' value='REMOVE'/></td>";
     echo "</tr>";

@@ -3,7 +3,7 @@
 require_once 'databaseConnection.php';
 require_once 'functions.php';
 
-$query = "SELECT clientName FROM clients";
+$query = "SELECT clientAbbrev FROM clients";
 
 $clientResults = $conn->query($query);
 
@@ -11,7 +11,7 @@ $clientNames = array();
 
 if ($clientResults->num_rows > 0) {
     while ($row = $clientResults->fetch_assoc()) {
-        array_push($clientNames, $row['clientName']);
+        array_push($clientNames, $row['clientAbbrev']);
     }
 }
 

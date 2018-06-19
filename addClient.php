@@ -22,4 +22,4 @@ $query = "INSERT INTO clients VALUES ('" . $clientName . "','" . $clientAbbrev .
 //Run query on connection
 $result = $conn->query($query);
 
-addClient($clientName);
+addClient($clientName, $clientAbbrev);

@@ -16,7 +16,7 @@ require_once 'functions.php';
 $name = $_POST["consultantName"];
 $role = $_POST["consultantRole"];
 
-$query = "SELECT clientName FROM clients";
+$query = "SELECT clientAbbrev FROM clients";
 
 $clientResults = $conn->query($query);
 
@@ -24,7 +24,7 @@ $clientNames = array();
 
 if ($clients->num_rows > 0) {
     while ($row = $clientResults->fetch_assoc()) {
-        array_push($clientNames, $row['clientName']);
+        array_push($clientNames, $row['clientAbbrev']);
     }
 }
 
