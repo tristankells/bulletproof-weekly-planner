@@ -36,9 +36,11 @@
                 },
                 function (data) { //Call back function to excute after the request to the server is processed
                     $("#clienttable").append(data); //Append the data recieved from the server to the client table
+                    $("#consultanttable").empty();
+                    $("#consultanttable").load("getConsultants.php");
                 });
 
-            $("#consultanttable").load("getConsultants.php");
+
         });
 
         $("#consultanttable").on("change", "#consultantName", function() {
@@ -63,6 +65,10 @@
             $.post("removeClient.php", //Request data from server using POST, url is removeClient.php
                 {
                     clientName: $(this).closest("tr").find("#clientName").html() //Pass the value of the table column with the id clientName within the closest table row to the removeclientbutton(this)
+                }, function () {
+
+                    $("#consultanttable").empty();
+                    $("#consultanttable").load("getConsultants.php");
                 });
             $(this).closest("tr").remove(); //Remove the closest table row to the button
         });
@@ -122,7 +128,7 @@
                 <input type="text" placeholder="Consultant Role" value="Test" id="consultantroleinput" />
             </td>
             <td colspan="5">
-                <input type="button" value="Add Client" id="addconsultantbutton" />
+                <input type="button" value="Add Consultant" id="addconsultantbutton" />
             </td>
         </tr>
     </table>
@@ -152,4 +158,5 @@
         </tbody>
     </table>
 </body>
+
 </html>

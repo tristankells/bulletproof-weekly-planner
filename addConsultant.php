@@ -20,10 +20,18 @@ $query = "SELECT clientName FROM clients";
 
 $clientResults = $conn->query($query);
 
+$clientNames = array();
+
+if ($clients->num_rows > 0) {
+    while ($row = $clientResults->fetch_assoc()) {
+        array_push($clientNames, $row['clientName']);
+    }
+}
+
 //Query to insert new client information to the client table stored in the application database
 $query = "INSERT INTO consultants VALUES ('" . $name . "','" . $role . "')";
 
 //Run query on connection
 $result = $conn->query($query);
 
-addConsultant($name,$clientResults);
+addConsultant($name,$clientNames);

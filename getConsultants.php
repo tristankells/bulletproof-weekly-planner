@@ -7,6 +7,14 @@ $query = "SELECT clientName FROM clients";
 
 $clientResults = $conn->query($query);
 
+$clientNames = array();
+
+if ($clientResults->num_rows > 0) {
+    while ($row = $clientResults->fetch_assoc()) {
+        array_push($clientNames, $row['clientName']);
+    }
+}
+
 //Query to retrieve all client names from clients table
 $query = "SELECT consultantsName FROM consultants";
 
@@ -16,7 +24,7 @@ $result = $conn->query($query);
 //If clients in database, insert a table row for each one
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        addConsultant($row['consultantsName'],$clientResults);
+        addConsultant($row['consultantsName'],$clientNames);
     }
 }
 
