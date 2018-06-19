@@ -1,158 +1,146 @@
+<!DOCTYPE html>
 <html>
+
 <head>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
 </head>
-<body>
 <script>
-function getMonday(d) {
-  d = new Date(d);
-  var day = d.getDay();
-   var diff = d.getDate() - day + (day == 0 ? -6:1); // adjust when day is sunday
-  return new Date(d.setDate(diff));
-}
-$(document).ready(function () {
-	var today = new Date();
-	var monday = getMonday(today);
-	var day = monday.getDate();
-	var mon = document.getElementById("mon");
-	mon.innerHTML = day+ " MON";
-	var tue = document.getElementById("tue");
-	tue.innerHTML = (day+1)+" TUE";
-	var wed = document.getElementById("wed");
-	wed.innerHTML = (day+2)+" WED";
-	var thu = document.getElementById("thu");
-	thu.innerHTML = (day+3)+" THU";
-	var fri = document.getElementById("fri");
-	fri.innerHTML = (day+4)+" FRI";
+    $(document).ready(function () { //Load the javascript when the page is loaded
 
-    var counter = 0;
-	var counter2=0;
-    $("#addrow").on("click", function () {
-        var newRow = $("<tr>");
-        var cols = "";
+        $("#consultanttable").load("getConsultants.php"); //Retrieve the consultants rows from the database and load the consultant table
 
-        cols += '<td><input type="text" class="form-control" name="name' + counter + '"/></td>';
-        cols += '<td><input type="text" class="form-control" name="mail' + counter + '"/></td>';
+        $("#clienttable").load("getClients.php"); //Retrieve  the client rows from the database and load to the clienttable
 
-        cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
-        newRow.append(cols);
-        $("#clienttable").append(newRow);
-        counter++;
+        $("#addclientbutton").click(function () { //Add a click event to the addclientbutton
+            $.post("addClient.php", //Request data from server using POST, url is addClient.php
+                {
+                    clientName: $("#clientnameinput").val(), //Pass the value of client name input to server
+                    clientAbbrev: $("#clientabrevationinput").val()  //Pass the value of client abbrevation input to server
+                },
+                function (data) { //Call back function to excute after the request to the server is processed
+                    $("#clienttable").append(data); //Append the data recieved from the server to the client table
+                });
+
+            $("#consultanttable").load("getConsultants.php");
+        });
+
+        $("#addconsultantbutton").click(function () { //Add a click event to the addclientbutton
+            $.post("addConsultant.php", //Request data from server using POST, url is addClient.php
+                {
+                    consultantName: $("#consultantnameinput").val(), //Pass the value of client name input to server
+                    consultantRole: $("#consultantroleinput").val()  //Pass the value of client abbrevation input to server
+                },
+                function (data) { //Call back function to excute after the request to the server is processed
+                    $("#consultanttable").append(data); //Append the data recieved from the server to the client table
+                });
+        });
+
+        $("#clienttable").on("click", "#removeClient", function () { //Add a click event to all remove client button on the client table
+            $.post("removeClient.php", //Request data from server using POST, url is removeClient.php
+                {
+                    clientName: $(this).closest("tr").find("#clientName").html() //Pass the value of the table column with the id clientName within the closest table row to the removeclientbutton(this)
+                });
+            $(this).closest("tr").remove(); //Remove the closest table row to the button
+        });
+
+        $("#consultanttable").on("click", "#removeConsultant", function () { //Add a click event to all remove client button on the client table
+
+            alert($(this).closest("tr").find("#consultantName").html());
+
+            $.post("removeConsultant.php", //Request data from server using POST, url is removeClient.php
+
+                {
+                    consultantName: $(this).closest("tr").find("#consultantName").html() //Pass the value of the table column with the id clientName within the closest table row to the removeclientbutton(this)
+                });
+            $(this).closest("tr").remove(); //Remove the closest table row to the button
+        });
+
+
+        $("#clientdropdown")
     });
 
-
-
-    $("#clienttable").on("click", ".ibtnDel", function (event) {
-        $(this).closest("tr").remove();
-        counter -= 1
-    });
-
-$("#addrowtocalendar").on("click", function () {
-        var newRow = $("<tr>");
-        var cols = "";
-
-        cols += '<td><input type="text" class="form-control" name="name' + counter2 + '"/></td>';
-        cols += '<td>'+counter2+'</td>';
-		cols += '<td>'+counter2+'</td>';
-		cols += '<td>'+counter2+'</td>';
-		cols += '<td>'+counter2+'</td>';
-		cols += '<td>'+counter2+'</td>';
-
-        cols += '<td><input type="button" class="ibtnDel btn btn-md btn-danger "  value="Delete"></td>';
-        newRow.append(cols);
-        $("#calendar").append(newRow);
-        counter2++;
-    });
-	$("#calendar").on("click", ".ibtnDel", function (event) {
-        $(this).closest("tr").remove();
-        counter2 -= 1
-    });
-
-});
 </script>
-<div class="container">
-	<table id="calendar" class=" table order-list">
-		<thead>
-			<tr>
-				<td>logo</td>
-				<td id="mon"></td>
-				<td id="tue"></td>
-				<td id="wed"></td>
-				<td id="thu"></td>
-				<td id="fri"></td>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td class="col-sm-4">
-					<input type="text" name="name" class="form-control" />
-				</td>
-				<td class="col-sm-4">
-				m
-				</td>
-				<td class="col-sm-4">
-				m
-				</td>
-				<td class="col-sm-4">
-				m
-				</td>
-				<td class="col-sm-4">
-				m
-				</td>
-				<td class="col-sm-4">
-				m
-				</td>
-				<td class="col-sm-2"><a class="deleteRow"></a>
 
-				</td>
-			</tr>
-		</tbody>
-		<tfoot>
-			<tr>
-				<td colspan="5" style="text-align: left;">
-					<input type="button" class="btn btn-lg btn-block " id="addrowtocalendar" value="Add Row" />
-				</td>
-			</tr>
-			<tr>
-			</tr>
-		</tfoot>
-	</table>
-</div>
-	<div class="container">
-		<table id="clienttable" class=" table order-list">
-		<thead>
-			<tr>
-				<td>Client</td>
-				<td>Team Members</td>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td class="col-sm-4">
-					<input type="text" name="name" class="form-control" />
-				</td>
-				<td class="col-sm-4">
-					<input type="mail" name="mail"  class="form-control"/>
-				</td>
-				</td>
-				<td class="col-sm-2"><a class="deleteRow"></a>
-
-				</td>
-			</tr>
-		</tbody>
-		<tfoot>
-			<tr>
-				<td colspan="5" style="text-align: left;">
-					<input type="button" class="btn btn-lg btn-block " id="addrow" value="Add Row" />
-				</td>
-			</tr>
-			<tr>
-			</tr>
-		</tfoot>
-	</table>
-	</div>
+<body>
+    <!--Consultant Table -->
+    <h1>Consultant Table</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th colspan="2">Client</th>
+                <th colspan="2">Monday </th>
+                <th colspan="2">Tue</th>
+                <th colspan="2">Wed</th>
+                <th colspan="2">Thu</th>
+                <th colspan="2">Fri</th>
+            </tr>
+            <tr>
+                <th colspan="2"></th>
+                <th>AM</th>
+                <th>PM</th>
+                <th>AM</th>
+                <th>PM</th>
+                <th>AM</th>
+                <th>PM</th>
+                <th>AM</th>
+                <th>PM</th>
+                <th>AM</th>
+                <th>PM</th>
+            </tr>
+        </thead>
+        <tbody id="consultanttable"></tbody>
+        <tr>
+            <td colspan="5">
+                <input type="text" placeholder="Consultant Name" value="Test" id="consultantnameinput" />
+            </td>
+            <td colspan="5">
+                <input type="text" placeholder="Consultant Role" value="Test" id="consultantroleinput" />
+            </td>
+            <td colspan="5">
+                <input type="button" value="Add Client" id="addconsultantbutton" />
+            </td>
+        </tr>
+    </table>
+    <!--Client Table -->
+    <h1>Client Table</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Client</th>
+                <th>Who</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tbody id="clienttable"></tbody>
+            <tr>
+                <td>
+                    <input type="text" placeholder="Client Name" value="Test" id="clientnameinput" />
+                </td>
+                <td>
+                    <input type="text" placeholder="Client Abbrevation" value="Test" id="clientabrevationinput" />
+                </td>
+                <td>
+                    <input type="button" value="Add Client" id="addclientbutton" />
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </body>
 </html>
