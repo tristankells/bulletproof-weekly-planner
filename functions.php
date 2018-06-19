@@ -13,7 +13,7 @@ function addClient($name, $abbreviation)
 function addConsultant($name, $clients)
 {
     echo "<tr>";
-    echo "<td id='consultantName' colspan='2'>" . $name . "</td>";
+    echo "<td colspan='2'><input id='consultantName' contenteditable='true' value = '$name'> </td>";
     for ($x = 0; $x < 10; $x++) {
         echo "<td><select class='form-control' id='clientdropdown'><option></option>";
         if (sizeof($clients) > 0 ) {
