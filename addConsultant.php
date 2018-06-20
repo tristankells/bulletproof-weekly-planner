@@ -22,7 +22,7 @@ $clientResults = $conn->query($query);
 
 $clientNames = array();
 
-if ($clients->num_rows > 0) {
+if ($clientResults->num_rows > 0) {
     while ($row = $clientResults->fetch_assoc()) {
         array_push($clientNames, $row['clientAbbrev']);
     }
