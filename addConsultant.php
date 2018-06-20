@@ -34,4 +34,6 @@ $query = "INSERT INTO consultants VALUES ('" . $name . "','" . $role . "')";
 //Run query on connection
 $result = $conn->query($query);
 
-addConsultant($name,$clientNames);
+$empty = array();
+
+addConsultant($name,$clientNames, $empty);
