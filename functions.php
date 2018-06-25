@@ -4,7 +4,7 @@ function addClient($name, $abbreviation)
 {
     echo "<tr>";
     echo "<td id='clientName'>$name</td>";
-    echo "<td>($abbreviation)</td>";
+    echo "<td id='clientAbrevation'>$abbreviation</td>";
     echo "<td> </td>";
     echo "<td><input type='button' id='removeClient' value='REMOVE'/></td>";
     echo "</tr>";
@@ -18,7 +18,7 @@ function addConsultant($name, $clients, $currentAllocations)
     echo "<tr>";
     echo "<td colspan='2'><input id='consultantName' value = '$name'> </td>"; //Set consultant name
     for ($x = 0; $x < 10; $x++) { //Iterate through the ten dropdown lists that make up a client potnetial AM/PM allocations
-        echo "<td><select class='form-control' id='clientdropdown'><option></option>"; //
+        echo "<td ><select class='form-control clientdropdown'><option></option>"; //
         if (sizeof($clients) > 0) { //If clients exist, populate dropdown options
             for ($i = 0; $i < sizeof($clients); $i++) { 
                 echo "<option value='$clients[$i]' ";
@@ -30,7 +30,7 @@ function addConsultant($name, $clients, $currentAllocations)
                 echo ">$clients[$i]</option>";
             }
         }
-        echo "</td>";
+        echo "</select></td>";
     }
     echo "<td><input type='button' id='removeConsultant' value='REMOVE'/></td>";
     echo "</tr>";

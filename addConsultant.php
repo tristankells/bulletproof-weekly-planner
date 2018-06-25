@@ -14,9 +14,9 @@ require_once 'databaseConnection.php';
 require_once 'functions.php';
 
 $name = $_POST["consultantName"];
-$role = $_POST["consultantRole"];
+$role = $_POST["consultantJob"];
 
-$query = "SELECT clientAbbrev FROM clients";
+$query = "SELECT ClientAbbrevation FROM clients";
 
 $clientResults = $conn->query($query);
 
@@ -24,15 +24,19 @@ $clientNames = array();
 
 if ($clientResults->num_rows > 0) {
     while ($row = $clientResults->fetch_assoc()) {
-        array_push($clientNames, $row['clientAbbrev']);
+        array_push($clientNames, $row['ClientAbbrevation']);
     }
 }
 
-//Query to insert new client information to the client table stored in the application database
-$query = "INSERT INTO consultants VALUES ('" . $name . "','" . $role . "')";
+//Query to insert new consultant information to the client table stored in the application database
+$query = "INSERT INTO consultants (ConsultantName, ConsultantJob) VALUES ('" . $name . "','" . $role . "')";
 
 //Run query on connection
 $result = $conn->query($query);
+
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 
 $empty = array();
 

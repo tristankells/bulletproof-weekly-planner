@@ -36,24 +36,29 @@
                 },
                 function (data) { //Call back function to excute after the request to the server is processed
                     $("#clienttable").append(data); //Append the data recieved from the server to the client table
-                    $("#consultanttable").empty();
-                    $("#consultanttable").load("getConsultants.php");
+                    $(".clientdropdown").append("<option value='" + $("#clientabrevationinput").val() + "'>" + $("#clientabrevationinput").val() + "</option>") //Add the abbreavtion of the added client to the consultant's dropdown
+
+                    //   $(".clientdropdown").empty();
+                    //  $(".clientdropdown").load("getClientDropdown.php");
+
+                    // $("#consultanttable").empty();
+                    // $("#consultanttable").load("getConsultants.php");
                 });
 
 
         });
 
-        $("#consultanttable").on("change", "#consultantName", function() {
+        $("#consultanttable").on("change", "#consultantName", function () {
             var x = document.getElementById("consultantName");
             alert("test");
             x.innerHTML = x.innerHTML.toUpperCase();
         });
-        
+
         $("#addconsultantbutton").click(function () { //Add a click event to the addclientbutton
             $.post("addConsultant.php", //Request data from server using POST, url is addClient.php
                 {
                     consultantName: $("#consultantnameinput").val(), //Pass the value of client name input to server
-                    consultantRole: $("#consultantroleinput").val()  //Pass the value of client abbrevation input to server
+                    consultantJob: $("#consultantroleinput").val()  //Pass the value of client abbrevation input to server
                 },
                 function (data) { //Call back function to excute after the request to the server is processed
                     $("#consultanttable").append(data); //Append the data recieved from the server to the client table
@@ -61,13 +66,15 @@
         });
 
         $("#clienttable").on("click", "#removeClient", function () { //Add a click event to all remove client button on the client table
+            var thisClientRow = $(this).closest("tr"); //Store the client table row
+            var thisClientAbbrevation = thisClientRow.find("#clientAbrevation").html(); //Store client abbrevation
+            var thisClientName = thisClientRow.find("#clientName").html(); //Store client name
+
             $.post("removeClient.php", //Request data from server using POST, url is removeClient.php
                 {
-                    clientName: $(this).closest("tr").find("#clientName").html() //Pass the value of the table column with the id clientName within the closest table row to the removeclientbutton(this)
+                    clientName: thisClientName //Pass the value of the table column with the id clientName within the closest table row to the removeclientbutton(this)
                 }, function () {
-
-                    $("#consultanttable").empty();
-                    $("#consultanttable").load("getConsultants.php");
+                    $("option[value='" + thisClientAbbrevation + "']").remove(); //Remove the abbrevation from the consultant dropdown
                 });
             $(this).closest("tr").remove(); //Remove the closest table row to the button
         });
@@ -84,8 +91,21 @@
             $(this).closest("tr").remove(); //Remove the closest table row to the button
         });
 
+        $("#consultanttable").on("change", ".clientdropdown", function () {
+            selectedClient = $(this).find(":selected").val();
 
-        $("#clientdropdown")
+            alert(selectedClient);
+
+        });
+
+        $('.clientdropdown').change(function () {
+
+            $(this).find(":selected").each(function () {
+                console.log($(this).val());
+            });
+        });
+
+
     });
 
 </script>
