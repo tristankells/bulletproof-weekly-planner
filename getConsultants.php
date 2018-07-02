@@ -1,19 +1,6 @@
 <?php
 
-require_once 'databaseConnection.php';
-require_once 'functions.php';
-
-$query = "SELECT ClientAbbrevation FROM clients";
-
-$clientResults = $conn->query($query);
-
-$clientNames = array();
-
-if ($clientResults->num_rows > 0) {
-    while ($row = $clientResults->fetch_assoc()) {
-        array_push($clientNames, $row['ClientAbbrevation']);
-    }
-}
+require_once 'database.php';
 
 //Query to retrieve all client names from clients table
 $query = "SELECT * FROM consultants";
@@ -23,21 +10,27 @@ $result = $conn->query($query);
 
 //If clients in database, insert a table row for each one
 if ($result->num_rows > 0) {
+    $consultantsArray = array();
     while ($row = $result->fetch_assoc()) {
-
-        $allocations = array();
-        array_push($allocations,$row['MondayAm']);
-        array_push($allocations,$row['MondayPm']);
-        array_push($allocations,$row['TuesdayAm']);
-        array_push($allocations,$row['TuesdayPm']);
-        array_push($allocations,$row['WednesdayAm']);
-        array_push($allocations,$row['WednesdayPm']);
-        array_push($allocations,$row['ThursdayAm']);
-        array_push($allocations,$row['ThursdayPm']);
-        array_push($allocations,$row['FridayAm']);
-        array_push($allocations,$row['FridayPm']);
-        addConsultant($row['ConsultantName'], $clientNames, $allocations);
+        $consultant =
+            [
+            "name" => $row['ConsultantName'],
+            "role" => $row['ConsultantJob'],
+            "allocation0" => $row['MondayAm'],
+            "allocation1" => $row['MondayPm'],
+            "allocation2" => $row['TuesdayAm'],
+            "allocation3" => $row['TuesdayPm'],
+            "allocation4" => $row['WednesdayAm'],
+            "allocation5" => $row['WednesdayPm'],
+            "allocation6" => $row['ThursdayAm'],
+            "allocation7" => $row['ThursdayPm'],
+            "allocation8" => $row['FridayAm'],
+            "allocation9" => $row['FridayPm'],
+        ];
+        array_push($consultantsArray, $consultant);
     }
 }
-
+// Convert Array to JSON String
+$consultantsJSON = json_encode($consultantsArray);
+echo $consultantsJSON;
 mysqli_close($conn);

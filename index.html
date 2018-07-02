@@ -2,72 +2,137 @@
 <html>
 
 <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title>Glance</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <!-- Latest compiled and minified CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-    <!-- jQuery library -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
-    <!-- Latest compiled JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
-    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
 <script>
     $(document).ready(function () { //Load the javascript when the page is loaded
 
-        $("#consultanttable").load("getConsultants.php"); //Retrieve the consultants rows from the database and load the consultant table
+        var clients = [],
+            consultants = [];
 
-        $("#clienttable").load("getClients.php"); //Retrieve the client rows from the database and load to the clienttable
+        //Retrieve the JSON representation of clients from the server 
+        $.get("getClients.php", function (data, status) {
+            clients = JSON.parse(data); //Decode json to array of clients
 
+            //Retrieve the JSON representation of clients from the server
+            $.get("getConsultants.php", function (data, status) {
+
+                consultants = JSON.parse(data); //Decode json to array of consultants
+                //Populate the client table with information from the database
+                for (x in clients) {
+                    addClientRow(clients[x]);
+                }
+                //Populate the consultant table with information from the database
+                for (x in consultants) {
+                    addConsultantRow(consultants[x]);
+                }
+            })
+        })
+
+        // Add a click event to the add client button
         $("#addclientbutton").click(function () { //Add a click event to the addclientbutton
-            $.post("addClient.php", //Request data from server using POST, url is addClient.php
+            $.post("addNewClient.php", //Request data from server using POST, url is addClient.php
                 {
                     clientName: $("#clientnameinput").val(), //Pass the value of client name input to server
                     clientAbbrev: $("#clientabrevationinput").val()  //Pass the value of client abbrevation input to server
                 },
-                function (data) { //Call back function to excute after the request to the server is processed
-                    $("#clienttable").append(data); //Append the data recieved from the server to the client table
-                    $(".clientdropdown").append("<option value='" + $("#clientabrevationinput").val() + "'>" + $("#clientabrevationinput").val() + "</option>") //Add the abbreavtion of the added client to the consultant's dropdown
-
-                    //   $(".clientdropdown").empty();
-                    //  $(".clientdropdown").load("getClientDropdown.php");
-
-                    // $("#consultanttable").empty();
-                    // $("#consultanttable").load("getConsultants.php");
+                function (data) { //After response is recieved from server
+                    addClientRow(JSON.parse(data)); //Append the data recieved from the server to the client table
                 });
-
-
         });
 
-        $("#consultanttable").on("change", "#consultantName", function () {
-            var x = document.getElementById("consultantName");
-            alert("test");
-            x.innerHTML = x.innerHTML.toUpperCase();
-        });
-
+        // Add a click event to the add consultant button
         $("#addconsultantbutton").click(function () { //Add a click event to the addclientbutton
-            $.post("addConsultant.php", //Request data from server using POST, url is addClient.php
+            $.post("addNewConsultant.php", //Request data from server using POST, url is addClient.php
                 {
                     consultantName: $("#consultantnameinput").val(), //Pass the value of client name input to server
                     consultantJob: $("#consultantroleinput").val()  //Pass the value of client abbrevation input to server
                 },
                 function (data) { //Call back function to excute after the request to the server is processed
-                    $("#consultanttable").append(data); //Append the data recieved from the server to the client table
+                    addConsultantRow(JSON.parse(data));
                 });
         });
 
-        $("#clienttable").on("click", "#removeClient", function () { //Add a click event to all remove client button on the client table
+        //Takes a single client and appends it to the client table
+        function addClientRow(client) {
+            var clientRow = "";
+            clientRow += "<tr>";
+            clientRow += "<td id='clientName'>" + client['name'] + "</td>";
+            clientRow += "<td id='clientAbbrevation'>" + client['abbrevation'] + "</td>";
+            clientRow += "<td id='" + client['name'] + "allocations'>";
+            for (z in consultants) { //Loop through number of consultants
+                consultant = consultants[z]; //Store a consultant
+                var clientAllocations = "";
+                for (const k in consultant) { //Loop through all the propoerties of th
+                    //Start new string for client 
+                    if (consultant[k] == client["abbrevation"]) { //Check that property of the consultant is the same as the the current client abbrevation
+                        if (!(clientAllocations.includes(consultant["name"]))) { //Check that clientAllocations DOES NOT include the name of the selected consultant
+                            clientAllocations += consultant["name"] + " ";
+                        }
+                    }
+                }
+                clientRow += clientAllocations;
+            }
+            clientRow += "</td>";
+            clientRow += "<td><input type='button' id='removeClient' value='REMOVE'/></td>";
+            clientRow += "</tr>";
+            $("#clienttablebody").append(clientRow);
+        }
+
+        //Takes a single consulant and appends it to the consultant table
+        function addConsultantRow(consultant) {
+            var consultantRow = ""; //Begin new consultant row
+            consultantRow += "<tr>";
+            consultantRow += "<td><input  id='consultantName' value='" + consultant['name'] + "'></input><br>" + consultant['role'] + "</td>"
+            for (i = 0; i < 10; i++) {
+                consultantRow += "<td><select class='form-control clientdropdown' id='allocation" + i + "'>";
+                consultantRow += "<option value='null'></option>"
+                for (z in clients) {
+                    var client = clients[z];
+                    consultantRow += "<option value='" + client['abbrevation'] + "'";
+                    if (consultant["allocation" + i] == client["abbrevation"]) {
+
+                        consultantRow += " selected='selected'"
+                    }
+                    consultantRow += ">" + client['abbrevation'] + "</option>"
+                }
+                consultantRow += "</select></td>";
+            }
+            consultantRow += "<td><input type='button' id='removeConsultant' value='REMOVE'/></td>";
+            consultantRow += "</tr>";
+            $("#consultantstablebody").append(consultantRow);
+        }
+
+        //WHen the dropdown for a consultant i chnaged send this update to the database
+        $("#consultantstable").on("change", ".clientdropdown", function () {
+
+            var selectedClient = $(this).find(":selected").val();
+
+            var allocationNo = $(this).prop("id");
+
+            var consultantRow = $(this).closest("tr");
+            var consultantName = consultantRow.find("#consultantName").prop("value");
+
+            $.post("updateAllocation.php",
+                {
+                    consultantName: consultantName,
+                    clientAbbrevation: selectedClient,
+                    allocationNo: allocationNo
+                }, function () {
+                    alert("Updated Database");
+                });
+        });
+
+        //Add a click event to all remove client button on the client table
+        $("#clientstable").on("click", "#removeClient", function () {
             var thisClientRow = $(this).closest("tr"); //Store the client table row
-            var thisClientAbbrevation = thisClientRow.find("#clientAbrevation").html(); //Store client abbrevation
+            var thisClientAbbrevation = thisClientRow.find("#clientAbbrevation").html(); //Store client abbrevation
             var thisClientName = thisClientRow.find("#clientName").html(); //Store client name
 
             $.post("removeClient.php", //Request data from server using POST, url is removeClient.php
@@ -79,7 +144,8 @@
             $(this).closest("tr").remove(); //Remove the closest table row to the button
         });
 
-        $("#consultanttable").on("click", "#removeConsultant", function () { //Add a click event to all remove client button on the client table
+        //Add a click event to all remove client button on the client table
+        $("#consultantstable").on("click", "#removeConsultant", function () {
 
             alert($(this).closest("tr").find("#consultantName").html());
 
@@ -91,91 +157,67 @@
             $(this).closest("tr").remove(); //Remove the closest table row to the button
         });
 
-        //When a dropdown is changed, send a request to update the consultant informtion in the database.
-        $("#consultanttable").on("change", ".clientdropdown", function () {
-
-            var selectedClient = $(this).find(":selected").val();
-           // alert(selectedClient);
-
-            var allocationNo = $(this).prop("id");
-           // alert(allocationNo);
-
-            var consultantRow = $(this).closest("tr");
-            var consultantName = consultantRow.find("#consultantName").prop("value");
-           // alert(consultantName);
-
-            $.post("updateAllocation.php",
-                {
-                    consultantName: consultantName,
-                    clientAbbrevation: selectedClient,
-                    allocationNo: allocationNo
-                }, function (){
-                    alert("Updated Database");
-                });
-        });
-
-
-
 
     });
-
 </script>
 
-
 <body>
-    <!--Consultant Table -->
-    <h1>Consultant Table</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th colspan="2">Client</th>
-                <th colspan="2">Monday </th>
-                <th colspan="2">Tue</th>
-                <th colspan="2">Wed</th>
-                <th colspan="2">Thu</th>
-                <th colspan="2">Fri</th>
-            </tr>
-            <tr>
-                <th colspan="2"></th>
-                <th>AM</th>
-                <th>PM</th>
-                <th>AM</th>
-                <th>PM</th>
-                <th>AM</th>
-                <th>PM</th>
-                <th>AM</th>
-                <th>PM</th>
-                <th>AM</th>
-                <th>PM</th>
-            </tr>
-        </thead>
-        <tbody id="consultanttable"></tbody>
-        <tr>
-            <td colspan="5">
-                <input type="text" placeholder="Consultant Name" value="Test" id="consultantnameinput" />
-            </td>
-            <td colspan="5">
-                <input type="text" placeholder="Consultant Role" value="Test" id="consultantroleinput" />
-            </td>
-            <td colspan="5">
-                <input type="button" value="Add Consultant" id="addconsultantbutton" />
-            </td>
-        </tr>
-    </table>
-    <!--Client Table -->
-    <h1>Client Table</h1>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Client</th>
-                <th>Who</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tbody id="clienttable"></tbody>
+    <div id="maindiv">
+        <div id="consultantsdiv">
+            <table id="consultantstable" class="table">
+                <thead id="consultantstablehead">
+                    <tr>
+                        <th>Client</th>
+                        <th colspan="2">Monday </th>
+                        <th colspan="2">Tue</th>
+                        <th colspan="2">Wed</th>
+                        <th colspan="2">Thu</th>
+                        <th colspan="2">Fri</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th>AM</th>
+                        <th>PM</th>
+                        <th>AM</th>
+                        <th>PM</th>
+                        <th>AM</th>
+                        <th>PM</th>
+                        <th>AM</th>
+                        <th>PM</th>
+                        <th>AM</th>
+                        <th>PM</th>
+                    </tr>
+                </thead>
+                <tbody id="consultantstablebody">
+
+                </tbody>
+
+            </table>
             <tr>
                 <td>
+                    <input type="text" placeholder="Consultant Name" value="Test" id="consultantnameinput" />
+                </td>
+                <td>
+                    <input type="text" placeholder="Consultant Role" value="Test" id="consultantroleinput" />
+                </td>
+                <td>
+                    <input type="button" value="Add Consultant" id="addconsultantbutton" />
+                </td>
+            </tr>
+        </div>
+        <div id="clientsdiv">
+            <table id="clientstable" class="table">
+                <thead id="clienttablehead">
+                    <th>Client</th>
+                    <th>Abbrevation</th>
+                    <th>Who</th>
+                </thead>
+                <tbody id="clienttablebody">
+                </tbody>
 
+            </table>
+            <tr>
+                <td>
                     <input type="text" placeholder="Client Name" value="Test" id="clientnameinput" />
                 </td>
                 <td>
@@ -185,8 +227,9 @@
                     <input type="button" value="Add Client" id="addclientbutton" />
                 </td>
             </tr>
-        </tbody>
-    </table>
+        </div>
+    </div>
 </body>
+
 
 </html>

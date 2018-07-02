@@ -7,7 +7,7 @@ Takes a client name handed in from POST and removes the the database record with
 that name.
 */
 
-require_once 'databaseConnection.php';
+require_once 'database.php';
 
 $name = $_POST['consultantName']; //Client name retrieved from post
 
