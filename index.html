@@ -10,6 +10,16 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
 </head>
+
+<style type="text/css">
+    /* Inputs with the class .names now as appear as normal text  */
+
+    .names {
+        background: rgba(0, 0, 0, 0);
+        border: none;
+    }
+</style>
+
 <script>
     $(document).ready(function () { //Load the javascript when the page is loaded
 
@@ -63,7 +73,7 @@
         function addClientRow(client) {
             var clientRow = "";
             clientRow += "<tr>";
-            clientRow += "<td id='clientName'>" + client['name'] + "</td>";
+            clientRow += "<td id='clientName' class='names'>" + client['name'] + "</td>";
             clientRow += "<td id='clientAbbrevation'>" + client['abbrevation'] + "</td>";
             clientRow += "<td id='" + client['name'] + "allocations'>";
             for (z in consultants) { //Loop through number of consultants
@@ -89,7 +99,7 @@
         function addConsultantRow(consultant) {
             var consultantRow = ""; //Begin new consultant row
             consultantRow += "<tr>";
-            consultantRow += "<td><input  id='consultantName' value='" + consultant['name'] + "'></input><br>" + consultant['role'] + "</td>"
+            consultantRow += "<td><input  id='consultantName' class='names' value='" + consultant['name'] + "'></input><br>" + consultant['role'] + "</td>"
             for (i = 0; i < 10; i++) {
                 consultantRow += "<td><select class='form-control clientdropdown' id='allocation" + i + "'>";
                 consultantRow += "<option value='null'></option>"
