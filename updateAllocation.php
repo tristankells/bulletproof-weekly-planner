@@ -10,7 +10,7 @@ $allocationNo = $_POST["allocationNo"];
 $dayTimeString;
 
 switch ($allocationNo) {
-    case "alocation0":
+    case "allocation0":
         $dayTimeString = 'MondayAm';
         break;
     case "allocation1":

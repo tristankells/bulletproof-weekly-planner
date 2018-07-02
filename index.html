@@ -123,19 +123,21 @@
         $("#consultantstable").on("change", ".clientdropdown", function () {
 
             var selectedClient = $(this).find(":selected").val();
+            alert(selectedClient);
 
             var allocationNo = $(this).prop("id");
-
+            alert(allocationNo);
             var consultantRow = $(this).closest("tr");
             var consultantName = consultantRow.find("#consultantName").prop("value");
+            alert(consultantName);
 
             $.post("updateAllocation.php",
                 {
                     consultantName: consultantName,
                     clientAbbrevation: selectedClient,
                     allocationNo: allocationNo
-                }, function () {
-                    alert("Updated Database");
+                }, function (data) {
+                    alert(data);
                 });
         });
 
