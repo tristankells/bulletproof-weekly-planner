@@ -12,11 +12,19 @@ $query = "INSERT INTO clients (ClientName, ClientAbbrevation) VALUES ('" . $clie
 //Run query on connection
 $result = $conn->query($query);
 
-$client =
-    [
-    "name" => $clientName,
-    "abbrevation" => $clientAbbrev,
-];
+//Query to insert new client information to the client table stored in the application database
+$query = "SELECT * FROM clients WHERE ClientName='$clientName'";
+//Run query on connection
+$result = $conn->query($query);
+
+while ($row = $result->fetch_assoc()) {
+    $client =
+        [
+        "id" => $row['ClientID'],
+        "name" => $row['ClientName'],
+        "abbrevation" => $row['ClientAbbrevation'],
+    ];
+}
 
 $clientJSON = json_encode($client);
 echo $clientJSON;

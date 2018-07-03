@@ -36,10 +36,12 @@
 
         //Retrieve the JSON representation of clients from the server 
         $.get("getClients.php", function (data, status) {
+     
             clients = JSON.parse(data); //Decode json to array of clients
 
             //Retrieve the JSON representation of clients from the server
             $.get("getConsultants.php", function (data, status) {
+                alert(data);
                 consultants = JSON.parse(data); //Decode json to array of consultants
                 //Populate the client table with information from the database
                 for (x in clients) {
@@ -64,12 +66,16 @@
                     clientAbbrev: newClientAbbrevation  //Pass the value of client abbrevation input to server
                 },
                 function (data) { //After response is recieved from server
-                    var clientDropdownOption = "";
+                    var clientDropdownOption = "",
+                        addedClient = {};
+
                     clientDropdownOption += "<option value='" + newClientAbbrevation + "'>";
                     clientDropdownOption += newClientAbbrevation + "</option>"
-
-                    addClientRow(JSON.parse(data)); //Append the data recieved from the server to the client table
                     $(".clientdropdown").append(clientDropdownOption) //Add the abbreavtion of the added client to the consultant's dropdown
+
+                    addedClient = JSON.parse(data);
+                    addClientRow(addedClient); //Append the data recieved from the server to the client table
+                    clients.push(addedClient);
                 });
         });
 
@@ -95,7 +101,7 @@
             for (z in consultants) { //Loop through number of consultants
                 consultant = consultants[z]; //Store a consultant
                 var clientAllocations = "";
-                for (const k in consultant) { //Loop through all the propoerties of th
+                for (const k in consultant) { //Loop through all the propoerties of the consultant
                     //Start new string for client 
                     if (consultant[k] == client["abbrevation"]) { //Check that property of the consultant is the same as the the current client abbrevation
                         if (!(clientAllocations.includes(consultant["name"]))) { //Check that clientAllocations DOES NOT include the name of the selected consultant
@@ -135,7 +141,7 @@
             $("#consultantstablebody").append(consultantRow);
         }
 
-        //WHen the dropdown for a consultant i chnaged send this update to the database
+        //WHen the dropdown for a consultant is chnaged send this update to the database
         $("#consultantstable").on("change", ".clientdropdown", function () {
 
             var selectedClient = $(this).find(":selected").val();
@@ -158,7 +164,7 @@
         $("#clientstable").on("click", "#removeClient", function () {
             var thisClientRow = $(this).closest("tr"); //Store the client table row
             var thisClientAbbrevation = thisClientRow.find("#clientAbbrevation").html(); //Store client abbrevation
-            var thisClientName = thisClientRow.find("#clientName").html(); //Store client name
+            var thisClientName = thisClientRow.find("#clientName").val(); //Store client name
 
             $.post("removeClient.php", //Request data from server using POST, url is removeClient.php
                 {
@@ -219,9 +225,8 @@
         /*
         *   @function removeConsultantFromClientWho
         *
-        *   Removes a consultants name from a client's WHO collumn, representing that the consultants
-        *   is no longer working on a project for the client. Called from the checkConsultantsAllocations
-        *   function
+        *   Removes a consultants name from a client's WHO collumn, representing the condition where the consultant
+        *   is no longer working on a project for the client.
         *
         *   @param {int} consultantID -ID NO of a consultant 
         *   @param {int} clientId - ID NO of client
