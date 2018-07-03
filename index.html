@@ -30,29 +30,9 @@
 <script>
     $(document).ready(function () { //Load the javascript when the page is loaded
 
+        //Intialise arrays for clients and consultants
         var clients = [],
             consultants = [];
-
-        clients = getCurrentClients();
-
-        consultants = getCurrentConsultants();
-
-        function getCurrentConsultants() {
-            $.get("getConsultants.php", function (data, status) {
-                var initialConsultants = [];
-                initialConsultants = JSON.parse(data);
-                return initialConsultants;
-
-            })
-        }
-
-        function getCurrentClients() {
-            $.get("getClients.php", function (data, status) {
-                var initialClients = [];
-                initialClients = JSON.parse(data); //Decode json to array of clients
-                return initialClients;
-            })
-        }
 
         //Retrieve the JSON representation of clients from the server 
         $.get("getClients.php", function (data, status) {
@@ -60,7 +40,6 @@
 
             //Retrieve the JSON representation of clients from the server
             $.get("getConsultants.php", function (data, status) {
-
                 consultants = JSON.parse(data); //Decode json to array of consultants
                 //Populate the client table with information from the database
                 for (x in clients) {
@@ -109,10 +88,10 @@
         //Takes a single client and appends it to the client table
         function addClientRow(client) {
             var clientRow = "";
-            clientRow += "<tr id='" + client['name'] + "row'>";
+            clientRow += "<tr id='" + client['id'] + "'>";
             clientRow += "<td><input type='text' id='clientName' class='names' value='" + client['name'] + "'></input></td>";
             clientRow += "<td id='clientAbbrevation'>" + client['abbrevation'] + "</td>";
-            clientRow += "<td id='" + client['name'] + "allocations'>";
+            clientRow += "<td id='allocatedclients'>";
             for (z in consultants) { //Loop through number of consultants
                 consultant = consultants[z]; //Store a consultant
                 var clientAllocations = "";
@@ -135,7 +114,7 @@
         //Takes a single consulant and appends it to the consultant table
         function addConsultantRow(consultant) {
             var consultantRow = ""; //Begin new consultant row
-            consultantRow += "<tr id='" + consultant['name'] + "row'>";
+            consultantRow += "<tr id='" + consultant['id'] + "'>";
             consultantRow += "<td><input type='text' id='consultantName' class='names' value='" + consultant['name'] + "'></input><br>" + consultant['role'] + "</td>"
             for (i = 0; i < 10; i++) {
                 consultantRow += "<td><select class='form-control clientdropdown' id='allocation" + i + "'>";
@@ -160,13 +139,11 @@
         $("#consultantstable").on("change", ".clientdropdown", function () {
 
             var selectedClient = $(this).find(":selected").val();
-            alert(selectedClient);
-
             var allocationNo = $(this).prop("id");
-            alert(allocationNo);
             var consultantRow = $(this).closest("tr");
             var consultantName = consultantRow.find("#consultantName").prop("value");
-            alert(consultantName);
+            var consultantID = consultantRow.prop("id")
+            checkConsultantsAllocations(consultantID);
 
             $.post("updateAllocation.php",
                 {
@@ -174,7 +151,6 @@
                     clientAbbrevation: selectedClient,
                     allocationNo: allocationNo
                 }, function (data) {
-                    alert(data);
                 });
         });
 
@@ -205,6 +181,66 @@
                 });
             $(this).closest("tr").remove(); //Remove the closest table row to the button
         });
+
+        //Funcation takes a consultant ID and a Clientname and returns true if that consultatnt has any allocation to the client
+        function checkIfConsultantIsAllocatedToClient(consultantID, clientAbbrevation) {
+            var clientCheck = false;
+            var consultantRow = $("#" + consultantID);
+            var i = 0;
+
+            for (i; i < 10; i++) {
+                clientForDay = consultantRow.find("#allocation" + i).val();
+                if (clientForDay === clientAbbrevation) {
+                    clientCheck = true;
+                }
+            }
+            if (clientCheck == true) {
+                return true;
+            }
+
+            else {
+                return false;
+            }
+        }
+
+        //Takes a Consultant ID, and checks if that consultant is allocated to any of the current clients
+        function checkConsultantsAllocations(consultantID) {
+            for (x in clients) {
+                var clientAbbrevation = clients[x]['abbrevation'];
+                if (checkIfConsultantIsAllocatedToClient(consultantID, clientAbbrevation)) {
+                    alert("Client is allocated to " + clientAbbrevation);
+                }
+                else {
+                    alert("Client is not allocated to " + clientAbbrevation);
+                    removeConsultantFromClientWho(consultantID, clients[x]['id']);
+                }
+            }
+        }
+        /*
+        *   @function removeConsultantFromClientWho
+        *
+        *   Removes a consultants name from a client's WHO collumn, representing that the consultants
+        *   is no longer working on a project for the client. Called from the checkConsultantsAllocations
+        *   function
+        *
+        *   @param {int} consultantID -ID NO of a consultant 
+        *   @param {int} clientId - ID NO of client
+        *
+        */
+        function removeConsultantFromClientWho(consultantID, clientId) {
+            var consultant = consultants.find(x => x['id'] == consultantID);
+            var consultantName = consultant['name'];
+
+            var clientRow = $("#clienttablebody").find("#" + clientId + "");
+            var allocatedClients = clientRow.find("#allocatedclients").text();
+            var newClients = allocatedClients.replace(consultantName, "");
+            clientRow.find("#allocatedclients").text(newClients);
+        }
+
+        $("#testbutton").click(function () {
+            removeConsultantFromClientWho("1", "1");
+        })
+
     });
 </script>
 
@@ -275,6 +311,8 @@
                 </td>
             </tr>
         </div>
+        <input type="button" id="testbutton" value="Test">
+        </input>
     </div>
 </body>
 

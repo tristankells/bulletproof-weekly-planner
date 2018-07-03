@@ -14,6 +14,7 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $consultant =
             [
+            "id" => $row['ConsultantID'],
             "name" => $row['ConsultantName'],
             "role" => $row['ConsultantJob'],
             "allocation0" => $row['MondayAm'],

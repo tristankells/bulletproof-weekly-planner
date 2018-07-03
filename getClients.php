@@ -3,7 +3,7 @@
 require_once 'database.php';
 
 //Query to retrieve all client names from clients table
-$query = "SELECT ClientName, ClientAbbrevation FROM clients";
+$query = "SELECT * FROM clients";
 
 //Run query on connection
 $result = $conn->query($query);
@@ -14,6 +14,7 @@ if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $client =
             [
+            "id" => $row['ClientID'],
             "name" => $row['ClientName'],
             "abbrevation" => $row['ClientAbbrevation'],
         ];
