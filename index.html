@@ -17,6 +17,13 @@
     .names {
         background: rgba(0, 0, 0, 0);
         border: none;
+        width: fit-content;
+    }
+
+    /* Increase the default width of txt input elements */
+
+    input[type=text] {
+        width: 300px;
     }
 </style>
 
@@ -25,6 +32,27 @@
 
         var clients = [],
             consultants = [];
+
+        clients = getCurrentClients();
+
+        consultants = getCurrentConsultants();
+
+        function getCurrentConsultants() {
+            $.get("getConsultants.php", function (data, status) {
+                var initialConsultants = [];
+                initialConsultants = JSON.parse(data);
+                return initialConsultants;
+
+            })
+        }
+
+        function getCurrentClients() {
+            $.get("getClients.php", function (data, status) {
+                var initialClients = [];
+                initialClients = JSON.parse(data); //Decode json to array of clients
+                return initialClients;
+            })
+        }
 
         //Retrieve the JSON representation of clients from the server 
         $.get("getClients.php", function (data, status) {
@@ -47,13 +75,22 @@
 
         // Add a click event to the add client button
         $("#addclientbutton").click(function () { //Add a click event to the addclientbutton
+            var newClientName, newClientAbbrevation;
+            newClientName = $("#clientnameinput").val(); //Store name of client to be added
+            newClientAbbrevation = $("#clientabrevationinput").val(); //Store abbrevation of client to be added
+
             $.post("addNewClient.php", //Request data from server using POST, url is addClient.php
                 {
-                    clientName: $("#clientnameinput").val(), //Pass the value of client name input to server
-                    clientAbbrev: $("#clientabrevationinput").val()  //Pass the value of client abbrevation input to server
+                    clientName: newClientName, //Pass the value of client name input to server
+                    clientAbbrev: newClientAbbrevation  //Pass the value of client abbrevation input to server
                 },
                 function (data) { //After response is recieved from server
+                    var clientDropdownOption = "";
+                    clientDropdownOption += "<option value='" + newClientAbbrevation + "'>";
+                    clientDropdownOption += newClientAbbrevation + "</option>"
+
                     addClientRow(JSON.parse(data)); //Append the data recieved from the server to the client table
+                    $(".clientdropdown").append(clientDropdownOption) //Add the abbreavtion of the added client to the consultant's dropdown
                 });
         });
 
@@ -72,8 +109,8 @@
         //Takes a single client and appends it to the client table
         function addClientRow(client) {
             var clientRow = "";
-            clientRow += "<tr>";
-            clientRow += "<td id='clientName' class='names'>" + client['name'] + "</td>";
+            clientRow += "<tr id='" + client['name'] + "row'>";
+            clientRow += "<td><input type='text' id='clientName' class='names' value='" + client['name'] + "'></input></td>";
             clientRow += "<td id='clientAbbrevation'>" + client['abbrevation'] + "</td>";
             clientRow += "<td id='" + client['name'] + "allocations'>";
             for (z in consultants) { //Loop through number of consultants
@@ -98,8 +135,8 @@
         //Takes a single consulant and appends it to the consultant table
         function addConsultantRow(consultant) {
             var consultantRow = ""; //Begin new consultant row
-            consultantRow += "<tr>";
-            consultantRow += "<td><input  id='consultantName' class='names' value='" + consultant['name'] + "'></input><br>" + consultant['role'] + "</td>"
+            consultantRow += "<tr id='" + consultant['name'] + "row'>";
+            consultantRow += "<td><input type='text' id='consultantName' class='names' value='" + consultant['name'] + "'></input><br>" + consultant['role'] + "</td>"
             for (i = 0; i < 10; i++) {
                 consultantRow += "<td><select class='form-control clientdropdown' id='allocation" + i + "'>";
                 consultantRow += "<option value='null'></option>"
@@ -168,8 +205,6 @@
                 });
             $(this).closest("tr").remove(); //Remove the closest table row to the button
         });
-
-
     });
 </script>
 
@@ -242,6 +277,5 @@
         </div>
     </div>
 </body>
-
 
 </html>
