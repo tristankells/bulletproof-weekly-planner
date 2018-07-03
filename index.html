@@ -36,7 +36,7 @@
 
         //Retrieve the JSON representation of clients from the server 
         $.get("getClients.php", function (data, status) {
-     
+
             clients = JSON.parse(data); //Decode json to array of clients
 
             //Retrieve the JSON representation of clients from the server
@@ -162,9 +162,11 @@
 
         //Add a click event to all remove client button on the client table
         $("#clientstable").on("click", "#removeClient", function () {
+
             var thisClientRow = $(this).closest("tr"); //Store the client table row
             var thisClientAbbrevation = thisClientRow.find("#clientAbbrevation").html(); //Store client abbrevation
             var thisClientName = thisClientRow.find("#clientName").val(); //Store client name
+
 
             $.post("removeClient.php", //Request data from server using POST, url is removeClient.php
                 {
@@ -181,7 +183,6 @@
             alert($(this).closest("tr").find("#consultantName").html());
 
             $.post("removeConsultant.php", //Request data from server using POST, url is removeClient.php
-
                 {
                     consultantName: $(this).closest("tr").find("#consultantName").html() //Pass the value of the table column with the id clientName within the closest table row to the removeclientbutton(this)
                 });
