@@ -8,10 +8,10 @@ $query = "SELECT * FROM clients";
 //Run query on connection
 $result = $conn->query($query);
 
-$clientsArray = array();
 //If clients in database, insert a table row for each one
+$clientsArray = array();
 if ($result->num_rows > 0) {
-
+    
     while ($row = $result->fetch_assoc()) {
         $client =
             [

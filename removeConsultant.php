@@ -9,9 +9,9 @@ that name.
 
 require_once 'database.php';
 
-$name = $_POST['consultantName']; //Client name retrieved from post
+$consultantID = $_POST['consultantID']; //Client name retrieved from post
 
-$query = "DELETE FROM consultants WHERE consultantsName = '" . $name ."'";
+$query = "DELETE FROM consultants WHERE ConsultantID = '" . $consultantID ."'";
 
 $result = $conn->query($query);
 

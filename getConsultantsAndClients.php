@@ -3,13 +3,34 @@
 require_once 'database.php';
 
 //Query to retrieve all client names from clients table
+$query = "SELECT * FROM clients";
+
+//Run query on connection
+$result = $conn->query($query);
+
+$clientsArray = array();
+//If clients in database, insert a table row for each one
+if ($result->num_rows > 0) {
+
+    while ($row = $result->fetch_assoc()) {
+        $client =
+            [
+            "id" => $row['ClientID'],
+            "name" => $row['ClientName'],
+            "abbrevation" => $row['ClientAbbrevation'],
+        ];
+        array_push($clientsArray, $client);
+    }
+}
+
+//Query to retrieve all client names from clients table
 $query = "SELECT * FROM consultants";
 
 //Run query on connection
 $result = $conn->query($query);
 
-//If clients in database, insert a table row for each one
 $consultantsArray = array();
+//If clients in database, insert a table row for each one
 if ($result->num_rows > 0) {
 
     while ($row = $result->fetch_assoc()) {
@@ -33,6 +54,6 @@ if ($result->num_rows > 0) {
     }
 }
 // Convert Array to JSON String
-$consultantsJSON = json_encode($consultantsArray);
-echo $consultantsJSON;
+$returnArrays = array($consultantsArray, $clientsArray);
+echo json_encode($returnArrays);
 mysqli_close($conn);

@@ -4,10 +4,10 @@
 require_once 'database.php';
 
 $clientName = $_POST["clientName"];
-$clientAbbrev = $_POST["clientAbbrev"];
+$clientAbbrevation = $_POST["clientAbbrev"];
 
 //Query to insert new client information to the client table stored in the application database
-$query = "INSERT INTO clients (ClientName, ClientAbbrevation) VALUES ('" . $clientName . "','" . $clientAbbrev . "')";
+$query = "INSERT INTO clients (ClientName, ClientAbbrevation) VALUES ('" . $clientName . "','" . $clientAbbrevation . "')";
 
 //Run query on connection
 $result = $conn->query($query);
