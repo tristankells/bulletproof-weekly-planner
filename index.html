@@ -75,7 +75,7 @@
             var clientRow = "",
                 consultant = {},
                 clientAllocations = "";
-        
+
             //Begin a new html table row containing the clients information
             clientRow = "<tr " +
                 "id='" + client['id'] +
@@ -387,15 +387,45 @@
                     consultantID: consultantID,
                     consultantName: newConsultantName
                 }, function (data) {
-                    alert("Updated");
                 });
         });
 
+        currentDate = new Date();
+        monday = new Date();
+
+        switch (currentDate.getDay()) {
+            case 0:
+                monday.setDate(monday.getDate() - 7);
+                break;
+            case 1:
+                monday.setDate(monday.getDate());
+                break;
+            case 2:
+                monday.setDate(monday.getDate() - 1);
+                break;
+            case 3:
+                monday.setDate(monday.getDate() - 2);
+                break;
+            case 4:
+                monday.setDate(monday.getDate() - 3);
+                break;
+            case 5:
+                monday.setDate(monday.getDate() - 4);
+                break;
+            case 6:
+                monday.setDate(monday.getDate() - 5);
+                break;
+        }
+
+        $('#consultantstableheadrow > .dates').each(function () {
+            $(this).append(monday.getDate() + $(this).index() - 1);
+        })
 
         //Populate page
         initialiseTables();
 
         $("#testbutton").click(function () {
+
         })
     })
 </script>
@@ -403,15 +433,16 @@
 <body>
     <div id="maindiv">
         <div id="consultantsdiv">
+            <h3>Consultant Table</h3>
             <table id="consultantstable" class="table">
                 <thead id="consultantstablehead">
-                    <tr>
+                    <tr id="consultantstableheadrow">
                         <th>Consultant</th>
-                        <th colspan="2">Monday </th>
-                        <th colspan="2">Tue</th>
-                        <th colspan="2">Wed</th>
-                        <th colspan="2">Thu</th>
-                        <th colspan="2">Fri</th>
+                        <th colspan="2" class="dates">Monday </th>
+                        <th colspan="2" class="dates">Tue </th>
+                        <th colspan="2" class="dates">Wed </th>
+                        <th colspan="2" class="dates">Thu </th>
+                        <th colspan="2" class="dates">Fri </th>
                     </tr>
                     <tr>
                         <th></th>
@@ -445,6 +476,7 @@
             </tr>
         </div>
         <div id="clientsdiv">
+            <h3>Client Table</h3>
             <table id="clientstable" class="table">
                 <thead id="clienttablehead">
                     <th>Client</th>
@@ -453,7 +485,6 @@
                 </thead>
                 <tbody id="clienttablebody">
                 </tbody>
-
             </table>
             <tr>
                 <td>
