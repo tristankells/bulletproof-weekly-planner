@@ -11,7 +11,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    
+
 </head>
 
 <style type="text/css">
@@ -216,6 +216,7 @@
         $("#addconsultantbutton").click(function () { //Add a click event to the add consultant button
             var newConsultantName = "",
                 newConsultantRole = "",
+                newConsultantPosition = 0,
                 nameUnique = true,
                 consultants = {},
                 addedConsultant = {},
@@ -236,11 +237,13 @@
                 if (nameUnique) {
                     $.get("getClients.php", function (data) {
                         clients = JSON.parse(data);
+                        newConsultantPosition = consultants.length + 1;
 
                         $.post("addNewConsultant.php", //Request data from server using POST, url is addClient.php
                             {
-                                consultantName: newConsultantName, //Pass the value of client name input to server
-                                consultantJob: newConsultantRole  //Pass the value of client abbrevation input to server
+                                consultantName: newConsultantName, //Pass the value of consultant name input to server
+                                consultantJob: newConsultantRole,  //Pass the value of consultant row input to server
+                                consultantPosition: newConsultantPosition
                             },
                             function (data) { //Call back function to excute after the request to the server is processed
                                 addedConsultant = JSON.parse(data);
@@ -261,6 +264,7 @@
                     consultantID = "";
 
                 thisConsultantRow = $(this).closest("tr");
+                consultantName = thisConsultantRow.data('name');
                 consultantID = thisConsultantRow.prop("id");
 
                 $.post("removeConsultant.php", //Request data from server using POST, url is removeClient.php
@@ -268,6 +272,15 @@
                         consultantID: consultantID //Pass the value of the table column with the id clientName within the closest table row to the removeclientbutton(this)
                     }, function (data) {
                         thisConsultantRow.remove(); //Remove the closest table row to the button
+
+                        //Loop though all the client WHO collumns and remove the consultant's name.
+                        $('#clienttablebody > tr').each(function () {
+                            var clientRow = $(this);
+                            whoColumn = clientRow.find('.who-column');
+                            allocatedClients = whoColumn.html();
+                            allocatedClients = allocatedClients.replace(consultantName, "");
+                            whoColumn.html(allocatedClients);
+                        })
                     });
 
             });

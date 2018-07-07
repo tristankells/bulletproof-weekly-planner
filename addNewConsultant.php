@@ -5,15 +5,15 @@ require_once 'database.php';
 
 $name = $_POST["consultantName"];
 $role = $_POST["consultantJob"];
-
+$position = $_POST["consultantPosition"];
 
 //Query to insert new consultant information to the client table stored in the application database
-$query = "INSERT INTO consultants (ConsultantName, ConsultantJob) VALUES ('" . $name . "','" . $role . "')";
+$query = "INSERT INTO consultants (ConsultantName, ConsultantJob, position) VALUES ('" . $name . "','" . $role . "', $position)";
 
 //Run query on connection
 $result = $conn->query($query);
 
-$query = "SELECT ConsultantID, ConsultantName, ConsultantJob FROM consultants WHERE ConsultantName='$name'";
+$query = "SELECT ConsultantID, ConsultantName, ConsultantJob, position FROM consultants WHERE ConsultantName='$name'";
 
 $result = $conn->query($query);
 
@@ -24,6 +24,7 @@ if ($result->num_rows > 0) {
             "id" => $row['ConsultantID'],
             "name" => $row['ConsultantName'],
             "role" => $row['ConsultantJob'],
+            "position" => $row['position'],
             "allocation0" => null,
             "allocation1" => null,
             "allocation2" => null,
