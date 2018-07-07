@@ -15,6 +15,17 @@
 </head>
 
 <style type="text/css">
+    /* Inputs with the class .names now as appear as normal text  */
+
+    .client-name-input {
+        background: rgba(0, 0, 0, 0);
+        border: none;
+    }
+
+    .consultant-name-input {
+        background: rgba(0, 0, 0, 0);
+        border: none;
+    }
 </style>
 
 <script>
@@ -64,11 +75,14 @@
             var clientRow = "",
                 consultant = {},
                 clientAllocations = "";
-
+        
             //Begin a new html table row containing the clients information
-            clientRow = "<tr id='" + client['id'] +
+            clientRow = "<tr " +
+                "id='" + client['id'] +
                 "' data-abbrevation='" + client['abbrevation'] + "'>";
-            clientRow += "<td>" + client['name'] + "</td>";
+            clientRow += "<td>" +
+                "<input class='client-name-input' value='" + client['name'] + "'>" +
+                "</input></td>";
             clientRow += "<td>" + client['abbrevation'] + "</td>";
             clientRow += "<td class='who-column'>";
 
@@ -106,7 +120,7 @@
 
             consultantRow = "<tr id='" + consultant['id'] +
                 "' data-name='" + consultant['name'] + "'>";
-            consultantRow += "<td>" + consultant['name'] + "</td>"
+            consultantRow += "<td><input class='consultant-name-input' value='" + consultant['name'] + "'></input></td>"
             for (i = 0; i < 10; i++) {
                 consultantRow += "<td><select" +
                     " class='form-control clientdropdown'" +
@@ -340,10 +354,46 @@
             })
         }
 
+        /*
+        Add a event listener to the client name input that when clicked away from, saves the clients new name to the 
+        database.
+        */
+        $('#maindiv').on('blur', ".client-name-input", function () {
+            var newClientName = "",
+                clientID = 0
+
+            newClientName = $(this).val();
+            clientID = $(this).closest('tr').prop('id');
+            $.post("updateClientName.php",
+                {
+                    clientID: clientID,
+                    clientName: newClientName
+                }, function (data) {
+                });
+        });
+
+        /*
+       Add a event listener to the client name input that when clicked away from, saves the clients new name to the 
+       database.
+       */
+        $('#maindiv').on('blur', ".consultant-name-input", function () {
+            var newConsultantName = "",
+                consultantID = 0
+
+            newConsultantName = $(this).val();
+            consultantID = $(this).closest('tr').prop('id');
+            $.post("updateConsultantName.php",
+                {
+                    consultantID: consultantID,
+                    consultantName: newConsultantName
+                }, function (data) {
+                    alert("Updated");
+                });
+        });
+
+
         //Populate page
         initialiseTables();
-
-
 
         $("#testbutton").click(function () {
         })
