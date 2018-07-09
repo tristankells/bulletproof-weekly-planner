@@ -40,6 +40,7 @@
 
         function initialiseTables() {
             $.get("getConsultantsAndClients.php", function (data) {
+                alert(data);
                 var databaseResults = [],
                     clients = [],
                     consultants = [];
@@ -419,7 +420,7 @@
                 consultantID = 0,
                 consultantRow = {};
 
-            newConsultantName = $(this).val(); 
+            newConsultantName = $(this).val();
             consultantRow = $(this).closest('tr');
             consultantID = consultantRow.prop('id');
             originalConsultantName = consultantRow.data('name');
@@ -433,7 +434,7 @@
                             clientRowWhoColumn = {},
                             allocatedClient = "";
 
-                        clientRow = $(this); 
+                        clientRow = $(this);
                         clientRowWhoColumn = clientRow.find(".who-column");
                         allocatedClients = clientRowWhoColumn.html(); //String for all the WHO consultants 
 
