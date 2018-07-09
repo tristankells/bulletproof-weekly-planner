@@ -62,7 +62,7 @@ if ($result->num_rows == 1) {
         Allocation5 VARCHAR(3),
         Allocation6 VARCHAR(3),
         Allocation7 VARCHAR(3),
-        Allocation8  VARCHAR(3),
+        Allocation8 VARCHAR(3),
         Allocation9 VARCHAR(3),
         PRIMARY KEY (ConsultantID)
         )";
