@@ -410,22 +410,42 @@
         /*
           #input #maindiv > .consultant-name-input
       
-          Add a blur event to the consultant name inputs (when they are clicked away from) which updates the database with the
-          new consultant name.
+          Add a blur event to the consultant name inputs (when they are clicked away from) which updates the database 
+          with the new consultant name. Alss updates the client's WHO columns which had the orginal name
         */
         $('#maindiv').on('blur', ".consultant-name-input", function () {
             var newConsultantName = "",
-                consultantID = 0
+                originalConsultantName = "",
+                consultantID = 0,
+                consultantRow = {};
 
-            newConsultantName = $(this).val();
-            consultantID = $(this).closest('tr').prop('id');
+            newConsultantName = $(this).val(); 
+            consultantRow = $(this).closest('tr');
+            consultantID = consultantRow.prop('id');
+            originalConsultantName = consultantRow.data('name');
             $.post("updateConsultantName.php",
                 {
                     consultantID: consultantID,
                     consultantName: newConsultantName
                 }, function (data) {
+                    $('#clienttablebody > tr').each(function () {
+                        var clientRow = {},
+                            clientRowWhoColumn = {},
+                            allocatedClient = "";
+
+                        clientRow = $(this); 
+                        clientRowWhoColumn = clientRow.find(".who-column");
+                        allocatedClients = clientRowWhoColumn.html(); //String for all the WHO consultants 
+
+                        if (allocatedClients.includes(originalConsultantName)) {
+                            allocatedClients = allocatedClients.replace(originalConsultantName,
+                                newConsultantName);
+                            consultantRow.data('name', newConsultantName)
+                            clientRowWhoColumn.html(allocatedClients);
+                        }
+                    });
                 });
-        });
+        })
 
         //Populate page
         initialiseTables();
