@@ -171,7 +171,7 @@
             @button #addclientbutton
 
             An click event is attached to the 'Add Client' button, which captures the input of the #clientnameinput and
-            the #clientabrevationinput. If the clien input is unquie, then the client information is added to the
+            the #b. If the clien input is unquie, then the client information is added to the
             database, the new client is rendered to the client table.
         */
         $("#addclientbutton").click(function () { //Add a click event to the addclientbutton
@@ -183,7 +183,7 @@
                 consultants = [];
 
             newClientName = $("#clientnameinput").val(); //Store name of client to be added
-            newClientAbbrevation = $("#clientabrevationinput").val(); //Store abbrevation of client to be added
+            newClientAbbrevation = $("#clientabbrevationinput").val(); //Store abbrevation of client to be added
             newClientAbbrevation = newClientAbbrevation.toUpperCase();
 
             $.get("getClients.php", function (data, status) {
@@ -199,38 +199,45 @@
                     }
                 }
 
-                if (nameUnique) {
-                    if (abbrevationUnique) {
-                        $.get("getConsultants.php", function (data, status) {
-                            consultants = JSON.parse(data);
+                if (newClientName !== "" && newClientAbbrevation !== "") {
+                    if (nameUnique) {
+                        if (abbrevationUnique) {
+                            $.get("getConsultants.php", function (data, status) {
+                                consultants = JSON.parse(data);
 
-                            $.post("addNewClient.php", //Request data from server using POST, url is addClient.php
-                                {
-                                    clientName: newClientName, //Pass the value of client name 
-                                    clientAbbrev: newClientAbbrevation  //Pass the value of client abbrevation 
-                                },
-                                function (data) { //After response is recieved from server
-                                    var optionHTML = "",
-                                        addedClient = {};
+                                $.post("addNewClient.php", //Request data from server using POST, url is addClient.php
+                                    {
+                                        clientName: newClientName, //Pass the value of client name 
+                                        clientAbbrev: newClientAbbrevation  //Pass the value of client abbrevation 
+                                    },
+                                    function (data) { //After response is recieved from server
+                                        var optionHTML = "",
+                                            addedClient = {};
 
-                                    optionHTML += "<option" +
-                                        " value='" + newClientAbbrevation + "'>" +
-                                        newClientAbbrevation + "</option>";
+                                        optionHTML += "<option" +
+                                            " value='" + newClientAbbrevation + "'>" +
+                                            newClientAbbrevation + "</option>";
 
-                                    //Add the client to the list of options in allocation's dropdown
-                                    $(".clientdropdown").append(optionHTML)
+                                        //Add the client to the list of options in allocation's dropdown
+                                        $(".clientdropdown").append(optionHTML)
 
-                                    addedClient = JSON.parse(data);
-                                    addClientToTable(addedClient, consultants); //Add client to page table
-                                });
-                        })
+                                        addedClient = JSON.parse(data);
+                                        addClientToTable(addedClient, consultants); //Add client to page table
+                                        $("#clientnameinput").val(null);
+                                        $("#clientabbrevationinput").val(null);
+                                    });
+                            })
+                        }
+                        else {
+                            alert("Abbrevation is not unquie");
+                        }
                     }
                     else {
-                        alert("Abbrevation is not unquie");
+                        alert("Name is not unquie");
                     }
                 }
                 else {
-                    alert("Name is not unquie");
+                    alert("Please enter name and abbrevation");
                 }
             })
         })
@@ -270,7 +277,6 @@
         $("#addconsultantbutton").click(function () {
             var newConsultantName = "",
                 newConsultantRole = "",
-                newConsultantPosition = 0,
                 nameUnique = true,
                 consultants = {},
                 addedConsultant = {},
@@ -287,25 +293,31 @@
                     }
                 }
 
-                if (nameUnique) {
-                    $.get("getClients.php", function (data) {
-                        clients = JSON.parse(data);
-                        newConsultantPosition = consultants.length + 1;
+                if (newConsultantName !== "") { //Check name field is not blank
+                    if (nameUnique) {
+                        $.get("getClients.php", function (data) {
+                            clients = JSON.parse(data);
+                            newConsultantPosition = consultants.length + 1;
 
-                        $.post("addNewConsultant.php", //Request data from server using POST, url is addClient.php
-                            {
-                                consultantName: newConsultantName, //Pass the value of consultant name input to server
-                                consultantJob: newConsultantRole,  //Pass the value of consultant row input to server
-                                consultantPosition: newConsultantPosition
-                            },
-                            function (data) { //Call back function to excute after the request to the server is processed
-                                addedConsultant = JSON.parse(data);
-                                addConsultantToTable(addedConsultant, clients);
-                            });
-                    })
+                            $.post("addNewConsultant.php", //Request data from server using POST, url is addClient.php
+                                {
+                                    consultantName: newConsultantName, //Pass the value of consultant name input to server
+                                    consultantJob: newConsultantRole,  //Pass the value of consultant row input to server
+                                },
+                                function (data) { //Call back function to excute after the request to the server is processed
+                                    addedConsultant = JSON.parse(data);
+                                    addConsultantToTable(addedConsultant, clients);
+                                    $("#clientnameinput").val(null);
+                                    $("#clientabbrevationinput").val(null);
+                                });
+                        })
+                    }
+                    else {
+                        alert("Name is not unique");
+                    }
                 }
                 else {
-                    alert("Name is not unique");
+                    alert("Please enter name");
                 }
             })
         })
@@ -592,7 +604,7 @@
                     <input type="text" placeholder="Client Name..." id="clientnameinput" />
                 </td>
                 <td>
-                    <input type="text" placeholder="Client Abbrevation..." id="clientabrevationinput" maxlength="3" />
+                    <input type="text" placeholder="Client Abbrevation..." id="clientabbrevationinput" maxlength="3" />
                 </td>
                 <td>
                     <input type="button" class="btn" value="Add Client" id="addclientbutton" />
