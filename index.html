@@ -26,6 +26,11 @@
         background: rgba(0, 0, 0, 0);
         border: none;
     }
+
+    .rolediv {
+        font-style: italic;
+
+    }
 </style>
 
 <script>
@@ -40,7 +45,6 @@
 
         function initialiseTables() {
             $.get("getConsultantsAndClients.php", function (data) {
-                alert(data);
                 var databaseResults = [],
                     clients = [],
                     consultants = [];
@@ -126,20 +130,32 @@
             //Begin a new html table row containing the consultants information
             consultantRow = "<tr id='" + consultant['id'] +
                 "' data-name='" + consultant['name'] + "'>";
-            consultantRow += "<td><input class='consultant-name-input' value='" + consultant['name'] + "'></input></td>"
+            consultantRow += "<td><input class='consultant-name-input' value='"
+                + consultant['name'] + "'/></br><div class='rolediv'>" + consultant['role']
+                + "</div></td>";
             for (i = 0; i < 10; i++) { //Loop through days in the week, times 2, and populate dropdowns
                 consultantRow += "<td><select" +
                     " class='form-control clientdropdown'" +
                     " id='allocation" + i + "'>";
-                consultantRow += "<option value='null'></option>"
+                consultantRow += "<option value='Open'></option>";
+                consultantRow += "<option value='Leave' ";
+                //Check if LEAVE is the client allocation
+                if (consultant["allocation" + i] == 'Leave') {
+                    consultantRow += "selected='selected'"
+                }
+                consultantRow += ">Leave</option>";
+
                 for (z in clients) { //Loop through clients
                     client = clients[z];
                     abbrevation = client['abbrevation'];
                     consultantRow += "<option value='" + abbrevation + "'";
+
                     //If consultants allocation matches clients name, dropdown option is selected
                     if (consultant["allocation" + i] == abbrevation) {
                         consultantRow += " selected='selected'"
                     }
+
+
                     consultantRow += ">" + client['abbrevation'] + "</option>"
                 }
                 consultantRow += "</select></td>";
@@ -409,12 +425,12 @@
         });
 
         /*
-          #input #maindiv > .consultant-name-input
+          #input #consultantstablebody > .consultant-name-input
       
           Add a blur event to the consultant name inputs (when they are clicked away from) which updates the database 
           with the new consultant name. Alss updates the client's WHO columns which had the orginal name
         */
-        $('#maindiv').on('blur', ".consultant-name-input", function () {
+        $('#consultantstablebody').on('blur', ".consultant-name-input", function () {
             var newConsultantName = "",
                 originalConsultantName = "",
                 consultantID = 0,
@@ -448,6 +464,30 @@
                 });
         })
 
+        /*
+          #input #consultantstablebody > .consultant-name-input
+              
+          Add a key press event to the consultant name inputs (when enter is clicked) which blurs the input box, 
+          causing the new name input to be saved to the database.
+        */
+        $("#consultantstablebody").on('keyup', '.consultant-name-input', function (e) {
+            if (e.keyCode === 13) {
+                this.blur();
+            }
+        });
+
+        /*
+         #input #clienttablebody > .client-name-input
+             
+         Add a key press event to the client name inputs (when enter is clicked) which blurs the input box, causing the 
+         name input to be saved to the database.
+        */
+        $("#clienttablebody").on('keyup', '.client-name-input', function (e) {
+            if (e.keyCode === 13) {
+                this.blur();
+            }
+        });
+
         //Populate page
         initialiseTables();
 
@@ -478,7 +518,7 @@
                 break;
         }
 
-        $('#consultantstableheadrow > .dates').each(function () {
+        $('#consultantstable > .dates').each(function () {
             $(this).append(monday.getDate() + $(this).index() - 1);
         })
 
@@ -526,10 +566,10 @@
             </table>
             <tr>
                 <td>
-                    <input type="text" placeholder="Consultant Name" value="Test" id="consultantnameinput" />
+                    <input type="text" placeholder="Consultant Name..." id="consultantnameinput" />
                 </td>
                 <td>
-                    <input type="text" placeholder="Consultant Role" value="Test" id="consultantroleinput" />
+                    <input type="text" placeholder="Consultant Role..." id="consultantroleinput" />
                 </td>
                 <td>
                     <input type="button" class="btn" value="Add Consultant" id="addconsultantbutton" />
@@ -549,10 +589,10 @@
             </table>
             <tr>
                 <td>
-                    <input type="text" placeholder="Client Name" value="Test" id="clientnameinput" />
+                    <input type="text" placeholder="Client Name..." id="clientnameinput" />
                 </td>
                 <td>
-                    <input type="text" placeholder="Client Abbrevation" value="Tes" id="clientabrevationinput" maxlength="3" />
+                    <input type="text" placeholder="Client Abbrevation..." id="clientabrevationinput" maxlength="3" />
                 </td>
                 <td>
                     <input type="button" class="btn" value="Add Client" id="addclientbutton" />
