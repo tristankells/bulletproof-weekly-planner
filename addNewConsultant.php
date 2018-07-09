@@ -5,10 +5,9 @@ require_once 'database.php';
 
 $name = $_POST["consultantName"];
 $role = $_POST["consultantJob"];
-$position = $_POST["consultantPosition"];
 
 //Query to insert new consultant information to the client table stored in the application database
-$query = "INSERT INTO consultants (ConsultantName, ConsultantJob, position) VALUES ('" . $name . "','" . $role . "', $position)";
+$query = "INSERT INTO consultants (ConsultantName, ConsultantJob) VALUES ('$name','$role')";
 
 //Run query on connection
 $result = $conn->query($query);
