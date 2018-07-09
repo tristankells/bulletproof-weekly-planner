@@ -13,7 +13,7 @@ $query = "INSERT INTO consultants (ConsultantName, ConsultantJob, position) VALU
 //Run query on connection
 $result = $conn->query($query);
 
-$query = "SELECT ConsultantID, ConsultantName, ConsultantJob, position FROM consultants WHERE ConsultantName='$name'";
+$query = "SELECT ConsultantID, ConsultantName, ConsultantJob FROM consultants WHERE ConsultantName='$name'";
 
 $result = $conn->query($query);
 
@@ -24,7 +24,6 @@ if ($result->num_rows > 0) {
             "id" => $row['ConsultantID'],
             "name" => $row['ConsultantName'],
             "role" => $row['ConsultantJob'],
-            "position" => $row['position'],
             "allocation0" => null,
             "allocation1" => null,
             "allocation2" => null,
