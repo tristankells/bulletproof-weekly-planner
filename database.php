@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 //AWS Database
 //$host = "glancedbinstance.ccw7olvlgk06.us-east-2.rds.amazonaws.com";
@@ -9,7 +9,7 @@
 $host = "127.0.0.1";
 $user = "root";
 $pswd = "";
-$dbnm = "test";
+$dbnm = "glance";
 
 $conn = new mysqli($host, $user, $pswd, $dbnm);
 

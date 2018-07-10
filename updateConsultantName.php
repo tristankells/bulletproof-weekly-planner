@@ -8,7 +8,7 @@ $consultantID = $_POST["consultantID"];
 $consultantName = $_POST["consultantName"];
 
 //Query to update a consultatns client allocation for a specific day/time
-$query = "UPDATE consultants SET ConsultantName = '$consultantName' WHERE ConsultantID = '$consultantID'";
+$query = "UPDATE consultants SET name = '$consultantName' WHERE id = '$consultantID'";
 
 //Run query on connection
 $result = $conn->query($query);

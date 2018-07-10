@@ -5,37 +5,34 @@ require_once 'database.php';
 
 $name = $_POST["consultantName"];
 $role = $_POST["consultantJob"];
+$position = $_POST["position"];
+$board = 1; //Placeholder
+$consultant = [];
 
 //Query to insert new consultant information to the client table stored in the application database
-$query = "INSERT INTO consultants (ConsultantName, ConsultantJob) VALUES ('$name','$role')";
+$query = "INSERT INTO consultants (name, role) VALUES ('$name','$role')";
 
 //Run query on connection
-$result = $conn->query($query);
-
-$query = "SELECT ConsultantID, ConsultantName, ConsultantJob FROM consultants WHERE ConsultantName='$name'";
-
-$result = $conn->query($query);
-
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        $consultant =
-            [
-            "id" => $row['ConsultantID'],
-            "name" => $row['ConsultantName'],
-            "role" => $row['ConsultantJob'],
-            "allocation0" => null,
-            "allocation1" => null,
-            "allocation2" => null,
-            "allocation3" => null,
-            "allocation4" => null,
-            "allocation5" => null,
-            "allocation6" => null,
-            "allocation7" => null,
-            "allocation8" => null,
-            "allocation9" => null,
-        ];
+if ($conn->query($query) === true) {
+    $lastId = $conn->insert_id;
+    $query = "INSERT INTO boardConsultants (BoardID, ConsultantID, BoardPosition ) VALUES ($board, $lastId, $position)";
+    if ($result = $conn->query($query)) {
+        $query = "SELECT * FROM consultants WHERE id = $lastId";
+        if ($result = $conn->query($query)) {
+            while ($row = mysqli_fetch_assoc($result)) {
+                $consultant =
+                    [
+                    "id" => $row["ID"],
+                    "name" => $row["Name"],
+                    "role" => $row["Role"],
+                ];
+            }
+        }
     }
+    echo ($conn->error);
 }
+
+echo ($conn->error);
 
 $consultantJSON = json_encode($consultant);
 echo $consultantJSON;
