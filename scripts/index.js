@@ -7,7 +7,7 @@ $(document).ready(function() {
     */
 
   function initialiseTables() {
-    $.get("getConsultantsAndClients.php", function(data) {
+    $.get("backend/getConsultantsAndClients.php", function(data) {
       var databaseResults = [],
         clients = [],
         consultants = [];
@@ -289,7 +289,7 @@ $(document).ready(function() {
       if (nameUnique) {
         if (abbrevationUnique) {
           $.post(
-            "addNewClient.php", //Request data from server using POST, url is addClient.php
+            "backend/addNewClient.php", //Request data from server using POST, url is addClient.php
             {
               clientName: newClientName, //Pass the value of client name
               clientAbbrev: newClientAbbrevation, //Pass the value of client abbrevation
@@ -348,7 +348,7 @@ $(document).ready(function() {
     clientAbbrevation = thisClientRow.data("abbrevation");
 
     $.post(
-      "removeClient.php", //Request data from server using POST, url is removeClient.php
+      "backend/removeClient.php", //Request data from server using POST, url is removeClient.php
       {
         clientID: thisClientID, //Pass the value of the table column with the id clientName within the closest table row to the removeclientbutton(this)
         abbrevation: clientAbbrevation
@@ -395,7 +395,7 @@ $(document).ready(function() {
         clients = getClients();
 
         $.post(
-          "addNewConsultant.php", //Request data from server using POST, url is addClient.php
+          "backend/addNewConsultant.php", //Request data from server using POST, url is addClient.php
           {
             consultantName: newConsultantName, //Pass the value of consultant name input to server
             consultantJob: newConsultantRole, //Pass the value of consultant row input to server
@@ -432,7 +432,7 @@ $(document).ready(function() {
     consultantID = thisConsultantRow.prop("id");
 
     $.post(
-      "removeConsultant.php", //Request data from server using POST, url is removeClient.php
+      "backend/removeConsultant.php", //Request data from server using POST, url is removeClient.php
       {
         consultantID: consultantID //Pass the value of the table column with the id clientName within the closest table row to the removeclientbutton(this)
       },
@@ -470,7 +470,7 @@ $(document).ready(function() {
     consultantRow = $(this).closest("tr");
     consultantID = consultantRow.prop("id");
     $.post(
-      "updateAllocation.php",
+      "backend/updateAllocation.php",
       {
         consultantID: consultantID,
         clientAbbrevation: selectedClientAbbrevation,
@@ -529,7 +529,7 @@ $(document).ready(function() {
       .closest("tr")
       .prop("id");
     $.post(
-      "updateClientName.php",
+      "backend/updateClientName.php",
       {
         clientID: clientID,
         clientName: newClientName
@@ -555,7 +555,7 @@ $(document).ready(function() {
     consultantID = consultantRow.prop("id");
     originalConsultantName = consultantRow.data("name");
     $.post(
-      "updateConsultantName.php",
+      "backend/updateConsultantName.php",
       {
         consultantID: consultantID,
         consultantName: newConsultantName
