@@ -31,12 +31,77 @@
     .rolediv {
         font-style: italic;
     }
+
+    /*CSS for context menu adapted from https://stackoverflow.com/questions/4495626/making-custom-right-click-context-menus-for-my-web-app 12/07/2018 */
+
+    /* CSS3 */
+
+    /* The whole thing */
+
+    .custom-menu {
+        display: none;
+        z-index: 1000;
+        position: absolute;
+        overflow: hidden;
+        border: 1px solid #CCC;
+        white-space: nowrap;
+        font-family: sans-serif;
+        background: #FFF;
+        color: #333;
+        border-radius: 5px;
+        padding: 0;
+    }
+
+    /* Each of the items in the list */
+
+    .custom-menu li {
+        padding: 8px 12px;
+        cursor: pointer;
+        list-style-type: none;
+        transition: all .3s ease;
+        user-select: none;
+    }
+
+    .custom-menu li:hover {
+        background-color: #DEF;
+    }
+
+    .dot {
+        height: 25px;
+        width: 25px;
+        border-radius: 50%;
+        display: inline-block;
+    }
+
+    .on-site-colour {
+        background-color: #f9e0ae;
+    }
+
+    .office-colour {
+        background-color: #bbf9ae;
+    }
+
+    #consultanttablekey {
+        text-align: right;
+        padding: 8px 12px;
+    }
 </style>
 
 <body>
+    <ul class='custom-menu'>
+        <li data-action="1">On-Site</li>
+        <li data-action="2">Office Time</li>
+        <li data-action="0">N/A</li>
+    </ul>
     <div id="maindiv">
         <div id="consultantsdiv">
             <h3>Consultant Table</h3>
+            <div id="consultanttablekey">
+                <b>ON-SITE</b>
+                <p class="dot on-site-colour"></p>
+                <b>AT OFFICE</b>
+                <p class="dot office-colour"></p>
+            </div>
             <table id="consultantstable" class="table">
                 <thead id="consultantstablehead">
                     <tr id="consultantstableheadrow">

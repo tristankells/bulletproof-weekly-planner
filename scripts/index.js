@@ -145,8 +145,11 @@ $(document).ready(function() {
         " class='form-control clientdropdown'" +
         " id='" +
         i +
-        "'>";
-      consultantRow += "<option value='Open'></option>";
+        "' data-office=";
+
+      consultantRow += checkOfficeStatusOfSlot(consultant["allocations"], i);
+
+      consultantRow += " ><option value='Open'></option>";
       consultantRow += "<option value='Leave' ";
       if (checkIfClientAllocatedNow(consultant["allocations"], i, "Leave")) {
         consultantRow += " selected='selected'";
@@ -185,6 +188,7 @@ $(document).ready(function() {
 
   function checkIfClientAllocatedNow(allocations, allocationslot, abbrevation) {
     var allocation = {};
+
     for (y in allocations) {
       allocation = allocations[y];
       if (
@@ -195,6 +199,29 @@ $(document).ready(function() {
       }
     }
     return false;
+  }
+
+  function checkOfficeStatusOfSlot(allocations, allocationslot) {
+    var allocation = {};
+    officeStatus = 0;
+
+    for (y in allocations) {
+      allocation = allocations[y];
+      if (allocation["allocationslot"] == i) {
+        switch (allocation["officestatus"]) {
+          case "1":
+            return "'1' style='background-color:#f9e0ae;'";
+            break;
+          case "2":
+            return "'2' style='background-color:#bbf9ae;'";
+            break;
+          case "0":
+            return "'0'";
+            break;
+        }
+      }
+    }
+    return "'0'";
   }
 
   /*  
@@ -297,7 +324,7 @@ $(document).ready(function() {
             },
             function(data) {
               //After response is recieved from server
-              alert(data);
+
               var optionHTML = "",
                 addedClient = {},
                 consultants = [];
@@ -461,20 +488,25 @@ $(document).ready(function() {
     var selectedClientAbbrevation = "",
       allocationNo = "",
       consultantRow = {},
-      consultantID = 0;
+      consultantID = 0,
+      selectElement = {},
+      officeStatus = 0;
 
-    selectedClientAbbrevation = $(this)
-      .find(":selected")
-      .val();
-    allocationNo = $(this).prop("id");
-    consultantRow = $(this).closest("tr");
+    selectElement = $(this);
+
+    selectedClientAbbrevation = selectElement.find(":selected").val();
+    officeStatus = selectElement.data("office");
+
+    allocationNo = selectElement.prop("id");
+    consultantRow = selectElement.closest("tr");
     consultantID = consultantRow.prop("id");
     $.post(
       "backend/updateAllocation.php",
       {
         consultantID: consultantID,
         clientAbbrevation: selectedClientAbbrevation,
-        allocationNo: allocationNo
+        allocationNo: allocationNo,
+        officeStatus: officeStatus
       },
       function(data) {
         updateClientAllocationColumn(consultantID);
@@ -641,11 +673,94 @@ $(document).ready(function() {
     $(this).append(monday.getDate() + $(this).index() - 1);
   });
 
-  $("#testbutton").click(function() {
-    alert(
-      $("#clienttablebody")
-        .children("#1")
-        .data("position")
+  //Beginning of context menu code adapted from https://stackoverflow.com/questions/4495626/making-custom-right-click-context-menus-for-my-web-app 12/07/2018
+  var contextMenuClosestSelect = {};
+
+  // Trigger action when the contextmenu is about to be shown on td element
+  $("#consultantsdiv").on("contextmenu", "select", function(event) {
+    contextMenuClosestSelect = $(this);
+    // Avoid the real one
+    event.preventDefault();
+
+    // Show contextmenu
+    $(".custom-menu")
+      .finish()
+      .toggle(100)
+      // In the right position (the mouse)
+      .css({
+        top: event.pageY + "px",
+        left: event.pageX + "px"
+      });
+  });
+
+  // If the document is clicked somewhere
+  $(document).bind("mousedown", function(e) {
+    // If the clicked element is not the menu
+    if (!$(e.target).parents(".custom-menu").length > 0) {
+      // Hide it
+      $(".custom-menu").hide(100);
+    }
+  });
+
+  // If the menu element is clicked
+  $(".custom-menu li").click(function() {
+    var consultantID = 0,
+      allocationNo = 0,
+      officeStatus = 0,
+      clientAbbrevation = "";
+
+    allocationNo = contextMenuClosestSelect.prop("id");
+    consultantID = contextMenuClosestSelect.parents("tr").prop("id");
+    clientAbbrevation = contextMenuClosestSelect.val();
+
+    // This is the triggered action name
+    switch ($(this).attr("data-action")) {
+      // A case for each action. Your actions here
+      case "1":
+        contextMenuClosestSelect.data("office", "1");
+        break;
+      case "2":
+        contextMenuClosestSelect.data("office", "2");
+        break;
+      case "0":
+        contextMenuClosestSelect.data("office", "0");
+        break;
+    }
+
+    updateSelectColour(contextMenuClosestSelect);
+
+    officeStatus = contextMenuClosestSelect.data("office");
+
+    // Hide it AFTER the action was triggered
+    $(".custom-menu").hide(100);
+
+    $.post(
+      "backend/updateAllocation.php",
+      {
+        consultantID: consultantID,
+        clientAbbrevation: clientAbbrevation,
+        allocationNo: allocationNo,
+        officeStatus: officeStatus
+      },
+      function(data) {}
     );
   });
+
+  function updateSelectColour(selectElement) {
+    switch (selectElement.data("office")) {
+      case "1":
+        selectElement.css("background-color", "#f9e0ae");
+        break;
+      case "2":
+        selectElement.css("background-color", "#bbf9ae");
+        break;
+      case "0":
+        selectElement.css("background-color", "white");
+        break;
+    }
+  }
+
+  //End of context menu code adapted from https://stackoverflow.com/questions/4495626/making-custom-right-click-context-menus-for-my-web-app 12/07/2018
+
+  $("#testbutton").click(function() {});
 });

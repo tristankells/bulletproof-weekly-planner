@@ -7,7 +7,7 @@ require_once 'database.php'
 $consultantID = $_POST["consultantID"];
 $clientAbbrevation = $_POST["clientAbbrevation"];
 $allocationNo = $_POST["allocationNo"];
-$outOffice = 0;
+$outOffice = $_POST["officeStatus"];
 
 $query = "DELETE FROM ALLOCATIONS WHERE ConsultantID = $consultantID AND AllocationSlot = $allocationNo";
 

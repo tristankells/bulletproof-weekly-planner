@@ -66,7 +66,7 @@ if ($result->num_rows > 0) {
                     "id" => $allocationRow['ID'],
                     "allocatedto" => $allocationRow['AllocatedTo'],
                     "allocationslot" => $allocationRow['AllocationSlot'],
-                    "outOffice" => $allocationRow['OutOffice'],
+                    "officestatus" => $allocationRow['OutOffice'],
                 ];
                 array_push($allocations, $allocation);
             }
