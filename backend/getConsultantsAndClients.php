@@ -2,71 +2,67 @@
 
 require_once 'database.php';
 
-$boardId = 1;
+$boardID = 1;
+$clients = array();
+$consultants = array();
 
-$query = "SELECT clients.Id,
-clients.Name,
-clients.Abbrevation,
-boardclients.BoardPosition
-FROM clients
-INNER JOIN boardclients ON clients.ID=boardclients.ClientID
-WHERE boardclients.boardid = $boardId;";
+$query = "SELECT id,
+full_name,
+abbreviation,
+board_position
+FROM client
+WHERE board_id = $boardID";
 
 //Run query on connection
 $result = $conn->query($query);
 
-$clientsArray = array();
 //If clients in database, insert a table row for each one
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $client =
             [
-            "id" => $row['Id'],
-            "name" => $row['Name'],
-            "abbrevation" => $row['Abbrevation'],
-            "position" => $row['BoardPosition'],
+            "id" => $row['id'],
+            "name" => $row['full_name'],
+            "abbreviation" => $row['abbreviation'],
+            "position" => $row['board_position'],
         ];
-        array_push($clientsArray, $client);
+        array_push($clients, $client);
     }
 }
 
 //Query to retrieve all client names from clients table
-$query = "SELECT consultants.ID,
-    consultants.Name,
-    consultants.Role,
-    boardconsultants.BoardPosition
-FROM consultants
-INNER JOIN boardconsultants ON consultants.ID=boardconsultants.ConsultantID
-WHERE boardconsultants.boardid = $boardId;";
+$query = "SELECT id,
+    full_name,
+    job_title,
+    board_position
+FROM consultant
+WHERE board_id = $boardID";
 
 //Run query on connection
 $result = $conn->query($query);
 
-$consultantsArray = array();
 //If clients in database, insert a table row for each one
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
-        $id = $row['ID'];
+        $id = $row['id'];
         $allocations = array();
         $query = "SELECT
-        consultants.ID,
-        consultants.Name,
-        allocations.AllocatedTo,
-        allocations.AllocationSlot,
-        allocations.OutOffice
-        FROM consultants
-        INNER JOIN allocations ON consultants.id = allocations.ConsultantID
-        WHERE allocations.ConsultantID =  $id;";
+        allocated_to,
+        allocation_slot,
+        office_status
+        FROM allocation
+        WHERE consultant_id =  $id";
 
         $allocationResult = $conn->query($query);
+
+        echo ($conn->error);
 
         if ($allocationResult->num_rows > 0) {
             while ($allocationRow = $allocationResult->fetch_assoc()) {
                 $allocation = [
-                    "id" => $allocationRow['ID'],
-                    "allocatedto" => $allocationRow['AllocatedTo'],
-                    "allocationslot" => $allocationRow['AllocationSlot'],
-                    "officestatus" => $allocationRow['OutOffice'],
+                    "allocatedto" => $allocationRow['allocated_to'],
+                    "allocationslot" => $allocationRow['allocation_slot'],
+                    "officestatus" => $allocationRow['office_status'],
                 ];
                 array_push($allocations, $allocation);
             }
@@ -74,16 +70,16 @@ if ($result->num_rows > 0) {
 
         $consultant =
             [
-            "id" => $row['ID'],
-            "name" => $row['Name'],
-            "role" => $row['Role'],
-            "position" => $row['BoardPosition'],
+            "id" => $row['id'],
+            "name" => $row['full_name'],
+            "role" => $row['job_title'],
+            "position" => $row['board_position'],
             "allocations" => $allocations,
         ];
-        array_push($consultantsArray, $consultant);
+        array_push($consultants, $consultant);
     }
 }
 // Convert Array to JSON String
-$returnArrays = array($consultantsArray, $clientsArray);
+$returnArrays = array($consultants, $clients);
 echo json_encode($returnArrays);
 mysqli_close($conn);

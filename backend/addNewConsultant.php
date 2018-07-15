@@ -9,31 +9,28 @@ $position = $_POST["position"];
 $board = 1; //Placeholder
 
 //Query to insert new consultant information to the client table stored in the application database
-$query = "INSERT INTO consultants (name, role)
-            VALUES ('$name','$role')";
+$query = "INSERT INTO consultant (full_name, job_title, board_id, board_position)
+            VALUES ('$name','$role', $board, $position)";
 
 //Run query on connection
 if ($conn->query($query) === true) {
     $lastId = $conn->insert_id;
 
-    $query = "INSERT INTO boardConsultants (BoardID, ConsultantID, BoardPosition)
-                VALUES ($board, $lastId, $position)";
+    $query = "SELECT id, full_name, job_title, board_position 
+                FROM consultant WHERE id = $lastId";
 
     if ($result = $conn->query($query)) {
-
-        $query = "SELECT * FROM consultants WHERE id = $lastId";
-
-        if ($result = $conn->query($query)) {
-            while ($row = mysqli_fetch_assoc($result)) {
-                $consultant =
-                    [
-                    "id" => $row["ID"],
-                    "name" => $row["Name"],
-                    "role" => $row["Role"],
-                ];
-            }
+        while ($row = mysqli_fetch_assoc($result)) {
+            $consultant =
+                [
+                "id" => $row["id"],
+                "name" => $row["full_name"],
+                "role" => $row["job_title"],
+                "position" => $row["board_position"],
+            ];
         }
     }
+
     echo ($conn->error);
 }
 

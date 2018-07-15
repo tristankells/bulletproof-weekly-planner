@@ -10,17 +10,12 @@ that name.
 require_once 'database.php';
 
 $id = $_POST['clientID']; //Client name retrieved from post
-$abbrevation = $_POST['abbrevation'];
 $board = 1;
 
-$query = "DELETE FROM ALLOCATIONS WHERE AllocatedTo = '$abbrevation'";
+$query = "DELETE FROM allocation WHERE client_id = $id";
 $conn->query($query);
 
-$query = "DELETE FROM BOARDCLIENTS WHERE BoardID = $board AND ClientID = $id";
+$query = "DELETE FROM client WHERE id = $id";
 $conn->query($query);
-
-$query = "DELETE FROM clients WHERE ID = $id";
-$conn->query($query);
-echo ($conn->error);
 
 mysqli_close($conn);

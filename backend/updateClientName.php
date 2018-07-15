@@ -9,7 +9,7 @@ $clientName = $_POST["clientName"];
 echo ($clientName);
 
 //Query to update a consultatns client allocation for a specific day/time
-$query = "UPDATE clients SET Name = '$clientName' WHERE ID = '$clientID'";
+$query = "UPDATE client SET full_name = '$clientName' WHERE id = '$clientID'";
 
 //Run query on connection
 $result = $conn->query($query);

@@ -1,55 +1,76 @@
 CREATE TABLE board (
-id 		        bigint NOT NULL AUTO_INCREMENT,
-name 	        varchar(100) NOT NULL,
-description     text,
+id 		            bigint NOT NULL AUTO_INCREMENT,
+name 	            varchar(100) NOT NULL,
+description         text,
 PRIMARY KEY (id)
 );
 
 
 CREATE TABLE client (
-id          bigint NOT NULL AUTO_INCREMENT,
-full_name   varchar(30),
-abbrevation varchar(3),
+id                  bigint NOT NULL AUTO_INCREMENT,
+full_name           varchar(30),
+abbreviation        varchar(10),
+board_id            bigint REFERENCES board(id),
+board_position      int,
+CONSTRAINT unq_board_id_client_name UNIQUE(full_name, board_position),
+CONSTRAINT unq_board_id_abbreviation UNIQUE(abbreviation, board_position),
 PRIMARY KEY (id)
 );
 
 CREATE TABLE consultant (
-id bigint NOT NULL AUTO_INCREMENT,
-full_name  varchar(30),
-job_title varchar(30),
+id              bigint NOT NULL AUTO_INCREMENT,
+full_name       varchar(30),
+job_title       varchar(30),
+board_id        bigint NOT NULL REFERENCES board(id),
+board_position  int,
+CONSTRAINT unq_board_id_consultant_name UNIQUE(full_name, board_position),
 PRIMARY KEY (id)
 );
 
+CREATE TABLE allocation (
+consultant_id       bigint NOT NULL REFERENCES consultant(id),
+allocated_to        varchar(10) NOT NULL,
+allocation_slot     int NOT NULL,
+office_status       int default 0,
+time_allocated      timestamp NOT NULL default current_timestamp ON UPDATE current_timestamp,
+PRIMARY KEY (consultant_id, allocation_slot)
+);
 
+
+/*
+EXAMPLE OF NON AUTO ID TABLE STRUCTURE
+
+CREATE TABLE board (
+id 		            bigint NOT NULL AUTO_INCREMENT,
+name 	            varchar(100) NOT NULL,
+description         text,
+PRIMARY KEY (id)
+);
+
+CREATE TABLE consultant (
+full_name       varchar(30),
+job_title       varchar(30),
+board_id        bigint NOT NULL REFERENCES board(id),
+board_position  int,
+PRIMARY KEY (full_name, board_id)
+);
+
+CREATE TABLE client (
+full_name           varchar(30),
+abbreviation        varchar(10),
+board_id            bigint REFERENCES board(id),
+board_position      int,
+CONSTRAINT unq_board_id_abbreviation UNIQUE(abbreviation, board_id),
+PRIMARY KEY (full_name, board_id)
+);
 
 CREATE TABLE allocation (
-id bigint NOT NULL AUTO_INCREMENT,
-consultant_id bigint NOT NULL,
-allocated_to varchar(10) NOT NULL,
-allocation_slot int NOT NULL,
-office_status int default 0,
-time_allocated timestamp not null default current_timestamp on update current_timestamp,
-PRIMARY KEY (id),
-FOREIGN KEY (consultant_id) REFERENCES consultant(id),
-CONSTRAINT unq_consultant_id_allocation_slot UNIQUE(consultant_id, allocation_slot)
+board_id                bigint NOT NULL REFERENCES board(id),
+consultant_full_name    bigint NOT NULL REFERENCES consultant(full_name),
+client_abbreviation     bigint NOT NULL REFERENCES client(abbreviation),
+allocation_slot         int NOT NULL,
+office_status           int default 0,
+time_allocated          timestamp NOT NULL default current_timestamp ON UPDATE current_timestamp,
+PRIMARY KEY (consultant_full_name, allocation_slot)
 );
-
-CREATE TABLE board_consultant (
-id bigint NOT NULL AUTO_INCREMENT,
-board_id bigint,
-consultant_id bigint,
-position int,
-PRIMARY KEY (id),
-FOREIGN KEY (consultant_id) REFERENCES consultant(id),
-FOREIGN KEY (board_id) REFERENCES board(id)
-);
-
-CREATE TABLE board_client (
-id bigint NOT NULL AUTO_INCREMENT,
-board_id bigint,
-client_id bigint,
-position int,
-PRIMARY KEY (id),
-FOREIGN KEY (client_id) REFERENCES client(id),
-FOREIGN KEY (board_id) REFERENCES board(id)
-);
+*/

@@ -12,13 +12,10 @@ require_once 'database.php';
 $id = $_POST['consultantID']; //Client name retrieved from post
 $board = 1;
 
-$query = "DELETE FROM ALLOCATIONS WHERE ConsultantID = $id";
+$query = "DELETE FROM allocation WHERE consultant_id = $id";
 $conn->query($query);
 
-$query = "DELETE FROM BOARDCONSULTANTS WHERE BoardID = $board AND ConsultantID = $id";
+$query = "DELETE FROM consultant WHERE id = $id";
 $conn->query($query);
 
-$query = "DELETE FROM consultants WHERE ID = $id";
-$conn->query($query);
-echo ($conn->error);
 mysqli_close($conn);
