@@ -5,7 +5,7 @@ require_once 'database.php'
 ;
 //Store the consultant ID, client name and the day/time of the client allocation
 $id = $_POST["consultantID"];
-$allocatedTo = $_POST["clientabbreviation"];
+$allocatedTo = $_POST["clientAbbreviation"];
 $allocationSlot = $_POST["allocationSlot"];
 $officeStatus = $_POST["officeStatus"];
 

@@ -8,7 +8,6 @@ $(document).ready(function() {
 
   function initialiseTables() {
     $.get("backend/getConsultantsAndClients.php", function(data) {
-      alert(data);
 
       var databaseResults = [],
         clients = [],
@@ -510,11 +509,12 @@ $(document).ready(function() {
       "backend/updateAllocation.php",
       {
         consultantID: consultantID,
-        clientabbreviation: selectedClientabbreviation,
-        allocationNo: allocationNo,
+        clientAbbreviation: selectedClientabbreviation,
+        allocationSlot: allocationNo,
         officeStatus: officeStatus
       },
       function(data) {
+        alert(data);
         updateClientAllocationColumn(consultantID);
       }
     );
@@ -713,11 +713,11 @@ $(document).ready(function() {
     var consultantID = 0,
       allocationNo = 0,
       officeStatus = 0,
-      clientabbreviation = "";
+      clientAbbreviation = "";
 
     allocationNo = contextMenuClosestSelect.prop("id");
     consultantID = contextMenuClosestSelect.parents("tr").prop("id");
-    clientabbreviation = contextMenuClosestSelect.val();
+    clientAbbreviation = contextMenuClosestSelect.val();
 
     // This is the triggered action name
     switch ($(this).attr("data-action")) {
@@ -744,8 +744,8 @@ $(document).ready(function() {
       "backend/updateAllocation.php",
       {
         consultantID: consultantID,
-        clientabbreviation: clientabbreviation,
-        allocationNo: allocationNo,
+        clientAbbreviation: clientAbbreviation,
+        allocationSlot: allocationNo,
         officeStatus: officeStatus
       },
       function(data) {}
