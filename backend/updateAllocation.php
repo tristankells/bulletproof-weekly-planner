@@ -4,17 +4,20 @@
 require_once 'database.php'
 ;
 //Store the consultant ID, client name and the day/time of the client allocation
-$consultantID = $_POST["consultantID"];
-$clientAbbrevation = $_POST["clientabbreviation"];
-$allocationNo = $_POST["allocationNo"];
-$outOffice = $_POST["officeStatus"];
+$id = $_POST["consultantID"];
+$allocatedTo = $_POST["clientabbreviation"];
+$allocationSlot = $_POST["allocationSlot"];
+$officeStatus = $_POST["officeStatus"];
 
-$query = "DELETE FROM allocation WHERE consultant_id = $consultantID AND allocation_slot = $allocationNo";
+$query = "DELETE FROM allocation
+            WHERE consultant_id = $id
+            AND allocation_slot = $allocationSlot";
 
 $conn->query($query);
 
 //Query to update a consultatns client allocation for a specific day/time
-$query = "INSERT INTO allocation (consultant_id, allocated_to, allocation_slot, office_status) VALUES ($consultantID, '$clientAbbrevation', $allocationNo, $outOffice)";
+$query = "INSERT INTO allocation (consultant_id, allocated_to, allocation_slot, office_status)
+            VALUES ($id, '$allocatedTo', $allocationSlot, $officeStatus)";
 
 //Run query on connection
 $conn->query($query);

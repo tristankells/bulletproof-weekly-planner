@@ -4,11 +4,11 @@
 require_once 'database.php'
 ;
 //Store the consultant ID, client name and the day/time of the client allocation
-$consultantID = $_POST["consultantID"];
-$consultantName = $_POST["consultantName"];
+$id = $_POST["consultantID"];
+$name = $_POST["consultantName"];
 
 //Query to update a consultatns client allocation for a specific day/time
-$query = "UPDATE consultant SET full_name = '$consultantName' WHERE id = '$consultantID'";
+$query = "UPDATE consultant SET full_name = '$name' WHERE id = '$id'";
 
 //Run query on connection
 $result = $conn->query($query);
