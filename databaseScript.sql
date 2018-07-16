@@ -42,9 +42,9 @@ CREATE TABLE monthly_allocation (
     allocation_slot     int NOT NULL,
     time_allocated      timestamp NOT NULL default current_timestamp ON UPDATE current_timestamp,
     PRIMARY KEY (consultant_id, allocation_slot)
-)
+);
 
-CREATE TABLE user (
+CREATE TABLE user_profile (
 id   	     bigint NOT NULL AUTO_INCREMENT,
 first_name     varchar(30) NOT NULL,
 last_name      varchar(30),
@@ -55,13 +55,13 @@ PRIMARY KEY (id)
 );
 
 
-create table membership (
-id 		        	bigint NOT NULL AUTO_INCREMENT,
-user_id         	bigint NOT NULL REFERENCES user(id),
+create TABLE membership (
+id 		        	    bigint NOT NULL AUTO_INCREMENT,
+user_id         	    bigint NOT NULL REFERENCES user(user_profile),
 board_id	    		bigint NOT NULL,
 access  				int,
 PRIMARY KEY (id)
-)
+);
 
 
 
