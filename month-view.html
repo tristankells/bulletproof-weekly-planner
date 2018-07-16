@@ -77,22 +77,26 @@
         }
 
         function addClientToMonthlyBoard(clients) {
-            var clientHTML = "";
+            var clientHTML = "",
+                listHtml = "";
+
             clientHTML = "<tr><td>";
             for (x in clients) {
 
                 clientHTML += clients[x]['name'] + "<br>";
+                listHtml += "<li data-action='" + x + "'>" + clients[x]['name'] + "</li>";
 
             }
             clientHTML += "</td></tr>";
             $("#clienttablebody").append(clientHTML);
+            $(".custom-menu").append(listHtml);
         }
 
         // JAVASCRIPT (jQuery)
 
         // Trigger action when the contexmenu is about to be shown
-        
-        $("#monthtable").on("contextmenu",".allocation", function (event) {
+
+        $("#monthtable").on("contextmenu", ".allocation", function (event) {
 
             // Avoid the real one
             event.preventDefault();
@@ -143,9 +147,6 @@
 
 <body>
     <ul class='custom-menu'>
-        <li data-action="1">On-Site</li>
-        <li data-action="2">Office Time</li>
-        <li data-action="0">N/A</li>
     </ul>
     <table id="monthtable" class="table table-bordered">
         <thead id="monthtablehead">
