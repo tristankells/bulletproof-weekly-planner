@@ -36,6 +36,14 @@ time_allocated      timestamp NOT NULL default current_timestamp ON UPDATE curre
 PRIMARY KEY (consultant_id, allocation_slot)
 );
 
+CREATE TABLE monthly_allocation (
+    consultant_id       bigint NOT NULL REFERENCES consultant(id),
+    client_id           bigint NOT NULL REFERENCES client(id),
+    allocation_slot     int NOT NULL,
+    time_allocated      timestamp NOT NULL default current_timestamp ON UPDATE current_timestamp,
+    PRIMARY KEY (consultant_id, allocation_slot)
+)
+
 
 /*
 EXAMPLE OF NON AUTO ID TABLE STRUCTURE
