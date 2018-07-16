@@ -44,6 +44,31 @@ CREATE TABLE monthly_allocation (
     PRIMARY KEY (consultant_id, allocation_slot)
 )
 
+CREATE TABLE user (
+id 		      bigint NOT NULL AUTO_INCREMENT,
+first_name 	   varchar(30) NOT NULL,
+last_name      varchar(30),
+email				varchar(320) UNIQUE,		
+PRIMARY KEY (id)
+);
+
+create table login (
+id 		        	bigint NOT NULL AUTO_INCREMENT,
+user_id         	bigint NOT NULL REFERENCES user(id),
+username	    		varchar(320),
+login_password  	varchar(320),
+PRIMARY KEY (id)
+)
+
+create table membership (
+id 		        	bigint NOT NULL AUTO_INCREMENT,
+user_id         	bigint NOT NULL REFERENCES user(id),
+board_id	    		bigint NOT NULL,
+access  				int,
+PRIMARY KEY (id)
+)
+
+
 
 /*
 EXAMPLE OF NON AUTO ID TABLE STRUCTURE

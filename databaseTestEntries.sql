@@ -32,3 +32,10 @@ values (1,1,1);
 
 INSERT INTO monthly_allocation (consultant_id, client_id,allocation_slot)
 values (2,2,2);
+
+
+INSERT INTO user (first_name, last_name, email)
+VALUES ('tristan','kells','tristankells@aut.ac.nz');
+
+INSERT INTO login (user_id, username, login_password)
+VALUES ('1','admin','admin');
