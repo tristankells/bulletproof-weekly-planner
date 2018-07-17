@@ -1,8 +1,8 @@
 <?php
 
-$host = "localhost";
+$host = "127.0.0.1";
 $user = "root";
-$pswd = "root";
+$pswd = "";
 $dbnm = "glance";
 
 $conn = new mysqli($host, $user, $pswd, $dbnm);
