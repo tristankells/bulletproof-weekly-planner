@@ -355,7 +355,7 @@ $(document).ready(function() {
             }
           );
         } else {
-          alert("abbreviation is not unquie");
+          alert("Abbreviation is not unquie");
         }
       } else {
         alert("Name is not unquie");
@@ -515,7 +515,6 @@ $(document).ready(function() {
         officeStatus: officeStatus
       },
       function(data) {
-        alert(data);
         updateClientAllocationColumn(consultantID);
       }
     );
