@@ -48,9 +48,9 @@ CREATE TABLE user_profile (
 id   	     bigint NOT NULL AUTO_INCREMENT,
 first_name     varchar(30) NOT NULL,
 last_name      varchar(30),
-username 	           varchar(320),
-login_password      varchar(320),
-email               varchar(320) UNIQUE,        
+username 	           varchar(50),
+login_password      varchar(50),
+email               varchar(50) UNIQUE,        
 PRIMARY KEY (id)
 );
 
