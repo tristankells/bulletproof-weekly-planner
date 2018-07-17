@@ -34,8 +34,8 @@ INSERT INTO monthly_allocation (consultant_id, client_id,allocation_slot)
 values (2,2,2);
 
 
-INSERT INTO user (first_name, last_name, email)
-VALUES ('tristan','kells','tristankells@aut.ac.nz');
+INSERT INTO user_profile (first_name, last_name, username, login_password , email)
+VALUES ('tristan','kells','admin',  'd033e22ae348aeb5660fc2140aec35850c4da997', 'tristankells@aut.com');
 
-INSERT INTO login (user_id, username, login_password)
-VALUES ('1','admin','admin');
+INSERT INTO membership (user_profile_id, board_id)
+VALUES (1,1);

@@ -45,12 +45,12 @@ CREATE TABLE monthly_allocation (
 );
 
 CREATE TABLE user_profile (
-id   	     bigint NOT NULL AUTO_INCREMENT,
-first_name     varchar(30) NOT NULL,
-last_name      varchar(30),
-username 	           varchar(50),
-login_password      varchar(50),
-email               varchar(50) UNIQUE,        
+id   	        bigint NOT NULL AUTO_INCREMENT,
+first_name      varchar(30) NOT NULL,
+last_name       varchar(30),
+username 	    varchar(50) NOT NULL UNIQUE,
+login_password  varchar(50) NOT NULL,
+email           varchar(50) NOT NULL UNIQUE,        
 PRIMARY KEY (id)
 );
 
@@ -59,7 +59,7 @@ create TABLE membership (
 id 		        	    bigint NOT NULL AUTO_INCREMENT,
 user_profile_id         bigint NOT NULL REFERENCES user_profile(id),
 board_id	    		bigint NOT NULL,
-access  				int,
+access  				int NOT NULL DEFAULT 0,
 PRIMARY KEY (id)
 );
 
