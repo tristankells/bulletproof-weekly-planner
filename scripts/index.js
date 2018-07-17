@@ -8,11 +8,12 @@ $(document).ready(function() {
 
   function initialiseTables() {
     $.get("backend/getConsultantsAndClients.php", function(data) {
+      
 
       var databaseResults = [],
         clients = [],
         consultants = [];
-
+        
       databaseResults = JSON.parse(data); //Store consultant and client arrays recieved from server
 
       consultants = databaseResults[0]; //Store array of consultants
