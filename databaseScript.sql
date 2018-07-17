@@ -57,7 +57,7 @@ PRIMARY KEY (id)
 
 create TABLE membership (
 id 		        	    bigint NOT NULL AUTO_INCREMENT,
-user_id         	    bigint NOT NULL REFERENCES user(user_profile),
+user_profile_id         bigint NOT NULL REFERENCES user_profile(id),
 board_id	    		bigint NOT NULL,
 access  				int,
 PRIMARY KEY (id)
