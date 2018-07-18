@@ -22,10 +22,10 @@
         </div>
         <div class="form">
             <form class="register-form">
-                <input type="text" placeholder="name" />
-                <input type="password" placeholder="password" />
-                <input type="text" placeholder="email address" />
-                <button>Create</button>
+                <input type="text" id='register-name-input' placeholder="name" />
+                <input type="password" id='register-password-input' placeholder="password" />
+                <input type="text" id='register-email-input' placeholder="email address" />
+                <button id='register-button'>Create</button>
                 <p class="message">Already registered?
                     <a href="#">Sign In</a>
                 </p>
@@ -58,7 +58,7 @@
                     password: password
                 }, function (data) {
                     if (data == 'success') {
-                        window.location.href = 'user-page.html';
+                        window.location.href = 'week-calendar.html';
                     } else {
                         alert(data);
                         $('#username-input').val(" ");
@@ -68,6 +68,25 @@
             )
         }
         );
+
+        $('#register-button').click(function () {
+            var firstName = "",
+                lastName = "",
+                username = "",
+                password = "";
+
+            firstName = $('#register-name-input').val();
+            lastName = $('#username-input').val();
+            password = $('#username-input').val();
+            email = $('#username-input').val();
+
+
+        })
+
+
+
+
+
         $('.message a').click(function () {
             $('form').animate({ height: "toggle", opacity: "toggle" }, "slow");
         });
