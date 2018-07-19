@@ -150,9 +150,10 @@ $(document).ready(function() {
     }
     clientRow += "</td>";
     clientRow +=
-      "<td><input type='button' " +
-      "class='remove-client-btn btn'" +
-      " value='REMOVE'/></td>";
+      "<td style='text-align: center; vertical-align: middle;'><input type='image' src='/Glance/img/remove.png' class='remove-client-btn'/></td>";
+
+      "<td style='text-align: center; vertical-align: middle;'><input type='image' src='/Glance/img/remove.png' class='remove-consultant-btn'/></td>";
+
     clientRow += "</tr>";
     $("#clienttablebody").append(clientRow); //Append html table row to client table body
   }
@@ -192,12 +193,19 @@ $(document).ready(function() {
       "</div></td>";
     for (i = 0; i < 10; i++) {
       //Loop through days in the week, times 2, and populate dropdowns
+
       consultantRow +=
-        "<td><select" +
-        " class='form-control clientdropdown'" +
-        " id='" +
-        i +
-        "' data-office=";
+        "<td"
+        
+        if(i%2==1){
+          consultantRow+= " class='row-space'>";
+        }else{
+          consultantRow+=">";
+        }
+
+        consultantRow+= "<select" +
+          " class=" 
+            + "'clientdropdown' id='" + i + "'data-office=";
 
       consultantRow += checkOfficeStatusOfSlot(consultant["allocations"], i);
 
@@ -222,9 +230,7 @@ $(document).ready(function() {
       consultantRow += "</select></td>";
     }
     consultantRow +=
-      "<td><input type='button'" +
-      " class='remove-consultant-btn btn'" +
-      " value='REMOVE'/></td>";
+      "<td style='text-align: center; vertical-align: middle;'><input type='image' src='/Glance/img/remove.png' class='remove-consultant-btn'/></td>";
     consultantRow += "</tr>";
     $("#consultantstablebody").append(consultantRow);
   }
@@ -266,10 +272,10 @@ $(document).ready(function() {
       if (allocation["allocationslot"] == i) {
         switch (allocation["officestatus"]) {
           case "1":
-            return "'1' style='background-color:#f9e0ae;'";
+            return "'1' style='background-color:#1A2930;color:white;'";
             break;
           case "2":
-            return "'2' style='background-color:#bbf9ae;'";
+            return "'2' style='background-color:#F7CE3E;'";
             break;
           case "0":
             return "'0'";
@@ -805,10 +811,12 @@ $(document).ready(function() {
   function updateSelectColour(selectElement) {
     switch (selectElement.data("office")) {
       case "1":
-        selectElement.css("background-color", "#f9e0ae");
+        selectElement.css("background-color", "#1A2930");
+        selectElement.css("color", "white");
         break;
       case "2":
-        selectElement.css("background-color", "#bbf9ae");
+        selectElement.css("background-color", "#F7CE3E");
+        selectElement.css("color", "black");
         break;
       case "0":
         selectElement.css("background-color", "white");
