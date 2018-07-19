@@ -65,9 +65,6 @@ td{
     margin:0!important;
 }
 
-
-
-
 .custom-menu {
     display: none;
     z-index: 1000;
@@ -90,6 +87,10 @@ td{
     list-style-type: none;
     transition: all .3s ease;
     user-select: none;
+}
+
+body {
+    background-color: #f9f9f9;
 }
 
 .custom-menu li:hover {
