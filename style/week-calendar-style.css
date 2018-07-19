@@ -1,4 +1,4 @@
- /* Inputs with the class .names now as appear as normal text  */
+ /* Inputs with the class .client-name-input now as appear as normal text  */
 
  .client-name-input {
     background: rgba(0, 0, 0, 0);
@@ -8,6 +8,7 @@
 .consultant-name-input {
     background: rgba(0, 0, 0, 0);
     border: none;
+    max-width: 130px;
 }
 
 .rolediv {
@@ -19,6 +20,53 @@
 /* CSS3 */
 
 /* The whole thing */
+
+
+
+.clientdropdown {
+    background-color: transparent;
+    width: 100%!important;
+    height: 50px!important;
+    text-align: center;
+    -webkit-text-size-adjust: inherit;
+    border: none;
+}
+
+.row-space {
+    padding-right: 10px!important;
+
+}
+
+select {
+    -webkit-appearance: none;
+    -webkit-border-radius: 0px;
+    -moz-appearance: none;
+    border-radius: 0px;
+    text-indent: 1px;
+    text-overflow: '';
+    text-align-last:center;
+    padding: 5px;
+    margin: 5px;
+}
+
+.mr-auto {
+    margin-right: auto !important;
+}
+
+.logo {
+  display: block;
+  max-height:30px;
+  width: auto;
+  height: auto;
+}
+
+td{
+    padding:0!important;
+    margin:0!important;
+}
+
+
+
 
 .custom-menu {
     display: none;
@@ -45,7 +93,7 @@
 }
 
 .custom-menu li:hover {
-    background-color: #DEF;
+    background-color: rgb(255, 229, 145);
 }
 
 .dot {
@@ -56,14 +104,31 @@
 }
 
 .on-site-colour {
-    background-color: #f9e0ae;
+    background-color: #1A2930;
 }
 
 .office-colour {
-    background-color: #bbf9ae;
+    background-color: #F7CE3E;
 }
 
 #consultanttablekey {
     text-align: right;
     padding: 8px 12px;
+}
+
+.remove-consultant-btn {
+    width: 20px;
+    height: 20px;
+}
+
+.remove-client-btn {
+    width: 20px;
+    height: 20px;
+}
+
+.remove-row{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+
 }
