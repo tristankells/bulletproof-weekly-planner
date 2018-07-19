@@ -23,5 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     //Check if query succesful
     if (mysqli_query($conn, $query)) {
         echo ("Sucess");
+    } else {
+        echo (mysqli_error($conn));
     }
+
 }
