@@ -3,55 +3,53 @@
 require_once 'database.php';
 
 // Define varaible and initilaise with empty values
-$username = $password = "";
+$email = $password = "";
 
 // Processing form data when form is submitted
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
-	// Check if username or password haven't been entered
-	if (empty(trim($_POST['username'])) || empty(trim($_POST['password']))) {
-        echo("Please fill in all the fields. ");
+    // Check if email or password haven't been entered
+    if (empty(trim($_POST['email'])) || empty(trim($_POST['password']))) {
+        echo ("Please fill in all the fields. ");
         exit();
-    } else { 
-		$username = trim($_POST['username']);
-        $password = trim($_POST['password']);
-        $passwordHash = sha1($password);
+    } else {
+        $email = mysqli_escape_string($conn, $_POST['email']);
+        $password = mysqli_escape_string($conn, $_POST['password']);
 
-		$passwordCheckQuery = "SELECT username,login_password FROM user_profile WHERE username='$username'";
+        $passwordCheckQuery = "SELECT email,login_password FROM user_profile WHERE email='$email'";
 
-		//Check if query succesful
+        //Check if query succesful
         if ($passwordCheckSql = mysqli_query($conn, $passwordCheckQuery)) {
-			$numOfuser_profile = mysqli_num_rows($passwordCheckSql);
-			
-			//Check if any user match that username
+            $numOfuser_profile = mysqli_num_rows($passwordCheckSql);
+
+            //Check if any user match that email
             if ($numOfuser_profile == 0) {
-                echo("No user found");
+                echo ("No user found");
                 exit();
-			} 
-			
-			//Check that one user matches username
-			else  {
+            }
+
+            //Check that one user matches email
+            else {
                 $user_profilePassword = "";
                 while ($row = mysqli_fetch_assoc($passwordCheckSql)) {
                     $user_profilePassword = $row['login_password'];
                 }
-                if (strcmp($passwordHash, $user_profilePassword)) {
-                    echo("Incorrect password" . $passwordHash . "    " . $user_profilePassword);
+                if (!(password_verify($password, $user_profilePassword))) {
+                    echo ("Incorrect password" . $password . "    " . $user_profilePassword);
                     exit();
-                } else {					
-					//Save username to session
-					session_start();
-					$_SESSION['username'] = $username;
-					echo('success');
+                } else {
+                    //Save email to session
+                    session_start();
+                    $_SESSION['email'] = $email;
+                    echo ('success');
                 }
-            } 
+            }
 
             mysqli_free_result($passwordCheckSql);
         } else {
-            echo("password checking query error");
+            echo ("password checking query error");
             exit();
         }
     }
 }
-

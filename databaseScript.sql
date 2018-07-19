@@ -49,7 +49,7 @@ id   	        bigint NOT NULL AUTO_INCREMENT,
 first_name      varchar(30) NOT NULL,
 last_name       varchar(30),
 email           varchar(50) NOT NULL UNIQUE,  
-login_password  varchar(50) NOT NULL, 
+login_password  char(60) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL, 
 PRIMARY KEY (id)
 );
 

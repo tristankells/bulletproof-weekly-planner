@@ -11,7 +11,8 @@ full_name,
 abbreviation,
 board_position
 FROM client
-WHERE board_id = $boardID";
+WHERE board_id = $boardID
+ORDER BY board_position ASC";
 
 //Run query on connection
 $result = $conn->query($query);
@@ -36,7 +37,8 @@ $query = "SELECT id,
     job_title,
     board_position
 FROM consultant
-WHERE board_id = $boardID";
+WHERE board_id = $boardID
+ORDER BY board_position ASC";
 
 //Run query on connection
 $result = $conn->query($query);

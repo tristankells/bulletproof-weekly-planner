@@ -8,12 +8,10 @@ $(document).ready(function() {
 
   function initialiseTables() {
     $.get("backend/getConsultantsAndClients.php", function(data) {
-      
-
       var databaseResults = [],
         clients = [],
         consultants = [];
-        
+
       databaseResults = JSON.parse(data); //Store consultant and client arrays recieved from server
 
       consultants = databaseResults[0]; //Store array of consultants
@@ -34,21 +32,72 @@ $(document).ready(function() {
 
       //Using the jquery UI library, makes items within tbody elements sortable
       //THE START OF POSITION TRACKING FUNCTIONALITY NEED TO BE EXPANDED UPON
-      //http://benfoster.io/blog/jquery-sortable-getting-the-new-and-original-index
+      //https://www.youtube.com/watch?v=V1nYMDoSCXY
       $("#clienttablebody").sortable({
-        start: function(event, ui) {},
-        stop: function(event, ui) {},
-        update: function(event, ui) {}
+        update: function(event, ui) {
+          $(this)
+            .children()
+            .each(function(index) {
+              if ($(this).attr("data-position") != index + 1) {
+                $(this)
+                  .attr("data-position", index + 1)
+                  .addClass("client-updated");
+              }
+            });
+          saveNewClientPositions();
+        }
       });
 
       $("#consultantstablebody").sortable({
-        start: function(event, ui) {},
-        stop: function(event, ui) {},
-        update: function(event, ui) {}
+        update: function(event, ui) {
+          $(this)
+            .children()
+            .each(function(index) {
+              if ($(this).attr("data-position") != index + 1) {
+                $(this)
+                  .attr("data-position", index + 1)
+                  .addClass("consultant-updated");
+              }
+            });
+          saveNewConsultantPositions();
+        }
       });
     });
   }
 
+  function saveNewConsultantPositions() {
+    var positions = [];
+    $(".consultant-updated").each(function() {
+      positions.push([$(this).prop("id"), $(this).attr("data-position")]);
+      //  alert($(this).prop("id"));
+      // alert($(this).attr("data-position"));
+      $(this).removeClass("consultant-updated");
+    });
+    $.post(
+      "backend/updateConsultantPositions.php",
+      {
+        positions: positions
+      },
+      function(data) {}
+    );
+  }
+
+  function saveNewClientPositions() {
+    var positions = [];
+    $(".client-updated").each(function() {
+      positions.push([$(this).prop("id"), $(this).attr("data-position")]);
+      //  alert($(this).prop("id"));
+      // alert($(this).attr("data-position"));
+      $(this).removeClass("client-updated");
+    });
+    $.post(
+      "backend/updateClientPositions.php",
+      {
+        positions: positions
+      },
+      function(data) {}
+    );
+  }
   /*  
         @function addClientToTable
 
@@ -126,10 +175,11 @@ $(document).ready(function() {
       consultant["id"] +
       "' data-name='" +
       consultant["name"] +
-      "' " +
-      " data-role='" +
+      "' data-role='" +
       consultant["role"] +
-      "'>";
+      "' data-position='" +
+      consultant["position"] +
+      "' >";
     consultantRow +=
       "<td>" +
       "<input " +
@@ -767,6 +817,4 @@ $(document).ready(function() {
   }
 
   //End of context menu code adapted from https://stackoverflow.com/questions/4495626/making-custom-right-click-context-menus-for-my-web-app 12/07/2018
-
-  $("#testbutton").click(function() {});
 });

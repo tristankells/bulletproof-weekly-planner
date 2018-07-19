@@ -22,16 +22,18 @@
         </div>
         <div class="form">
             <form class="register-form">
-                <input type="text" id='register-name-input' placeholder="name" />
-                <input type="password" id='register-password-input' placeholder="password" />
+                <input type="text" id='register-firstname-input' placeholder="first name" />
+                <input type="text" id='register-lastname-input' placeholder="last name" />
                 <input type="text" id='register-email-input' placeholder="email address" />
+                <input type="password" id='register-password-input' placeholder="password" />
+                <input type="password" id='register-repassword-input' placeholder="enter password again" />
                 <button id='register-button'>Create</button>
                 <p class="message">Already registered?
                     <a href="#">Sign In</a>
                 </p>
             </form>
             <form class="login-form">
-                <input id='username-input' type="text" placeholder="username" />
+                <input id='email-input' type="text" placeholder="email" />
                 <input id='password-input' type="password" placeholder="password" />
                 <button id='login-button'>Login</button>
                 <p class="message">Not registered?
@@ -46,22 +48,22 @@
     $(document).ready(function () {
         //Listender attached to login button
         $("#login-button").click(function () {
-            var username = "",
+            var email = "",
                 password = "";
-            username = $('#username-input').val();
+                email = $('#email-input').val();
             password = $('#password-input').val();
 
             $.post(
                 'backend/login.php',
                 {
-                    username: username,
+                    email: email,
                     password: password
                 }, function (data) {
                     if (data == 'success') {
                         window.location.href = 'week-calendar.html';
                     } else {
                         alert(data);
-                        $('#username-input').val(" ");
+                        $('#email-input').val(" ");
                         $('#password-input').val(" ");
                     }
                 }
@@ -69,27 +71,64 @@
         }
         );
 
+
         $('#register-button').click(function () {
             var firstName = "",
                 lastName = "",
-                username = "",
-                password = "";
+                password = "",
+                rePassword = "";
 
-            firstName = $('#register-name-input').val();
-            lastName = $('#username-input').val();
-            password = $('#username-input').val();
-            email = $('#username-input').val();
-
-
-        })
+            firstName = $('#register-firstname-input').val();
+            lastName = $('#register-lastname-input').val();
+            password = $('#register-password-input').val();
+            rePassword = $('#register-repassword-input').val();
+            email = $('#register-email-input').val();
 
 
+            //Check all fields have been entered 
+            if (!(firstName.length == 0 ||
+                lastName.length == 0 ||
+                password.length == 0 ||
+                rePassword.length == 0 ||
+                email.length == 0)) {
+
+                //Check if email is valid
+                if (isEmail(email)) {
+                    //Check both passwords match
+                    if (password === rePassword) {
+
+                        alert("Passwords match");
+
+                        $.post('backend/register.php',
+                            {
+                                firstName: firstName,
+                                lastName: lastName,
+                                password: password,
+                                email: email
+                            }, function (data) {
+                                alert(data);
+                            }
+
+                        )
+                    } else {
+                        alert("Passwords dont match");
+                    }
+                }
+            } else {
+                alert("Please enter all fields");
+            }
+        });
 
 
 
         $('.message a').click(function () {
             $('form').animate({ height: "toggle", opacity: "toggle" }, "slow");
         });
+
+        function isEmail(email) {
+            var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+            return regex.test(email);
+        }
     });
 </script>
 
