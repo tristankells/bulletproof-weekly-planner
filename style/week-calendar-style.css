@@ -135,9 +135,7 @@ body {
 }
 
 /* Remove padding from the fluid container */
-.container-fluid {
-    padding-right:0;
-    padding-left:0;
-    margin-right:auto;
-    margin-left:auto
- }
+
+ select:hover { 
+    background-color: rgba(233, 236, 27, 0.469);
+}
