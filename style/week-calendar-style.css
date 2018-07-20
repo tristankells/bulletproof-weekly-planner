@@ -134,6 +134,10 @@ body {
 
 }
 
-.white {
-    color: white;
-}
+/* Remove padding from the fluid container */
+.container-fluid {
+    padding-right:0;
+    padding-left:0;
+    margin-right:auto;
+    margin-left:auto
+ }
