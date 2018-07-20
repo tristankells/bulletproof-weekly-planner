@@ -23,7 +23,9 @@
         <li data-action="0">N/A</li>
     </ul>
 
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <!-- Links -->
             <ul class="navbar-nav">
                 <a class="navbar-brand" href="#">
@@ -37,81 +39,79 @@
                 </li>
             </ul>
         </nav>
-<div class="container">
-  <div class="row" id="maindiv">
-        <div class="col-lg-12" id="consultantsdiv">
-            <div id="consultanttablekey">
-                <b>ON-SITE</b>
-                <p class="dot on-site-colour"></p>
-                <b>AT OFFICE</b>
-                <p class="dot office-colour"></p>
+        <div class="row" id="maindiv">
+            <div class="col-lg-12" id="consultantsdiv">
+                <div id="consultanttablekey">
+                    <b>ON-SITE</b>
+                    <p class="dot on-site-colour"></p>
+                    <b>AT OFFICE</b>
+                    <p class="dot office-colour"></p>
+                </div>
+                <table class="consultant-table table" id="consultantstable">
+                    <thead id="consultantstablehead">
+                        <tr id="consultantstableheadrow">
+                            <th class="test">Consultant</th>
+                            <th colspan="2" class="dates">M </th>
+                            <th colspan="2" class="dates">T </th>
+                            <th colspan="2" class="dates">W </th>
+                            <th colspan="2" class="dates">T </th>
+                            <th colspan="2" class="dates">F </th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th>AM</th>
+                            <th>PM</th>
+                            <th>AM</th>
+                            <th>PM</th>
+                            <th>AM</th>
+                            <th>PM</th>
+                            <th>AM</th>
+                            <th>PM</th>
+                            <th>AM</th>
+                            <th>PM</th>
+                        </tr>
+                    </thead>
+                    <tbody id="consultantstablebody">
+
+                    </tbody>
+
+                </table>
+                <tr>
+                    <td>
+                        <input type="text" placeholder="Consultant Name..." id="consultantnameinput" />
+                    </td>
+                    <td>
+                        <input type="text" placeholder="Consultant Role..." id="consultantroleinput" />
+                    </td>
+                    <td>
+                        <input type="button" class="btn" value="Add Consultant" id="addconsultantbutton" />
+                    </td>
+                </tr>
             </div>
-            <table class="consultant-table table" id="consultantstable">
-                <thead id="consultantstablehead">
-                    <tr id="consultantstableheadrow">
-                        <th class="test">Consultant</th>
-                        <th colspan="2" class="dates">M </th>
-                        <th colspan="2" class="dates">T </th>
-                        <th colspan="2" class="dates">W </th>
-                        <th colspan="2" class="dates">T </th>
-                        <th colspan="2" class="dates">F </th>
-                    </tr>
-                    <tr>
-                        <th></th>
-                        <th>AM</th>
-                        <th>PM</th>
-                        <th>AM</th>
-                        <th>PM</th>
-                        <th>AM</th>
-                        <th>PM</th>
-                        <th>AM</th>
-                        <th>PM</th>
-                        <th>AM</th>
-                        <th>PM</th>
-                    </tr>
-                </thead>
-                <tbody id="consultantstablebody">
-
-                </tbody>
-
-            </table>
-            <tr>
-                <td>
-                    <input type="text" placeholder="Consultant Name..." id="consultantnameinput" />
-                </td>
-                <td>
-                    <input type="text" placeholder="Consultant Role..." id="consultantroleinput" />
-                </td>
-                <td>
-                    <input type="button" class="btn" value="Add Consultant" id="addconsultantbutton" />
-                </td>
-            </tr>
+            <div class="col-lg-12" id="clientsdiv">
+                <table class="table" id="clientstable">
+                    <thead id="clienttablehead">
+                        <th>Client</th>
+                        <th>Abbrevation</th>
+                        <th>Who</th>
+                    </thead>
+                    <tbody id="clienttablebody">
+                    </tbody>
+                </table>
+                <tr>
+                    <td>
+                        <input type="text" placeholder="Client Name..." id="clientnameinput" />
+                    </td>
+                    <td>
+                        <input type="text" placeholder="Client Abbrevation..." id="clientabbreviationinput" maxlength="3" />
+                    </td>
+                    <td>
+                        <input type="button" class="btn" value="Add Client" id="addclientbutton" />
+                    </td>
+                </tr>
+            </div>
         </div>
-        <div class="col-lg-12" id="clientsdiv">
-            <table class = "table" id="clientstable">
-                <thead id="clienttablehead">
-                    <th>Client</th>
-                    <th>Abbrevation</th>
-                    <th>Who</th>
-                </thead>
-                <tbody id="clienttablebody">
-                </tbody>
-            </table>
-            <tr>
-                <td>
-                    <input type="text" placeholder="Client Name..." id="clientnameinput" />
-                </td>
-                <td>
-                    <input type="text" placeholder="Client Abbrevation..." id="clientabbreviationinput" maxlength="3" />
-                </td>
-                <td>
-                    <input type="button" class="btn" value="Add Client" id="addclientbutton" />
-                </td>
-            </tr>
-        </div>
-        <input type="button" id="testbutton" value="Test"></input>
     </div>
-</div>
 </body>
 
 </html>
