@@ -15,6 +15,15 @@
     font-style: italic;
 }
 
+body {
+    background-color: #f9f9f9;
+}
+
+.row-space {
+    padding-right: 10px!important;
+
+}
+
 /*CSS for context menu adapted from https://stackoverflow.com/questions/4495626/making-custom-right-click-context-menus-for-my-web-app 12/07/2018 */
 
 /* CSS3 */
@@ -23,18 +32,12 @@
 
 
 
-.clientdropdown {
+.dropdown {
     background-color: transparent;
     width: 100%!important;
     height: 50px!important;
     text-align: center;
-    -webkit-text-size-adjust: inherit;
     border: none;
-}
-
-.row-space {
-    padding-right: 10px!important;
-
 }
 
 select {
@@ -44,7 +47,7 @@ select {
     border-radius: 0px;
     text-indent: 1px;
     text-overflow: '';
-    text-align-last:center;
+    text-align-last: center;
     padding: 5px;
     margin: 5px;
 }
@@ -89,20 +92,12 @@ td{
     user-select: none;
 }
 
-body {
-    background-color: #f9f9f9;
-}
-
 .custom-menu li:hover {
     background-color: rgb(255, 229, 145);
 }
 
-.dot {
-    height: 25px;
-    width: 25px;
-    border-radius: 50%;
-    display: inline-block;
-}
+
+/* Consultant table key */
 
 .on-site-colour {
     background-color: #1A2930;
@@ -112,10 +107,22 @@ body {
     background-color: #F7CE3E;
 }
 
-#consultanttablekey {
-    text-align: right;
+.consultanttablekey {
+    display: flex;
+    justify-content: flex-end;
     padding: 8px 12px;
 }
+
+.key-table-heading {
+    padding: 5px;
+}
+
+.dot-position {
+    text-align: center;
+}
+
+
+/* Remove buttons */
 
 .remove-consultant-btn {
     width: 20px;
@@ -131,5 +138,4 @@ body {
     display: block;
     margin-left: auto;
     margin-right: auto;
-
 }
