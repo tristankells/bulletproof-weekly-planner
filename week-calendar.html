@@ -23,102 +23,108 @@
         <li data-action="0">N/A</li>
     </ul>
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-            <!-- Links -->
-            <ul class="navbar-nav">
-                <a class="navbar-brand" href="#">
-                    <img src="/Glance/img/glance_logo_white_lg.png" class="logo" alt="">
-                </a>
-                <li class="nav-item">
-                    <a class="nav-link" href="week-calendar.html">Week Calendar</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="month-calendar.html">Month Calendar</a>
-                </li>
-            </ul>
-        </nav>
-<div class="container-fluid">
-  <div class="row" id="maindiv">
-        <div class="col-lg-12" id="consultantsdiv">
-            <div class="consultanttablekey">
-                <table>
-                    <th class="key-table-heading">Site</th>
-                    <th class="key-table-heading">Office</th>
-                    <tr><td class="dot-position"><img src="/Glance/img/key_dot_blue.png"</img></td>
-                    <td class="dot-position"><img src="/Glance/img/key_dot_yellow.png"</img></td></tr>
-                </table>
-                
-            </div>
-            <table class="consultant-table table" id="consultantstable">
-                <thead id="consultantstablehead">
-                    <tr id="consultantstableheadrow">
-                        <th>Consultant</th>
-                        <th colspan="2" class="dates">M </th>
-                        <th colspan="2" class="dates">T </th>
-                        <th colspan="2" class="dates">W </th>
-                        <th colspan="2" class="dates">T </th>
-                        <th colspan="2" class="dates">F </th>
-                    </tr>
-                    <tr class="table-subheadings">
-                        <th></th>
-                        <th>AM</th>
-                        <th>PM</th>
-                        <th>AM</th>
-                        <th>PM</th>
-                        <th>AM</th>
-                        <th>PM</th>
-                        <th>AM</th>
-                        <th>PM</th>
-                        <th>AM</th>
-                        <th>PM</th>
-                    </tr>
-                    
-                </thead>
-                <tbody id="consultantstablebody">
+        <!-- Links -->
+        <ul class="navbar-nav">
+            <a class="navbar-brand" href="#">
+                <img src="/Glance/img/glance_logo_white_lg.png" class="logo" alt="">
+            </a>
+            <li class="nav-item">
+                <a class="nav-link" href="week-calendar.html">Week Calendar</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="month-calendar.html">Month Calendar</a>
+            </li>
+        </ul>
+    </nav>
+    <div class="container-fluid">
+        <div class="row" id="maindiv">
+            <div class="col-lg-12" id="consultantsdiv">
+                    <input type="button" class="btn" value="Reset Allocations" id="resetallocationbutton" />
+                <div class="consultanttablekey">
+                    <table>
+                        <th class="key-table-heading">Site</th>
+                        <th class="key-table-heading">Office</th>
+                        <tr>
+                            <td class="dot-position">
+                                <img src="/Glance/img/key_dot_blue.png" </img>
+                            </td>
+                            <td class="dot-position">
+                                <img src="/Glance/img/key_dot_yellow.png" </img>
+                            </td>
+                        </tr>
+                    </table>
 
-                </tbody>
-                
-            </table>
-            <table>
+                </div>
+                <table class="consultant-table table" id="consultantstable">
+                    <thead id="consultantstablehead">
+                        <tr id="consultantstableheadrow">
+                            <th>Consultant</th>
+                            <th colspan="2" class="dates">M </th>
+                            <th colspan="2" class="dates">T </th>
+                            <th colspan="2" class="dates">W </th>
+                            <th colspan="2" class="dates">T </th>
+                            <th colspan="2" class="dates">F </th>
+                        </tr>
+                        <tr class="table-subheadings">
+                            <th></th>
+                            <th>AM</th>
+                            <th>PM</th>
+                            <th>AM</th>
+                            <th>PM</th>
+                            <th>AM</th>
+                            <th>PM</th>
+                            <th>AM</th>
+                            <th>PM</th>
+                            <th>AM</th>
+                            <th>PM</th>
+                        </tr>
+
+                    </thead>
+                    <tbody id="consultantstablebody">
+
+                    </tbody>
+
+                </table>
+                <table>
+                    <tr>
+                        <td>
+                            <input type="text" placeholder="Consultant Name..." id="consultantnameinput" />
+                        </td>
+                        <td>
+                            <input type="text" placeholder="Consultant Role..." id="consultantroleinput" />
+                        </td>
+                        <td>
+                            <input type="button" class="btn" value="Add Consultant" id="addconsultantbutton" />
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+            <div class="col-lg-12"></div>
+            <div class="col-lg-12" id="clientsdiv">
+                <table class="table" id="clientstable">
+                    <thead id="clienttablehead">
+                        <th>Client</th>
+                        <th>Abbrevation</th>
+                        <th>Who</th>
+                    </thead>
+                    <tbody id="clienttablebody">
+                    </tbody>
+                </table>
                 <tr>
                     <td>
-                        <input type="text" placeholder="Consultant Name..." id="consultantnameinput" />
+                        <input type="text" placeholder="Client Name..." id="clientnameinput" />
                     </td>
                     <td>
-                        <input type="text" placeholder="Consultant Role..." id="consultantroleinput" />
+                        <input type="text" placeholder="Client Abbrevation..." id="clientabbreviationinput" maxlength="3" />
                     </td>
                     <td>
-                        <input type="button" class="btn" value="Add Consultant" id="addconsultantbutton" />
+                        <input type="button" class="btn" value="Add Client" id="addclientbutton" />
                     </td>
                 </tr>
-            </table>
-            
-            
-        </div>
-        <div class="col-lg-12"></div>
-        <div class="col-lg-12" id="clientsdiv">
-            <table class = "table" id="clientstable">
-                <thead id="clienttablehead">
-                    <th>Client</th>
-                    <th>Abbrevation</th>
-                    <th>Who</th>
-                </thead>
-                <tbody id="clienttablebody">
-                </tbody>
-            </table>
-            <tr>
-                <td>
-                    <input type="text" placeholder="Client Name..." id="clientnameinput" />
-                </td>
-                <td>
-                    <input type="text" placeholder="Client Abbrevation..." id="clientabbreviationinput" maxlength="3" />
-                </td>
-                <td>
-                    <input type="button" class="btn" value="Add Client" id="addclientbutton" />
-                </td>
-            </tr>
+            </div>
         </div>
     </div>
-</div>
 </body>
 
 </html>

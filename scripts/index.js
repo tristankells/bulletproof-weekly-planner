@@ -152,7 +152,7 @@ $(document).ready(function() {
     clientRow +=
       "<td style='text-align: center; vertical-align: middle; border: none;'><input type='image' src='/Glance/img/remove.png' class='remove-client-btn'/></td>";
 
-      "<td style='text-align: center; vertical-align: middle; border: none;'><input type='image' src='/Glance/img/remove.png' class='remove-consultant-btn'/></td>";
+    ("<td style='text-align: center; vertical-align: middle; border: none;'><input type='image' src='/Glance/img/remove.png' class='remove-consultant-btn'/></td>");
 
     clientRow += "</tr>";
     $("#clienttablebody").append(clientRow); //Append html table row to client table body
@@ -194,18 +194,20 @@ $(document).ready(function() {
     for (i = 0; i < 10; i++) {
       //Loop through days in the week, times 2, and populate dropdowns
 
-      consultantRow +=
-        "<td"
-        
-        if(i%2==1){
-          consultantRow+= " class='row-space'>";
-        }else{
-          consultantRow+=">";
-        }
+      consultantRow += "<td";
 
-        consultantRow+= "<select" +
-          " class=" 
-            + "'dropdown' id='" + i + "'data-office=";
+      if (i % 2 == 1) {
+        consultantRow += " class='row-space'>";
+      } else {
+        consultantRow += ">";
+      }
+
+      consultantRow +=
+        "<select" +
+        " class=" +
+        "'dropdown clientdropdown' id='" +
+        i +
+        "'data-office=";
 
       consultantRow += checkOfficeStatusOfSlot(consultant["allocations"], i);
 
@@ -825,4 +827,20 @@ $(document).ready(function() {
   }
 
   //End of context menu code adapted from https://stackoverflow.com/questions/4495626/making-custom-right-click-context-menus-for-my-web-app 12/07/2018
+
+  //Add clear all allocations function to the reset allocations button
+  $("#resetallocationbutton").click(function() {
+    clearAllAllcations();
+  });
+
+  /*    
+     Remove allocations from the consultant table 
+  */
+  function clearAllAllcations() {
+    $.get("backend/removeAllAllocations.php", function() {
+      //Set select elements to the "" value and the background colour to the default
+      $("select").val("");
+      $("select").css("background-color", "#f9f9f9");
+    });
+  }
 });
