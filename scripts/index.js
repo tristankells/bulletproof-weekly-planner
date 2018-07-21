@@ -819,7 +819,7 @@ $(document).ready(function() {
         selectElement.css("color", "black");
         break;
       case "0":
-        selectElement.css("background-color", "white");
+        selectElement.css("background-color", "#f9f9f9");
         break;
     }
   }

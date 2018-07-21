@@ -24,6 +24,8 @@ body {
 
 }
 
+
+
 /*CSS for context menu adapted from https://stackoverflow.com/questions/4495626/making-custom-right-click-context-menus-for-my-web-app 12/07/2018 */
 
 /* CSS3 */
@@ -138,4 +140,8 @@ td{
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+
+select:hover { 
+    background-color: lightcyan;
 }
