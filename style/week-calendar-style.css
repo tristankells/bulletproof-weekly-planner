@@ -1,5 +1,7 @@
  /* Inputs with the class .client-name-input now as appear as normal text  */
 
+ @import url("https://fonts.googleapis.com/css?family=Lato");
+
  .client-name-input {
     background: rgba(0, 0, 0, 0);
     border: none;
@@ -17,6 +19,7 @@
 
 body {
     background-color: #f9f9f9;
+    font-family: Lato, Arial;
 }
 
 .row-space {
@@ -50,6 +53,11 @@ select {
     text-align-last: center;
     padding: 5px;
     margin: 5px;
+}
+
+select option {
+    background-color: white;
+    color: black;
 }
 
 .mr-auto {
