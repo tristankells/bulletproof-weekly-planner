@@ -150,9 +150,9 @@ $(document).ready(function() {
     }
     clientRow += "</td>";
     clientRow +=
-      "<td style='text-align: center; vertical-align: middle;'><input type='image' src='/Glance/img/remove.png' class='remove-client-btn'/></td>";
+      "<td style='text-align: center; vertical-align: middle; border: none;'><input type='image' src='/Glance/img/remove.png' class='remove-client-btn'/></td>";
 
-      "<td style='text-align: center; vertical-align: middle;'><input type='image' src='/Glance/img/remove.png' class='remove-consultant-btn'/></td>";
+      "<td style='text-align: center; vertical-align: middle; border: none;'><input type='image' src='/Glance/img/remove.png' class='remove-consultant-btn'/></td>";
 
     clientRow += "</tr>";
     $("#clienttablebody").append(clientRow); //Append html table row to client table body
@@ -205,7 +205,7 @@ $(document).ready(function() {
 
         consultantRow+= "<select" +
           " class=" 
-            + "'clientdropdown' id='" + i + "'data-office=";
+            + "'dropdown' id='" + i + "'data-office=";
 
       consultantRow += checkOfficeStatusOfSlot(consultant["allocations"], i);
 
@@ -230,7 +230,7 @@ $(document).ready(function() {
       consultantRow += "</select></td>";
     }
     consultantRow +=
-      "<td style='text-align: center; vertical-align: middle;'><input type='image' src='/Glance/img/remove.png' class='remove-consultant-btn'/></td>";
+      "<td style='text-align: center; vertical-align: middle; border: none'><input type='image' src='/Glance/img/remove.png' class='remove-consultant-btn'/></td>";
     consultantRow += "</tr>";
     $("#consultantstablebody").append(consultantRow);
   }
@@ -819,7 +819,7 @@ $(document).ready(function() {
         selectElement.css("color", "black");
         break;
       case "0":
-        selectElement.css("background-color", "#f9f9f9");
+        selectElement.css("background-color", "white");
         break;
     }
   }
