@@ -122,14 +122,14 @@ $(document).ready(function() {
       client["position"] +
       "' >";
     clientRow +=
-      "<td>" +
+      "<td class='client-row-format' style='vertical-align: middle;'>" +
       "<input class='client-name-input'" +
       "value='" +
       client["name"] +
       "'/>" +
       "</td>";
-    clientRow += "<td>" + client["abbreviation"] + "</td>";
-    clientRow += "<td class='who-column'>";
+    clientRow += "<td class='client-row-format' style='vertical-align: middle; font-weight:bold;'>" + client["abbreviation"] + "</td>";
+    clientRow += "<td class='who-column client-row-format' style='vertical-align: middle;'>";
 
     //Checks if consultants are allocated to a client and create the appropirate innerHTML for the WHO column.
     for (x in consultants) {

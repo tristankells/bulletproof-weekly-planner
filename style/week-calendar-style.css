@@ -105,6 +105,7 @@ td{
 /* Client table */
 
 .add-client-table {
+    font-family: Lato;
     border-collapse: separate;
     border-spacing: 10px;
 }
@@ -121,10 +122,9 @@ td{
     padding-bottom: 8px;
 }
 
-.client-table tbody{
+.client-row-format {
+    height: 60px;
     font-size: 14px;
-    padding-top: 3px;
-    padding-bottom: 5px;
 }
 
 /* Consultant table key */
