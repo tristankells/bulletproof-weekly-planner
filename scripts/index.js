@@ -142,7 +142,7 @@ $(document).ready(function() {
         if (allocation["allocatedto"] == client["abbreviation"]) {
           if (!clientAllocations.includes(consultant["name"])) {
             //Check name is not added twice.
-            clientAllocations += consultant["name"] + " ";
+            clientAllocations += consultant["name"] + ", ";
           }
         }
       }
@@ -182,13 +182,13 @@ $(document).ready(function() {
       consultant["position"] +
       "' >";
     consultantRow +=
-      "<td>" +
-      "<input " +
+      "<div id='consultant-header'><td class='consultant-header'>" +
+      "<div><input " +
       "class='consultant-name-input' " +
       " value='" +
       consultant["name"] +
-      "'/>" +
-      "</br><div class='rolediv'>" +
+      "'/></div>" +
+      "<div class='rolediv'>" +
       consultant["role"] +
       "</div></td>";
     for (i = 0; i < 10; i++) {
@@ -232,7 +232,7 @@ $(document).ready(function() {
       consultantRow += "</select></td>";
     }
     consultantRow +=
-      "<td style='text-align: center; vertical-align: middle; border: none'><input type='image' src='/Glance/img/remove.png' class='remove-consultant-btn'/></td>";
+      "<td style='text-align: center; vertical-align: middle; border: none'><input type='image' src='/Glance/img/remove.png' class='remove-consultant-btn remove-add-btn'/></td>";
     consultantRow += "</tr>";
     $("#consultantstablebody").append(consultantRow);
   }
@@ -598,7 +598,7 @@ $(document).ready(function() {
         allocation = consultantRow.find("#" + i);
         if (allocation.val() == clientRow.data("abbreviation")) {
           if (!allocatedClients.includes(consultantName)) {
-            allocatedClients += " " + consultantName;
+            allocatedClients += ", " + consultantName;
             whoColumn = clientRow.find(".who-column");
             whoColumn.html(allocatedClients);
           }

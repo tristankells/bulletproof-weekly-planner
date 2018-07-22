@@ -40,6 +40,14 @@
     .custom-menu li:hover {
         background-color: #DEF;
     }
+
+    .logo {
+        display: block;
+        max-height:30px;
+        width: auto;
+        height: auto;
+    }
+
 </style>
 <script>
     $(document).ready(function () {
@@ -151,11 +159,14 @@
     <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
             <!-- Links -->
             <ul class="navbar-nav">
+                <a class="navbar-brand" href="#">
+                    <img src="/Glance/img/glance_logo_white_lg.png" class="logo" alt="">
+                </a>
                 <li class="nav-item">
-                    <a class="nav-link" href="week-calendar.html">Week Calendar</a>
+                    <a class="nav-link" href="week-calendar.html">Week</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="month-calendar.html">Month Calendar</a>
+                    <a class="nav-link" href="month-calendar.html">Month</a>
                 </li>
             </ul>
     
@@ -176,10 +187,10 @@
     <table id="clienttable" class="table table-bordered">
         <thead id="clienttablehead">
             <tr id="clienttableheadrow">
-                <th>Client</th>
+                <th>Clients</th>
             </tr>
         </thead>
-        <tbody id="clienttablebody">
+        <tbody id="clienttablebody" style="font-weight: bold">
         </tbody>
     </table>
 </body>

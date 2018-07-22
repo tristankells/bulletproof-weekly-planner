@@ -7,15 +7,7 @@
     border: none;
 }
 
-.consultant-name-input {
-    background: rgba(0, 0, 0, 0);
-    border: none;
-    max-width: 130px;
-}
 
-.rolediv {
-    font-style: italic;
-}
 
 body {
     background-color: #f9f9f9;
@@ -24,7 +16,7 @@ body {
 
 .row-space {
     padding-right: 10px!important;
-
+    /*border-right: 1px solid lightgray !important;*/ 
 }
 
 
@@ -40,13 +32,14 @@ body {
 .dropdown {
     background-color: transparent;
     width: 100%!important;
-    height: 50px!important;
+    height: 60px!important;
     text-align: center;
     border: none;
 }
 
 select {
     -webkit-appearance: none;
+    appearance: none;
     -webkit-border-radius: 0px;
     -moz-appearance: none;
     border-radius: 0px;
@@ -55,6 +48,9 @@ select {
     text-align-last: center;
     padding: 5px;
     margin: 5px;
+    font-size: 13px;
+    font-weight: 700;
+    font-family: Lato;
 }
 
 select option {
@@ -106,6 +102,30 @@ td{
     background-color: rgb(255, 229, 145);
 }
 
+/* Client table */
+
+.add-client-table {
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+
+.client-table {
+    font-family: Lato;
+}
+
+.client-table th{
+    font-size: 15px;
+    text-align: left;
+    padding-left: 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+.client-table tbody{
+    font-size: 14px;
+    padding-top: 3px;
+    padding-bottom: 5px;
+}
 
 /* Consultant table key */
 
@@ -125,6 +145,7 @@ td{
 
 .key-table-heading {
     padding: 5px;
+    white-space: nowrap;
 }
 
 .dot-position {
@@ -132,11 +153,87 @@ td{
 }
 
 
+
+.rolediv {
+    font-style: italic;
+    font-family: Lato, Arial;
+    font-weight: lighter;
+    vertical-align: top;
+}
+
+.consultant-header {
+    font-size: 14px;
+    font-family: Lato, Arial;
+    vertical-align: -webkit-baseline-middle
+}
+
+.consultant-header input {
+    background: rgba(0, 0, 0, 0);
+    border: none;
+    max-width: 120px;
+    vertical-align: -webkit-baseline-middle;
+}
+.consultant-header td {
+    vertical-align: -webkit-baseline-middle;
+}
+
+.table thead>tr.dates.dates>th {
+    font-family: Lato;
+    font-size: 14px;
+    text-align: center;
+    padding-bottom: 10px;
+    margin: 0;
+    border: none;
+}
+
+.table tbody>tr.client-abbr.client-abbr>td {
+    border-right: 1px solid red;
+}
+
+.table thead>tr.date-subheading.date-subheading>th {
+    font-family: Lato;
+    font-size: 13px;
+    font-weight: lighter;
+    text-align: center;
+    line-height: 5px;
+    padding-top: 0 !important;
+    padding-bottom: 10px !important;
+    padding-left: 3px !important;
+    padding-right: 0 !important;
+    border: none;
+
+}
+.add-consultant-table {
+    font-family: Lato;
+    border-collapse: separate;
+    border-spacing: 10px;
+}
+
+.clear-table {
+    font-family: Lato;
+    font-weight: bold;
+    text-align: right;
+    white-space: nowrap;
+}
+
+.input-row {
+    width: 150px;
+    border-collapse: separate;
+    border-spacing: 5px;
+}
+
+.button-row {
+    width: 60px;
+    border-collapse: separate;
+    border-spacing: 5px;
+}
+
 /* Remove buttons */
 
-.remove-consultant-btn {
+.remove-add-btn {
     width: 20px;
     height: 20px;
+    margin-left: 5px;
 }
 
 .remove-client-btn {

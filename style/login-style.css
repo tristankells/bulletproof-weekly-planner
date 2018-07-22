@@ -2,15 +2,19 @@
     @import url(https://fonts.googleapis.com/css?family=Roboto:300);
 
     .login-page {
-        width: 360px;
+        width: 100%;
+        min-height: 1000px;
         padding: 8% 0 0;
         margin: auto;
-
+        text-align: center;
     }
 
     .logo {
-        max-width: 360px;
         margin-bottom: 10px;
+    }
+
+    .logo-image {
+        max-width: 360px;
     }
 
     img {
@@ -45,7 +49,7 @@
         font-family: "Roboto", sans-serif;
         text-transform: uppercase;
         outline: 0;
-        background: #1EBE85;
+        background: #1A2930;
         width: 100%;
         border: 0;
         padding: 15px;
@@ -69,7 +73,7 @@
     }
 
     .form .message a {
-        color: #1EBE85;
+        color: #1A2930;
         text-decoration: none;
     }
 
@@ -119,8 +123,7 @@
     }
 
     body {
-        background-image: url("/Glance/img/glance_landing_lg.jpg");
-        background-size: cover;
+        
         /* background: white;
         /*fallback for old browsers
         background: -webkit-linear-gradient(right, #ffffff, rgb(255, 255, 255));
@@ -130,6 +133,11 @@
         font-family: "Roboto", sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+    }
+
+    #background {
+        background-image: url("/Glance/img/glance_landing_lg.jpg");
+        background-size: cover;
     }
 
 
