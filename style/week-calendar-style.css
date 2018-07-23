@@ -247,6 +247,6 @@ td{
     margin-right: auto;
 }
 
-select:hover { 
-    background-color: lightcyan;
+.select-element-hover { 
+    opacity: 0.8 !important;
 }
