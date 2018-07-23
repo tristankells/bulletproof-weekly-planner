@@ -1,13 +1,13 @@
  /* Inputs with the class .client-name-input now as appear as normal text  */
 
+ /* FONTS */
+
  @import url("https://fonts.googleapis.com/css?family=Lato");
 
  .client-name-input {
     background: rgba(0, 0, 0, 0);
     border: none;
 }
-
-
 
 body {
     background-color: #f9f9f9;
@@ -19,6 +19,16 @@ body {
     /*border-right: 1px solid lightgray !important;*/ 
 }
 
+/* NAVBAR */
+
+.nav-link {
+    font-family: Lato;
+    color: black;
+}
+
+.nav-link:hover {
+    color: #F7CE3E;
+}
 
 
 /*CSS for context menu adapted from https://stackoverflow.com/questions/4495626/making-custom-right-click-context-menus-for-my-web-app 12/07/2018 */
