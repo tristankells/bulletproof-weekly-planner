@@ -140,11 +140,11 @@ td{
 /* Consultant table key */
 
 .on-site-colour {
-    background-color: #1A2930;
+    background-color: #A9B7C0;
 }
 
 .office-colour {
-    background-color: #F7CE3E;
+    background-color: #C7D8C6;
 }
 
 .consultanttablekey {
@@ -258,5 +258,6 @@ td{
 }
 
 .select-element-hover { 
-    opacity: 0.8 !important;
+    background-color: rgb(240, 240, 240) !important;
+    color: black !important;
 }

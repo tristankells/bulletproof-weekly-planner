@@ -277,10 +277,10 @@ $(document).ready(function () {
       if (allocation["allocationslot"] == i) {
         switch (allocation["officestatus"]) {
           case "1":
-            return "'1' style='background-color:#1A2930;color:white;'";
+            return "'1' style='background-color:#A9B7C0;color:white;'";
             break;
           case "2":
-            return "'2' style='background-color:#F7CE3E;'";
+            return "'2' style='background-color:#C7D8C6;'";
             break;
           case "0":
             return "'0'";
@@ -816,15 +816,16 @@ $(document).ready(function () {
   function updateSelectColour(selectElement) {
     switch (selectElement.data("office")) {
       case "1":
-        selectElement.css("background-color", "#1A2930");
+        selectElement.css("background-color", "#A9B7C0");
         selectElement.css("color", "white");
         break;
       case "2":
-        selectElement.css("background-color", "#F7CE3E");
+        selectElement.css("background-color", "#C7D8C6");
         selectElement.css("color", "black");
         break;
       case "0":
         selectElement.css("background-color", "#f9f9f9");
+        selectElement.css("color", "black");
         break;
     }
   }
