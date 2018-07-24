@@ -133,6 +133,7 @@
         font-family: "Roboto", sans-serif;
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+        max-height: 700px;
     }
 
     #background {
