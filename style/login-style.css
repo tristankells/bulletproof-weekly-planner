@@ -49,7 +49,7 @@
         font-family: "Roboto", sans-serif;
         text-transform: uppercase;
         outline: 0;
-        background: #1A2930;
+        background: rgb(73, 93, 105);
         width: 100%;
         border: 0;
         padding: 15px;
@@ -63,7 +63,7 @@
     .form button:hover,
     .form button:active,
     .form button:focus {
-        background: #F7CE3E;
+        background: #C7D8C6;
     }
 
     .form .message {
