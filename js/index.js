@@ -69,8 +69,6 @@ $(document).ready(function() {
     var positions = [];
     $(".consultant-updated").each(function() {
       positions.push([$(this).prop("id"), $(this).attr("data-position")]);
-      //  alert($(this).prop("id"));
-      // alert($(this).attr("data-position"));
       $(this).removeClass("consultant-updated");
     });
     $.post(
@@ -86,8 +84,6 @@ $(document).ready(function() {
     var positions = [];
     $(".client-updated").each(function() {
       positions.push([$(this).prop("id"), $(this).attr("data-position")]);
-      //  alert($(this).prop("id"));
-      // alert($(this).attr("data-position"));
       $(this).removeClass("client-updated");
     });
     $.post(
@@ -577,7 +573,6 @@ $(document).ready(function() {
       .find("[data-abbreviation ='" + selectedClientabbreviation + "']")
       .attr("data-name");
 
-    alert(clientName);
 
     officeStatus = selectElement.data("office");
 
