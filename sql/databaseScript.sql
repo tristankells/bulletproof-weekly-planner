@@ -38,7 +38,7 @@ PRIMARY KEY (consultant_id, allocation_slot)
 
 CREATE TABLE monthly_allocation (
     consultant_id       bigint NOT NULL REFERENCES consultant(id),
-    client_id           bigint NOT NULL REFERENCES client(id),
+    allocated_to        varchar(40) NOT NULL,
     allocation_slot     int NOT NULL,
     time_allocated      timestamp NOT NULL default current_timestamp ON UPDATE current_timestamp,
     PRIMARY KEY (consultant_id, allocation_slot, client_id)

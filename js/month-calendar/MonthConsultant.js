@@ -3,7 +3,12 @@ function MonthConsultant(consultant) {
   this.full_name = consultant["full_name"];
   this.job_title = consultant["job_title"];
   this.board_position = consultant["board_position"];
-  this.allocations = consultant["allocations"];
+  this.monthly_allocations = consultant["monthly_allocations"];
+  this.week_allocations = consultant["week_allocations"];
+
+  for (x in this.week_allocations) {
+    // alert(this.week_allocations[x]["allocated_to"]);
+  }
 
   //Return a new HTML row representing a consultant on the monthly calendar
   this.getRow = function() {
@@ -13,15 +18,28 @@ function MonthConsultant(consultant) {
       .data("id", this.id); //Add consultant id to row
     row.append($("<td></td>").html(this.full_name)); //Add client name colunm
 
+    var weekClientNames = "";
+    for (x in this.week_allocations) {
+      if (
+        !(this.week_allocations[x]["allocated_to"] == "Open") &&
+        !(this.week_allocations[x]["allocated_to"] == "Leave")
+      ) {
+        alert("Test");
+        weekClientNames += this.week_allocations[x]["allocated_to"] + " ";
+      }
+    }
+
+    row.append($("<td></td>").html(weekClientNames));
+
     //Loop through weeks in month, and check existing allocations
-    for (var i = 1; i <= 4; i++) {
+    for (var i = 2; i <= 4; i++) {
       var clientNames = "",
         allocations = [];
 
-      allocations = getAllocations(consultant["allocations"], i);
+      allocations = getAllocations(this.monthly_allocations, i);
       if (allocations) {
         for (x in allocations) {
-          clientNames += allocations[x]["full_name"] + " ";
+          clientNames += allocations[x]["allocated_to"] + " ";
         }
       }
       row.append(

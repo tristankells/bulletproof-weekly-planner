@@ -46,31 +46,45 @@ $result = $conn->query($query);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $id = $row['id'];
-        $allocations = array();
+
+        $monthlyAllocations = array();
+        $weekAllocations = array();
         $query = "SELECT
         consultant_id,
-        client_id,
-        allocation_slot,
-		full_name,
-		abbreviation
-        FROM monthly_allocation ma
-		INNER JOIN client ON client.id=ma.client_id
+        allocated_to,
+        allocation_slot
+        FROM monthly_allocation
         WHERE consultant_id =  $id";
 
         $allocationResult = $conn->query($query);
 
         echo ($conn->error);
-
         if ($allocationResult->num_rows > 0) {
             while ($allocationRow = $allocationResult->fetch_assoc()) {
                 $allocation = [
                     "consultant_id" => $allocationRow['consultant_id'],
-                    "client_id" => $allocationRow['client_id'],
+                    "allocated_to" => $allocationRow['allocated_to'],
                     "allocation_slot" => $allocationRow['allocation_slot'],
-                    "full_name" => $allocationRow['full_name'],
-                    "abbreviation" => $allocationRow['abbreviation'],
                 ];
-                array_push($allocations, $allocation);
+                array_push($monthlyAllocations, $allocation);
+            }
+        }
+
+        $query = "SELECT DISTINCT
+        client.full_name
+        FROM client
+        LEFT OUTER JOIN allocation ON allocation.allocated_to = client.abbreviation
+        WHERE allocation.consultant_id =$id";
+
+        $allocationResult = $conn->query($query);
+
+        echo ($conn->error);
+        if ($allocationResult->num_rows > 0) {
+            while ($allocationRow = $allocationResult->fetch_assoc()) {
+                $allocation = [
+                    "allocated_to" => $allocationRow['full_name'],
+                ];
+                array_push($weekAllocations, $allocation);
             }
         }
 
@@ -80,7 +94,8 @@ if ($result->num_rows > 0) {
             "full_name" => $row['full_name'],
             "job_title" => $row['job_title'],
             "board_position" => $row['board_position'],
-            "allocations" => $allocations,
+            "monthly_allocations" => $monthlyAllocations,
+            "week_allocations" => $weekAllocations,
         ];
         array_push($consultants, $consultant);
     }

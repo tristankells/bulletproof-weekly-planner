@@ -5,7 +5,8 @@ require_once 'database.php'
 ;
 //Store the consultant ID, client name and the day/time of the client allocation
 $id = $_POST["consultantID"];
-$allocatedTo = $_POST["clientAbbreviation"];
+$abbreviation = $_POST["clientAbbreviation"];
+$allocated_to = $_POST["clientName"];
 $allocationSlot = $_POST["allocationSlot"];
 $officeStatus = $_POST["officeStatus"];
 
@@ -17,7 +18,8 @@ $conn->query($query);
 
 //Query to update a consultatns client allocation for a specific day/time
 $query = "INSERT INTO allocation (consultant_id, allocated_to, allocation_slot, office_status)
-            VALUES ($id, '$allocatedTo', $allocationSlot, $officeStatus)";
+            VALUES ($id, '$abbreviation', $allocationSlot, $officeStatus)";
+
 
 //Run query on connection
 $conn->query($query);

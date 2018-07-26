@@ -1,9 +1,4 @@
 $(document).ready(function() {
-  //Table data module
-  var MonthlyDataModule = (function() {
-    var clients = [],
-      consultants = [];
-  })();
   //Consultant object
 
   setUpMonthCalendar();
@@ -49,8 +44,6 @@ $(document).ready(function() {
 
   // Trigger action when the contexmenu is about to be shown
 
-  var consultantTable = $("#monthtable");
-
   $("#monthtable").on("contextmenu", ".allocation", function(event) {
     $("#clicked").removeAttr("id");
     $(this).attr("id", "clicked"); //targets this element for context action
@@ -82,6 +75,7 @@ $(document).ready(function() {
     var $tr = $("#clicked").closest("tr"); //consultant row
     var consultantId = $tr.data("id"); //consultant Id
     var clientId = $(this).data("action"); //client Id
+    var allocated_to = $(this).attr("data-name");
     var isAdding = 1;
     if ($(this).data("flag") == 1) {
       //if it is deleting
@@ -93,7 +87,7 @@ $(document).ready(function() {
       "php/updateAllocation_month.php",
       {
         col: col,
-        clientId: clientId,
+        allocated_to: allocated_to,
         consultantId: consultantId,
         isAdding: isAdding
       },
