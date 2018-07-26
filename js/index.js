@@ -7,7 +7,7 @@ $(document).ready(function () {
     */
 
   function initialiseTables() {
-    $.get("backend/getConsultantsAndClients.php", function (data) {
+    $.get("php/getConsultantsAndClients.php", function (data) {
       var databaseResults = [],
         clients = [],
         consultants = [];
@@ -74,7 +74,7 @@ $(document).ready(function () {
       $(this).removeClass("consultant-updated");
     });
     $.post(
-      "backend/updateConsultantPositions.php",
+      "php/updateConsultantPositions.php",
       {
         positions: positions
       },
@@ -91,7 +91,7 @@ $(document).ready(function () {
       $(this).removeClass("client-updated");
     });
     $.post(
-      "backend/updateClientPositions.php",
+      "php/updateClientPositions.php",
       {
         positions: positions
       },
@@ -383,7 +383,7 @@ $(document).ready(function () {
       if (nameUnique) {
         if (abbreviationUnique) {
           $.post(
-            "backend/addNewClient.php", //Request data from server using POST, url is addClient.php
+            "php/addNewClient.php", //Request data from server using POST, url is addClient.php
             {
               clientName: newClientName, //Pass the value of client name
               clientAbbrev: newClientabbreviation, //Pass the value of client abbreviation
@@ -442,7 +442,7 @@ $(document).ready(function () {
     clientabbreviation = thisClientRow.data("abbreviation");
 
     $.post(
-      "backend/removeClient.php", //Request data from server using POST, url is removeClient.php
+      "php/removeClient.php", //Request data from server using POST, url is removeClient.php
       {
         clientID: thisClientID, //Pass the value of the table column with the id clientName within the closest table row to the removeclientbutton(this)
         abbreviation: clientabbreviation
@@ -489,7 +489,7 @@ $(document).ready(function () {
         clients = getClients();
 
         $.post(
-          "backend/addNewConsultant.php", //Request data from server using POST, url is addClient.php
+          "php/addNewConsultant.php", //Request data from server using POST, url is addClient.php
           {
             consultantName: newConsultantName, //Pass the value of consultant name input to server
             consultantJob: newConsultantRole, //Pass the value of consultant row input to server
@@ -526,7 +526,7 @@ $(document).ready(function () {
     consultantID = thisConsultantRow.prop("id");
 
     $.post(
-      "backend/removeConsultant.php", //Request data from server using POST, url is removeClient.php
+      "php/removeConsultant.php", //Request data from server using POST, url is removeClient.php
       {
         consultantID: consultantID //Pass the value of the table column with the id clientName within the closest table row to the removeclientbutton(this)
       },
@@ -568,7 +568,7 @@ $(document).ready(function () {
     consultantRow = selectElement.closest("tr");
     consultantID = consultantRow.prop("id");
     $.post(
-      "backend/updateAllocation.php",
+      "php/updateAllocation.php",
       {
         consultantID: consultantID,
         clientAbbreviation: selectedClientabbreviation,
@@ -628,7 +628,7 @@ $(document).ready(function () {
       .closest("tr")
       .prop("id");
     $.post(
-      "backend/updateClientName.php",
+      "php/updateClientName.php",
       {
         clientID: clientID,
         clientName: newClientName
@@ -654,7 +654,7 @@ $(document).ready(function () {
     consultantID = consultantRow.prop("id");
     originalConsultantName = consultantRow.data("name");
     $.post(
-      "backend/updateConsultantName.php",
+      "php/updateConsultantName.php",
       {
         consultantID: consultantID,
         consultantName: newConsultantName
@@ -802,7 +802,7 @@ $(document).ready(function () {
     $(".custom-menu").hide(100);
 
     $.post(
-      "backend/updateAllocation.php",
+      "php/updateAllocation.php",
       {
         consultantID: consultantID,
         clientAbbreviation: clientAbbreviation,
@@ -841,7 +841,7 @@ $(document).ready(function () {
      Remove allocations from the consultant table 
   */
   function clearAllAllcations() {
-    $.get("backend/removeAllAllocations.php", function () {
+    $.get("php/removeAllAllocations.php", function () {
       //Set select elements to the "" value and the background colour to the default
       $("select").val("");
       $("select").css("background-color", "#f9f9f9");

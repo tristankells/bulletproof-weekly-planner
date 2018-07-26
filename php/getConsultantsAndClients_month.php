@@ -5,6 +5,7 @@ require_once 'database.php';
 $boardID = 1;
 $clients = array();
 $consultants = array();
+$data = array();
 
 $query = "SELECT id,
 full_name,
@@ -22,9 +23,9 @@ if ($result->num_rows > 0) {
         $client =
             [
             "id" => $row['id'],
-            "name" => $row['full_name'],
+            "full_name" => $row['full_name'],
             "abbreviation" => $row['abbreviation'],
-            "position" => $row['board_position'],
+            "board_position" => $row['board_position'],
         ];
         array_push($clients, $client);
     }
@@ -66,8 +67,8 @@ if ($result->num_rows > 0) {
                     "consultant_id" => $allocationRow['consultant_id'],
                     "client_id" => $allocationRow['client_id'],
                     "allocation_slot" => $allocationRow['allocation_slot'],
-					"full_name" => $allocationRow['full_name'],
-					"abbreviation" => $allocationRow['abbreviation'],
+                    "full_name" => $allocationRow['full_name'],
+                    "abbreviation" => $allocationRow['abbreviation'],
                 ];
                 array_push($allocations, $allocation);
             }
@@ -76,15 +77,16 @@ if ($result->num_rows > 0) {
         $consultant =
             [
             "id" => $row['id'],
-            "name" => $row['full_name'],
-            "role" => $row['job_title'],
-            "position" => $row['board_position'],
+            "full_name" => $row['full_name'],
+            "job_title" => $row['job_title'],
+            "board_position" => $row['board_position'],
             "allocations" => $allocations,
         ];
         array_push($consultants, $consultant);
     }
 }
-// Convert Array to JSON String
-$returnArrays = array($consultants, $clients);
-echo json_encode($returnArrays);
+// Convert client and consultants arrays to JSON
+$data['consultants'] = $consultants;
+$data['clients'] = $clients;
+echo json_encode($data);
 mysqli_close($conn);

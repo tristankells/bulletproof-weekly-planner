@@ -41,7 +41,7 @@ CREATE TABLE monthly_allocation (
     client_id           bigint NOT NULL REFERENCES client(id),
     allocation_slot     int NOT NULL,
     time_allocated      timestamp NOT NULL default current_timestamp ON UPDATE current_timestamp,
-    PRIMARY KEY (consultant_id, allocation_slot)
+    PRIMARY KEY (consultant_id, allocation_slot, client_id)
 );
 
 CREATE TABLE user_profile (

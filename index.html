@@ -54,7 +54,7 @@
             password = $('#password-input').val();
 
             $.post(
-                'backend/login.php',
+                'php/login.php',
                 {
                     email: email,
                     password: password
@@ -97,7 +97,7 @@
                     //Check both passwords match
                     if (password === rePassword) {
 
-                        $.post('backend/register.php',
+                        $.post('php/register.php',
                             {
                                 firstName: firstName,
                                 lastName: lastName,
