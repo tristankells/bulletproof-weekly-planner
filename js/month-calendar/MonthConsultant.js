@@ -6,9 +6,6 @@ function MonthConsultant(consultant) {
   this.monthly_allocations = consultant["monthly_allocations"];
   this.week_allocations = consultant["week_allocations"];
 
-  for (x in this.week_allocations) {
-    // alert(this.week_allocations[x]["allocated_to"]);
-  }
 
   //Return a new HTML row representing a consultant on the monthly calendar
   this.getRow = function() {
@@ -18,17 +15,16 @@ function MonthConsultant(consultant) {
       .data("id", this.id); //Add consultant id to row
     row.append($("<td></td>").html(this.full_name)); //Add client name colunm
 
+    //Add all allocated  clients from the weekly view to the this week colunm
     var weekClientNames = "";
     for (x in this.week_allocations) {
       if (
         !(this.week_allocations[x]["allocated_to"] == "Open") &&
         !(this.week_allocations[x]["allocated_to"] == "Leave")
       ) {
-        alert("Test");
         weekClientNames += this.week_allocations[x]["allocated_to"] + " ";
       }
     }
-
     row.append($("<td></td>").html(weekClientNames));
 
     //Loop through weeks in month, and check existing allocations
