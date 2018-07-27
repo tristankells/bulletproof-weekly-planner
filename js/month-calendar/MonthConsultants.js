@@ -18,9 +18,14 @@ var MonthConsultants = (function() {
     return $rowElements;
   };
 
+  removeAllocation = function() {
+    
+
+  };
+
   return {
     add: add,
     getRows: getRows,
-    empty : empty
+    empty: empty
   };
 })();

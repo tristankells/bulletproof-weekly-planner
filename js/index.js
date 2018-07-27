@@ -123,7 +123,7 @@ $(document).ready(function() {
       "<td class='client-row-format' style='vertical-align: middle;'>" +
       "<input class='client-name-input'" +
       "value='" +
-      client["name"] +
+      client["full_name"] +
       "'/>" +
       "</td>";
     clientRow +=
