@@ -12,33 +12,37 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="style/month-calendar-style.css">
-    <script src="scripts/month-calendar.js"></script>
+    <script src="js/month-calendar/MonthClient.js"></script>
+    <script src="js/month-calendar/MonthConsultant.js"></script>
+    <script src="js/month-calendar/MonthClientsModule.js"></script>
+    <script src="js/month-calendar/MonthConsultantsModule.js"></script>
+    <script src="js/month-calendar/MonthCalendar.js"></script>
 </head>
 <script>
-   
+
 </script>
 
 <body>
     <ul class='custom-menu'>
     </ul>
     <nav class="navbar navbar-expand-sm bg-light justify-content-center">
-            <!-- Links -->
-            <ul class="navbar-nav">
-				<a class="navbar-brand" href="#">
-                   <img src="/Glance/img/glance_logo_navyblue_lg.png" class="logo" alt="">
-				</a>
-                <li class="nav-item">
-					<a class="nav-link" href="week-calendar.html">Week</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="month-calendar.html">Month</a>
-                </li>
-            </ul>
-    
-        </nav>
-    <table id="monthtable" class="table table-bordered">
-        <thead id="monthtablehead">
-            <tr id="monthtableheadrow">
+        <!-- Links -->
+        <ul class="navbar-nav">
+            <a class="navbar-brand" href="#">
+                <img src="/Glance/img/glance_logo_navyblue_lg.png" class="logo" alt="">
+            </a>
+            <li class="nav-item">
+                <a class="nav-link" href="week-calendar.html">Week</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="month-calendar.html">Month</a>
+            </li>
+        </ul>
+
+    </nav>
+    <table id="consultanttable" class="table table-bordered">
+        <thead id="consultanttablehead">
+            <tr id="consultanttableheadrow">
                 <th>Consultants</th>
                 <th>This Week </th>
                 <th>Week 2 </th>
@@ -46,7 +50,7 @@
                 <th>Week 4 </th>
             </tr>
         </thead>
-        <tbody id="monthtablebody">
+        <tbody id="consultanttablebody">
         </tbody>
     </table>
     <table id="clienttable" class="table table-bordered">

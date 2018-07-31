@@ -11,7 +11,8 @@ full_name,
 abbreviation,
 board_position
 FROM client
-WHERE board_id = $boardID";
+WHERE board_id = $boardID
+ORDER BY board_position ASC";
 
 //Run query on connection
 $result = $conn->query($query);
@@ -22,7 +23,7 @@ if ($result->num_rows > 0) {
         $client =
             [
             "id" => $row['id'],
-            "name" => $row['full_name'],
+            "full_name" => $row['full_name'],
             "abbreviation" => $row['abbreviation'],
             "position" => $row['board_position'],
         ];
@@ -36,7 +37,8 @@ $query = "SELECT id,
     job_title,
     board_position
 FROM consultant
-WHERE board_id = $boardID";
+WHERE board_id = $boardID
+ORDER BY board_position ASC";
 
 //Run query on connection
 $result = $conn->query($query);
@@ -47,13 +49,10 @@ if ($result->num_rows > 0) {
         $id = $row['id'];
         $allocations = array();
         $query = "SELECT
-        consultant_id,
-        client_id,
+        allocated_to,
         allocation_slot,
-		full_name,
-		abbreviation
-        FROM monthly_allocation ma
-		INNER JOIN client ON client.id=ma.client_id
+        office_status
+        FROM allocation
         WHERE consultant_id =  $id";
 
         $allocationResult = $conn->query($query);
@@ -63,11 +62,9 @@ if ($result->num_rows > 0) {
         if ($allocationResult->num_rows > 0) {
             while ($allocationRow = $allocationResult->fetch_assoc()) {
                 $allocation = [
-                    "consultant_id" => $allocationRow['consultant_id'],
-                    "client_id" => $allocationRow['client_id'],
-                    "allocation_slot" => $allocationRow['allocation_slot'],
-					"full_name" => $allocationRow['full_name'],
-					"abbreviation" => $allocationRow['abbreviation'],
+                    "allocatedto" => $allocationRow['allocated_to'],
+                    "allocationslot" => $allocationRow['allocation_slot'],
+                    "officestatus" => $allocationRow['office_status'],
                 ];
                 array_push($allocations, $allocation);
             }

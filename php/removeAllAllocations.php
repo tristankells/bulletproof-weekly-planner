@@ -11,8 +11,6 @@ require_once 'database.php';
 
 $board = 1;
 
-
-
 $query = "DELETE allocation
 FROM allocation 
 LEFT OUTER JOIN consultant ON allocation.consultant_id = consultant.id
