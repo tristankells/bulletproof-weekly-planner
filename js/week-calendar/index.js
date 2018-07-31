@@ -92,7 +92,7 @@ $(document).ready(function() {
       function(data) {}
     );
   }
- 
+
   /*  
         @function addConsultantToTable
 
@@ -166,6 +166,9 @@ $(document).ready(function() {
       }
       consultantRow += "</select></td>";
     }
+
+    consultantRow +=
+      "<td style='text-align: center; vertical-align: middle; border: none'><input type='image' src='/Glance/img/clear.png' class='clear-consultant-btn remove-add-btn'/></td>";
     consultantRow +=
       "<td style='text-align: center; vertical-align: middle; border: none'><input type='image' src='/Glance/img/remove.png' class='remove-consultant-btn remove-add-btn'/></td>";
     consultantRow += "</tr>";
@@ -703,4 +706,35 @@ $(document).ready(function() {
   $("#consultantstablebody").on("mouseleave", "select", function() {
     $(this).removeClass("select-element-hover");
   });
+
+  function bindClearAlllocationButtons() {
+    $("#consultantstablebody").on(
+      "click",
+      ".clear-consultant-btn",
+      clearConsultantAllocations
+    );
+  }
+
+  bindClearAlllocationButtons();
+
+  function clearConsultantAllocations() {
+    var $consultantRow = {},
+      id = 0;
+
+    $consultantRow = $(event.target).closest("tr");
+
+    id = $consultantRow.attr("id");
+
+    clearConsutlantAllocationsDB(id).done(function(data) {
+      alert(data);
+      $consultantRow
+        .find(".clientdropdown")
+        .val(null)
+        .css("background-color", "#f9f9f9");
+    });
+  }
+
+  function clearConsutlantAllocationsDB(id) {
+    return $.post("php/removeConsultantAllocations.php", { id: id });
+  }
 });
