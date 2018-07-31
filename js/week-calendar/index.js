@@ -598,6 +598,14 @@ $(document).ready(function() {
     if (day > 31) {
       day = day - 31;
     }
+
+    if (currentDate.getDate() == day) {
+      alert("The day is " + day);
+      alert("The day is " + currentDate.getDate());
+      //PLACEHOLDER CURRENT DAY HIGHLIGHT
+      $(this).css("background-color", "#A9B7C0");
+    }
+
     $(this).append(" | " + day);
   });
 

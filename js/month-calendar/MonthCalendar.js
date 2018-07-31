@@ -21,7 +21,6 @@ $(document).ready(function() {
       consultants = databaseResults.consultants; //Store array of consultants
 
       clients = databaseResults.clients; //Store array of clients
-
       MonthClientsModule.init(clients);
 
       MonthConsultantsModule.init(consultants);
