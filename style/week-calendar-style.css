@@ -30,6 +30,23 @@ body {
     color: #A9B7C0;
 }
 
+.logo {
+    width: auto;
+    height: 35px;
+
+  }
+
+  .navbar-brand {
+    height: 100px;
+    line-height: 100px;
+  }
+  .navbar-nav .nav-link {
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 100px;
+    line-height: 100px;
+  }
+
 
 /*CSS for context menu adapted from https://stackoverflow.com/questions/4495626/making-custom-right-click-context-menus-for-my-web-app 12/07/2018 */
 
@@ -72,12 +89,7 @@ select option {
     margin-right: auto !important;
 }
 
-.logo {
-  display: block;
-  max-height:30px;
-  width: auto;
-  height: auto;
-}
+
 
 td{
     padding:0!important;
@@ -144,7 +156,8 @@ td{
 }
 
 .office-colour {
-    background-color: #C7D8C6;
+    /*background-color: #C7D8C6; */
+    background-color: #EFD9C1;
 }
 
 .consultanttablekey {
