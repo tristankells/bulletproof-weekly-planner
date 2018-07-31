@@ -575,8 +575,30 @@ $(document).ready(function() {
       break;
   }
 
-  $("#consultantstable > .dates").each(function() {
-    $(this).append(monday.getDate() + $(this).index() - 1);
+  var months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
+  $("#displaymonth").append(months[currentDate.getMonth()]);
+
+  $("#consultantstableheadrow > .date").each(function() {
+    var day = 0;
+    day = monday.getDate() + $(this).index() - 1;
+
+    if (day > 31) {
+      day = day - 31;
+    }
+    $(this).append(" | " + day);
   });
 
   //Beginning of context menu code adapted from https://stackoverflow.com/questions/4495626/making-custom-right-click-context-menus-for-my-web-app 12/07/2018
@@ -707,6 +729,8 @@ $(document).ready(function() {
     $(this).removeClass("select-element-hover");
   });
 
+  /*-----------------CLEAR ROW ALLOCATIONS---------------------*/
+
   function bindClearAlllocationButtons() {
     $("#consultantstablebody").on(
       "click",
@@ -725,8 +749,7 @@ $(document).ready(function() {
 
     id = $consultantRow.attr("id");
 
-    clearConsutlantAllocationsDB(id).done(function(data) {
-      alert(data);
+    clearConsutlantAllocationsDB(id).done(function() {
       $consultantRow
         .find(".clientdropdown")
         .val(null)
