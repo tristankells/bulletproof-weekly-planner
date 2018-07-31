@@ -71,7 +71,7 @@ var WeekClientsModule = (function() {
             function(data) {
               //After response is recieved from server
               var client = {};
-              client = new WeekClient(JSON.parse(data));
+              client = new WeekClient(JSON.parse(data), consultants);
               DOM.$clienttablebody.append(client.getRow());
 
               //Add the client to the list of options in allocation's dropdown
@@ -140,7 +140,7 @@ var WeekClientsModule = (function() {
   function init(clients, consultants) {
     cacheDom();
     for (x in clients) {
-      moduleClients.push(new WeekClient(clients[x]));
+      moduleClients.push(new WeekClient(clients[x], consultants));
     }
 
     this.moduleConsultants = consultants;

@@ -44,7 +44,7 @@ function WeekClient(client, consultants) {
         }
       }
 
-      returnString = returnString.substring(0, returnString.length - 2);
+   
     }
 
     return returnString;
