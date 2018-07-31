@@ -9,10 +9,16 @@ that name.
 
 require_once 'database.php';
 
-$id = $_POST['clientID']; //Client name retrieved from post
+$dynamicData = $_POST['dynamicData'];
+$id = $dynamicData['id']; //Client name retrieved from post
+$abbreviation = $dynamicData['abbreviation'];
+$name = $dynamicData['name'];
 $board = 1;
 
-$query = "DELETE FROM allocation WHERE client_id = $id";
+$query = "DELETE FROM allocation WHERE allocated_to = '$abbreviation'";
+$conn->query($query);
+
+$query = "DELETE FROM monthly_allocation WHERE allocated_to = '$name'";
 $conn->query($query);
 
 $query = "DELETE FROM client WHERE id = $id";

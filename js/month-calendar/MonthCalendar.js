@@ -6,7 +6,7 @@ $(document).ready(function() {
   }
 
   function setUpMonthCalendar() {
-    $("#consultanttablebody").empty();
+    $("#consultanttablebody ").empty();
     $("#clienttablebody").empty();
     $(".custom-menu").empty();
     MonthConsultantsModule.empty();
