@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Glance: Week View</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="style/month-calendar-style.css">
+    <script src="js/manage-calendar/ClientModule.js"></script>
+    <script src="js/manage-calendar/ConsultantModule.js"></script>
+    <script src="js/manage-calendar/app.js"></script>
+    <link rel="stylesheet" href="style/week-calendar-style.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm bg-light justify-content-center">
+        <!-- Links -->
+        <ul class="navbar-nav">
+            <a class="navbar-brand" href="#">
+                <img src="/Glance/img/glance_logo_navyblue_lg.png" class="logo" alt="">
+            </a>
+            <li class="nav-item">
+                <a class="nav-link" href="week-calendar.html">Week</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="month-calendar.html">Month</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="management-page.html">Manage</a>
+            </li>
+        </ul>
+    </nav>
+
+    <div class="container-fluid">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Role</th>
+                </tr>
+            </thead>
+            <tbody id="consultantstablebody"></tbody>
+        </table>
+        <table width="100%" class="add-consultant-table">
+            <tr>
+                <td class="input-row">
+                    <input type="text" class="form-control-sm" placeholder="Consultant Name..." id="consultantnameinput" />
+                </td>
+                <td class="input-row">
+                    <input type="text" class="form-control-sm" placeholder="Consultant Role..." id="consultantroleinput" />
+                </td>
+                <td class="button-row">
+                    <input type='image' src='/Glance/img/plus.png' id="addconsultantbutton" class="remove-add-btn" />
+                </td>
+            </tr>
+        </table>
+
+        <table class="table">
+            <thead>
+                <th>Name</th>
+                <th>Abbreviation</th>
+            </thead>
+            <tbody id="clientstablebody"></tbody>
+        </table>
+        <table class="add-client-table">
+            <tr>
+                <td class="input-row">
+                    <input class="form-control-sm" type="text" placeholder="Client Name..." id="clientnameinput" />
+                </td>
+                <td class="input-row">
+                    <input class="form-control-sm" type="text" placeholder="Client Abbrevation..." id="clientabbreviationinput" maxlength="3"
+                    />
+                </td>
+                <td class="button-row">
+                    <input type='image' src='/Glance/img/plus.png' id="addclientbutton" class="remove-add-btn" />
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

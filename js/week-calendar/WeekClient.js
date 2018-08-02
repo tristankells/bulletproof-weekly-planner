@@ -44,7 +44,7 @@ function WeekClient(client, consultants) {
         }
       }
 
-      returnString = returnString.substring(0, returnString.length - 2);
+   
     }
 
     return returnString;
@@ -100,13 +100,6 @@ function WeekClient(client, consultants) {
           "text-align": "center",
           border: "none"
         })
-        .append(
-          $("<input></input>")
-            .attr("type", "image")
-            .attr("src", "/Glance/img/remove.png")
-            .attr("data-id", this.id)
-            .addClass("remove-client-btn")
-        )
     );
 
     return $rowElement;
