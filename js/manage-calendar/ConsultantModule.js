@@ -49,7 +49,7 @@ var ConsultantModule = (function() {
             .attr("type", "image")
             .attr("src", "/Glance/img/remove.png")
             .attr("data-id", consultant["id"])
-            .addClass("remove-consultant-btn")
+            .addClass("remove-consultant-btn remove-add-btn")
         )
     );
 
@@ -98,16 +98,18 @@ var ConsultantModule = (function() {
   }
 
   function deleteConsultant() {
-    var consultantRow = {},
-      dynamicData = {};
+    if (confirm("Press OK to delete consultant information")) {
+      var consultantRow = {},
+        dynamicData = {};
 
-    consultantRow = $(event.target).closest("tr");
-    dynamicData["id"] = consultantRow.attr("data-id");
+      consultantRow = $(event.target).closest("tr");
+      dynamicData["id"] = consultantRow.attr("data-id");
 
-    //Ajax function to remove from database
-    deleteConsultantFromDB(dynamicData).done(function() {
-      consultantRow.remove(); //Remove the closest table row to the button
-    });
+      //Ajax function to remove from database
+      deleteConsultantFromDB(dynamicData).done(function() {
+        consultantRow.remove(); //Remove the closest table row to the button
+      });
+    }
   }
 
   /* ================= private AJAX methods =============== */

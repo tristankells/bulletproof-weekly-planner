@@ -166,11 +166,8 @@ $(document).ready(function() {
       }
       consultantRow += "</select></td>";
     }
-
     consultantRow +=
       "<td style='text-align: center; vertical-align: middle; border: none'><input type='image' src='/Glance/img/clear.png' class='clear-consultant-btn remove-add-btn'/></td>";
-    consultantRow +=
-      "<td style='text-align: center; vertical-align: middle; border: none'><input type='image' src='/Glance/img/remove.png' class='remove-consultant-btn remove-add-btn'/></td>";
     consultantRow += "</tr>";
     $("#consultantstablebody").append(consultantRow);
   }
@@ -607,6 +604,8 @@ $(document).ready(function() {
   Requires a event. Remove all allocation information for the parent Consultant row of the event.
   */
   function clearConsultantAllocations() {
+
+   confirm("Press OK to delete consultant allocation information");
     var $consultantRow = {},
       id = 0;
 

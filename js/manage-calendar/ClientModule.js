@@ -47,7 +47,7 @@ var ClientModule = (function() {
             .attr("type", "image")
             .attr("src", "/Glance/img/remove.png")
             .attr("data-id", client["id"])
-            .addClass("remove-client-btn")
+            .addClass("remove-client-btn remove-add-btn")
         )
     );
     DOM.$clientstablebody.append($rowElement);
@@ -123,18 +123,20 @@ var ClientModule = (function() {
   */
 
   function deleteClient() {
-    var clientRow = {},
-      dynamicData = {};
+    if (confirm("Press OK to delete client information")) {
+      var clientRow = {},
+        dynamicData = {};
 
-    clientRow = $(event.target).closest("tr");
-    dynamicData["id"] = clientRow.attr("data-id");
-    dynamicData["abbreviation"] = clientRow.attr("data-abbreviation");
-    dynamicData["name"] = clientRow.attr("data-name");
+      clientRow = $(event.target).closest("tr");
+      dynamicData["id"] = clientRow.attr("data-id");
+      dynamicData["abbreviation"] = clientRow.attr("data-abbreviation");
+      dynamicData["name"] = clientRow.attr("data-name");
 
-    //Ajax function to remove from database
-    deleteClientFromDB(dynamicData).done(function() {
-      clientRow.remove(); //Remove the closest table row to the button
-    });
+      //Ajax function to remove from database
+      deleteClientFromDB(dynamicData).done(function() {
+        clientRow.remove(); //Remove the closest table row to the button
+      });
+    }
   }
 
   /* ================= private AJAX methods =============== */

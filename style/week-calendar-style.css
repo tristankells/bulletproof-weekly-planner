@@ -248,6 +248,9 @@ td {
   width: 20px;
   height: 20px;
   margin-left: 5px;
+  text-align: center;
+  vertical-align: middle;
+  border: none;
 }
 
 .remove-client-btn {
@@ -269,5 +272,5 @@ td {
 #displaymonth {
   padding-left: 2%;
   font-family: Lato;
-  font-size: 200%
+  font-size: 200%;
 }
