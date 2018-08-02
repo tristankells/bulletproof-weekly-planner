@@ -223,9 +223,6 @@ $(document).ready(function() {
     return "'0'";
   }
 
-
-
-
   /*  
         @dropdown #consultantstable > .clientdropdown
 
@@ -559,7 +556,9 @@ $(document).ready(function() {
 
   //Add clear all allocations function to the reset allocations button
   $("#resetallocationbutton").click(function() {
-    clearAllAllcations();
+    if (confirm("Press OK to delete ALL allocation information")) {
+      clearAllAllcations();
+    }
   });
 
   /*    
@@ -604,21 +603,21 @@ $(document).ready(function() {
   Requires a event. Remove all allocation information for the parent Consultant row of the event.
   */
   function clearConsultantAllocations() {
+    if (confirm("Press OK to delete consultant allocation information")) {
+      var $consultantRow = {},
+        id = 0;
 
-   confirm("Press OK to delete consultant allocation information");
-    var $consultantRow = {},
-      id = 0;
+      $consultantRow = $(event.target).closest("tr");
 
-    $consultantRow = $(event.target).closest("tr");
+      id = $consultantRow.attr("id");
 
-    id = $consultantRow.attr("id");
-
-    clearConsutlantAllocationsDB(id).done(function() {
-      $consultantRow
-        .find(".clientdropdown")
-        .val(null)
-        .css("background-color", "#f9f9f9");
-    });
+      clearConsutlantAllocationsDB(id).done(function() {
+        $consultantRow
+          .find(".clientdropdown")
+          .val(null)
+          .css("background-color", "#f9f9f9");
+      });
+    }
   }
 
   /*
