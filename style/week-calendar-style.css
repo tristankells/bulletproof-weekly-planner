@@ -274,3 +274,14 @@ td {
   font-family: Lato;
   font-size: 200%;
 }
+
+#navigationBar {
+  text-align: right;
+  padding-top: 2%;
+}
+
+.navigationLinks {
+  color: #333;
+  font-weight: bold;
+  padding: 1%; 
+}

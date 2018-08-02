@@ -17,7 +17,8 @@
     <script src="js/week-calendar/WeekConsultantsModule.js"></script>
     <script src="js/week-calendar/index.js"></script>
 
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+        crossorigin="anonymous">
     <link rel="manifest" href="js/manifest.json">
     <link rel="stylesheet" href="style/week-calendar-style.css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
@@ -31,25 +32,21 @@
         <li data-action="2">Office Time</li>
         <li data-action="0">N/A</li>
     </ul>
-    <nav class="navbar navbar-expand-sm bg-light justify-content-center">
-        <!-- Links -->
-        <ul class="navbar-nav">
-            <a class="navbar-brand" href="#">
-                <img src="/Glance/img/glance_logo_navyblue_lg.png" class="logo" alt="">
-            </a>
-            <li class="nav-item">
-                <a class="nav-link active" href="week-calendar.html">Week</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="month-calendar.html">Month</a>
-            </li>
-            <li><i class="fas-2x fa-cog"></i></li>
-            <li class="nav-item">
-                <a class="nav-link" href="management-page.html">Manage</a>
-            </li>
-        </ul>
-    </nav>
+
     <div class="container-fluid">
+        <div id="navigationBar" class="row">
+            <div class="col-8 ">
+
+                <img src="/Glance/img/glance_logo_navyblue_lg.png" class="logo" alt="">
+
+                <a class="navigationLinks" href="week-calendar.html">Week</a>
+                <a class="navigationLinks" href="month-calendar.html">Month</a>
+                <a class="navigationLinks" href="management-page.html">Manage</a>
+            </div>
+            <div class="col-4">
+                <i class="fas fa-cog"></i>
+            </div>
+        </div>
 
         <div class="row" id="maindiv">
             <div id='displaymonth'>
