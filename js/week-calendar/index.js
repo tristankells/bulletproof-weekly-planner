@@ -226,155 +226,8 @@ $(document).ready(function() {
     return "'0'";
   }
 
-  /*  
-        @button #addclientbutton
 
-        An click event is attached to the 'Add Client' button, which captures the input of the #clientnameinput and
-        the #b. If the clien input is unquie, then the client information is added to the
-        database, the new client is rendered to the client table.
-    */
 
-  function getClients() {
-    var clients = [],
-      client = {},
-      clientRow = {},
-      name = "",
-      abbreviation = "",
-      id = 0;
-
-    $("#clienttablebody > tr").each(function() {
-      clientRow = $(this);
-      id = clientRow.prop("id");
-      name = clientRow.data("name");
-      abbreviation = clientRow.data("abbreviation");
-
-      client = {
-        id: id,
-        name: name,
-        abbreviation: abbreviation
-      };
-
-      clients.push(client);
-    });
-
-    return clients;
-  }
-
-  function getConsultants() {
-    var consultants = [],
-      consultant = {},
-      consultantRow = {},
-      id = 0,
-      name = "",
-      role = "";
-
-    $("#consultanttablebody > tr").each(function() {
-      consultantRow = $(this);
-      id = consultantRow.prop("id");
-      name = consultantRow.data("name");
-      role = consultantRow.data("role");
-
-      consultant = {
-        id: id,
-        name: name,
-        role: role
-      };
-
-      consultants.push(consultant);
-    });
-
-    return consultants;
-  }
-
-  /*  
-        @button #addconsultantbutton
-
-        An click event is attached to the 'Add Consultant' button, which captures the input of the 
-        #consultantnameinput and the #consultantroleinput. If the consultant name is unquie, then the consultant 
-        information is added to the database and the new consultant is rendered to the consultant table.
-    */
-  $("#addconsultantbutton").click(function() {
-    var newConsultantName = "",
-      newConsultantRole = "",
-      nameUnique = true,
-      consultants = {},
-      addedConsultant = {},
-      clients = [];
-    position = 0;
-
-    newConsultantName = $("#consultantnameinput").val();
-    newConsultantRole = $("#consultantroleinput").val();
-
-    consultants = getConsultants();
-
-    position = consultants.length + 1;
-
-    for (x in consultants) {
-      if (consultants[x]["name"] == newConsultantName) {
-        nameUnique = false;
-      }
-    }
-
-    if (newConsultantName !== "") {
-      //Check name field is not blank
-      if (nameUnique) {
-        clients = getClients();
-
-        $.post(
-          "php/addNewConsultant.php", //Request data from server using POST, url is addClient.php
-          {
-            consultantName: newConsultantName, //Pass the value of consultant name input to server
-            consultantJob: newConsultantRole, //Pass the value of consultant row input to server
-            position: position
-          },
-          function(data) {
-            //Call back function to excute after the request to the server is processed
-            addedConsultant = JSON.parse(data);
-            addConsultantToTable(addedConsultant, clients);
-            $("#clientnameinput").val(null);
-            $("#clientabbreviationinput").val(null);
-          }
-        );
-      } else {
-        alert("Name is not unique");
-      }
-    } else {
-      alert("Please enter name");
-    }
-  });
-
-  /* 
-        @button .remove-consultant-btn
-
-        Attaches a click event to the buttons with the remove-consultant-btn class. Delete the selected row from the
-        table and removes that consultant from the database. Updates the client's WHO columns.
-    */
-  $("#consultantstable").on("click", ".remove-consultant-btn", function() {
-    var thisConsultantRow = {},
-      consultantID = "";
-
-    thisConsultantRow = $(this).closest("tr");
-    consultantName = thisConsultantRow.data("name");
-    consultantID = thisConsultantRow.prop("id");
-
-    $.post(
-      "php/removeConsultant.php", //Request data from server using POST, url is removeClient.php
-      {
-        consultantID: consultantID //Pass the value of the table column with the id clientName within the closest table row to the removeclientbutton(this)
-      },
-      function(data) {
-        thisConsultantRow.remove(); //Remove the closest table row to the button
-        //Loop though all the client WHO collumns and remove the consultant's name.
-        $("#clienttablebody > tr").each(function() {
-          var clientRow = $(this);
-          whoColumn = clientRow.find(".who-column");
-          allocatedClients = whoColumn.html();
-          allocatedClients = allocatedClients.replace(consultantName, "");
-          whoColumn.html(allocatedClients);
-        });
-      }
-    );
-  });
 
   /*  
         @dropdown #consultantstable > .clientdropdown
@@ -600,8 +453,6 @@ $(document).ready(function() {
     }
 
     if (currentDate.getDate() == day) {
-      alert("The day is " + day);
-      alert("The day is " + currentDate.getDate());
       //PLACEHOLDER CURRENT DAY HIGHLIGHT
       $(this).css("background-color", "#A9B7C0");
     }
@@ -737,8 +588,9 @@ $(document).ready(function() {
     $(this).removeClass("select-element-hover");
   });
 
-  /*-----------------CLEAR ROW ALLOCATIONS---------------------*/
+  /*-----------------CONSULTANS : CLEAR ROW ALLOCATIONS---------------------*/
 
+  //Bind the clear allocations function to its button
   function bindClearAlllocationButtons() {
     $("#consultantstablebody").on(
       "click",
@@ -749,6 +601,11 @@ $(document).ready(function() {
 
   bindClearAlllocationButtons();
 
+  /*
+  function : clearConsultantAllocations()
+
+  Requires a event. Remove all allocation information for the parent Consultant row of the event.
+  */
   function clearConsultantAllocations() {
     var $consultantRow = {},
       id = 0;
@@ -765,6 +622,11 @@ $(document).ready(function() {
     });
   }
 
+  /*
+  function: clearConsutlantAllocationsDB()
+
+  AJAX. Takes a consultant ID number as parameter. Remove all allocations for a consultant from the the database.
+  */
   function clearConsutlantAllocationsDB(id) {
     return $.post("php/removeConsultantAllocations.php", { id: id });
   }

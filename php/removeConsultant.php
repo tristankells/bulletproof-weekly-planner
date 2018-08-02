@@ -9,10 +9,14 @@ that name.
 
 require_once 'database.php';
 
-$id = $_POST['consultantID']; //Client name retrieved from post
+$dynamicData = $_POST['dynamicData']; //Client name retrieved from post
+$id = $dynamicData['id'];
 $board = 1;
 
 $query = "DELETE FROM allocation WHERE consultant_id = $id";
+$conn->query($query);
+
+$query = "DELETE FROM monthly_allocation WHERE consultant_id = $id";
 $conn->query($query);
 
 $query = "DELETE FROM consultant WHERE id = $id";
