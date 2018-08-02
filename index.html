@@ -18,7 +18,7 @@
 <body>
     <div class="container-fluid login-page" id="background">
         <div class="row-fluid logo">
-            <img class = "logo-image" src="img/glance_logo_white_lg.png">
+            <img class="logo-image" src="img/glance_logo_white_lg.png">
         </div>
         <div class="form">
             <form class="register-form">
@@ -35,11 +35,12 @@
             <form class="login-form">
                 <input id='email-input' type="text" placeholder="email" />
                 <input id='password-input' type="password" placeholder="password" />
-                <button id='login-button'>Login</button>
+
                 <p class="message">Not registered?
                     <a href="#">Create an account</a>
                 </p>
             </form>
+            <button id='login-button'>Login</button>
         </div>
     </div>
 </body>
@@ -50,7 +51,7 @@
         $("#login-button").click(function () {
             var email = "",
                 password = "";
-                email = $('#email-input').val();
+            email = $('#email-input').val();
             password = $('#password-input').val();
 
             $.post(
