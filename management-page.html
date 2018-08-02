@@ -11,32 +11,25 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="style/month-calendar-style.css">
     <script src="js/manage-calendar/ClientModule.js"></script>
     <script src="js/manage-calendar/ConsultantModule.js"></script>
     <script src="js/manage-calendar/app.js"></script>
-    <link rel="stylesheet" href="style/week-calendar-style.css">
+    <link rel="stylesheet" href="style/style.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-sm bg-light justify-content-center">
-        <!-- Links -->
-        <ul class="navbar-nav">
-            <a class="navbar-brand" href="#">
-                <img src="/Glance/img/glance_logo_navyblue_lg.png" class="logo" alt="">
-            </a>
-            <li class="nav-item">
-                <a class="nav-link" href="week-calendar.html">Week</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="month-calendar.html">Month</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="management-page.html">Manage</a>
-            </li>
-        </ul>
-    </nav>
-
+    <div id="navigationBar" class="row">
+        <div class="col-4"></div>
+        <div id="linksAndLogo" class="col-4 ">
+            <img src="/Glance/img/glance_logo_navyblue_lg.png" class="logo" alt="">
+            <a class="navigation-links" href="week-calendar.html">Week</a>
+            <a class="navigation-links" href="month-calendar.html">Month</a>
+            <a class="navigation-links" href="management-page.html">Manage</a>
+        </div>
+        <div id='settingsIcon' class="col-4">
+            <i class="fas fa-cog"></i>
+        </div>
+    </div>
     <div class="container-fluid">
         <table class="table">
             <thead>
