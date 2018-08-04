@@ -17,6 +17,29 @@ var ClientModule = (function() {
     DOM.$addclientbutton.click(addClient);
 
     DOM.$clientstablebody.on("click", ".remove-client-btn", deleteClient);
+
+    DOM.$clientstablebody.on(
+      "blur",
+      ".client-name-input",
+      updateConsultantName
+    );
+  }
+
+  function updateConsultantName() {
+    var dynamicData = [],
+      $clientRow = {},
+      orginalName = "";
+
+    $clientRow = $(event.target).closest("tr");
+    dynamicData["name"] = $(event.target).val();
+    orginalName = $clientRow.attr("data-name");
+    if (dynamicData["name"] != orginalName) {
+      dynamicData["id"] = $clientRow.attr("data-id");
+
+      updateClientNameInDB(dynamicData).done(function(data) {
+        alert(data);
+      });
+    }
   }
 
   //Render a client to DOM
@@ -29,7 +52,13 @@ var ClientModule = (function() {
       .attr("data-abbreviation", client["abbreviation"]);
 
     //Add client name colunm
-    $rowElement.append($("<td></td>").html(client["full_name"]));
+    $rowElement.append(
+      $("<td></td>").append(
+        $("<input></input>")
+          .addClass("client-name-input")
+          .val(client["full_name"])
+      )
+    );
 
     //Add client abbreviation colunm
     $rowElement.append($("<td></td>").html(client["abbreviation"]));
@@ -154,6 +183,12 @@ var ClientModule = (function() {
         dynamicData: dynamicData
       }
     );
+  }
+
+  function updateClientNameInDB(dynamicData) {
+    return $.post("php/updateClientName.php", {
+      dynamicData: dynamicData
+    });
   }
 
   /* =================== public methods ================== */

@@ -200,7 +200,7 @@ $(document).ready(function() {
     return false;
   }
 
-  function checkOfficeStatusOfSlot(allocations, allocationslot) {
+  function checkOfficeStatusOfSlot(allocations) {
     var allocation = {};
     officeStatus = 0;
 
@@ -286,8 +286,11 @@ $(document).ready(function() {
       for (i; i < 10; i++) {
         allocation = consultantRow.find("#" + i);
         if (allocation.val() == clientRow.data("abbreviation")) {
+          if (allocatedClients != "") {
+            allocatedClients += ", ";
+          }
           if (!allocatedClients.includes(consultantName)) {
-            allocatedClients += ", " + consultantName;
+            allocatedClients += consultantName;
             whoColumn = clientRow.find(".who-column");
             whoColumn.html(allocatedClients);
           }
@@ -295,6 +298,13 @@ $(document).ready(function() {
         }
       }
       allocatedClients = allocatedClients.replace(consultantName, "");
+
+      if (allocatedClients.charAt(allocatedClients.length - 2) == ",") {
+        allocatedClients = allocatedClients.substring(
+          0,
+          allocatedClients.length - 2
+        );
+      }
       clientRow.find(".who-column").html(allocatedClients);
     });
   }
@@ -569,6 +579,14 @@ $(document).ready(function() {
       //Set select elements to the "" value and the background colour to the default
       $("select").val("");
       $("select").css("background-color", "#f9f9f9");
+
+      var id;
+
+      $("#clienttablebody > tr").each(function() {
+        $(this)
+          .find(".who-column")
+          .html("");
+      });
     });
   }
 

@@ -43,10 +43,12 @@ function WeekClient(client, consultants) {
           }
         }
       }
-
-   
     }
 
+    //Check string ends in a ',', if so remove it.
+    if (returnString.charAt(returnString.length - 2) == ",") {
+      returnString = returnString.substring(0, returnString.length - 2);
+    }
     return returnString;
   };
 
@@ -94,12 +96,11 @@ function WeekClient(client, consultants) {
 
     //Add remove button
     $rowElement.append(
-      $("<td></td>")
-        .css({
-          "vertical-align": "middle",
-          "text-align": "center",
-          border: "none"
-        })
+      $("<td></td>").css({
+        "vertical-align": "middle",
+        "text-align": "center",
+        border: "none"
+      })
     );
 
     return $rowElement;
