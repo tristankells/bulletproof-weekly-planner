@@ -21,17 +21,18 @@ var ClientModule = (function() {
     DOM.$clientstablebody.on(
       "blur",
       ".client-name-input",
-      updateConsultantName
+      updateClientName
     );
   }
 
-  function updateConsultantName() {
-    var dynamicData = [],
+  function updateClientName() {
+    var dynamicData = {},
       $clientRow = {},
       orginalName = "";
 
     $clientRow = $(event.target).closest("tr");
     dynamicData["name"] = $(event.target).val();
+
     orginalName = $clientRow.attr("data-name");
     if (dynamicData["name"] != orginalName) {
       dynamicData["id"] = $clientRow.attr("data-id");
@@ -39,6 +40,8 @@ var ClientModule = (function() {
       updateClientNameInDB(dynamicData).done(function(data) {
         alert(data);
       });
+    } else {
+      alert("Please pick a unique client name");
     }
   }
 
@@ -169,6 +172,11 @@ var ClientModule = (function() {
   }
 
   /* ================= private AJAX methods =============== */
+  function updateClientNameInDB(dynamicData) {
+    return $.post("php/updateClientName.php", {
+      dynamicData: dynamicData
+    });
+  }
 
   function addClientToDB(dynamicData) {
     return $.post("php/addNewClient.php", {
@@ -183,12 +191,6 @@ var ClientModule = (function() {
         dynamicData: dynamicData
       }
     );
-  }
-
-  function updateClientNameInDB(dynamicData) {
-    return $.post("php/updateClientName.php", {
-      dynamicData: dynamicData
-    });
   }
 
   /* =================== public methods ================== */

@@ -279,7 +279,7 @@ td {
 #navigationBar {
   padding-top: 1%;
   padding-bottom: 1%;
-  background-color: #ebebeb
+  background-color: #ebebeb;
 }
 
 .navigation-links {
@@ -294,4 +294,17 @@ td {
 
 #linksAndLogo {
   text-align: center;
+}
+
+tbody > tr {
+  height: 60px;
+  font-size: 14px;
+}
+
+* {
+  font-family: Lato;
+}
+
+#managePage tr {
+  font-size: 110%;
 }
