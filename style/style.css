@@ -19,32 +19,7 @@ body {
   /*border-right: 1px solid lightgray !important;*/
 }
 
-/* NAVBAR */
 
-.nav-link {
-  font-family: Lato;
-  color: black;
-}
-
-.nav-link:hover {
-  color: #a9b7c0;
-}
-
-.logo {
-  width: auto;
-  height: 35px;
-}
-
-.navbar-brand {
-  height: 100px;
-  line-height: 100px;
-}
-.navbar-nav .nav-link {
-  padding-top: 0;
-  padding-bottom: 0;
-  height: 100px;
-  line-height: 100px;
-}
 
 /*CSS for context menu adapted from https://stackoverflow.com/questions/4495626/making-custom-right-click-context-menus-for-my-web-app 12/07/2018 */
 
@@ -79,6 +54,15 @@ select {
 select option {
   background-color: white;
   color: black;
+}
+
+/* Mobile view optimisation for select element */
+
+@media only screen and (max-width: 426px) {
+  select {
+    font-size: 8px;
+    font-weight: 100;
+  }
 }
 
 .mr-auto {
@@ -169,27 +153,67 @@ td {
   text-align: center;
 }
 
+/* Consultant name, position/role and draggable icon */
+
+.draggable-icon {
+  display: inline-block;
+  width: 10%;
+  text-align: center;
+}
+
+.draggable-icon, a{
+  color: rgb(199, 199, 199);
+}
+
+.draggable-icon, a:hover{
+  color: #a9b7c0;
+}
+
+.consultant-info-format {
+  display: inline-block;
+  width: 90%;
+}
+
 .rolediv {
   font-style: italic;
   font-family: Lato, Arial;
   font-weight: lighter;
   vertical-align: top;
+  font-size: 15px;
 }
 
 .consultant-header {
-  font-size: 14px;
   font-family: Lato, Arial;
   vertical-align: -webkit-baseline-middle;
+  width: 180px;
+  font-size: 20px;
 }
 
 .consultant-header input {
   background: rgba(0, 0, 0, 0);
   border: none;
-  max-width: 120px;
+  width: 180px;
   vertical-align: -webkit-baseline-middle;
+  font-size: 16px;
 }
 .consultant-header td {
   vertical-align: -webkit-baseline-middle;
+}
+
+/* Mobile view optimisation for consultant header and role */
+
+@media only screen and (max-width: 426px) {
+  .rolediv {
+      font-size: 10px;
+  }
+  .consultant-header {
+      max-width: 80px;
+      font-size: 20px;
+  }
+  .consultant-name-input {
+      font-size: 10px;
+      max-width: 80px;
+  }
 }
 
 .table thead > tr.dates.dates > th {
@@ -197,6 +221,7 @@ td {
   font-size: 14px;
   text-align: center;
   padding-bottom: 10px;
+  padding-top: 40px;
   margin: 0;
   border: none;
 }
@@ -211,12 +236,16 @@ td {
   font-weight: lighter;
   text-align: center;
   line-height: 5px;
-  padding-top: 0 !important;
-  padding-bottom: 10px !important;
-  padding-left: 3px !important;
-  padding-right: 0 !important;
   border: none;
 }
+
+#displaymonth {
+  font-family: Lato;
+  font-size: 18px;
+  text-align: left;
+  text-transform: capitalize;
+}
+
 .add-consultant-table {
   font-family: Lato;
   border-collapse: separate;
@@ -269,17 +298,11 @@ td {
   color: black !important;
 }
 
-#displaymonth {
-  padding-left: 2%;
-  font-family: Lato;
-  font-size: 200%;
-}
-
 /* CUSTOM NAVIGATION BAR CSS ============================*/
 #navigationBar {
-  padding-top: 1%;
-  padding-bottom: 1%;
-  background-color: #ebebeb
+  padding-top: 5px;;
+  padding-bottom: 5px;
+  background-color: #ebebeb;
 }
 
 .navigation-links {
@@ -288,10 +311,33 @@ td {
   padding: 1%;
 }
 
+.navigation-links:hover{
+  color: #a9b7c0;
+  text-decoration: none;
+}
+
 #settingsIcon {
   text-align: right;
 }
 
 #linksAndLogo {
   text-align: center;
+}
+
+.logo {
+  width: auto;
+  height: 35px;
+}
+
+@media only screen and (max-width: 426px) {
+  .navigation-links {
+    color: #333;
+    font-weight: bold;
+    padding: 1%;
+    font-size: 10px;
+  }
+  .logo {
+    width: auto;
+    height: 20px;
+  }
 }

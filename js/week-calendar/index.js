@@ -118,14 +118,17 @@ $(document).ready(function() {
       "' >";
     consultantRow +=
       "<div id='consultant-header'><td class='consultant-header'>" +
-      "<div><input " +
-      "class='consultant-name-input' " +
-      " value='" +
-      consultant["name"] +
-      "'/></div>" +
-      "<div class='rolediv'>" +
-      consultant["role"] +
-      "</div></td>";
+      "<div class='consultant-info-format'>" +
+        "<div><input class='consultant-name-input' value='" +
+        consultant["name"] +
+        "'/></div>" +
+        "<div class='rolediv'>" +
+        consultant["role"] +
+        "</div>"+
+        "</div>" +
+        "<div class='draggable-icon'>" +
+                "<a href='#'><i class='fas fa-ellipsis-v'></i></a>" +
+            "</div></td>";
     for (i = 0; i < 10; i++) {
       //Loop through days in the week, times 2, and populate dropdowns
 
@@ -337,7 +340,7 @@ $(document).ready(function() {
       #input #consultantstablebody > .consultant-name-input
   
       Add a blur event to the consultant name inputs (when they are clicked away from) which updates the database 
-      with the new consultant name. Alss updates the client's WHO columns which had the orginal name
+      with the new consultant name. Also updates the client's WHO columns which had the orginal name
     */
   $("#consultantstablebody").on("blur", ".consultant-name-input", function() {
     var newConsultantName = "",
@@ -655,3 +658,15 @@ $(document).ready(function() {
     return $.post("php/removeConsultantAllocations.php", { id: id });
   }
 });
+
+/* function: retrieveConsultantInitials()  *************************** TEST ***************************
+
+AJAX. Takes a consultant name as a string and converts it to corresponding initials.
+
+    function clearConsutlantAllocationsDB(id) {
+  var str     = "Java Script Object Notation";
+  var matches = str.match(/\b(\w)/g);              // ['J','S','O','N']
+  var acronym = matches.join(''); 
+  return acronym;
+  }
+}); */

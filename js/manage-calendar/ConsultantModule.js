@@ -90,7 +90,7 @@ var ConsultantModule = (function() {
           DOM.$consultantroleinput.val(null);
         });
       } else {
-        alert("Name is not unquie");
+        alert("Name is not unique");
       }
     } else {
       alert("Please enter name and role");
