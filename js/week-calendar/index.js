@@ -453,7 +453,7 @@ $(document).ready(function() {
 
   $("#consultantstableheadrow > .date").each(function() {
     var day = 0;
-    day = monday.getDate() + $(this).index() - 1;
+    day = monday.getDate() + $(this).index();
 
     if (day > 31) {
       day = day - 31;

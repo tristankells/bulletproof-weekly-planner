@@ -20,6 +20,32 @@ var ConsultantModule = (function() {
       ".remove-consultant-btn",
       deleteConsultant
     );
+
+    DOM.$consultanttablebody.on(
+      "blur",
+      ".consultant-name-input",
+      updateConsultantName
+    );
+  }
+
+  function updateConsultantName() {
+    var dynamicData = {},
+      $consultantRow = {},
+      orginalName = "";
+
+    $consultantRow = $(event.target).closest("tr");
+    dynamicData["name"] = $(event.target).val();
+
+    orginalName = $consultantRow.attr("data-name");
+    if (dynamicData["name"] != orginalName) {
+      dynamicData["id"] = $consultantRow.attr("data-id");
+
+      updateConsultantNameInDB(dynamicData).done(function(data) {
+        alert(data);
+      });
+    } else {
+      alert("Please pick a unique consultant name");
+    }
   }
 
   function renderConsultant(consultant) {
@@ -31,7 +57,13 @@ var ConsultantModule = (function() {
       .attr("data-role", consultant["job_title"]);
 
     //Add consultant name colunm
-    $rowElement.append($("<td></td>").html(consultant["full_name"]));
+    $rowElement.append(
+      $("<td></td>").append(
+        $("<input></input>")
+          .addClass("consultant-name-input")
+          .val(consultant["full_name"])
+      )
+    );
 
     //Add consultant role colunm
     $rowElement.append($("<td></td>").html(consultant["job_title"]));
@@ -113,6 +145,12 @@ var ConsultantModule = (function() {
   }
 
   /* ================= private AJAX methods =============== */
+
+  function updateConsultantNameInDB(dynamicData) {
+    return $.post("php/updateConsultantName.php", {
+      dynamicData: dynamicData
+    });
+  }
 
   function addConsultantToDB(dynamicData) {
     return $.post("php/addNewConsultant.php", {
