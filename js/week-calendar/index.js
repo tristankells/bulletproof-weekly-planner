@@ -461,10 +461,10 @@ $(document).ready(function() {
 
     if (currentDate.getDate() == day) {
       //PLACEHOLDER CURRENT DAY HIGHLIGHT
-      $(this).css("background-color", "#A9B7C0");
+      $(this).css("background-color", "red");
     }
 
-    $(this).append(" | " + day);
+    $(this).append(" " + day);
   });
 
   //Beginning of context menu code adapted from https://stackoverflow.com/questions/4495626/making-custom-right-click-context-menus-for-my-web-app 12/07/2018
