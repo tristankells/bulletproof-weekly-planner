@@ -9,6 +9,11 @@
   border: none;
 }
 
+.consultant-name-input {
+  background: rgba(0, 0, 0, 0);
+  border: none;
+}
+
 body {
   background-color: #f9f9f9;
   font-family: Lato, Arial;
@@ -18,8 +23,6 @@ body {
   padding-right: 10px !important;
   /*border-right: 1px solid lightgray !important;*/
 }
-
-
 
 /*CSS for context menu adapted from https://stackoverflow.com/questions/4495626/making-custom-right-click-context-menus-for-my-web-app 12/07/2018 */
 
@@ -161,11 +164,13 @@ td {
   text-align: center;
 }
 
-.draggable-icon, a{
+.draggable-icon,
+a {
   color: rgb(199, 199, 199);
 }
 
-.draggable-icon, a:hover{
+.draggable-icon,
+a:hover {
   color: #a9b7c0;
 }
 
@@ -204,15 +209,15 @@ td {
 
 @media only screen and (max-width: 426px) {
   .rolediv {
-      font-size: 10px;
+    font-size: 10px;
   }
   .consultant-header {
-      max-width: 80px;
-      font-size: 20px;
+    max-width: 80px;
+    font-size: 20px;
   }
   .consultant-name-input {
-      font-size: 10px;
-      max-width: 80px;
+    font-size: 10px;
+    max-width: 80px;
   }
 }
 
@@ -303,7 +308,7 @@ td {
   padding-top: 1%;
   padding-bottom: 1%;
   background-color: #ebebeb;
-  padding-top: 15px;;
+  padding-top: 15px;
   padding-bottom: 15px;
   border-bottom: 1px solid rgb(231, 231, 231);
 }
@@ -314,7 +319,7 @@ td {
   padding: 1%;
 }
 
-.navigation-links:hover{
+.navigation-links:hover {
   color: #a9b7c0;
   text-decoration: none;
 }

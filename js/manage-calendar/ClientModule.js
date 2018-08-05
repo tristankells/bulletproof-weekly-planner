@@ -18,32 +18,34 @@ var ClientModule = (function() {
 
     DOM.$clientstablebody.on("click", ".remove-client-btn", deleteClient);
 
-    DOM.$clientstablebody.on(
-      "blur",
-      ".client-name-input",
-      updateClientName
-    );
+    DOM.$clientstablebody.on("blur", ".client-name-input", function() {
+      updateClientName(updateClientNameInDB);
+    });
+
+    DOM.$clientstablebody.on("keyup", ".client-name-input", function(e) {
+      if (e.keyCode === 13) {
+        this.blur();
+      }
+    });
   }
 
-  function updateClientName() {
-    var dynamicData = {},
-      $clientRow = {},
-      orginalName = "";
 
-    $clientRow = $(event.target).closest("tr");
-    dynamicData["name"] = $(event.target).val();
+   /*
+      #input #consultantstablebody > .consultant-name-input
+          
+      Add a key press event to the consultant name inputs (when enter is clicked) which blurs the input box, 
+      causing the new name input to be saved to the database.
+   
 
-    orginalName = $clientRow.attr("data-name");
-    if (dynamicData["name"] != orginalName) {
-      dynamicData["id"] = $clientRow.attr("data-id");
+  /*
+     #input #clienttablebody > .client-name-input
+         
+     Add a key press event to the client name inputs (when enter is clicked) which blurs the input box, causing the 
+     name input to be saved to the database.
+    */
+ 
 
-      updateClientNameInDB(dynamicData).done(function(data) {
-        alert(data);
-      });
-    } else {
-      alert("Please pick a unique client name");
-    }
-  }
+  function updateClientName() {};
 
   //Render a client to DOM
   function renderClient(client) {
@@ -195,10 +197,11 @@ var ClientModule = (function() {
 
   /* =================== public methods ================== */
   // main init method
-  function init(clients) {
+  function init(clients, BaseEntityModule) {
     cacheDom();
     bindEvents();
     render(clients);
+    updateClientName = BaseEntityModule.changeName;
   }
 
   /* =============== export public methods =============== */

@@ -21,32 +21,18 @@ var ConsultantModule = (function() {
       deleteConsultant
     );
 
-    DOM.$consultanttablebody.on(
-      "blur",
-      ".consultant-name-input",
-      updateConsultantName
-    );
+    DOM.$consultanttablebody.on("blur", ".consultant-name-input", function() {
+      updateConsultantName(updateConsultantNameInDB);
+    });
+
+    DOM.$consultanttablebody.on("keyup", ".consultant-name-input", function(e) {
+      if (e.keyCode === 13) {
+        this.blur();
+      }
+    });
   }
 
-  function updateConsultantName() {
-    var dynamicData = {},
-      $consultantRow = {},
-      orginalName = "";
-
-    $consultantRow = $(event.target).closest("tr");
-    dynamicData["name"] = $(event.target).val();
-
-    orginalName = $consultantRow.attr("data-name");
-    if (dynamicData["name"] != orginalName) {
-      dynamicData["id"] = $consultantRow.attr("data-id");
-
-      updateConsultantNameInDB(dynamicData).done(function(data) {
-        alert(data);
-      });
-    } else {
-      alert("Please pick a unique consultant name");
-    }
-  }
+  function updateConsultantName() {}
 
   function renderConsultant(consultant) {
     var $rowElement = $();
@@ -169,10 +155,11 @@ var ConsultantModule = (function() {
 
   /* =================== public methods ================== */
   // main init method
-  function init(consultants) {
+  function init(consultants, BaseEntityModule) {
     cacheDom();
     bindEvents();
     render(consultants);
+    updateConsultantName = BaseEntityModule.changeName;
   }
 
   /* =============== export public methods =============== */
