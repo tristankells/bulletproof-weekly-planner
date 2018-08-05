@@ -7,7 +7,7 @@ $(document).ready(function() {
     */
 
   function initialiseTables() {
-    $.get("backend/getConsultantsAndClients.php", function(data) {
+    $.get("php/getConsultantsAndClients.php", function(data) {
       var databaseResults = [],
         clients = [],
         consultants = [];
@@ -22,9 +22,7 @@ $(document).ready(function() {
             Iterate through the arrays of clients and consultants and ouput the information stored in these arrays
             to the page tables
             */
-      for (x in clients) {
-        addClientToTable(clients[x], consultants);
-      }
+      WeekClientsModule.init(clients, consultants);
 
       for (x in consultants) {
         addConsultantToTable(consultants[x], clients);
@@ -69,12 +67,10 @@ $(document).ready(function() {
     var positions = [];
     $(".consultant-updated").each(function() {
       positions.push([$(this).prop("id"), $(this).attr("data-position")]);
-      //  alert($(this).prop("id"));
-      // alert($(this).attr("data-position"));
       $(this).removeClass("consultant-updated");
     });
     $.post(
-      "backend/updateConsultantPositions.php",
+      "php/updateConsultantPositions.php",
       {
         positions: positions
       },
@@ -86,76 +82,15 @@ $(document).ready(function() {
     var positions = [];
     $(".client-updated").each(function() {
       positions.push([$(this).prop("id"), $(this).attr("data-position")]);
-      //  alert($(this).prop("id"));
-      // alert($(this).attr("data-position"));
       $(this).removeClass("client-updated");
     });
     $.post(
-      "backend/updateClientPositions.php",
+      "php/updateClientPositions.php",
       {
         positions: positions
       },
       function(data) {}
     );
-  }
-  /*  
-        @function addClientToTable
-
-        Takes a client object and array of consultants objects as parameters. Appends a row to the client table
-        using the passed paremeters.
-    */
-
-  function addClientToTable(client, consultants) {
-    var clientRow = "",
-      consultant = {},
-      clientAllocations = "";
-
-    //Begin a new html table row containing the clients information
-    clientRow =
-      "<tr " +
-      "id='" +
-      client["id"] +
-      "' data-abbreviation='" +
-      client["abbreviation"] +
-      "' " +
-      "data-position='" +
-      client["position"] +
-      "' >";
-    clientRow +=
-      "<td>" +
-      "<input class='client-name-input'" +
-      "value='" +
-      client["name"] +
-      "'/>" +
-      "</td>";
-    clientRow += "<td>" + client["abbreviation"] + "</td>";
-    clientRow += "<td class='who-column'>";
-
-    //Checks if consultants are allocated to a client and create the appropirate innerHTML for the WHO column.
-    for (x in consultants) {
-      consultant = consultants[x];
-      consultantAllocations = consultant["allocations"];
-      clientAllocations = "";
-      for (k in consultantAllocations) {
-        //Loop though consultant properties
-        allocation = consultantAllocations[k];
-        if (allocation["allocatedto"] == client["abbreviation"]) {
-          if (!clientAllocations.includes(consultant["name"])) {
-            //Check name is not added twice.
-            clientAllocations += consultant["name"] + ", ";
-          }
-        }
-      }
-      clientRow += clientAllocations;
-    }
-    clientRow += "</td>";
-    clientRow +=
-      "<td style='text-align: center; vertical-align: middle; border: none;'><input type='image' src='/Glance/img/remove.png' class='remove-client-btn'/></td>";
-
-    ("<td style='text-align: center; vertical-align: middle; border: none;'><input type='image' src='/Glance/img/remove.png' class='remove-consultant-btn'/></td>");
-
-    clientRow += "</tr>";
-    $("#clienttablebody").append(clientRow); //Append html table row to client table body
   }
 
   /*  
@@ -232,7 +167,7 @@ $(document).ready(function() {
       consultantRow += "</select></td>";
     }
     consultantRow +=
-      "<td style='text-align: center; vertical-align: middle; border: none'><input type='image' src='/Glance/img/remove.png' class='remove-consultant-btn remove-add-btn'/></td>";
+      "<td style='text-align: center; vertical-align: middle; border: none'><input type='image' src='/Glance/img/clear.png' class='clear-consultant-btn remove-add-btn'/></td>";
     consultantRow += "</tr>";
     $("#consultantstablebody").append(consultantRow);
   }
@@ -265,7 +200,7 @@ $(document).ready(function() {
     return false;
   }
 
-  function checkOfficeStatusOfSlot(allocations, allocationslot) {
+  function checkOfficeStatusOfSlot(allocations) {
     var allocation = {};
     officeStatus = 0;
 
@@ -274,10 +209,10 @@ $(document).ready(function() {
       if (allocation["allocationslot"] == i) {
         switch (allocation["officestatus"]) {
           case "1":
-            return "'1' style='background-color:#1A2930;color:white;'";
+            return "'1' style='background-color:#A9B7C0;color:white;'";
             break;
           case "2":
-            return "'2' style='background-color:#F7CE3E;'";
+            return "'2' style='background-color:#C7D8C6;'";
             break;
           case "0":
             return "'0'";
@@ -287,259 +222,6 @@ $(document).ready(function() {
     }
     return "'0'";
   }
-
-  /*  
-        @button #addclientbutton
-
-        An click event is attached to the 'Add Client' button, which captures the input of the #clientnameinput and
-        the #b. If the clien input is unquie, then the client information is added to the
-        database, the new client is rendered to the client table.
-    */
-
-  function getClients() {
-    var clients = [],
-      client = {},
-      clientRow = {},
-      name = "",
-      abbreviation = "",
-      id = 0;
-
-    $("#clienttablebody > tr").each(function() {
-      clientRow = $(this);
-      id = clientRow.prop("id");
-      name = clientRow.data("name");
-      abbreviation = clientRow.data("abbreviation");
-
-      client = {
-        id: id,
-        name: name,
-        abbreviation: abbreviation
-      };
-
-      clients.push(client);
-    });
-
-    return clients;
-  }
-
-  function getConsultants() {
-    var consultants = [],
-      consultant = {},
-      consultantRow = {},
-      id = 0,
-      name = "",
-      role = "";
-
-    $("#consultanttablebody > tr").each(function() {
-      consultantRow = $(this);
-      id = consultantRow.prop("id");
-      name = consultantRow.data("name");
-      role = consultantRow.data("role");
-
-      consultant = {
-        id: id,
-        name: name,
-        role: role
-      };
-
-      consultants.push(consultant);
-    });
-
-    return consultants;
-  }
-
-  $("#addclientbutton").click(function() {
-    //Add a click event to the addclientbutton
-    var newClientName = "",
-      newClientabbreviation = "",
-      nameUnique = true,
-      abbreviationUnique = true,
-      clients = [],
-      consultants = [],
-      position = 0;
-
-    newClientName = $("#clientnameinput").val(); //Store name of client to be added
-    newClientabbreviation = $("#clientabbreviationinput").val(); //Store abbreviation of client to be added
-    newClientabbreviation = newClientabbreviation.toUpperCase();
-
-    clients = getClients();
-
-    position = clients.length + 1;
-
-    //Loop though the current list of clients and make sure the name and abrevvation are unique
-    for (x in clients) {
-      if (clients[x]["name"] == newClientName) {
-        nameUnique = false;
-      }
-      if (clients[x]["abbreviation"] == newClientabbreviation) {
-        abbreviationUnique = false;
-      }
-    }
-
-    if (newClientName !== "" && newClientabbreviation !== "") {
-      if (nameUnique) {
-        if (abbreviationUnique) {
-          $.post(
-            "backend/addNewClient.php", //Request data from server using POST, url is addClient.php
-            {
-              clientName: newClientName, //Pass the value of client name
-              clientAbbrev: newClientabbreviation, //Pass the value of client abbreviation
-              position: position
-            },
-            function(data) {
-              //After response is recieved from server
-
-              var optionHTML = "",
-                addedClient = {},
-                consultants = [];
-
-              consultants = getConsultants();
-
-              optionHTML +=
-                "<option" +
-                " value='" +
-                newClientabbreviation +
-                "'>" +
-                newClientabbreviation +
-                "</option>";
-
-              //Add the client to the list of options in allocation's dropdown
-              $(".clientdropdown").append(optionHTML);
-
-              addedClient = JSON.parse(data);
-              addClientToTable(addedClient, consultants); //Add client to page table
-              $("#clientnameinput").val(null);
-              $("#clientabbreviationinput").val(null);
-            }
-          );
-        } else {
-          alert("Abbreviation is not unquie");
-        }
-      } else {
-        alert("Name is not unquie");
-      }
-    } else {
-      alert("Please enter name and abbreviation");
-    }
-  });
-
-  /*  
-        @button .remove-client-btn
-
-        Attaches a event to the buttons with the remove-client-btn class. Delete the selected row from the table and
-        removes that client from the database. Updates the dropdown options.
-   */
-  $("#clientstable").on("click", ".remove-client-btn", function() {
-    var thisClientRow = {},
-      thisClientID = 0,
-      clientabbreviation = "";
-
-    thisClientRow = $(this).closest("tr"); //Store the client table row
-    thisClientID = thisClientRow.prop("id"); //Store client id
-    clientabbreviation = thisClientRow.data("abbreviation");
-
-    $.post(
-      "backend/removeClient.php", //Request data from server using POST, url is removeClient.php
-      {
-        clientID: thisClientID, //Pass the value of the table column with the id clientName within the closest table row to the removeclientbutton(this)
-        abbreviation: clientabbreviation
-      },
-      function(data) {
-        $("option[value='" + clientabbreviation + "']").remove(); //Remove the abbreviation from the consultant dropdown
-        thisClientRow.remove(); //Remove the closest table row to the button
-      }
-    );
-  });
-
-  /*  
-        @button #addconsultantbutton
-
-        An click event is attached to the 'Add Consultant' button, which captures the input of the 
-        #consultantnameinput and the #consultantroleinput. If the consultant name is unquie, then the consultant 
-        information is added to the database and the new consultant is rendered to the consultant table.
-    */
-  $("#addconsultantbutton").click(function() {
-    var newConsultantName = "",
-      newConsultantRole = "",
-      nameUnique = true,
-      consultants = {},
-      addedConsultant = {},
-      clients = [];
-    position = 0;
-
-    newConsultantName = $("#consultantnameinput").val();
-    newConsultantRole = $("#consultantroleinput").val();
-
-    consultants = getConsultants();
-
-    position = consultants.length + 1;
-
-    for (x in consultants) {
-      if (consultants[x]["name"] == newConsultantName) {
-        nameUnique = false;
-      }
-    }
-
-    if (newConsultantName !== "") {
-      //Check name field is not blank
-      if (nameUnique) {
-        clients = getClients();
-
-        $.post(
-          "backend/addNewConsultant.php", //Request data from server using POST, url is addClient.php
-          {
-            consultantName: newConsultantName, //Pass the value of consultant name input to server
-            consultantJob: newConsultantRole, //Pass the value of consultant row input to server
-            position: position
-          },
-          function(data) {
-            //Call back function to excute after the request to the server is processed
-            addedConsultant = JSON.parse(data);
-            addConsultantToTable(addedConsultant, clients);
-            $("#clientnameinput").val(null);
-            $("#clientabbreviationinput").val(null);
-          }
-        );
-      } else {
-        alert("Name is not unique");
-      }
-    } else {
-      alert("Please enter name");
-    }
-  });
-
-  /* 
-        @button .remove-consultant-btn
-
-        Attaches a click event to the buttons with the remove-consultant-btn class. Delete the selected row from the
-        table and removes that consultant from the database. Updates the client's WHO columns.
-    */
-  $("#consultantstable").on("click", ".remove-consultant-btn", function() {
-    var thisConsultantRow = {},
-      consultantID = "";
-
-    thisConsultantRow = $(this).closest("tr");
-    consultantName = thisConsultantRow.data("name");
-    consultantID = thisConsultantRow.prop("id");
-
-    $.post(
-      "backend/removeConsultant.php", //Request data from server using POST, url is removeClient.php
-      {
-        consultantID: consultantID //Pass the value of the table column with the id clientName within the closest table row to the removeclientbutton(this)
-      },
-      function(data) {
-        thisConsultantRow.remove(); //Remove the closest table row to the button
-        //Loop though all the client WHO collumns and remove the consultant's name.
-        $("#clienttablebody > tr").each(function() {
-          var clientRow = $(this);
-          whoColumn = clientRow.find(".who-column");
-          allocatedClients = whoColumn.html();
-          allocatedClients = allocatedClients.replace(consultantName, "");
-          whoColumn.html(allocatedClients);
-        });
-      }
-    );
-  });
 
   /*  
         @dropdown #consultantstable > .clientdropdown
@@ -555,19 +237,26 @@ $(document).ready(function() {
       consultantID = 0,
       selectElement = {},
       officeStatus = 0;
+    clientName = "";
 
     selectElement = $(this);
 
     selectedClientabbreviation = selectElement.find(":selected").val();
+
+    clientName = $("#clienttablebody")
+      .find("[data-abbreviation ='" + selectedClientabbreviation + "']")
+      .attr("data-name");
+
     officeStatus = selectElement.data("office");
 
     allocationNo = selectElement.prop("id");
     consultantRow = selectElement.closest("tr");
     consultantID = consultantRow.prop("id");
     $.post(
-      "backend/updateAllocation.php",
+      "php/updateAllocation.php",
       {
         consultantID: consultantID,
+        clientName: clientName,
         clientAbbreviation: selectedClientabbreviation,
         allocationSlot: allocationNo,
         officeStatus: officeStatus
@@ -597,8 +286,11 @@ $(document).ready(function() {
       for (i; i < 10; i++) {
         allocation = consultantRow.find("#" + i);
         if (allocation.val() == clientRow.data("abbreviation")) {
+          if (allocatedClients != "") {
+            allocatedClients += ", ";
+          }
           if (!allocatedClients.includes(consultantName)) {
-            allocatedClients += ", " + consultantName;
+            allocatedClients += consultantName;
             whoColumn = clientRow.find(".who-column");
             whoColumn.html(allocatedClients);
           }
@@ -606,6 +298,13 @@ $(document).ready(function() {
         }
       }
       allocatedClients = allocatedClients.replace(consultantName, "");
+
+      if (allocatedClients.charAt(allocatedClients.length - 2) == ",") {
+        allocatedClients = allocatedClients.substring(
+          0,
+          allocatedClients.length - 2
+        );
+      }
       clientRow.find(".who-column").html(allocatedClients);
     });
   }
@@ -625,7 +324,7 @@ $(document).ready(function() {
       .closest("tr")
       .prop("id");
     $.post(
-      "backend/updateClientName.php",
+      "php/updateClientName.php",
       {
         clientID: clientID,
         clientName: newClientName
@@ -651,7 +350,7 @@ $(document).ready(function() {
     consultantID = consultantRow.prop("id");
     originalConsultantName = consultantRow.data("name");
     $.post(
-      "backend/updateConsultantName.php",
+      "php/updateConsultantName.php",
       {
         consultantID: consultantID,
         consultantName: newConsultantName
@@ -733,8 +432,36 @@ $(document).ready(function() {
       break;
   }
 
-  $("#consultantstable > .dates").each(function() {
-    $(this).append(monday.getDate() + $(this).index() - 1);
+  var months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December"
+  ];
+  $("#displaymonth").append(months[currentDate.getMonth()]);
+
+  $("#consultantstableheadrow > .date").each(function() {
+    var day = 0;
+    day = monday.getDate() + $(this).index() - 1;
+
+    if (day > 31) {
+      day = day - 31;
+    }
+
+    if (currentDate.getDate() == day) {
+      //PLACEHOLDER CURRENT DAY HIGHLIGHT
+      $(this).css("background-color", "#A9B7C0");
+    }
+
+    $(this).append(" | " + day);
   });
 
   //Beginning of context menu code adapted from https://stackoverflow.com/questions/4495626/making-custom-right-click-context-menus-for-my-web-app 12/07/2018
@@ -771,11 +498,18 @@ $(document).ready(function() {
     var consultantID = 0,
       allocationNo = 0,
       officeStatus = 0,
-      clientAbbreviation = "";
+      clientAbbreviation = "",
+      clientName = "";
 
     allocationNo = contextMenuClosestSelect.prop("id");
     consultantID = contextMenuClosestSelect.parents("tr").prop("id");
     clientAbbreviation = contextMenuClosestSelect.val();
+
+    if (!clientAbbreviation == "Open") {
+      clientName = $("#clienttablebody")
+        .find("[data-abbreviation ='" + clientAbbreviation + "']")
+        .attr("data-name");
+    }
 
     // This is the triggered action name
     switch ($(this).attr("data-action")) {
@@ -799,9 +533,10 @@ $(document).ready(function() {
     $(".custom-menu").hide(100);
 
     $.post(
-      "backend/updateAllocation.php",
+      "php/updateAllocation.php",
       {
         consultantID: consultantID,
+        clientName: clientName,
         clientAbbreviation: clientAbbreviation,
         allocationSlot: allocationNo,
         officeStatus: officeStatus
@@ -813,15 +548,16 @@ $(document).ready(function() {
   function updateSelectColour(selectElement) {
     switch (selectElement.data("office")) {
       case "1":
-        selectElement.css("background-color", "#1A2930");
+        selectElement.css("background-color", "#A9B7C0");
         selectElement.css("color", "white");
         break;
       case "2":
-        selectElement.css("background-color", "#F7CE3E");
+        selectElement.css("background-color", "#C7D8C6");
         selectElement.css("color", "black");
         break;
       case "0":
         selectElement.css("background-color", "#f9f9f9");
+        selectElement.css("color", "black");
         break;
     }
   }
@@ -838,17 +574,84 @@ $(document).ready(function() {
 
   //Add clear all allocations function to the reset allocations button
   $("#resetallocationbutton").click(function() {
-    clearAllAllcations();
+    if (confirm("Press OK to delete ALL allocation information")) {
+      clearAllAllcations();
+    }
   });
 
   /*    
      Remove allocations from the consultant table 
   */
   function clearAllAllcations() {
-    $.get("backend/removeAllAllocations.php", function() {
+    $.get("php/removeAllAllocations.php", function() {
       //Set select elements to the "" value and the background colour to the default
       $("select").val("");
       $("select").css("background-color", "#f9f9f9");
+
+      var id;
+
+      $("#clienttablebody > tr").each(function() {
+        $(this)
+          .find(".who-column")
+          .html("");
+      });
     });
+  }
+
+  /* 
+    Add background color change on mouseover of a select item
+  */
+
+  $("#consultantstablebody").on("mouseover", "select", function() {
+    $(this).addClass("select-element-hover");
+  });
+
+  $("#consultantstablebody").on("mouseleave", "select", function() {
+    $(this).removeClass("select-element-hover");
+  });
+
+  /*-----------------CONSULTANS : CLEAR ROW ALLOCATIONS---------------------*/
+
+  //Bind the clear allocations function to its button
+  function bindClearAlllocationButtons() {
+    $("#consultantstablebody").on(
+      "click",
+      ".clear-consultant-btn",
+      clearConsultantAllocations
+    );
+  }
+
+  bindClearAlllocationButtons();
+
+  /*
+  function : clearConsultantAllocations()
+
+  Requires a event. Remove all allocation information for the parent Consultant row of the event.
+  */
+  function clearConsultantAllocations() {
+    if (confirm("Press OK to delete consultant allocation information")) {
+      var $consultantRow = {},
+        id = 0;
+
+      $consultantRow = $(event.target).closest("tr");
+
+      id = $consultantRow.attr("id");
+
+      clearConsutlantAllocationsDB(id).done(function() {
+        $consultantRow
+          .find(".clientdropdown")
+          .val(null)
+          .css("background-color", "#f9f9f9");
+      });
+    }
+  }
+
+  /*
+  function: clearConsutlantAllocationsDB()
+
+  AJAX. Takes a consultant ID number as parameter. Remove all allocations for a consultant from the the database.
+  */
+  function clearConsutlantAllocationsDB(id) {
+    return $.post("php/removeConsultantAllocations.php", { id: id });
   }
 });

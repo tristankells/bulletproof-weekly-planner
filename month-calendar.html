@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Glance</title>
+    <title>Glance: Month View</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
@@ -11,169 +11,35 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="style/style.css">
+    <script src="js/month-calendar/MonthClient.js"></script>
+    <script src="js/month-calendar/MonthConsultant.js"></script>
+    <script src="js/month-calendar/MonthClientsModule.js"></script>
+    <script src="js/month-calendar/MonthConsultantsModule.js"></script>
+    <script src="js/month-calendar/MonthCalendar.js"></script>
 </head>
-<style>
-    .custom-menu {
-        display: none;
-        z-index: 1000;
-        position: absolute;
-        overflow: hidden;
-        border: 1px solid #CCC;
-        white-space: nowrap;
-        font-family: sans-serif;
-        background: #FFF;
-        color: #333;
-        border-radius: 5px;
-        padding: 0;
-    }
-
-    /* Each of the items in the list */
-
-    .custom-menu li {
-        padding: 8px 12px;
-        cursor: pointer;
-        list-style-type: none;
-        transition: all .3s ease;
-        user-select: none;
-    }
-
-    .custom-menu li:hover {
-        background-color: #DEF;
-    }
-
-    .logo {
-        display: block;
-        max-height:30px;
-        width: auto;
-        height: auto;
-    }
-
-</style>
 <script>
-    $(document).ready(function () {
-        $.get("backend/getConsultantsAndClients.php", function (data) {
 
-            var databaseResults = [],
-                clients = [],
-                consultants = [];
-
-            databaseResults = JSON.parse(data); //Store consultant and client arrays recieved from server
-
-            consultants = databaseResults[0]; //Store array of consultants
-
-            clients = databaseResults[1]; //Store array of clients
-
-            for (x in consultants) {
-                addConsultantToMonthlyBoard(consultants[x])
-            }
-
-            addClientToMonthlyBoard(clients);
-        });
-
-        function addConsultantToMonthlyBoard(consultant) {
-            var consultantHTML = "";
-
-            consultantHTML = "<tr>";
-            consultantHTML += "<td>" + consultant['name'] + "</td>";
-            consultantHTML += "<td class='allocation'></td>";
-            consultantHTML += "<td class='allocation'></td>";
-            consultantHTML += "<td class='allocation'></td>";
-            consultantHTML += "<td class='allocation'></td>";
-            consultantHTML += "</tr>";
-
-            $("#monthtablebody").append(consultantHTML);
-        }
-
-        function addClientToMonthlyBoard(clients) {
-            var clientHTML = "",
-                listHtml = "";
-
-            clientHTML = "<tr><td>";
-            for (x in clients) {
-
-                clientHTML += clients[x]['name'] + "<br>";
-                listHtml += "<li data-action='" + x + "'>" + clients[x]['name'] + "</li>";
-
-            }
-            clientHTML += "</td></tr>";
-            $("#clienttablebody").append(clientHTML);
-            $(".custom-menu").append(listHtml);
-        }
-
-        // JAVASCRIPT (jQuery)
-
-        // Trigger action when the contexmenu is about to be shown
-
-        $("#monthtable").on("contextmenu", ".allocation", function (event) {
-
-            // Avoid the real one
-            event.preventDefault();
-
-            // Show contextmenu
-            $(".custom-menu").finish().toggle(100).
-
-                // In the right position (the mouse)
-                css({
-                    top: event.pageY + "px",
-                    left: event.pageX + "px"
-                });
-        });
-
-
-        // If the document is clicked somewhere
-        $(document).bind("mousedown", function (e) {
-
-            // If the clicked element is not the menu
-            if (!$(e.target).parents(".custom-menu").length > 0) {
-
-                // Hide it
-                $(".custom-menu").hide(100);
-            }
-        });
-
-
-        // If the menu element is clicked
-        $(".custom-menu li").click(function () {
-
-            // This is the triggered action name
-            switch ($(this).attr("data-action")) {
-
-                // A case for each action. Your actions here
-                case "first": alert("first"); break;
-                case "second": alert("second"); break;
-                case "third": alert("third"); break;
-            }
-
-            // Hide it AFTER the action was triggered
-            $(".custom-menu").hide(100);
-        });
-
-
-
-    });
 </script>
 
 <body>
     <ul class='custom-menu'>
     </ul>
-    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-            <!-- Links -->
-            <ul class="navbar-nav">
-                <a class="navbar-brand" href="#">
-                    <img src="/Glance/img/glance_logo_white_lg.png" class="logo" alt="">
-                </a>
-                <li class="nav-item">
-                    <a class="nav-link" href="week-calendar.html">Week</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="month-calendar.html">Month</a>
-                </li>
-            </ul>
-    
-        </nav>
-    <table id="monthtable" class="table table-bordered">
-        <thead id="monthtablehead">
-            <tr id="monthtableheadrow">
+    <div id="navigationBar" class="row">
+        <div class="col-4"></div>
+        <div id="linksAndLogo" class="col-4 ">
+            <img src="/Glance/img/glance_logo_navyblue_lg.png" class="logo" alt="">
+            <a class="navigation-links" href="week-calendar.html">Week</a>
+            <a class="navigation-links" href="month-calendar.html">Month</a>
+            <a class="navigation-links" href="management-page.html">Manage</a>
+        </div>
+        <div id='settingsIcon' class="col-4">
+            <i class="fas fa-cog"></i>
+        </div>
+    </div>
+    <table id="consultanttable" class="table table-bordered">
+        <thead id="consultanttablehead">
+            <tr id="consultanttableheadrow">
                 <th>Consultants</th>
                 <th>This Week </th>
                 <th>Week 2 </th>
@@ -181,7 +47,7 @@
                 <th>Week 4 </th>
             </tr>
         </thead>
-        <tbody id="monthtablebody">
+        <tbody id="consultanttablebody">
         </tbody>
     </table>
     <table id="clienttable" class="table table-bordered">
@@ -190,7 +56,7 @@
                 <th>Clients</th>
             </tr>
         </thead>
-        <tbody id="clienttablebody" style="font-weight: bold">
+        <tbody id="clienttablebody" style="font-weight:bold">
         </tbody>
     </table>
 </body>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Page Title</title>
+    <title> Glance: Manage your team </title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -18,7 +18,7 @@
 <body>
     <div class="container-fluid login-page" id="background">
         <div class="row-fluid logo">
-            <img class = "logo-image" src="img/glance_logo_white_lg.png">
+            <img class="logo-image" src="img/glance_logo_white_lg.png">
         </div>
         <div class="form">
             <form class="register-form">
@@ -35,11 +35,12 @@
             <form class="login-form">
                 <input id='email-input' type="text" placeholder="email" />
                 <input id='password-input' type="password" placeholder="password" />
-                <button id='login-button'>Login</button>
+
                 <p class="message">Not registered?
                     <a href="#">Create an account</a>
                 </p>
             </form>
+            <button id='login-button'>Login</button>
         </div>
     </div>
 </body>
@@ -50,11 +51,11 @@
         $("#login-button").click(function () {
             var email = "",
                 password = "";
-                email = $('#email-input').val();
+            email = $('#email-input').val();
             password = $('#password-input').val();
 
             $.post(
-                'backend/login.php',
+                'php/login.php',
                 {
                     email: email,
                     password: password
@@ -63,8 +64,8 @@
                         window.location.href = 'week-calendar.html';
                     } else {
                         alert(data);
-                        $('#email-input').val(" ");
-                        $('#password-input').val(" ");
+                        $('#email-input').val("");
+                        $('#password-input').val("");
                     }
                 }
             )
@@ -97,9 +98,7 @@
                     //Check both passwords match
                     if (password === rePassword) {
 
-                        alert("Passwords match");
-
-                        $.post('backend/register.php',
+                        $.post('php/register.php',
                             {
                                 firstName: firstName,
                                 lastName: lastName,
@@ -118,8 +117,6 @@
                 alert("Please enter all fields");
             }
         });
-
-
 
         $('.message a').click(function () {
             $('form').animate({ height: "toggle", opacity: "toggle" }, "slow");

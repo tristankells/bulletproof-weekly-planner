@@ -9,13 +9,15 @@ that name.
 
 require_once 'database.php';
 
-$id = $_POST['consultantID']; //Client name retrieved from post
 $board = 1;
 
-$query = "DELETE FROM allocation WHERE consultant_id = $id";
+$query = "DELETE allocation
+FROM allocation 
+LEFT OUTER JOIN consultant ON allocation.consultant_id = consultant.id
+WHERE consultant.board_id = $board";
+
 $conn->query($query);
 
-$query = "DELETE FROM consultant WHERE id = $id";
-$conn->query($query);
+echo ($conn->error);
 
 mysqli_close($conn);

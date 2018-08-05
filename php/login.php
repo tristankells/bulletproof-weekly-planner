@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     $user_profilePassword = $row['login_password'];
                 }
                 if (!(password_verify($password, $user_profilePassword))) {
-                    echo ("Incorrect password" . $password . "    " . $user_profilePassword);
+                    echo ("Incorrect password");
                     exit();
                 } else {
                     //Save email to session

@@ -3,9 +3,10 @@
 //Required to retrieve $conn variable used to connect the application database
 require_once 'database.php';
 
-$name = $_POST["clientName"];
-$abbreviation = $_POST["clientAbbrev"];
-$position = $_POST["position"];
+$dynamicData = $_POST["dynamicData"];
+$name = $dynamicData["name"];
+$abbreviation = $dynamicData["abbreviation"];
+$position = $dynamicData["position"];
 $board = 1;
 
 //Query to insert new client information to the client table stored in the application database
@@ -24,9 +25,9 @@ if ($conn->query($query) === true) {
             $client =
                 [
                 "id" => $row["id"],
-                "name" => $row["full_name"],
+                "full_name" => $row["full_name"],
                 "abbreviation" => $row["abbreviation"],
-                "position" => $row["board_position"],
+                "board_position" => $row["board_position"],
             ];
         }
     }

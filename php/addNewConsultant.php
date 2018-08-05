@@ -3,9 +3,10 @@
 //Required to retrieve $conn variable used to connect the application database
 require_once 'database.php';
 
-$name = $_POST["consultantName"];
-$role = $_POST["consultantJob"];
-$position = $_POST["position"];
+$dynamicData = $_POST["dynamicData"];
+$name = $dynamicData["name"];
+$role = $dynamicData["role"];
+$position = $dynamicData["position"];
 $board = 1; //Placeholder
 
 //Query to insert new consultant information to the client table stored in the application database
@@ -16,7 +17,7 @@ $query = "INSERT INTO consultant (full_name, job_title, board_id, board_position
 if ($conn->query($query) === true) {
     $lastId = $conn->insert_id;
 
-    $query = "SELECT id, full_name, job_title, board_position 
+    $query = "SELECT id, full_name, job_title, board_position
                 FROM consultant WHERE id = $lastId";
 
     if ($result = $conn->query($query)) {
@@ -24,9 +25,9 @@ if ($conn->query($query) === true) {
             $consultant =
                 [
                 "id" => $row["id"],
-                "name" => $row["full_name"],
-                "role" => $row["job_title"],
-                "position" => $row["board_position"],
+                "full_name" => $row["full_name"],
+                "job_title" => $row["job_title"],
+                "board_position" => $row["board_position"],
             ];
         }
     }

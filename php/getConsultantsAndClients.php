@@ -23,7 +23,7 @@ if ($result->num_rows > 0) {
         $client =
             [
             "id" => $row['id'],
-            "name" => $row['full_name'],
+            "full_name" => $row['full_name'],
             "abbreviation" => $row['abbreviation'],
             "position" => $row['board_position'],
         ];

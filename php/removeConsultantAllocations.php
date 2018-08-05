@@ -9,14 +9,12 @@ that name.
 
 require_once 'database.php';
 
-$board = 1;
-
-
+$id = $_POST['id'];
 
 $query = "DELETE allocation
 FROM allocation 
 LEFT OUTER JOIN consultant ON allocation.consultant_id = consultant.id
-WHERE consultant.board_id = $board";
+WHERE consultant.id = $id";
 
 $conn->query($query);
 
