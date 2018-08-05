@@ -361,3 +361,21 @@ tbody > tr {
     height: 20px;
   }
 }
+
+/*Added css to colour elements */
+[data-office="1"] {
+  background-color: #a9b7c0;
+  color: white;
+}
+
+[data-office="2"] {
+  background-color: #c7d8c6;
+}
+
+.clear-consultant-btn {
+ margin-top: 30px;
+}
+
+select {
+  font-size: 110%
+}

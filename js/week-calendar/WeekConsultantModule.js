@@ -9,17 +9,11 @@ var WeekConsultantModule = (function() {
     DOM.$consultantstablebody = $("#consultantstablebody");
   }
   // bind events
-  function bindEvents() {
-    DOM.$someElement.click(handleClick);
-  }
-  // handle click events
-  function handleClick(e) {
-    render(); // etc
-  }
+  function bindEvents() {}
 
-  function renderConsultant(consultant) {
-    var $rowElement = {};
-    $allocationElement = {};
+  function renderConsultant(consultant, clients) {
+    var $rowElement = {},
+      $allocationElement = {};
 
     //Begin new consultant row
     $rowElement = $("<tr></tr>")
@@ -32,12 +26,21 @@ var WeekConsultantModule = (function() {
     $rowElement.append(
       $("<td></td>")
         .addClass("consultant-header")
-        .html(consultant["name"])
         .append(
           $("<div></div>")
-            .addClass("rolediv")
-            .html(consultant["role"])
+            .addClass("consultant-info-format")
+            .append(
+              $("<div></div>")
+                .addClass("consultant-name-input")
+                .html(consultant["name"])
+            )
+            .append(
+              $("<div></div>")
+                .addClass("rolediv")
+                .html(consultant["role"])
+            )
         )
+
         .append(
           $("<div></div>")
             .addClass("draggable-icon")
@@ -48,21 +51,28 @@ var WeekConsultantModule = (function() {
             )
         )
     );
-
     //append allocation columns
+    var i = 0,
+      $columnElement = {},
+      $selectElement = {},
+      $optionElement;
+
     for (i = 0; i < 10; i++) {
       $columnElement = $("<td></td>");
 
       if (i % 2 == 1) {
-        $allocationElement.addClass("row-space");
+        $columnElement.addClass("row-space");
       }
 
-      $selectElement = $("<select></select>").addClass(
-        "dropdown clientdropdown"
-      );
+      $selectElement = $("<select></select>")
+        .addClass("dropdown clientdropdown")
+        .attr("data-slot", i)
+        .attr("data-office", 0);
 
+      var allocation = {};
       for (x in consultant["allocations"]) {
-        if (consultant["allocations"][x]["allocationslot"] == i) {
+        allocation = consultant["allocations"][x];
+        if (allocation["allocationslot"] == i) {
           switch (allocation["officestatus"]) {
             case "1":
               $selectElement.attr("data-office", 1);
@@ -71,6 +81,9 @@ var WeekConsultantModule = (function() {
               $selectElement.attr("data-office", 2);
               break;
             case "0":
+              $selectElement.attr("data-office", 0);
+              break;
+            default:
               $selectElement.attr("data-office", 0);
               break;
           }
@@ -102,7 +115,7 @@ var WeekConsultantModule = (function() {
 
         var allocation = {};
         for (z in consultant["allocations"]) {
-          allocation = consultant["allocations"][x];
+          allocation = consultant["allocations"][z];
           if (
             allocation["allocatedto"] == abbreviation &&
             allocation["allocationslot"] == i
@@ -110,9 +123,11 @@ var WeekConsultantModule = (function() {
             $optionElement.attr("selected", "selected");
           }
         }
-      }
 
-      $rowElement.append($allocationElement);
+        $selectElement.append($optionElement);
+      }
+      $columnElement.append($selectElement);
+      $rowElement.append($columnElement);
     }
 
     $rowElement.append(
@@ -127,13 +142,19 @@ var WeekConsultantModule = (function() {
     DOM.$consultantstablebody.append($rowElement);
   }
   // render DOM
-  function render() {}
+  function render(consultants, clients) {
+    var x = 0;
+    for (x in consultants) {
+      renderConsultant(consultants[x], clients);
+    }
+  }
 
   /* =================== public methods ================== */
   // main init method
-  function init(consultans, clients) {
+  function init(consultants, clients) {
     cacheDom();
     bindEvents();
+    render(consultants, clients);
   }
 
   /* =============== export public methods =============== */

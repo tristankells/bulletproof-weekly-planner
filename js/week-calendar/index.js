@@ -24,9 +24,11 @@ $(document).ready(function() {
             */
       WeekClientsModule.init(clients, consultants);
 
-      for (x in consultants) {
-        addConsultantToTable(consultants[x], clients);
-      }
+      WeekConsultantModule.init(consultants, clients);
+
+      //  for (x in consultants) {
+      //   addConsultantToTable(consultants[x], clients);
+      //  }
 
       //Using the jquery UI library, makes items within tbody elements sortable
       //THE START OF POSITION TRACKING FUNCTIONALITY NEED TO BE EXPANDED UPON
@@ -119,16 +121,16 @@ $(document).ready(function() {
     consultantRow +=
       "<div id='consultant-header'><td class='consultant-header'>" +
       "<div class='consultant-info-format'>" +
-        "<div><input class='consultant-name-input' value='" +
-        consultant["name"] +
-        "'/></div>" +
-        "<div class='rolediv'>" +
-        consultant["role"] +
-        "</div>"+
-        "</div>" +
-        "<div class='draggable-icon'>" +
-                "<a href='#'><i class='fas fa-ellipsis-v'></i></a>" +
-            "</div></td>";
+      "<div><input class='consultant-name-input' value='" +
+      consultant["name"] +
+      "'/></div>" +
+      "<div class='rolediv'>" +
+      consultant["role"] +
+      "</div>" +
+      "</div>" +
+      "<div class='draggable-icon'>" +
+      "<a href='#'><i class='fas fa-ellipsis-v'></i></a>" +
+      "</div></td>";
     for (i = 0; i < 10; i++) {
       //Loop through days in the week, times 2, and populate dropdowns
 
@@ -170,7 +172,7 @@ $(document).ready(function() {
       consultantRow += "</select></td>";
     }
     consultantRow +=
-      "<td style='text-align: center; vertical-align: middle; border: none'><input type='image' src='/Glance/img/clear.png' class='clear-consultant-btn remove-add-btn'/></td>";
+      "<td  style='text-align: center; vertical-align: middle; border: none'><input type='image' src='/Glance/img/clear.png' class='clear-consultant-btn remove-add-btn'/></td>";
     consultantRow += "</tr>";
     $("#consultantstablebody").append(consultantRow);
   }
@@ -250,11 +252,18 @@ $(document).ready(function() {
       .find("[data-abbreviation ='" + selectedClientabbreviation + "']")
       .attr("data-name");
 
-    officeStatus = selectElement.data("office");
+    officeStatus = selectElement.attr("data-office");
 
-    allocationNo = selectElement.prop("id");
+    allocationNo = selectElement.attr("data-slot");
     consultantRow = selectElement.closest("tr");
-    consultantID = consultantRow.prop("id");
+    consultantID = consultantRow.attr("data-id");
+
+    console.log(consultantID);
+    console.log(clientName);
+    console.log(selectedClientabbreviation);
+    console.log(allocationNo);
+    console.log(officeStatus);
+
     $.post(
       "php/updateAllocation.php",
       {
@@ -265,6 +274,7 @@ $(document).ready(function() {
         officeStatus: officeStatus
       },
       function(data) {
+        console.log(data);
         updateClientAllocationColumn(consultantID);
       }
     );
@@ -281,13 +291,15 @@ $(document).ready(function() {
     $("#clienttablebody > tr").each(function() {
       var clientRow = $(this);
       var i = 0;
-      var consultantRow = $("#consultantstablebody").children("#" + id);
-      var consultantName = consultantRow.data("name");
+      var consultantRow = $("#consultantstablebody").find(
+        "[data-id='" + id + "']"
+      );
+      var consultantName = consultantRow.attr("data-name");
 
       allocatedClients = clientRow.find(".who-column").html();
 
       for (i; i < 10; i++) {
-        allocation = consultantRow.find("#" + i);
+        allocation = consultantRow.find("[data-slot='" + i + "']");
         if (allocation.val() == clientRow.data("abbreviation")) {
           if (allocatedClients != "") {
             allocatedClients += ", ";
@@ -308,12 +320,12 @@ $(document).ready(function() {
           allocatedClients.length - 2
         );
       }
+
+      allocatedClients = allocatedClients.replace(", ,", ",");
+
       clientRow.find(".who-column").html(allocatedClients);
     });
   }
-
- 
- 
 
   //Populate page
   initialiseTables();
@@ -414,8 +426,8 @@ $(document).ready(function() {
       clientAbbreviation = "",
       clientName = "";
 
-    allocationNo = contextMenuClosestSelect.prop("id");
-    consultantID = contextMenuClosestSelect.parents("tr").prop("id");
+    allocationNo = contextMenuClosestSelect.attr("data-slot");
+    consultantID = contextMenuClosestSelect.parents("tr").attr("data-id");
     clientAbbreviation = contextMenuClosestSelect.val();
 
     if (!clientAbbreviation == "Open") {
@@ -477,13 +489,15 @@ $(document).ready(function() {
 
   //End of context menu code adapted from https://stackoverflow.com/questions/4495626/making-custom-right-click-context-menus-for-my-web-app 12/07/2018
 
-
   //Add hover effect to select items
-  $("data-office").hover(function(){
-    $(this).css("background-color", "yellow");
-    }, function(){
-    $(this).css("background-color", "pink");
-});
+  $("data-office").hover(
+    function() {
+      $(this).css("background-color", "yellow");
+    },
+    function() {
+      $(this).css("background-color", "pink");
+    }
+  );
 
   //Add clear all allocations function to the reset allocations button
   $("#resetallocationbutton").click(function() {
@@ -548,13 +562,15 @@ $(document).ready(function() {
 
       $consultantRow = $(event.target).closest("tr");
 
-      id = $consultantRow.attr("id");
+      id = $consultantRow.attr("data-id");
 
       clearConsutlantAllocationsDB(id).done(function() {
         $consultantRow
           .find(".clientdropdown")
           .val(null)
           .css("background-color", "#f9f9f9");
+
+        updateClientAllocationColumn(id);
       });
     }
   }

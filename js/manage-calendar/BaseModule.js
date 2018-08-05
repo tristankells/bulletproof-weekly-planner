@@ -6,7 +6,7 @@ var BaseModule = (function() {
     Parameters: AJAX function that point to the file updateClientName.php
     or the file updateConsultantName.php
 
-      
+
     
     */
   function changeName(updateDbFunction) {
@@ -23,7 +23,6 @@ var BaseModule = (function() {
       updateDbFunction(dynamicData).done(function(data) {
       });
     } else {
-      alert("Please pick a unique client name");
     }
   }
 

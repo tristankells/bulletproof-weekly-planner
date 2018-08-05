@@ -13,7 +13,7 @@ $(document).ready(function() {
     MonthClientsModule.empty();
 
     getClientsAndConsultants().done(function(data) {
-      alert(data);
+
       var databaseResults = [],
         clients = [],
         consultants = [],
