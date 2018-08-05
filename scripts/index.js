@@ -828,6 +828,14 @@ $(document).ready(function() {
 
   //End of context menu code adapted from https://stackoverflow.com/questions/4495626/making-custom-right-click-context-menus-for-my-web-app 12/07/2018
 
+
+  //Add hover effect to select items
+  $("data-office").hover(function(){
+    $(this).css("background-color", "yellow");
+    }, function(){
+    $(this).css("background-color", "pink");
+});
+
   //Add clear all allocations function to the reset allocations button
   $("#resetallocationbutton").click(function() {
     clearAllAllcations();
