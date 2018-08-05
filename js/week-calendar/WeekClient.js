@@ -65,13 +65,9 @@ function WeekClient(client, consultants) {
     //Add name column
     $rowElement.append(
       $("<td></td>")
-        .addClass("client-row-format")
+        .addClass("client-row-format client-name-input")
         .css("vertical-align", "middle")
-        .append(
-          $("<input></input>")
-            .addClass("client-name-input")
-            .val(this.full_name)
-        )
+        .html(this.full_name)
     );
 
     //Add abbreviation column
