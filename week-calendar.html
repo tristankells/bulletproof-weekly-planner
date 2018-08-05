@@ -20,7 +20,7 @@
         crossorigin="anonymous">
     <link rel="manifest" href="js/manifest.json">
     <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato:400,900" />
 </head>
 
 
@@ -31,34 +31,34 @@
         <li data-action="2">Office Time</li>
         <li data-action="0">N/A</li>
     </ul>
-
     <div class="container-fluid">
-        <div id="navigationBar" class="row">
-            <div class="col-4"></div>
-            <div id="linksAndLogo" class="col-4 ">
+        <div id ="navigationBar" class="row">
+            <div class="col-3">
                 <img src="/Glance/img/glance_logo_navyblue_lg.png" class="logo" alt="">
+            </div>
+            <div id="linksAndLogo" class="col-6 ">
                 <a class="navigation-links" href="week-calendar.html">Week</a>
                 <a class="navigation-links" href="month-calendar.html">Month</a>
                 <a class="navigation-links" href="management-page.html">Manage</a>
             </div>
-            <div id='settingsIcon' class="col-4">
+            <div id='settingsIcon' class="col-3">
                 <i class="fas fa-cog"></i>
             </div>
         </div>
-
+    </div>
+    <div class="container-fluid">
         <div class="row" id="maindiv">
-            <div id='displaymonth'>
-            </div>
+            
             <div class="col-lg-12" id="consultantsdiv">
                 <table class="consultant-table table" id="consultantstable">
                     <thead id="consultantstablehead">
                         <tr class="dates" id="consultantstableheadrow">
-                            <th></th>
-                            <th class="date" colspan="2">M</th>
-                            <th class="date" colspan="2">T</th>
-                            <th class="date" colspan="2">W</th>
-                            <th class="date" colspan="2">T</th>
-                            <th class="date" colspan="2">F</th>
+                            <th><div id="displaymonth"></div></th>
+                            <th class="date" colspan="2">MON</th>
+                            <th class="date" colspan="2">TUE</th>
+                            <th class="date" colspan="2">WED</th>
+                            <th class="date" colspan="2">THU</th>
+                            <th class="date" colspan="2">FRI</th>
                         </tr>
                         <tr class="date-subheading">
                             <th></th>
