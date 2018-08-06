@@ -371,7 +371,7 @@ $(document).ready(function() {
     "November",
     "December"
   ];
-  $("#displaymonth").append(months[currentDate.getMonth()]);
+  $("#displaymonth").append((months[currentDate.getMonth()]).toUpperCase());
 
   $("#consultantstableheadrow > .date").each(function() {
     var day = 0;
