@@ -27,25 +27,22 @@ var ClientModule = (function() {
         this.blur();
       }
     });
+
+    DOM.$clientstablebody.on("click", ".color-col", changeClientColour);
   }
 
+  function changeClientColour() {
+    var clientRow = {},
+      dynamicData = {};
 
-   /*
-      #input #consultantstablebody > .consultant-name-input
-          
-      Add a key press event to the consultant name inputs (when enter is clicked) which blurs the input box, 
-      causing the new name input to be saved to the database.
-   
+    clientRow = $(event.target).closest("tr");
+    dynamicData["id"] = clientRow.attr("data-id");
+    dynamicData["abbreviation"] = clientRow.attr("data-abbreviation");
+    dynamicData["name"] = clientRow.attr("data-name");
+  }
 
-  /*
-     #input #clienttablebody > .client-name-input
-         
-     Add a key press event to the client name inputs (when enter is clicked) which blurs the input box, causing the 
-     name input to be saved to the database.
-    */
- 
-
-  function updateClientName() {};
+  //Inherited from BaseModule.changeName function; See BaseModule.js
+  function updateClientName() {}
 
   //Render a client to DOM
   function renderClient(client) {
@@ -68,6 +65,13 @@ var ClientModule = (function() {
     //Add client abbreviation colunm
     $rowElement.append($("<td></td>").html(client["abbreviation"]));
 
+    //INSERT CUSTOM ICON
+    $rowElement.append(
+      $("<td></td>")
+        .html("Click to change colour")
+        .addClass("color-col")
+    );
+
     //Add remove client button
     $rowElement.append(
       $("<td></td>")
@@ -84,6 +88,9 @@ var ClientModule = (function() {
             .addClass("remove-client-btn remove-add-btn")
         )
     );
+
+    // <span class="glyphicon glyphicon-picture" />;
+
     DOM.$clientstablebody.append($rowElement);
   }
 
@@ -197,11 +204,12 @@ var ClientModule = (function() {
 
   /* =================== public methods ================== */
   // main init method
-  function init(clients, BaseEntityModule) {
+  function init(clients, BaseModule) {
     cacheDom();
     bindEvents();
     render(clients);
-    updateClientName = BaseEntityModule.changeName;
+    //Set the update name function to the BaseModule.changeName function
+    updateClientName = BaseModule.changeName;
   }
 
   /* =============== export public methods =============== */

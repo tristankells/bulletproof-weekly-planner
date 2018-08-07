@@ -38,35 +38,6 @@ body {
   border: none;
 }
 
-select {
-  -webkit-appearance: none;
-  appearance: none;
-  -webkit-border-radius: 0px;
-  -moz-appearance: none;
-  border-radius: 0px;
-  text-indent: 1px;
-  text-overflow: "";
-  text-align-last: center;
-  padding: 5px;
-  margin: 5px;
-  font-size: 13px;
-  font-weight: 700;
-  font-family: Lato;
-}
-
-select option {
-  background-color: white;
-  color: black;
-}
-
-/* Mobile view optimisation for select element */
-
-@media only screen and (max-width: 426px) {
-  select {
-    font-size: 8px;
-    font-weight: 100;
-  }
-}
 
 .mr-auto {
   margin-right: auto !important;

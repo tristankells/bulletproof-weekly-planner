@@ -371,7 +371,7 @@ $(document).ready(function() {
     "November",
     "December"
   ];
-  $("#displaymonth").append((months[currentDate.getMonth()]).toUpperCase());
+  $("#displaymonth").append(months[currentDate.getMonth()].toUpperCase());
 
   $("#consultantstableheadrow > .date").each(function() {
     var day = 0;
@@ -393,13 +393,30 @@ $(document).ready(function() {
   var contextMenuClosestSelect = {};
 
   // Trigger action when the contextmenu is about to be shown on td element
-  $("#consultantsdiv").on("contextmenu", "select", function(event) {
-    contextMenuClosestSelect = $(this);
+  $("#consultantsdiv").on("contextmenu", ".allocation-col", function(event) {
     // Avoid the real one
     event.preventDefault();
 
+    $(this).addClass("clicked-allocation");
+
     // Show contextmenu
-    $(".custom-menu")
+    $(".office-menu")
+      .finish()
+      .toggle(100)
+      // In the right position (the mouse)
+      .css({
+        top: event.pageY + "px",
+        left: event.pageX + "px"
+      });
+  });
+
+  $("#consultantsdiv").on("click", ".allocation-col", function(event) {
+    contextMenuClosestSelect = $(this);
+
+    $(this).addClass("clicked-allocation");
+
+    // Show contextmenu
+    $(".client-menu")
       .finish()
       .toggle(100)
       // In the right position (the mouse)
@@ -413,49 +430,44 @@ $(document).ready(function() {
   $(document).bind("mousedown", function(e) {
     // If the clicked element is not the menu
     if (!$(e.target).parents(".custom-menu").length > 0) {
+      $(".clicked-allocation").removeClass("clicked-allocation");
       // Hide it
       $(".custom-menu").hide(100);
     }
   });
 
   // If the menu element is clicked
-  $(".custom-menu li").click(function() {
+  $(".office-menu li").click(function() {
     var consultantID = 0,
       allocationNo = 0,
       officeStatus = 0,
       clientAbbreviation = "",
-      clientName = "";
+      clientName = "",
+      $allocationTd = {};
 
-    allocationNo = contextMenuClosestSelect.attr("data-slot");
-    consultantID = contextMenuClosestSelect.parents("tr").attr("data-id");
-    clientAbbreviation = contextMenuClosestSelect.val();
+    $allocationTd = $(".clicked-allocation");
 
-    if (!clientAbbreviation == "Open") {
+    allocationNo = $allocationTd.attr("data-slot");
+    consultantID = $allocationTd.parents("tr").attr("data-id");
+    clientAbbreviation = $allocationTd.html();
+
+    if (!clientAbbreviation == "") {
       clientName = $("#clienttablebody")
         .find("[data-abbreviation ='" + clientAbbreviation + "']")
         .attr("data-name");
     }
 
-    // This is the triggered action name
-    switch ($(this).attr("data-action")) {
-      // A case for each action. Your actions here
-      case "1":
-        contextMenuClosestSelect.data("office", "1");
-        break;
-      case "2":
-        contextMenuClosestSelect.data("office", "2");
-        break;
-      case "0":
-        contextMenuClosestSelect.data("office", "0");
-        break;
+    if (clientAbbreviation == "LEAVE") {
+      clientName = "Leave";
     }
+    $allocationTd.attr("data-office", $(this).attr("data-action"));
 
-    updateSelectColour(contextMenuClosestSelect);
-
-    officeStatus = contextMenuClosestSelect.data("office");
+    officeStatus = $allocationTd.attr("data-office");
 
     // Hide it AFTER the action was triggered
     $(".custom-menu").hide(100);
+    //Removed the clicked allocation class
+    $(".clicked-allocation").removeClass("clicked-allocation");
 
     $.post(
       "php/updateAllocation.php",
@@ -466,26 +478,45 @@ $(document).ready(function() {
         allocationSlot: allocationNo,
         officeStatus: officeStatus
       },
-      function(data) {}
+      function() {
+
+      }
     );
   });
 
-  function updateSelectColour(selectElement) {
-    switch (selectElement.data("office")) {
-      case "1":
-        selectElement.css("background-color", "#A9B7C0");
-        selectElement.css("color", "white");
-        break;
-      case "2":
-        selectElement.css("background-color", "#C7D8C6");
-        selectElement.css("color", "black");
-        break;
-      case "0":
-        selectElement.css("background-color", "#f9f9f9");
-        selectElement.css("color", "black");
-        break;
-    }
-  }
+  $("body").on("click", ".client-menu li", function() {
+    var consultantID = 0,
+      allocationNo = 0,
+      officeStatus = 0,
+      clientAbbreviation = "",
+      clientName = "",
+      $allocationTd = {};
+
+    $allocationTd = $(".clicked-allocation");
+
+    allocationNo = $allocationTd.attr("data-slot");
+    consultantID = $allocationTd.parents("tr").attr("data-id");
+    officeStatus = $allocationTd.attr("data-office");
+    clientAbbreviation = $(this).html();
+    $allocationTd.html(clientAbbreviation);
+
+    // Hide it AFTER the action was triggered
+    $(".custom-menu").hide(100);
+    //Removed the clicked allocation class
+    $(".clicked-allocation").removeClass("clicked-allocation");
+
+    $.post(
+      "php/updateAllocation.php",
+      {
+        consultantID: consultantID,
+        clientName: clientName,
+        clientAbbreviation: clientAbbreviation,
+        allocationSlot: allocationNo,
+        officeStatus: officeStatus
+      },
+      function() {}
+    );
+  });
 
   //End of context menu code adapted from https://stackoverflow.com/questions/4495626/making-custom-right-click-context-menus-for-my-web-app 12/07/2018
 

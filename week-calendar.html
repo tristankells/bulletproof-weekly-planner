@@ -26,37 +26,45 @@
 
 <body>
 
-    <ul class='custom-menu'>
+    <ul class='custom-menu office-menu'>
         <li data-action="1">On-Site</li>
         <li data-action="2">Office Time</li>
         <li data-action="0">N/A</li>
     </ul>
+
+    <ul class='custom-menu client-menu'>
+        <li>EMPTY</li>
+        <li>LEAVE</li>
+    </ul>
+
     <div class="container-fluid">
-        <div id ="navigationBar" class="row">
+        <div id="navigationBar" class="row">
             <div class="col-3">
                 <img src="/Glance/img/glance_logo_navyblue_lg.png" class="logo" alt="">
             </div>
-            <div class = "btn-group-wrap col-6">
+            <div class="btn-group-wrap col-6">
                 <div class="btn-group">
                     <button type="button" class="btn btn-primary" href="week-calendar.html">Week</button>
-                    <button type="button" class="btn btn-primary"><a href="month-calendar.html">Month</a></button>
+                    <button type="button" class="btn btn-primary">
+                        <a href="month-calendar.html">Month</a>
+                    </button>
                     <button type="button" class="btn btn-primary" href="management-page.html">Manage</button>
                 </div>
             </div>
-            
-            <div id='settingsIcon' class="col-3">
-                <i class="fas fa-cog"></i>
-            </div>
+
+            th
         </div>
     </div>
     <div class="container-fluid">
         <div class="row" id="maindiv">
-            
+
             <div class="col-lg-12" id="consultantsdiv">
                 <table class="consultant-table table table-bordered" id="consultantstable">
                     <thead id="consultantstablehead">
                         <tr class="dates" id="consultantstableheadrow">
-                            <th><div id="displaymonth"></div></th>
+                            <th>
+                                <div id="displaymonth"></div>
+                            </th>
                             <th class="date" colspan="2">MON</th>
                             <th class="date" colspan="2">TUE</th>
                             <th class="date" colspan="2">WED</th>

@@ -155,11 +155,12 @@ var ConsultantModule = (function() {
 
   /* =================== public methods ================== */
   // main init method
-  function init(consultants, BaseEntityModule) {
+  function init(consultants, BaseModule) {
     cacheDom();
     bindEvents();
     render(consultants);
-    updateConsultantName = BaseEntityModule.changeName;
+    updateConsultantName = BaseModule.changeName;
+    
   }
 
   /* =============== export public methods =============== */

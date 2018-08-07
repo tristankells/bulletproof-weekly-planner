@@ -40,7 +40,6 @@ var WeekConsultantModule = (function() {
                 .html(consultant["role"])
             )
         )
-
         .append(
           $("<div></div>")
             .addClass("draggable-icon")
@@ -51,94 +50,58 @@ var WeekConsultantModule = (function() {
             )
         )
     );
+
     //append allocation columns
     var i = 0,
       $columnElement = {},
-      $selectElement = {},
-      $optionElement;
+      $allocationDiv = {};
 
     for (i = 0; i < 10; i++) {
-      $columnElement = $("<td></td>");
+      $columnElement = $("<td></td>")
+        .addClass("allocation-col")
+        .attr("data-slot", i);
 
       if (i % 2 == 1) {
         $columnElement.addClass("row-space");
       }
 
-      $selectElement = $("<select></select>")
-        .addClass("dropdown clientdropdown")
-        .attr("data-slot", i)
-        .attr("data-office", 0);
-
-      var allocation = {};
+      var x = 0,
+        allocation = {};
       for (x in consultant["allocations"]) {
         allocation = consultant["allocations"][x];
         if (allocation["allocationslot"] == i) {
+          $columnElement.html(allocation["allocatedto"]);
           switch (allocation["officestatus"]) {
             case "1":
-              $selectElement.attr("data-office", 1);
+              $columnElement.attr("data-office", 1);
               break;
             case "2":
-              $selectElement.attr("data-office", 2);
-              break;
-            case "0":
-              $selectElement.attr("data-office", 0);
+              $columnElement.attr("data-office", 2);
               break;
             default:
-              $selectElement.attr("data-office", 0);
+              $columnElement.attr("data-office", 0);
               break;
           }
         }
       }
-      $optionElement = $("<option></option>").val("Open");
-      $selectElement.append($optionElement);
 
-      $optionElement = $("<option></option>")
-        .val("Leave")
-        .html("Leave");
-      for (x in consultant["allocations"]) {
-        if (consultant["allocations"][x]["allocationslot"] == i) {
-          if (consultant["allocations"][x]["allocatedto"] == "Leave") {
-            $optionElement.attr("selected", "selected");
-          }
-        }
-      }
+      $columnElement.append($allocationDiv);
 
-      $selectElement.append($optionElement);
-
-      var abbreviation = "";
-      for (x in clients) {
-        abbreviation = clients[x]["abbreviation"];
-
-        $optionElement = $("<option></option>")
-          .val(abbreviation)
-          .html(abbreviation);
-
-        var allocation = {};
-        for (z in consultant["allocations"]) {
-          allocation = consultant["allocations"][z];
-          if (
-            allocation["allocatedto"] == abbreviation &&
-            allocation["allocationslot"] == i
-          ) {
-            $optionElement.attr("selected", "selected");
-          }
-        }
-
-        $selectElement.append($optionElement);
-      }
-      $columnElement.append($selectElement);
       $rowElement.append($columnElement);
     }
 
     $rowElement.append(
       $("<td></td>").append(
         $("<input></input>")
-          .attr("type", "image")
-          .attr("src", "/Glance/img/clear.png")
+          .attr({
+            type: "image",
+            src: "/Glance/img/clear.png"
+          })
           .addClass("clear-consultant-btn remove-add-btn")
       )
     );
 
+    //Append row to consutlant table
     DOM.$consultantstablebody.append($rowElement);
   }
   // render DOM

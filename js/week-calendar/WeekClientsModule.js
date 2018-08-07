@@ -12,7 +12,15 @@ var WeekClientsModule = (function() {
   function cacheDom() {
     DOM.$clienttablebody = $("#clienttablebody");
     DOM.$clienttable = $("#clientstable");
-    DOM.$clientdropdown = $(".clientdropdown");
+    DOM.$clientMenu = $(".client-menu");
+  }
+
+  function populateClientMenu(clients) {
+    var $clientListElement = {};
+    for (x in clients) {
+      $clientListElement = $("<li></li>").html(clients[x]["abbreviation"]);
+      DOM.$clientMenu.append($clientListElement);
+    }
   }
 
   /*=========== public methods ==========*/
@@ -47,7 +55,7 @@ var WeekClientsModule = (function() {
     }
 
     this.moduleConsultants = consultants;
-
+    populateClientMenu(clients);
     renderTableRows();
     bindEvents();
   }
