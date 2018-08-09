@@ -11,7 +11,10 @@ var WeekConsultantModule = (function() {
   // bind events
   function bindEvents() {}
 
-  function renderConsultant(consultant, clients) {
+
+
+  
+  function renderConsultant(consultant) {
     var $rowElement = {},
       $allocationElement = {};
 
@@ -59,7 +62,8 @@ var WeekConsultantModule = (function() {
     for (i = 0; i < 10; i++) {
       $columnElement = $("<td></td>")
         .addClass("allocation-col")
-        .attr("data-slot", i);
+        .attr("data-slot", i)
+        .attr("data-office", 0)
 
       if (i % 2 == 1) {
         $columnElement.addClass("row-space");
@@ -70,16 +74,14 @@ var WeekConsultantModule = (function() {
       for (x in consultant["allocations"]) {
         allocation = consultant["allocations"][x];
         if (allocation["allocationslot"] == i) {
-          $columnElement.html(allocation["allocatedto"]);
+          $columnElement.html(allocation["abbreviation"]);
+          $columnElement.attr("data-id", allocation["id"]);
           switch (allocation["officestatus"]) {
             case "1":
               $columnElement.attr("data-office", 1);
               break;
             case "2":
               $columnElement.attr("data-office", 2);
-              break;
-            default:
-              $columnElement.attr("data-office", 0);
               break;
           }
         }
@@ -104,20 +106,21 @@ var WeekConsultantModule = (function() {
     //Append row to consutlant table
     DOM.$consultantstablebody.append($rowElement);
   }
+
   // render DOM
-  function render(consultants, clients) {
+  function render(consultants) {
     var x = 0;
     for (x in consultants) {
-      renderConsultant(consultants[x], clients);
+      renderConsultant(consultants[x]);
     }
   }
 
   /* =================== public methods ================== */
   // main init method
-  function init(consultants, clients) {
+  function init(consultants) {
     cacheDom();
     bindEvents();
-    render(consultants, clients);
+    render(consultants);
   }
 
   /* =============== export public methods =============== */

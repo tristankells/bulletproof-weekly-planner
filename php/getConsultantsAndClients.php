@@ -27,7 +27,7 @@ if ($result->num_rows > 0) {
             "full_name" => $row['full_name'],
             "abbreviation" => $row['abbreviation'],
             "position" => $row['board_position'],
-            "colour" => $row["colour"]
+            "colour" => $row["colour"],
         ];
         array_push($clients, $client);
     }
@@ -51,10 +51,12 @@ if ($result->num_rows > 0) {
         $id = $row['id'];
         $allocations = array();
         $query = "SELECT
-        allocated_to,
-        allocation_slot,
-        office_status
+        client.abbreviation,
+        client.id,
+        allocation.allocation_slot,
+        allocation.office_status
         FROM allocation
+        LEFT OUTER JOIN client ON client.id = allocation.client_id
         WHERE consultant_id =  $id";
 
         $allocationResult = $conn->query($query);
@@ -64,7 +66,8 @@ if ($result->num_rows > 0) {
         if ($allocationResult->num_rows > 0) {
             while ($allocationRow = $allocationResult->fetch_assoc()) {
                 $allocation = [
-                    "allocatedto" => $allocationRow['allocated_to'],
+                    "id"  => $allocationRow['id'],
+                    "abbreviation" => $allocationRow['abbreviation'],
                     "allocationslot" => $allocationRow['allocation_slot'],
                     "officestatus" => $allocationRow['office_status'],
                 ];

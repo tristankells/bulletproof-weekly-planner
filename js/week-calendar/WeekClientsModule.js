@@ -16,9 +16,13 @@ var WeekClientsModule = (function() {
   }
 
   function populateClientMenu(clients) {
-    var $clientListElement = {};
+    var $clientListElement = {},
+      client = {};
     for (x in clients) {
-      $clientListElement = $("<li></li>").html(clients[x]["abbreviation"]);
+      client = clients[x];
+      $clientListElement = $("<li></li>")
+        .attr("data-id", client["id"])
+        .html(client["abbreviation"]);
       DOM.$clientMenu.append($clientListElement);
     }
   }

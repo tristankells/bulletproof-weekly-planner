@@ -5,7 +5,6 @@ description         text,
 PRIMARY KEY (id)
 );
 
-
 CREATE TABLE client (
 id                  bigint NOT NULL AUTO_INCREMENT,
 full_name           varchar(30),
@@ -30,7 +29,7 @@ PRIMARY KEY (id)
 
 CREATE TABLE allocation (
 consultant_id       bigint NOT NULL REFERENCES consultant(id),
-allocated_to        varchar(10) NOT NULL,
+client_id           bigint  REFERENCES client(id),
 allocation_slot     int NOT NULL,
 office_status       int default 0,
 time_allocated      timestamp NOT NULL default current_timestamp ON UPDATE current_timestamp,
@@ -39,10 +38,10 @@ PRIMARY KEY (consultant_id, allocation_slot)
 
 CREATE TABLE monthly_allocation (
     consultant_id       bigint NOT NULL REFERENCES consultant(id),
-    allocated_to        varchar(40) NOT NULL,
+    client_id           bigint  REFERENCES client(id),
     allocation_slot     int NOT NULL,
     time_allocated      timestamp NOT NULL default current_timestamp ON UPDATE current_timestamp,
-    PRIMARY KEY (consultant_id, allocation_slot)
+    PRIMARY KEY (consultant_id, allocation_slot, client_id)
 );
 
 CREATE TABLE user_profile (

@@ -8,6 +8,7 @@ $(document).ready(function() {
 
   function initialiseTables() {
     $.get("php/getConsultantsAndClients.php", function(data) {
+
       var databaseResults = [],
         clients = [],
         consultants = [];
@@ -228,58 +229,6 @@ $(document).ready(function() {
     return "'0'";
   }
 
-  /*  
-        @dropdown #consultantstable > .clientdropdown
-
-        A change event is added to all dropdown menus for a consultants allocations. When a new abbreviation is
-        selected, or a null is selected, this allocation is updated to the database. The who column for the
-        appropirate client is updated if necessary.
-     */
-  $("#consultantstable").on("change", ".clientdropdown", function() {
-    var selectedClientabbreviation = "",
-      allocationNo = "",
-      consultantRow = {},
-      consultantID = 0,
-      selectElement = {},
-      officeStatus = 0;
-    clientName = "";
-
-    selectElement = $(this);
-
-    selectedClientabbreviation = selectElement.find(":selected").val();
-
-    clientName = $("#clienttablebody")
-      .find("[data-abbreviation ='" + selectedClientabbreviation + "']")
-      .attr("data-name");
-
-    officeStatus = selectElement.attr("data-office");
-
-    allocationNo = selectElement.attr("data-slot");
-    consultantRow = selectElement.closest("tr");
-    consultantID = consultantRow.attr("data-id");
-
-    console.log(consultantID);
-    console.log(clientName);
-    console.log(selectedClientabbreviation);
-    console.log(allocationNo);
-    console.log(officeStatus);
-
-    $.post(
-      "php/updateAllocation.php",
-      {
-        consultantID: consultantID,
-        clientName: clientName,
-        clientAbbreviation: selectedClientabbreviation,
-        allocationSlot: allocationNo,
-        officeStatus: officeStatus
-      },
-      function(data) {
-        console.log(data);
-        updateClientAllocationColumn(consultantID);
-      }
-    );
-  });
-
   /*
         @function updateClientAllocationColumn
     
@@ -383,7 +332,6 @@ $(document).ready(function() {
 
     if (currentDate.getDate() == day) {
       //PLACEHOLDER CURRENT DAY HIGHLIGHT
-      $(this).css("background-color", "red");
     }
 
     $(this).append(" " + day);
@@ -411,7 +359,6 @@ $(document).ready(function() {
   });
 
   $("#consultantsdiv").on("click", ".allocation-col", function(event) {
-   
     $(this).addClass("clicked-allocation");
 
     // Show contextmenu
@@ -440,9 +387,9 @@ $(document).ready(function() {
     var consultantID = 0,
       allocationNo = 0,
       officeStatus = 0,
-      clientAbbreviation = "",
       clientName = "",
-      $allocationTd = {};
+      $allocationTd = {},
+      clientID = null;
 
     $allocationTd = $(".clicked-allocation");
 
@@ -450,15 +397,10 @@ $(document).ready(function() {
     consultantID = $allocationTd.parents("tr").attr("data-id");
     clientAbbreviation = $allocationTd.html();
 
-    if (!clientAbbreviation == "") {
-      clientName = $("#clienttablebody")
-        .find("[data-abbreviation ='" + clientAbbreviation + "']")
-        .attr("data-name");
+    if ( $allocationTd.attr("data-id")) {
+      clientID =  $allocationTd.attr("data-id");
     }
 
-    if (clientAbbreviation == "LEAVE") {
-      clientName = "Leave";
-    }
     $allocationTd.attr("data-office", $(this).attr("data-action"));
 
     officeStatus = $allocationTd.attr("data-office");
@@ -473,13 +415,11 @@ $(document).ready(function() {
       {
         consultantID: consultantID,
         clientName: clientName,
-        clientAbbreviation: clientAbbreviation,
+        clientID: clientID,
         allocationSlot: allocationNo,
         officeStatus: officeStatus
       },
-      function() {
-
-      }
+      function() {}
     );
   });
 
@@ -487,17 +427,23 @@ $(document).ready(function() {
     var consultantID = 0,
       allocationNo = 0,
       officeStatus = 0,
-      clientAbbreviation = "",
-      clientName = "",
-      $allocationTd = {};
+      $allocationCol = {},
+      clientID = null,
+      $clickedListItem = {};
 
-    $allocationTd = $(".clicked-allocation");
+      //Cache dom elements
+    $allocationCol = $(".clicked-allocation");
+    $clickedListItem = $(this);
 
-    allocationNo = $allocationTd.attr("data-slot");
-    consultantID = $allocationTd.parents("tr").attr("data-id");
-    officeStatus = $allocationTd.attr("data-office");
-    clientAbbreviation = $(this).html();
-    $allocationTd.html(clientAbbreviation);
+    //Get values for allocation
+    allocationNo = $allocationCol.attr("data-slot"); //Store allocation day/time slot
+    officeStatus = $allocationCol.attr("data-office"); //Store allocation office status
+    consultantID = $allocationCol.parents("tr").attr("data-id"); //Store consultant ID
+    clientID =  $clickedListItem.attr("data-id");
+
+    //Set attributes for allocation col
+    $allocationCol.attr("data-id", clientID);
+    $allocationCol.html( $clickedListItem.html());
 
     // Hide it AFTER the action was triggered
     $(".custom-menu").hide(100);
@@ -508,12 +454,12 @@ $(document).ready(function() {
       "php/updateAllocation.php",
       {
         consultantID: consultantID,
-        clientName: clientName,
-        clientAbbreviation: clientAbbreviation,
+        clientID: clientID,
         allocationSlot: allocationNo,
         officeStatus: officeStatus
       },
-      function() {}
+      function(data) {
+      }
     );
   });
 

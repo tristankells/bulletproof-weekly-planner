@@ -15,10 +15,10 @@ $abbreviation = $dynamicData['abbreviation'];
 $name = $dynamicData['name'];
 $board = 1;
 
-$query = "DELETE FROM allocation WHERE allocated_to = '$abbreviation'";
+$query = "DELETE FROM allocation WHERE client_id = $id";
 $conn->query($query);
 
-$query = "DELETE FROM monthly_allocation WHERE allocated_to = '$name'";
+$query = "DELETE FROM monthly_allocation WHERE client_id = $id";
 $conn->query($query);
 
 $query = "DELETE FROM client WHERE id = $id";

@@ -27,7 +27,7 @@ if ($result->num_rows > 0) {
             "full_name" => $row['full_name'],
             "abbreviation" => $row['abbreviation'],
             "board_position" => $row['board_position'],
-            "colour" => $row["colour"]
+            "colour" => $row["colour"],
         ];
         array_push($clients, $client);
     }
@@ -48,14 +48,14 @@ $result = $conn->query($query);
 if ($result->num_rows > 0) {
     while ($row = $result->fetch_assoc()) {
         $id = $row['id'];
-
         $monthlyAllocations = array();
         $weekAllocations = array();
         $query = "SELECT
-        consultant_id,
-        allocated_to,
-        allocation_slot
+        monthly_allocation.consultant_id,
+        monthly_allocation.allocation_slot,
+        client.full_name
         FROM monthly_allocation
+        INNER JOIN client ON monthly_allocation.client_id = client.id
         WHERE consultant_id =  $id";
 
         $allocationResult = $conn->query($query);
@@ -65,7 +65,7 @@ if ($result->num_rows > 0) {
             while ($allocationRow = $allocationResult->fetch_assoc()) {
                 $allocation = [
                     "consultant_id" => $allocationRow['consultant_id'],
-                    "allocated_to" => $allocationRow['allocated_to'],
+                    "full_name" => $allocationRow['full_name'],
                     "allocation_slot" => $allocationRow['allocation_slot'],
                 ];
                 array_push($monthlyAllocations, $allocation);
@@ -75,7 +75,7 @@ if ($result->num_rows > 0) {
         $query = "SELECT DISTINCT
         client.full_name
         FROM client
-        LEFT OUTER JOIN allocation ON allocation.allocated_to = client.abbreviation
+        LEFT OUTER JOIN allocation ON client.id = allocation.client_id
         WHERE allocation.consultant_id =$id";
 
         $allocationResult = $conn->query($query);
