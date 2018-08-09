@@ -94,89 +94,6 @@ $(document).ready(function() {
       function(data) {}
     );
   }
-
-  /*  
-        @function addConsultantToTable
-
-        Takes a consultant object and array of client objects as parameters. Appends a row to the consultant table
-        using the passed paremeters.
-    */
-
-  function addConsultantToTable(consultant, clients) {
-    var consultantRow = "",
-      client = {},
-      abbreviation;
-
-    //Begin a new html table row containing the consultants information
-    consultantRow =
-      "<tr id='" +
-      consultant["id"] +
-      "' data-name='" +
-      consultant["name"] +
-      "' data-role='" +
-      consultant["role"] +
-      "' data-position='" +
-      consultant["position"] +
-      "' >";
-    consultantRow +=
-      "<div id='consultant-header'><td class='consultant-header'>" +
-      "<div class='consultant-info-format'>" +
-      "<div><input class='consultant-name-input' value='" +
-      consultant["name"] +
-      "'/></div>" +
-      "<div class='rolediv'>" +
-      consultant["role"] +
-      "</div>" +
-      "</div>" +
-      "<div class='draggable-icon'>" +
-      "<a href='#'><i class='fas fa-ellipsis-v'></i></a>" +
-      "</div></td>";
-    for (i = 0; i < 10; i++) {
-      //Loop through days in the week, times 2, and populate dropdowns
-
-      consultantRow += "<td";
-
-      if (i % 2 == 1) {
-        consultantRow += " class='row-space'>";
-      } else {
-        consultantRow += ">";
-      }
-
-      consultantRow +=
-        "<select" +
-        " class=" +
-        "'dropdown clientdropdown' id='" +
-        i +
-        "'data-office=";
-
-      consultantRow += checkOfficeStatusOfSlot(consultant["allocations"], i);
-
-      consultantRow += " ><option value='Open'></option>";
-      consultantRow += "<option value='Leave' ";
-      if (checkIfClientAllocatedNow(consultant["allocations"], i, "Leave")) {
-        consultantRow += " selected='selected'";
-      }
-      consultantRow += ">Leave</option>";
-      for (z in clients) {
-        //Loop through clients
-        client = clients[z];
-        abbreviation = client["abbreviation"];
-        consultantRow += "<option value='" + abbreviation + "'";
-        if (
-          checkIfClientAllocatedNow(consultant["allocations"], i, abbreviation)
-        ) {
-          consultantRow += " selected='selected'";
-        }
-        consultantRow += ">" + client["abbreviation"] + "</option>";
-      }
-      consultantRow += "</select></td>";
-    }
-    consultantRow +=
-      "<td  style='text-align: center; vertical-align: middle; border: none'><input type='image' src='/Glance/img/clear.png' class='clear-consultant-btn remove-add-btn'/></td>";
-    consultantRow += "</tr>";
-    $("#consultantstablebody").append(consultantRow);
-  }
-
   /*  
         @function #checkIfClientAllocatedNow
 
@@ -332,6 +249,7 @@ $(document).ready(function() {
 
   currentDate = new Date();
   monday = new Date();
+  var currentYear = currentDate.getFullYear();
 
   switch (currentDate.getDay()) {
     case 0:
@@ -371,7 +289,9 @@ $(document).ready(function() {
     "November",
     "December"
   ];
+
   $("#displaymonth").append(months[currentDate.getMonth()].toUpperCase());
+  $("#displayyear").append(currentYear);
 
   $("#consultantstableheadrow > .date").each(function() {
     var day = 0;
@@ -383,7 +303,7 @@ $(document).ready(function() {
 
     if (currentDate.getDate() == day) {
       //PLACEHOLDER CURRENT DAY HIGHLIGHT
-      $(this).css("background-color", "red");
+      //$(this).css("background-color", "red");
     }
 
     $(this).append(" " + day);
@@ -518,16 +438,6 @@ $(document).ready(function() {
   });
 
   //End of context menu code adapted from https://stackoverflow.com/questions/4495626/making-custom-right-click-context-menus-for-my-web-app 12/07/2018
-
-  //Add hover effect to select items
-  $("data-office").hover(
-    function() {
-      $(this).css("background-color", "yellow");
-    },
-    function() {
-      $(this).css("background-color", "pink");
-    }
-  );
 
   //Add clear all allocations function to the reset allocations button
   $("#resetallocationbutton").click(function() {

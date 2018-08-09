@@ -20,29 +20,29 @@
         crossorigin="anonymous">
     <link rel="manifest" href="js/manifest.json">
     <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato:400,900" />
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato:300,400,700,900" />
 </head>
 
 
 <body>
 
     <ul class='custom-menu office-menu'>
-        <li data-action="1">On-Site</li>
-        <li data-action="2">Office Time</li>
-        <li data-action="0">N/A</li>
+        <li data-action="1">Office (Default)</li>
+        <li data-action="2">On-Site</li>
+        <li data-action="0">Leave</li>
     </ul>
 
     <ul class='custom-menu client-menu'>
-        <li>EMPTY</li>
-        <li>LEAVE</li>
+        <li>Empty</li>
+        <li>Leave</li>
     </ul>
 
     <div class="container-fluid">
         <div id="navigationBar" class="row">
-            <div class="col-3">
+            <div id = "top-logo" class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
                 <img src="/Glance/img/glance_logo_navyblue_lg.png" class="logo" alt="">
             </div>
-            <div class="btn-group-wrap col-6">
+            <div id="top-btn-group" class="btn-group-wrap col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <div class="btn-group">
                     <button type="button" class="btn btn-primary" href="week-calendar.html">Week</button>
                     <button type="button" class="btn btn-primary">
@@ -51,19 +51,21 @@
                     <button type="button" class="btn btn-primary" href="management-page.html">Manage</button>
                 </div>
             </div>
-
-            th
+            <div id="top-settings-icon" class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="text-align: right;">
+                <i class="fas fa-cog fa-2x"></i>
+            </div>
         </div>
     </div>
     <div class="container-fluid">
         <div class="row" id="maindiv">
 
             <div class="col-lg-12" id="consultantsdiv">
-                <table class="consultant-table table table-bordered" id="consultantstable">
+                <table class="consultant-table table" id="consultantstable">
                     <thead id="consultantstablehead">
                         <tr class="dates" id="consultantstableheadrow">
                             <th>
-                                <div id="displaymonth"></div>
+                                    <div id="displaymonth"></div>
+                                    <div id="displayyear"></div>
                             </th>
                             <th class="date" colspan="2">MON</th>
                             <th class="date" colspan="2">TUE</th>
@@ -89,34 +91,9 @@
                     <tbody id="consultantstablebody">
                     </tbody>
                 </table>
-
-                <table width="100%" class="add-consultant-table">
-                    <tr>
-                        <td>
-                            <div class="consultanttablekey">
-                                <table>
-                                    <tr>
-                                        <th class="key-table-heading">Clear Table</th>
-                                        <th class="key-table-heading">Site</th>
-                                        <th class="key-table-heading">Office</th>
-                                    </tr>
-                                    <tr>
-                                        <td class="dot-position">
-                                            <input type='image' src='/Glance/img/clear.png' id="resetallocationbutton" class="remove-add-btn" />
-                                        </td>
-                                        <td class="dot-position">
-                                            <img src="/Glance/img/key_dot_blue.png" </img>
-                                        </td>
-
-                                        <td class="dot-position">
-                                            <img src="/Glance/img/key_dot_yellow.png" </img>
-                                        </td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
+                <div class="clear-button-container">
+                        <button id="resetallocationbutton" class="clear-all-btn">CLEAR TABLE <i class="remove-add-btn fas fa-trash-alt" ></i></button>
+                </div>
             </div>
             <div class="col-lg-12"></div>
             <div class="col-lg-12 test-row" id="clientsdiv">

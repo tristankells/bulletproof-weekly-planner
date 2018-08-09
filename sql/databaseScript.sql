@@ -1,4 +1,4 @@
-CREATE TABLE board (
+/*CREATE TABLE board (
 id 		            bigint NOT NULL AUTO_INCREMENT,
 name 	            varchar(100) NOT NULL,
 description         text,
@@ -61,7 +61,7 @@ user_profile_id         bigint NOT NULL REFERENCES user_profile(id),
 board_id	    		bigint NOT NULL,
 access  				int NOT NULL DEFAULT 0,
 PRIMARY KEY (id)
-);
+); */
 
 
 

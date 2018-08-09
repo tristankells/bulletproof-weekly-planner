@@ -58,12 +58,8 @@ var WeekConsultantModule = (function() {
 
     for (i = 0; i < 10; i++) {
       $columnElement = $("<td></td>")
-        .addClass("allocation-col")
+        .addClass("allocation-col table-bordered")
         .attr("data-slot", i);
-
-      if (i % 2 == 1) {
-        $columnElement.addClass("row-space");
-      }
 
       var x = 0,
         allocation = {};
@@ -91,15 +87,15 @@ var WeekConsultantModule = (function() {
     }
 
     $rowElement.append(
-      $("<td></td>").append(
-        $("<input></input>")
-          .attr({
-            type: "image",
-            src: "/Glance/img/clear.png"
-          })
-          .addClass("clear-consultant-btn remove-add-btn")
-      )
-    );
+        $("<div></div>")
+          .addClass("clear-consultant-row")
+        
+          .append(
+          $("<i></i>")
+          .addClass("clear-consultant-btn clear-row-btn fas fa-minus-square fa-2x")
+        )
+      );
+
 
     //Append row to consutlant table
     DOM.$consultantstablebody.append($rowElement);
