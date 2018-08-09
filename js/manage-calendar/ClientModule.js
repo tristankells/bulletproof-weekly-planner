@@ -10,6 +10,8 @@ var ClientModule = (function() {
     DOM.$clientnameinput = $("#clientnameinput");
     DOM.$clientabbreviationinput = $("#clientabbreviationinput");
     DOM.$addclientbutton = $("#addclientbutton");
+    DOM.$document = $(document);
+    DOM.$colourmenu = $(".colour-menu");
   }
 
   // bind events
@@ -28,17 +30,54 @@ var ClientModule = (function() {
       }
     });
 
-    DOM.$clientstablebody.on("click", ".color-col", changeClientColour);
+    DOM.$clientstablebody.on("click", ".color-col", handleColourColClick);
+
+    DOM.$colourmenu.on("click", "li", handleColourItemClick);
+
+    DOM.$document.on("mousedown", function(e) {
+      if (!$(e.target).parents(".custom-menu").length > 0) {
+        $(".clicked-client").removeClass("clicked-client");
+        $(".custom-menu").hide(100);
+      }
+    });
   }
 
-  function changeClientColour() {
-    var clientRow = {},
-      dynamicData = {};
+  /* 
+  function :handleColourItemClick
+  
+  Called on a custom menu item click. 
+  Updates the 'colour' of a client in DB with a number between 0 and 5, representing 6 differnet colour options
+  */
+  function handleColourItemClick() {
+    var dynamicData = {},
+      newColour = 0,
+      $clientRow = {};
 
-    clientRow = $(event.target).closest("tr");
-    dynamicData["id"] = clientRow.attr("data-id");
-    dynamicData["abbreviation"] = clientRow.attr("data-abbreviation");
-    dynamicData["name"] = clientRow.attr("data-name");
+    newColour = $(this).attr("data-action");
+
+    $clientRow = $(".clicked-client").closest("tr");
+
+    dynamicData["id"] = $clientRow.attr("data-id");
+    dynamicData["colour"] = newColour;
+
+    $clientRow.attr("data-colour", newColour);
+
+    updateClientColourInDB(dynamicData).done(function() {
+      //EMPTY
+    });
+  }
+
+  function handleColourColClick() {
+    $(this).addClass("clicked-client");
+
+    $(".colour-menu")
+      .finish()
+      .toggle(100)
+      // In the right position (the mouse)
+      .css({
+        top: event.pageY + "px",
+        left: event.pageX + "px"
+      });
   }
 
   //Inherited from BaseModule.changeName function; See BaseModule.js
@@ -51,7 +90,8 @@ var ClientModule = (function() {
     $rowElement = $("<tr></tr>")
       .attr("data-id", client["id"])
       .attr("data-name", client["full_name"])
-      .attr("data-abbreviation", client["abbreviation"]);
+      .attr("data-abbreviation", client["abbreviation"])
+      .attr("data-colour", client["colour"]);
 
     //Add client name colunm
     $rowElement.append(
@@ -68,7 +108,7 @@ var ClientModule = (function() {
     //INSERT CUSTOM ICON
     $rowElement.append(
       $("<td></td>")
-        .html("Click to change colour")
+        .html(client["colour"])
         .addClass("color-col")
     );
 
@@ -183,6 +223,12 @@ var ClientModule = (function() {
   /* ================= private AJAX methods =============== */
   function updateClientNameInDB(dynamicData) {
     return $.post("php/updateClientName.php", {
+      dynamicData: dynamicData
+    });
+  }
+
+  function updateClientColourInDB(dynamicData) {
+    return $.post("php/updateClientColour.php", {
       dynamicData: dynamicData
     });
   }

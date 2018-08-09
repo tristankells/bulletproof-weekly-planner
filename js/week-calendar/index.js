@@ -411,8 +411,7 @@ $(document).ready(function() {
   });
 
   $("#consultantsdiv").on("click", ".allocation-col", function(event) {
-    contextMenuClosestSelect = $(this);
-
+   
     $(this).addClass("clicked-allocation");
 
     // Show contextmenu

@@ -380,3 +380,31 @@ tbody > tr {
 .clear-consultant-btn {
  margin-top: 30px;
 }
+
+[data-colour="1"] {
+  color: rgb(24, 133, 22);
+}
+
+
+[data-colour="2"] {
+  color: rgb(235, 152, 45);
+}
+
+
+[data-colour="3"] {
+  color: rgb(45, 58, 194);
+}
+
+
+[data-colour="4"] {
+  color: rgb(203, 42, 42);
+}
+
+
+[data-colour="5"] {
+  color: rgb(133, 33, 199);
+}
+
+input {
+  color: inherit;
+}

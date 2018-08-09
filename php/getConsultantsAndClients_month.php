@@ -10,7 +10,8 @@ $data = array();
 $query = "SELECT id,
 full_name,
 abbreviation,
-board_position
+board_position,
+colour
 FROM client
 WHERE board_id = $boardID";
 
@@ -26,6 +27,7 @@ if ($result->num_rows > 0) {
             "full_name" => $row['full_name'],
             "abbreviation" => $row['abbreviation'],
             "board_position" => $row['board_position'],
+            "colour" => $row["colour"]
         ];
         array_push($clients, $client);
     }

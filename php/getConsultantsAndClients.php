@@ -9,7 +9,8 @@ $consultants = array();
 $query = "SELECT id,
 full_name,
 abbreviation,
-board_position
+board_position,
+colour
 FROM client
 WHERE board_id = $boardID
 ORDER BY board_position ASC";
@@ -26,6 +27,7 @@ if ($result->num_rows > 0) {
             "full_name" => $row['full_name'],
             "abbreviation" => $row['abbreviation'],
             "position" => $row['board_position'],
+            "colour" => $row["colour"]
         ];
         array_push($clients, $client);
     }
