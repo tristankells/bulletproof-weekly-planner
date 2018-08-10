@@ -14,6 +14,7 @@
     <script src="js/week-calendar/WeekClient.js"></script>
     <script src="js/week-calendar/WeekClientsModule.js"></script>
     <script src="js/week-calendar/WeekConsultantModule.js"></script>
+    <script src="js/week-calendar/DateModule.js"></script>
     <script src="js/week-calendar/index.js"></script>
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
@@ -26,29 +27,33 @@
 
 <body>
 
-    <ul class='custom-menu office-menu'>
-        <li data-action="0">Empty</li>
+    <ul id='officemenu' class='custom-menu '>
+        <li data-action="0">Office</li>
         <li data-action="1">On-Site</li>
-        <li data-action="2">Office Time</li>
-        <li data-action="3">Leave</li>
+        <li data-action="2">Leave</li>
     </ul>
 
-    <ul class='custom-menu client-menu'>
-        <li> </li>
+    <ul id='clientmenu' class='custom-menu'>
+        <li>Empty</li>
     </ul>
 
     <div class="container-fluid">
         <div id="navigationBar" class="row">
-            <div id = "top-logo" class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
+            <div id="top-logo" class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
                 <img src="/Glance/img/glance_logo_navyblue_lg.png" class="logo" alt="">
             </div>
             <div id="top-btn-group" class="btn-group-wrap col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <div class="btn-group">
-                    <button type="button" class="btn btn-primary" href="week-calendar.html">Week</button>
+                    <button type="button" class="btn btn-primary">
+                        <a href="week-calendar.html">Week</a>
+                    </button>
+
                     <button type="button" class="btn btn-primary">
                         <a href="month-calendar.html">Month</a>
                     </button>
-                    <button type="button" class="btn btn-primary" href="management-page.html">Manage</button>
+                    <button type="button" class="btn btn-primary">
+                        <a href="management-page.html">Manage</a>
+                    </button>
                 </div>
             </div>
             <div id="top-settings-icon" class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="text-align: right;">
@@ -64,8 +69,8 @@
                     <thead id="consultantstablehead">
                         <tr class="dates" id="consultantstableheadrow">
                             <th>
-                                    <div id="displaymonth"></div>
-                                    <div id="displayyear"></div>
+                                <div id="displaymonth"></div>
+                                <div id="displayyear"></div>
                             </th>
                             <th class="date" colspan="2">MON</th>
                             <th class="date" colspan="2">TUE</th>
@@ -92,7 +97,9 @@
                     </tbody>
                 </table>
                 <div class="clear-button-container">
-                        <button id="resetallocationbutton" class="clear-all-btn">CLEAR TABLE <i class="remove-add-btn fas fa-trash-alt" ></i></button>
+                    <button id="resetallocationbutton" class="clear-all-btn">CLEAR TABLE
+                        <i class="remove-add-btn fas fa-trash-alt"></i>
+                    </button>
                 </div>
             </div>
             <div class="col-lg-12"></div>

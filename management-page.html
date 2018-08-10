@@ -27,69 +27,76 @@
         <li data-action="4">Red</li>
         <li data-action="5">Purple</li>
     </ul>
-    <div class="container-fluid" id="managePage">
+
+    <div class="container-fluid">
         <div id="navigationBar" class="row">
-            <div class="col-4"></div>
-            <div id="linksAndLogo" class="col-4 ">
+            <div id="top-logo" class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
                 <img src="/Glance/img/glance_logo_navyblue_lg.png" class="logo" alt="">
-                <a class="navigation-links" href="week-calendar.html">Week</a>
-                <a class="navigation-links" href="month-calendar.html">Month</a>
-                <a class="navigation-links" href="management-page.html">Manage</a>
             </div>
-            <div id='settingsIcon' class="col-4">
-                <i class="fas fa-cog"></i>
+            <div id="top-btn-group" class="btn-group-wrap col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-primary">
+                        <a href="week-calendar.html">Week</a>
+                    </button>
+
+                    <button type="button" class="btn btn-primary">
+                        <a href="month-calendar.html">Month</a>
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                        <a href="management-page.html">Manage</a>
+                    </button>
+                </div>
+            </div>
+            <div id="top-settings-icon" class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="text-align: right;">
+                <i class="fas fa-cog fa-2x"></i>
             </div>
         </div>
-        <ul class='custom-menu office-menu'>
-            <li data-action="1">On-Site</li>
-            <li data-action="2">Office Time</li>
-            <li data-action="0">N/A</li>
-        </ul>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Role</th>
-                </tr>
-            </thead>
-            <tbody id="consultantstablebody"></tbody>
-        </table>
-        <table width="100%" class="add-consultant-table">
+    </div>
+    <table class="table">
+        <thead>
             <tr>
-                <td class="input-row">
-                    <input type="text" class="form-control-sm" placeholder="Consultant Name..." id="consultantnameinput" />
-                </td>
-                <td class="input-row">
-                    <input type="text" class="form-control-sm" placeholder="Consultant Role..." id="consultantroleinput" />
-                </td>
-                <td class="button-row">
-                    <input type='image' src='/Glance/img/plus.png' id="addconsultantbutton" class="remove-add-btn" />
-                </td>
-            </tr>
-        </table>
-
-        <table class="table">
-            <thead>
                 <th>Name</th>
-                <th>Abbreviation</th>
-                <th>Colour</th>
-            </thead>
-            <tbody id="clientstablebody"></tbody>
-        </table>
-        <table class="add-client-table">
-            <tr>
-                <td class="input-row">
-                    <input class="form-control-sm" type="text" placeholder="Client Name..." id="clientnameinput" />
-                </td>
-                <td class="input-row">
-                    <input class="form-control-sm" type="text" placeholder="Client Abbrevation..." id="clientabbreviationinput" maxlength="3"
-                    />
-                </td>
-                <td class="button-row">
-                    <input type='image' src='/Glance/img/plus.png' id="addclientbutton" class="remove-add-btn" />
-                </td>
+                <th>Role</th>
             </tr>
-        </table>
+        </thead>
+        <tbody id="consultantstablebody"></tbody>
+    </table>
+    <table width="100%" class="add-consultant-table">
+        <tr>
+            <td class="input-row">
+                <input type="text" class="form-control-sm" placeholder="Consultant Name..." id="consultantnameinput" />
+            </td>
+            <td class="input-row">
+                <input type="text" class="form-control-sm" placeholder="Consultant Role..." id="consultantroleinput" />
+            </td>
+            <td class="button-row">
+                <input type='image' src='/Glance/img/plus.png' id="addconsultantbutton" class="remove-add-btn" />
+            </td>
+        </tr>
+    </table>
+
+    <table class="table">
+        <thead>
+            <th>Name</th>
+            <th>Abbreviation</th>
+            <th>Colour</th>
+        </thead>
+        <tbody id="clientstablebody"></tbody>
+    </table>
+    <table class="add-client-table">
+        <tr>
+            <td class="input-row">
+                <input class="form-control-sm" type="text" placeholder="Client Name..." id="clientnameinput" />
+            </td>
+            <td class="input-row">
+                <input class="form-control-sm" type="text" placeholder="Client Abbrevation..." id="clientabbreviationinput" maxlength="3"
+                />
+            </td>
+            <td class="button-row">
+                <input type='image' src='/Glance/img/plus.png' id="addclientbutton" class="remove-add-btn" />
+            </td>
+        </tr>
+    </table>
     </div>
     </div>
 </body>

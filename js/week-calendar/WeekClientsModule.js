@@ -12,7 +12,7 @@ var WeekClientsModule = (function() {
   function cacheDom() {
     DOM.$clienttablebody = $("#clienttablebody");
     DOM.$clienttable = $("#clientstable");
-    DOM.$clientMenu = $(".client-menu");
+    DOM.$clientMenu = $("#clientmenu");
   }
 
   function populateClientMenu(clients) {
@@ -25,6 +25,56 @@ var WeekClientsModule = (function() {
         .html(client["abbreviation"]);
       DOM.$clientMenu.append($clientListElement);
     }
+  }
+
+  function renderClient(client) {
+    var $rowElement = $(); //Initialise variable
+
+    $rowElement = $("<tr></tr>").attr({
+      "data-id": client["id"],
+      "data-abbreviation": client["abbreviation"],
+      "data-position": client["board_position"],
+      "data-name": client["full_name"]
+    });
+
+    //Add name column
+    $rowElement.append(
+      $("<td></td>")
+        .addClass("client-row-format client-name-input")
+        .css("vertical-align", "middle")
+        .html(client["full_name"])
+    );
+
+    //Add abbreviation column
+    $rowElement.append(
+      $("<td></td>")
+        .addClass("client-row-format")
+        .css({
+          "vertical-align": "middle",
+          "font-weight": "bold"
+        })
+        .html(client["abbreviation"])
+    );
+
+    //Add allocation column
+
+    $rowElement.append(
+      $("<td></td>")
+        .addClass("who-column client-row-format")
+        .css("vertical-align", "middle")
+        .html()
+    );
+
+    //Add remove button
+    $rowElement.append(
+      $("<td></td>").css({
+        "vertical-align": "middle",
+        "text-align": "center",
+        border: "none"
+      })
+    );
+
+    DOM.$clienttablebody.append($rowElement);
   }
 
   /*=========== public methods ==========*/
@@ -42,9 +92,10 @@ var WeekClientsModule = (function() {
   /*
     Returns <tr> elements for every client in the module array
     */
-  function renderTableRows() {
-    for (x in moduleClients) {
-      DOM.$clienttablebody.append(moduleClients[x].getRow());
+  function render(clients) {
+    var x = 0;
+    for (x in clients) {
+      renderClient(clients[x]);
     }
   }
 
@@ -52,16 +103,11 @@ var WeekClientsModule = (function() {
     Return <li> elemnts for every client in the module array
     */
 
-  function init(clients, consultants) {
+  function init(clients) {
     cacheDom();
-    for (x in clients) {
-      moduleClients.push(new WeekClient(clients[x], consultants));
-    }
-
-    this.moduleConsultants = consultants;
-    populateClientMenu(clients);
-    renderTableRows();
     bindEvents();
+    populateClientMenu(clients);
+    render(clients);
   }
 
   /*=========== export public methods ==========*/
