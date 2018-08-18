@@ -2,9 +2,7 @@ var WeekClientsModule = (function() {
   /*=========== private variables ==========*/
 
   //Initiliase array of clients
-  var moduleClients = [],
-    consultants = [],
-    DOM = {};
+  var DOM = {};
 
   /*=========== private methods ==========*/
 
