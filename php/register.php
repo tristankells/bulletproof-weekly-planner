@@ -4,17 +4,17 @@
 require_once 'database.php';
 
 // Define varaible and initilaise with empty values
-$firstName = $lastName = $password = $email = $savePassword = "";
+$dynamicData = $firstName = $lastName = $password = $email = $savePassword = "";
 
 // Processing form data when form is submitted
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Check if username or password haven't been entered
-
-    $email = $_POST['email'];
-    $firstName = $_POST['firstName'];
-    $lastName = $_POST['lastName'];
-    $password = $_POST['password'];
+    $dynamicData = $_POST['$dynamicData'];
+    $email = $dynamicData['email'];
+    $firstName = $dynamicData['firstName'];
+    $lastName = $dynamicData['lastName'];
+    $password = $dynamicData['password'];
     $savePassword = password_hash($password, PASSWORD_DEFAULT);
 
     $query = "INSERT INTO  user_profile (first_name,last_name,email,login_password )

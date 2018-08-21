@@ -20,7 +20,7 @@ if (isset($_POST['email'])) {
         echo ("Sorry, no user exists on our system with that email");
     } else {
         // generate a unique random token of length 100
-        $newPassword = bin2hex(random_bytes(50));
+        $newPassword = bin2hex(random_bytes(10));
         $newPasswordHash = password_hash($newPassword, PASSWORD_DEFAULT);
         $query = "UPDATE user_profile SET login_password = '$newPasswordHash' WHERE email='$email'";
         $results = mysqli_query($conn, $query);
