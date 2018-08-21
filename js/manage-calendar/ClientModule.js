@@ -95,7 +95,7 @@ var ClientModule = (function() {
 
     //Add client name colunm
     $rowElement.append(
-      $("<td></td>").append(
+      $("<td></td>").addClass("custom-dark-bg").append(
         $("<input></input>")
           .addClass("client-name-input")
           .val(client["full_name"])
@@ -103,7 +103,7 @@ var ClientModule = (function() {
     );
 
     //Add client abbreviation colunm
-    $rowElement.append($("<td></td>").html(client["abbreviation"]));
+    $rowElement.append($("<td></td>").addClass("custom-dark-bg").html(client["abbreviation"]));
 
     //INSERT CUSTOM ICON
     $rowElement.append(
@@ -126,6 +126,17 @@ var ClientModule = (function() {
             .attr("src", "/Glance/img/remove.png")
             .attr("data-id", client["id"])
             .addClass("remove-client-btn remove-add-btn")
+        )
+    );
+    $rowElement.append(
+      $("<div></div>")
+        .addClass("clear-consultant-row")
+
+        .append(
+          $("<i></i>").addClass(
+            "remove-client-btn fas fa-minus-square fa-2x remove-consultant-btn remove-add-btn"
+          )
+          .attr("data-id", consultant["id"])
         )
     );
 

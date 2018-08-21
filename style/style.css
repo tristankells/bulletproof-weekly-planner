@@ -226,6 +226,7 @@ a:hover {
   text-align: left;
   float: left;
 }
+
 #displayyear {
   font-family: Lato;
   font-size: 20px;
@@ -280,17 +281,7 @@ a:hover {
   border: 1px solid red;
 }
 
-.input-row {
-  width: 150px;
-  border-collapse: separate;
-  border-spacing: 5px;
-}
 
-.button-row {
-  width: 60px;
-  border-collapse: separate;
-  border-spacing: 5px;
-}
 
 /* Remove buttons */
 
@@ -321,7 +312,7 @@ a:hover {
   cursor: pointer;
 }
 
-/* CUSTOM NAVIGATION BAR CSS ============================*/
+/* Custom Navigation Bar */
 #navigationBar {
   border-bottom: 1px solid rgb(231, 231, 231);
 }
@@ -453,6 +444,7 @@ tbody > tr {
 }
 
 /*Added css to colour elements */
+
 [data-office="1"] {
   /*background-color: #a9b7c0;*/
   /*color: white;*/
@@ -505,6 +497,16 @@ input {
   border-width: thin;
 }
 
+/* Week view layout */
+
+#clientstable {
+  width: 70%;
+}
+
+#clientstable th, tr, td {
+  padding: 14px;
+}
+
 /* Month view layout */
 
 .table-padding {
@@ -538,29 +540,69 @@ input {
   width: 35%;
 }
 
-#clienttable td, th {
-  vertical-align: middle !important;
-  padding: 20px !important;
+#clienttable th, td {
+  vertical-align: middle;
+  padding: 15px !important;
 }
 
 /* Manage page layout */
 
-.manage-consultants-table table {
-  width: 50%;
+.manage-table {
+  width: 100%;
 }
 
-.manage-consultants-table td {
+.manage-table th{
+  font-family: Lato;
+  font-size: 14px;
+  text-align: center;
+  padding-bottom: 10px;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.manage-table td {
   border: 1px solid black;
 }
 
-.manage-consultants-table input {
-  background-color: white;
-  color: lightgray;
+.manage-table input {
   padding: 5px;
-  
+  border-radius: 2px;
+  width: 100%;
+}
+
+.add-consultant-table {
+  width: 95%;
+  background-color: #212529;
+  margin-bottom: 40px;
+  margin-top: 30px;
+}
+
+.add-consultant-table input {
+  width: 100%;
+  padding: 5px;
+  border-radius: 2px;
+}
+
+.add-consultant-table i {
+  color: white;
+}
+
+.add-consultant-table i:hover {
+  cursor: pointer;
+  color: rgb(29, 187, 55);
 }
 
 .custom-dark-bg {
   background-color: #212529 !important;
   color: white;
+}
+
+.custom-dark-bg input {
+  background-color: #212529 !important;
+  color: white;
+}
+
+.custom-dark-bg input:hover {
+  background-color: rgb(255, 226, 231);
+  color: black;
 }

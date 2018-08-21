@@ -55,30 +55,30 @@
     <div class="container-fluid table-padding">
         <div class="row" id="maindiv">
             <div class="col-lg-6 col-md-6 col-sm-10 mx-auto">
-                <table class="manage-consultants-table">
+                <table class="manage-table mx-auto">
                     <thead>
                         <tr>
-                            <th>Name</th>
-                            <th>Role</th>
+                            <th>NAME</th>
+                            <th>ROLE</th>
                         </tr>
                     </thead>
                     <tbody id="consultantstablebody"></tbody>
                 </table>
-                <table width="100%" class="add-consultant-table">
+                <table class="add-consultant-table">
                     <tr>
                         <td class="input-row">
-                            <input type="text" class="form-control-sm" placeholder="Consultant Name..." id="consultantnameinput" />
+                            <input type="text" placeholder="Consultant Name..." id="consultantnameinput" />
                         </td>
                         <td class="input-row">
-                            <input type="text" class="form-control-sm" placeholder="Consultant Role..." id="consultantroleinput" />
+                            <input type="text" placeholder="Consultant Role..." id="consultantroleinput" />
                         </td>
                         <td class="button-row">
-                            <input type='image' src='/Glance/img/plus.png' id="addconsultantbutton" class="remove-add-btn" />
+                            <i id="addconsultantbutton" class="fas fa-plus-square fa-2x"></i>
                         </td>
                     </tr>
                 </table>
 
-                <table class="table">
+                <table class="manage-table mx-auto">
                     <thead>
                         <th>Name</th>
                         <th>Abbreviation</th>
@@ -86,17 +86,17 @@
                     </thead>
                     <tbody id="clientstablebody"></tbody>
                 </table>
-                <table class="add-client-table">
+                <table class="add-consultant-table">
                     <tr>
-                        <td class="input-row">
-                            <input class="form-control-sm" type="text" placeholder="Client Name..." id="clientnameinput" />
+                        <td>
+                            <input type="text" placeholder="Client Name..." id="clientnameinput" />
                         </td>
-                        <td class="input-row">
-                            <input class="form-control-sm" type="text" placeholder="Client Abbrevation..." id="clientabbreviationinput" maxlength="3"
+                        <td>
+                            <input type="text" placeholder="Client Abbrevation..." id="clientabbreviationinput" maxlength="3"
                             />
                         </td>
-                        <td class="button-row">
-                            <input type='image' src='/Glance/img/plus.png' id="addclientbutton" class="remove-add-btn" />
+                        <td>
+                            <i id="addclientbutton" class="fas fa-plus-square fa-2x"></i>
                         </td>
                     </tr>
                 </table>

@@ -44,7 +44,8 @@ var ConsultantModule = (function() {
 
     //Add consultant name colunm
     $rowElement.append(
-      $("<td></td>").append(
+      $("<td></td>")
+      .addClass("custom-dark-bg").append(
         $("<input></input>")
           .addClass("consultant-name-input")
           .val(consultant["full_name"])
@@ -55,21 +56,6 @@ var ConsultantModule = (function() {
     $rowElement.append($("<td></td>").html(consultant["job_title"]));
 
     //Add remove consultant button
-    /*$rowElement.append(
-      $("<td></td>")
-        .css({
-          "vertical-align": "middle",
-          "text-align": "center",
-          border: "none"
-        })
-        .append(
-          $("<input></input>")
-            .attr("type", "image")
-            .attr("src", "/Glance/img/remove.png")
-            .attr("data-id", consultant["id"])
-            .addClass("remove-consultant-btn remove-add-btn")
-        )
-    ); */
     $rowElement.append(
       $("<div></div>")
         .addClass("clear-consultant-row")
