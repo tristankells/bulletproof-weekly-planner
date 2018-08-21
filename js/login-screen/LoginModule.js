@@ -23,7 +23,7 @@ var LoginModule = (function() {
 
     attemptLoginDB(dynamicData).done(function(data) {
       if (data == "success") {
-        window.location.href = "week-calendar.html";
+        window.location.href = "week-calendar.php";
       } else {
         alert(data);
         DOM.$emailInput.val("");

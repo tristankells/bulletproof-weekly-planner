@@ -21,13 +21,13 @@ $disp_port = ($protocol == 'http' && $port == 80 || $protocol == 'https' && $por
 // put em all together to get the complete base URL
 $url = "${protocol}://${domain}${disp_port}${base_url}";
 $newpath = $domain."/Glance/index.php";
-echo "<p>$url</p>"; // = http://example.com/path/directory
-echo "<p>$newpath</p>";
-echo "<h3>Unauthorized Access!</h3>";
-echo "<p>". $_SERVER['DOCUMENT_ROOT']. "</p>";
-echo "<p>". __DIR__. "</p>";
+
 $path2 = __DIR__;
 $path = $_SERVER['DOCUMENT_ROOT']."/Glance/index.php";
+
+
+
+echo "<h3>Unauthorized Access!</h3>";
 echo "<a href='./index.php'>Go to the main page</a>";
 ?>
 </body>

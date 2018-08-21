@@ -14,11 +14,11 @@ if($_SESSION['authentication']!=1)
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="js/week-calendar/WeekClient.js"></script>
     <script src="js/week-calendar/WeekClientsModule.js"></script>
     <script src="js/week-calendar/WeekConsultantModule.js"></script>
     <script src="js/week-calendar/DateModule.js"></script>
     <script src="js/week-calendar/index.js"></script>
+    <script src="js/UserSetting.js"></script>
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
         crossorigin="anonymous">
@@ -50,9 +50,9 @@ if($_SESSION['authentication']!=1)
             <div id="top-btn-group" class="btn-group-wrap col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <nav class="shift">
                     <ul>
-                      <li><a href="week-calendar.html">Week</a></li>
-                      <li><a href="month-calendar.html">Month</a></li>
-                      <li><a href="management-page.html">Manage</a></li>
+                      <li><a href="week-calendar.php">Week</a></li>
+                      <li><a href="month-calendar.php">Month</a></li>
+                      <li><a href="management-page.php">Manage</a></li>
                     </ul>
                   </nav>
             </div>
