@@ -62,7 +62,7 @@ var ConsultantModule = (function() {
 
         .append(
           $("<i></i>").addClass(
-            "clear-consultant-btn clear-row-btn fas fa-minus-square fa-2x remove-consultant-btn remove-add-btn"
+            "clear-consultant-btn clear-row-btn fas fa-minus-square fa-2x remove-consultant-btn"
           )
           .attr("data-id", consultant["id"])
         )

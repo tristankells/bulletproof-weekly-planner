@@ -88,9 +88,9 @@ if($_SESSION['authentication']!=1)
 
                 <table class="manage-table mx-auto">
                     <thead>
-                        <th>Name</th>
-                        <th>Abbreviation</th>
-                        <th>Colour</th>
+                        <th>NAME</th>
+                        <th>ABBREVIATION</th>
+                        <th>COLOUR</th>
                     </thead>
                     <tbody id="clientstablebody"></tbody>
                 </table>

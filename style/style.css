@@ -285,14 +285,6 @@ a:hover {
 
 /* Remove buttons */
 
-.remove-add-btn {
-  width: 20px;
-  height: 20px;
-  text-align: center;
-  vertical-align: middle;
-  border: none;
-}
-
 .clear-consultant-row {
   width: 20px;
   height: 60px;
@@ -325,6 +317,7 @@ nav {
   text-align: center;
   
 }
+
 nav ul {
   list-style: none;
   text-align: center;
@@ -354,6 +347,7 @@ nav ul li a {
   height: 100%;
   text-align: center;
 }
+
 nav ul li a,
 nav ul li a:after,
 nav ul li a:before {
@@ -388,6 +382,8 @@ nav.shift ul li a:after {
   opacity: 0;
   z-index: -1;
 }
+
+
 nav.shift ul li a:hover:after {
   opacity: 1;
   visibility: visible;
@@ -423,7 +419,7 @@ tbody > tr {
 
 @media only screen and (max-width: 580px) {
   #top-btn-group,
-  #top-settings-icon {
+  .settings-icon-top {
     display: none;
   }
 
@@ -518,6 +514,7 @@ input {
 #consultanttable {
   background: white;
   width: 100%;
+  margin-bottom: 30px;
 }
 
 #consultanttable th {
@@ -537,7 +534,21 @@ input {
 }
 
 #clienttable {
-  width: 35%;
+  width: 30%;
+  margin: auto;
+  text-align: center;
+}
+
+@media only screen and (max-width: 800px){
+  #clienttable {
+    width: 80%;
+  }
+}
+
+@media only screen and (max-width: 580px){
+  #clienttable {
+    width: 100%;
+  }
 }
 
 #clienttable th, td {
