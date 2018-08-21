@@ -10,7 +10,7 @@ $dynamicData = $firstName = $lastName = $password = $email = $savePassword = "";
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
     // Check if username or password haven't been entered
-    $dynamicData = $_POST['$dynamicData'];
+    $dynamicData = $_POST['dynamicData'];
     $email = $dynamicData['email'];
     $firstName = $dynamicData['firstName'];
     $lastName = $dynamicData['lastName'];

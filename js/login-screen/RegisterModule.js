@@ -12,14 +12,26 @@ var RegisterModule = (function() {
     DOM.$passwordInput = $("#register-password-input");
     DOM.$rePasswordInput = $("#register-repassword-input");
     DOM.$emailInput = $("#register-email-input");
+    DOM.$registerFormButton = $(".register-form-btn");
+
   }
   // bind events
   function bindEvents() {
     DOM.$registerButton.click(handleRegisterButtonClick);
+    DOM.$registerFormButton.click( function() {
+        animateLoginFormTransition(
+            $(this)
+              .closest("div")
+              .add(".register-form")
+          )
+    }
+        
+       
+    )
   }
   // handle click events
   function handleRegisterButtonClick() {
-    var dynamicData = "";
+    var dynamicData = {};
 
     dynamicData["firstName"] = DOM.$firstNameInput.val();
     dynamicData["lastName"] = DOM.$lastNameInput.val();
@@ -47,6 +59,7 @@ var RegisterModule = (function() {
   }
 
   function checkNoInputIsEmpty(dynamicData) {
+      var x = 0;
     for (x in dynamicData) {
       if (dynamicData[x].length == 0) {
         return false;
@@ -55,26 +68,30 @@ var RegisterModule = (function() {
     return true;
   }
 
-  function isEmail(email) {
-    var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-    return regex.test(email);
-  }
+
 
   /* =================== private AJAX methods ================= */
 
   function attemptRegisterNewUser(dynamicData) {
-    return $.post("php/register.php", dynamicData);
+    return $.post("php/register.php", {dynamicData : dynamicData});
   }
 
   /* =================== public methods ================== */
   // main init method
-  function init() {
+  function init(SharedFunctions) {
     cacheDom();
     bindEvents();
+    isEmail = SharedFunctions.isEmail;
+    animateLoginFormTransition = SharedFunctions.animateLoginFormTransition;
   }
+
+   //Inherited function from login-screen/app.js
+   function animateLoginFormTransition() {}
+
+   function isEmail() {}
 
   /* =============== export public methods =============== */
   return {
-    init: init
+    init: init,
   };
 })();

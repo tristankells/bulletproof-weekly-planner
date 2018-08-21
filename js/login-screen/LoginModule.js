@@ -10,10 +10,19 @@ var LoginModule = (function() {
     DOM.$loginButton = $("#login-button");
     DOM.$emailInput = $("#email-input");
     DOM.$passwordInput = $("#password-input");
+    DOM.$loginFormButton = $(".login-form-btn");
   }
   // bind events
   function bindEvents() {
     DOM.$loginButton.click(handleLoginButtonClick);
+
+    DOM.$loginFormButton.click(function() {
+      animateLoginFormTransition(
+        $(this)
+          .closest("div")
+          .add(".login-form")
+      );
+    });
   }
   // handle click events
   function handleLoginButtonClick() {
@@ -23,7 +32,7 @@ var LoginModule = (function() {
 
     attemptLoginDB(dynamicData).done(function(data) {
       if (data == "success") {
-        window.location.href = "week-calendar.html";
+        window.location.href = "week-calendar.php";
       } else {
         alert(data);
         DOM.$emailInput.val("");
@@ -42,6 +51,10 @@ var LoginModule = (function() {
     return { email: email, password: password };
   }
 
+  function animateLoginFormTransition() {}
+
+  function isEmail() {}
+
   /* =================== private AJAX methods ================= */
   function attemptLoginDB(dynamicData) {
     return $.post("php/login.php", { dynamicData: dynamicData });
@@ -49,11 +62,12 @@ var LoginModule = (function() {
 
   /* =================== public methods ================== */
   // main init method
-  function init() {
+  function init(SharedFunctions) {
     cacheDom();
     bindEvents();
+    isEmail = SharedFunctions.isEmail;
+    animateLoginFormTransition = SharedFunctions.animateLoginFormTransition;
   }
-
 
   /* =============== export public methods =============== */
   return {
