@@ -142,6 +142,9 @@ var ClientModule = (function() {
     }
   }
 
+  function isValid(str) {
+	  return !/[\W]/.test(str);
+  }
   /* 
   function : addClient
 
@@ -164,7 +167,7 @@ var ClientModule = (function() {
     ] = DOM.$clientabbreviationinput.val().toUpperCase();
     dynamicData["position"] = clients.length + 1;
 
-    if (dynamicData["name"] !== "" && dynamicData["abbreviation"] !== "") {
+    if (dynamicData["name"] !== "" && dynamicData["abbreviation"] !== "" && isValid(dynamicData["name"]) && isValid(dynamicData["abbreviation"])) {
       clients.each(function() {
         {
           if ($(this).attr("data-name") == dynamicData["name"]) {
