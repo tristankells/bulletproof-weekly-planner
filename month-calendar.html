@@ -10,6 +10,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+        crossorigin="anonymous">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="style/style.css">
     <script src="js/month-calendar/MonthClient.js"></script>
@@ -32,46 +34,51 @@
                 <img src="/Glance/img/glance_logo_navyblue_lg.png" class="logo" alt="">
             </div>
             <div id="top-btn-group" class="btn-group-wrap col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-primary">
-                        <a href="week-calendar.html">Week</a>
-                    </button>
-
-                    <button type="button" class="btn btn-primary">
-                        <a href="month-calendar.html">Month</a>
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                        <a href="management-page.html">Manage</a>
-                    </button>
-                </div>
+                <nav class="shift">
+                    <ul>
+                        <li><a href="week-calendar.html">Week</a></li>
+                        <li><a href="month-calendar.html">Month</a></li>
+                        <li><a href="management-page.html">Manage</a></li>
+                    </ul>
+                </nav>
             </div>
-            <div id="top-settings-icon" class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="text-align: right;">
-                <i class="fas fa-cog fa-2x"></i>
+            <div class="settings-icon-top col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div>
+                    <i class="fas fa-cog fa-2x"></i>
+                </div>
             </div>
         </div>
     </div>
-    <table id="consultanttable" class="table table-bordered">
-        <thead id="consultanttablehead">
-            <tr id="consultanttableheadrow">
-                <th>Consultants</th>
-                <th>This Week </th>
-                <th>Week 2 </th>
-                <th>Week 3 </th>
-                <th>Week 4 </th>
-            </tr>
-        </thead>
-        <tbody id="consultanttablebody">
-        </tbody>
-    </table>
-    <table id="clienttable" class="table table-bordered">
-        <thead id="clienttablehead">
-            <tr id="clienttableheadrow">
-                <th>Clients</th>
-            </tr>
-        </thead>
-        <tbody id="clienttablebody" style="font-weight:bold">
-        </tbody>
-    </table>
+    <div class="container-fluid">
+        <div class="row" id="maindiv">
+            <div class="col-lg-12" id="consultantsdiv">
+                    <table id="consultanttable" class="table table-bordered">
+                            <thead id="consultanttablehead">
+                                <tr id="consultanttableheadrow">
+                                    <th>Consultants</th>
+                                    <th>This Week </th>
+                                    <th>Week 2 </th>
+                                    <th>Week 3 </th>
+                                    <th>Week 4 </th>
+                                </tr>
+                            </thead>
+                            <tbody id="consultanttablebody">
+                            </tbody>
+                        </table>
+                        <table id="clienttable" class="table table-bordered">
+                            <thead id="clienttablehead">
+                                <tr id="clienttableheadrow">
+                                    <th>Clients</th>
+                                </tr>
+                            </thead>
+                            <tbody id="clienttablebody" style="font-weight:bold">
+                            </tbody>
+                        </table>
+            </div>
+        </div>
+    </div>
+
+    
 </body>
 
 </html>

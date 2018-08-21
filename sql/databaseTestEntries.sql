@@ -1,32 +1,44 @@
 INSERT INTO board (name, description)
 values ('Bulletproof Auckland','Bulletproof Auckland');
 
-INSERT INTO client (full_name, abbreviation, board_id, board_position)
-values ('Bulletproof','BUL',1,1);
+INSERT INTO client (full_name, abbreviation, board_id, board_position, colour)
+values ('Bulletproof','BUL',1,1,0);
 
-INSERT INTO client (full_name, abbreviation, board_id, board_position)
-values ('Wednesdays','WED',1,2);
+INSERT INTO client (full_name, abbreviation, board_id, board_position, colour)
+values ('KPMG','KPM',1,2,0);
+
+INSERT INTO client (full_name, abbreviation, board_id, board_position, colour)
+values ('Westpac','WES',1,3,0);
+
+INSERT INTO client (full_name, abbreviation, board_id, board_position, colour)
+values ('Auckland University of Technology','AUT',1,4,0);
+
+INSERT INTO client (full_name, abbreviation, board_id, board_position, colour)
+values ('Citzen Park','CIT',1,5,0);
+
+INSERT INTO client (full_name, abbreviation, board_id, board_position, colour)
+values ('Wednedays Cafe','WED',1,6,0);
 
 INSERT INTO consultant (full_name, job_title,board_id,board_position)
-values ('Dan Wood','Tester',1,1);
+values ('Dan Wood','UX Designer',1,1);
 
 INSERT INTO consultant (full_name, job_title,board_id,board_position)
-values ('Tristan Kells','Developer',1,2);
+values ('Tristan Kells','Software Developer',1,2);
 
-INSERT INTO allocation (consultant_id, allocated_to,allocation_slot,office_status )
-values (1,"BUL",1,0);
+INSERT INTO consultant (full_name, job_title,board_id,board_position)
+values ('Junha Yu','Tester',1,3);
 
-INSERT INTO allocation (consultant_id, allocated_to,allocation_slot,office_status )
-values (2,"WED",5,1);
+INSERT INTO consultant (full_name, job_title,board_id,board_position)
+values ('Kenneth Johnson','Mentor',1,4);
 
-INSERT INTO monthly_allocation (consultant_id, client_id,allocation_slot)
-values (1,1,1);
+INSERT INTO consultant (full_name, job_title,board_id,board_position)
+values ('Craig Hurley','Product Owner',1,5);
 
-INSERT INTO monthly_allocation (consultant_id, client_id,allocation_slot)
-values (2,2,2);
+INSERT INTO consultant (full_name, job_title,board_id,board_position)
+values ('Dylan Tindale','Scrum Master',1,6);
 
-INSERT INTO user_profile (first_name, last_name, username, login_password , email)
-VALUES ('tristan','kells','admin',  'd033e22ae348aeb5660fc2140aec35850c4da997', 'tristankells@aut.com');
+INSERT INTO consultant (full_name, job_title,board_id,board_position)
+values ('Grant Sweeney','Product Owner',1,7);
 
-INSERT INTO membership (user_profile_id, board_id)
-VALUES (1,1);
+INSERT INTO consultant (full_name, job_title,board_id,board_position)
+values ('Geethika Guruge','Product Owner',1,8);
