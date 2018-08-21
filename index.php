@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<?php session_start(); 
+if(isset($_SESSION['authentication'])&&$_SESSION['authentication']==1)
+    header("Location: ./week-calendar.php");?>
+    <!DOCTYPE html>
 <html>
 
 <head>
@@ -18,6 +21,15 @@
     <script src="js/login-screen/RegisterModule.js"></script>
     <script src="js/login-screen/ResetLostPasswordModule.js"></script>
     <script src="js/login-screen/app.js"></script>
+    <script>
+    $(document).ready(function () {
+        <?php if(isset($_SESSION['message'])) {
+    echo "var message = '".$_SESSION['message']."';";
+    echo "alert(message);";
+    unset($_SESSION['message']);
+} ?>
+});
+</script>
 </head>
 
 <body>

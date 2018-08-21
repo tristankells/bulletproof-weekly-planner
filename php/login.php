@@ -43,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     //Save email to session
                     session_start();
                     $_SESSION['email'] = $email;
+                    $_SESSION['authentication'] = 1;
                     echo ('success');
                 }
             }

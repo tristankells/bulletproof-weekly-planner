@@ -1,7 +1,7 @@
 <?php session_start(); 
 if($_SESSION['authentication']!=1)
     header("Location: ./Error.php");?>
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html>
 
 <head>
@@ -14,11 +14,11 @@ if($_SESSION['authentication']!=1)
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="js/week-calendar/WeekClient.js"></script>
     <script src="js/week-calendar/WeekClientsModule.js"></script>
     <script src="js/week-calendar/WeekConsultantModule.js"></script>
     <script src="js/week-calendar/DateModule.js"></script>
     <script src="js/week-calendar/index.js"></script>
+    <script src="js/UserSetting.js"></script>
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
         crossorigin="anonymous">
@@ -35,42 +35,36 @@ if($_SESSION['authentication']!=1)
         <li data-action="1">On-Site</li>
         <li data-action="2">Leave</li>
     </ul>
-
     <ul id='clientmenu' class='custom-menu'>
         <li>Empty</li>
     </ul>
-	<ul id='usermenu' class='custom-menu'>
+    <ul id='usermenu' class='custom-menu'>
         <li data-action="1">Logout</li>
 		<li data-action="2">something</li>
     </ul>
-
     <div class="container-fluid">
         <div id="navigationBar" class="row">
             <div id="top-logo" class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
                 <img src="/Glance/img/glance_logo_navyblue_lg.png" class="logo" alt="">
             </div>
             <div id="top-btn-group" class="btn-group-wrap col-lg-6 col-md-6 col-sm-6 col-xs-6">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-primary">
-                        <a href="week-calendar.php">Week</a>
-                    </button>
-
-                    <button type="button" class="btn btn-primary">
-                        <a href="month-calendar.html">Month</a>
-                    </button>
-                    <button type="button" class="btn btn-primary">
-                        <a href="management-page.html">Manage</a>
-                    </button>
-                </div>
+                <nav class="shift">
+                    <ul>
+                      <li><a href="week-calendar.php">Week</a></li>
+                      <li><a href="month-calendar.php">Month</a></li>
+                      <li><a href="management-page.php">Manage</a></li>
+                    </ul>
+                  </nav>
             </div>
-            <div id="top-settings-icon" class="col-lg-3 col-md-3 col-sm-3 col-xs-3" style="text-align: right;">
+            <div class="settings-icon-top col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                <div>
                 <i id="usermenubutton" class="fas fa-cog fa-2x"></i>
+                </div>
             </div>
         </div>
     </div>
     <div class="container-fluid">
         <div class="row" id="maindiv">
-
             <div class="col-lg-12" id="consultantsdiv">
                 <table class="consultant-table table" id="consultantstable">
                     <thead id="consultantstablehead">
@@ -111,7 +105,7 @@ if($_SESSION['authentication']!=1)
             </div>
             <div class="col-lg-12"></div>
             <div class="col-lg-12 test-row" id="clientsdiv">
-                <table class="table client-table" id="clientstable">
+                <table class="table table-dark table-striped client-table" id="clientstable">
                     <thead id="clienttablehead">
                         <th>Client</th>
                         <th>Abbreviation</th>

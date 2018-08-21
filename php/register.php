@@ -22,7 +22,9 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     //Check if query succesful
     if (mysqli_query($conn, $query)) {
-        echo ("Account Successfully Created. You Can Now Login");
+        session_start(); 
+        $_SESSION['message'] = "Account Successfully Created. You Can Now Login";
+        echo ('success');
     } else {
         echo ("Pleaser Enter A Unique Email Adress");
     }
