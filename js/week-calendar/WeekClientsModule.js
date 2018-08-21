@@ -60,7 +60,6 @@ var WeekClientsModule = (function() {
       $("<td></td>")
         .addClass("who-column client-row-format")
         .css("vertical-align", "middle")
-        .html()
     );
 
     //Add remove button
@@ -75,27 +74,14 @@ var WeekClientsModule = (function() {
     DOM.$clienttablebody.append($rowElement);
   }
 
-  /*=========== public methods ==========*/
 
-  function bindEvents() {}
-
-  /*
-     Empties the client array stored in the module
-     */
-  function empty() {
-    moduleClients = [];
-    consultants = [];
-  }
-
-  /*
-    Returns <tr> elements for every client in the module array
-    */
   function render(clients) {
     var x = 0;
     for (x in clients) {
       renderClient(clients[x]);
     }
   }
+  /*=========== public methods ==========*/
 
   /*
     Return <li> elemnts for every client in the module array
@@ -103,7 +89,6 @@ var WeekClientsModule = (function() {
 
   function init(clients) {
     cacheDom();
-    bindEvents();
     populateClientMenu(clients);
     render(clients);
   }
@@ -111,7 +96,6 @@ var WeekClientsModule = (function() {
   /*=========== export public methods ==========*/
 
   return {
-    init: init,
-    empty: empty
+    init: init
   };
 })();
