@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<?php session_start(); 
+if($_SESSION['authentication']!=1)
+    header("Location: ./Error.php");?>
+    <!DOCTYPE html>
 <html>
 
 <head>
@@ -19,6 +22,7 @@
     <script src="js/month-calendar/MonthClientsModule.js"></script>
     <script src="js/month-calendar/MonthConsultantsModule.js"></script>
     <script src="js/month-calendar/MonthCalendar.js"></script>
+    <script src="js/UserSetting.js"></script>
 </head>
 <script>
 
@@ -26,6 +30,10 @@
 
 <body>
     <ul class='custom-menu'>
+    </ul>
+    <ul id='usermenu' class='custom-menu'>
+        <li data-action="1">Logout</li>
+		<li data-action="2">something</li>
     </ul>
 
     <div class="container-fluid">
@@ -36,15 +44,15 @@
             <div id="top-btn-group" class="btn-group-wrap col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <nav class="shift">
                     <ul>
-                        <li><a href="week-calendar.html">Week</a></li>
-                        <li><a href="month-calendar.html">Month</a></li>
-                        <li><a href="management-page.html">Manage</a></li>
+                        <li><a href="week-calendar.php">Week</a></li>
+                        <li><a href="month-calendar.php">Month</a></li>
+                        <li><a href="management-page.php">Manage</a></li>
                     </ul>
                 </nav>
             </div>
             <div class="settings-icon-top col-lg-3 col-md-3 col-sm-3 col-xs-3">
                 <div>
-                    <i class="fas fa-cog fa-2x"></i>
+                    <i id="usermenubutton" class="fas fa-cog fa-2x"></i>
                 </div>
             </div>
         </div>

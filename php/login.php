@@ -3,19 +3,20 @@
 require_once 'database.php';
 
 // Define varaible and initilaise with empty values
-$email = $password = "";
+$dynamicData = "";
 
+$dynamicData = $_POST['dynamicData'];
 // Processing form data when form is submitted
 
 if ($_SERVER['REQUEST_METHOD'] == "POST") {
 
     // Check if email or password haven't been entered
-    if (empty(trim($_POST['email'])) || empty(trim($_POST['password']))) {
+    if (empty(trim($dynamicData['email'])) || empty(trim($dynamicData['password']))) {
         echo ("Please fill in all the fields. ");
         exit();
     } else {
-        $email = mysqli_escape_string($conn, $_POST['email']);
-        $password = mysqli_escape_string($conn, $_POST['password']);
+        $email = mysqli_escape_string($conn, $dynamicData['email']);
+        $password = mysqli_escape_string($conn, $dynamicData['password']);
 
         $passwordCheckQuery = "SELECT email,login_password FROM user_profile WHERE email='$email'";
 
@@ -42,6 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     //Save email to session
                     session_start();
                     $_SESSION['email'] = $email;
+                    $_SESSION['authentication'] = 1;
                     echo ('success');
                 }
             }
