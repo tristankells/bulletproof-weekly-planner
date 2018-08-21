@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<?php session_start(); 
+if($_SESSION['authentication']!=1)
+    header("Location: ./Error.php");?>
+    <!DOCTYPE html>
 <html>
 
 <head>

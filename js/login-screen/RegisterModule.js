@@ -31,7 +31,11 @@ var RegisterModule = (function() {
       if (isEmail(dynamicData["email"])) {
         if (dynamicData["password"] == dynamicData["rePassword"]) {
           attemptRegisterNewUser(dynamicData).done(function(data) {
+            if (data == "success") {
+              window.location.href = "./index.php";
+            } else {
             alert(data);
+            }
           });
         } else {
           alert("Password dont match, please re-enter");
