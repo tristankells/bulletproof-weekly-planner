@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="style/login-style.css">
+    <script src="js/login-screen/LoginModule.js"></script>
+    <script src="js/login-screen/RegisterModule.js"></script>
+    <script src="js/login-screen/ResetLostPasswordModule.js"></script>
+    <script src="js/login-screen/app.js"></script>
 </head>
 
 <body>
@@ -56,136 +60,4 @@
         </div>
     </div>
 </body>
-
-<script>
-    $(document).ready(function () {
-        //Listender attached to login button
-        $("#login-button").click(function () {
-            var email = "",
-                password = "";
-            email = $('#email-input').val();
-            password = $('#password-input').val();
-
-            $.post(
-                'php/login.php',
-                {
-                    email: email,
-                    password: password
-                }, function (data) {
-                    if (data == 'success') {
-                        window.location.href = 'week-calendar.html';
-                    } else {
-                        alert(data);
-                        $('#email-input').val("");
-                        $('#password-input').val("");
-                    }
-                }
-            )
-        }
-        );
-
-
-        $('#register-button').click(function () {
-            var firstName = "",
-                lastName = "",
-                password = "",
-                rePassword = "";
-
-            firstName = $('#register-firstname-input').val();
-            lastName = $('#register-lastname-input').val();
-            password = $('#register-password-input').val();
-            rePassword = $('#register-repassword-input').val();
-            email = $('#register-email-input').val();
-
-
-            //Check all fields have been entered 
-            if (!(firstName.length == 0 ||
-                lastName.length == 0 ||
-                password.length == 0 ||
-                rePassword.length == 0 ||
-                email.length == 0)) {
-
-                //Check if email is valid
-                if (isEmail(email)) {
-                    //Check both passwords match
-                    if (password === rePassword) {
-
-                        $.post('php/register.php',
-                            {
-                                firstName: firstName,
-                                lastName: lastName,
-                                password: password,
-                                email: email
-                            }, function (data) {
-                                alert(data);
-                            }
-
-                        )
-                    } else {
-                        alert("Passwords dont match");
-                    }
-                }
-            } else {
-                alert("Please enter all fields");
-            }
-        });
-
-
-
-        function bindEvents() {
-            $("#reset-btn").click(function () {
-                resetPassword();
-            });
-        }
-
-        bindEvents();
-
-        function resetPassword() {
-            var email = "";
-
-            email = $("#reset-email-input").val();
-            alert(email);
-            if (isEmail(email)) {
-                alert("Email adress is valid");
-                resetPasswordDB(email).done(function (data) {
-                    alert(data);
-                })
-            } else {
-                alert("Please enter a valid email address");
-            }
-        }
-
-        function resetPasswordDB(email) {
-            return $.post("php/forgottenPassword.php", { email: email })
-        }
-
-
-        function bindLoginScreenNavigation() {
-            $('.login-form-btn').click(function () {
-                animateLoginFormTransition($(this).closest("div").add(".login-form"));
-            })
-
-            $('.reset-form-btn').click(function () {
-                animateLoginFormTransition($(this).closest("div").add(".reset-form"));
-            })
-
-            $('.register-form-btn').click(function () {
-                animateLoginFormTransition($(this).closest("div").add(".register-form"));
-            })
-        }
-
-        bindLoginScreenNavigation();
-
-        function animateLoginFormTransition($forms) {
-            $forms.animate({ height: "toggle", opacity: "toggle" }, "slow");
-        }
-
-
-        function isEmail(email) {
-            var regex = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
-            return regex.test(email);
-        }
-    });
-</script>
-
 </html>
