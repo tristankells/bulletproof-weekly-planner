@@ -113,34 +113,18 @@ var ClientModule = (function() {
     );
 
     //Add remove client button
-    $rowElement.append(
-      $("<td></td>")
-        .css({
-          "vertical-align": "middle",
-          "text-align": "center",
-          border: "none"
-        })
-        .append(
-          $("<input></input>")
-            .attr("type", "image")
-            .attr("src", "/Glance/img/remove.png")
-            .attr("data-id", client["id"])
-            .addClass("remove-client-btn remove-add-btn")
-        )
-    );
+    
     $rowElement.append(
       $("<div></div>")
         .addClass("clear-consultant-row")
 
         .append(
           $("<i></i>").addClass(
-            "remove-client-btn fas fa-minus-square fa-2x remove-consultant-btn remove-add-btn"
+            "remove-client-btn fas fa-minus-square fa-2x clear-row-btn"
           )
           .attr("data-id", client["id"])
         )
     );
-
-    // <span class="glyphicon glyphicon-picture" />;
 
     DOM.$clientstablebody.append($rowElement);
   }
