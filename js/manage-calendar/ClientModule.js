@@ -136,7 +136,7 @@ var ClientModule = (function() {
           $("<i></i>").addClass(
             "remove-client-btn fas fa-minus-square fa-2x remove-consultant-btn remove-add-btn"
           )
-          .attr("data-id", consultant["id"])
+          .attr("data-id", client["id"])
         )
     );
 
