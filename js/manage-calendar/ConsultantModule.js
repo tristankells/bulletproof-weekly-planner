@@ -55,7 +55,7 @@ var ConsultantModule = (function() {
     $rowElement.append($("<td></td>").html(consultant["job_title"]));
 
     //Add remove consultant button
-    $rowElement.append(
+    /*$rowElement.append(
       $("<td></td>")
         .css({
           "vertical-align": "middle",
@@ -68,6 +68,17 @@ var ConsultantModule = (function() {
             .attr("src", "/Glance/img/remove.png")
             .attr("data-id", consultant["id"])
             .addClass("remove-consultant-btn remove-add-btn")
+        )
+    ); */
+    $rowElement.append(
+      $("<div></div>")
+        .addClass("clear-consultant-row")
+
+        .append(
+          $("<i></i>").addClass(
+            "clear-consultant-btn clear-row-btn fas fa-minus-square fa-2x remove-consultant-btn remove-add-btn"
+          )
+          .attr("data-id", consultant["id"])
         )
     );
 

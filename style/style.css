@@ -11,12 +11,11 @@
 }
 
 .client-name-input {
-  background: rgba(0, 0, 0, 0);
   border: none;
 }
 
 .consultant-name-input {
-  background: rgba(0, 0, 0, 0);
+  background: #212529;
   border: none;
 }
 
@@ -29,12 +28,6 @@ body {
 
 /* CSS3 */
 
-/* The whole thing */
-
-td {
-  padding: 0 !important;
-  margin: 0 !important;
-}
 
 /* Custom right and left click dropdown menu */
 
@@ -47,7 +40,7 @@ td {
   white-space: nowrap;
   font-family: sans-serif;
   background: #fff;
-  color: #333;
+  color: #212529;
   border-radius: 5px;
   padding: 0;
 }
@@ -65,7 +58,7 @@ td {
 }
 
 .custom-menu li:hover {
-  background-color: rgb(61, 61, 61);
+  background-color: #212529;
   color: white;
 }
 
@@ -79,7 +72,7 @@ td {
 }
 
 .allocation-col:hover {
-  background-color: rgb(32, 32, 32);
+  background-color: #212529;
   color: white;
   font-weight: 900;
   cursor: pointer;
@@ -132,7 +125,7 @@ a:hover {
 .consultant-info-format {
   display: inline-block;
   width: 90%;
-  padding: 10px;
+  padding: 0;
 }
 
 .rolediv {
@@ -146,15 +139,15 @@ a:hover {
 .consultant-header {
   font-family: Lato, Arial;
   vertical-align: -webkit-baseline-middle;
-  max-width: 170px;
-  width: 170px;
+  max-width: 200px;
+  width: 200px;
   font-size: 17px;
-  background-color: rgb(32, 32, 32);
+  background-color: #212529;
   color: white;
 }
 
 .consultant-header input {
-  background: rgba(0, 0, 0, 0);
+  background: #212529;
   border: none;
   max-width: 170px;
   width: 170px;
@@ -320,6 +313,7 @@ a:hover {
 
 .clear-row-btn {
   vertical-align: middle !important;
+  color: #212529;
 }
 
 .clear-row-btn:hover {
@@ -338,6 +332,7 @@ nav {
   margin: 0;
   padding: 0;
   text-align: center;
+  
 }
 nav ul {
   list-style: none;
@@ -356,13 +351,15 @@ nav ul li {
 }
 nav ul li a {
   display: inline-block;
-  padding: 10px;
+  padding: 15px;
   text-decoration: none;
   color: rgb(109, 109, 109);
-  font-family: Montserrat;
+  font-family: Lato;
   font-weight: 400;
+  font-size: 12px;
+  letter-spacing: 3px;
   text-transform: uppercase;
-  margin: auto;
+  margin: 0;
   height: 100%;
   text-align: center;
 }
@@ -395,7 +392,7 @@ nav.shift ul li a:after {
   height: 1px;
   content: '.';
   color: transparent;
-  background: rgb(22, 22, 22);
+  background: #212529;
   visibility: none;
   opacity: 0;
   z-index: -1;
@@ -496,16 +493,74 @@ input {
 }
 
 .highlight-day {
-  height: 20px; /*change this and the width
+  height: 30px; /*change this and the width
   for the size of your initial circle*/
   width: 20px;
-  padding: 4%;
-  border-radius: 50%;
+  padding: 10px;
   /*make it pretty*/
   /*background: #000;
   color: #f9f9f9; */
   border-style: solid;
-  border-color: black;
+  border-color: #9a9da0;
+  border-width: thin;
 }
 
 /* Month view layout */
+
+.table-padding {
+  padding-left: 15px;
+  padding-top: 40px;
+  padding-right: 15px;
+}
+
+#consultanttable {
+  background: white;
+  width: 100%;
+}
+
+#consultanttable th {
+  font-family: Lato;
+  font-size: 14px;
+  padding: 20px;
+  text-align: left;
+  border: 0;
+  margin: 0;
+  border: none;
+  letter-spacing: 1px;
+}
+
+#consultanttablebody td {
+  vertical-align: middle !important;
+  padding: 20px !important;
+}
+
+#clienttable {
+  width: 35%;
+}
+
+#clienttable td, th {
+  vertical-align: middle !important;
+  padding: 20px !important;
+}
+
+/* Manage page layout */
+
+.manage-consultants-table table {
+  width: 50%;
+}
+
+.manage-consultants-table td {
+  border: 1px solid black;
+}
+
+.manage-consultants-table input {
+  background-color: white;
+  color: lightgray;
+  padding: 5px;
+  
+}
+
+.custom-dark-bg {
+  background-color: #212529 !important;
+  color: white;
+}
