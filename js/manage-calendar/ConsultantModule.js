@@ -81,6 +81,9 @@ var ConsultantModule = (function() {
     }
   }
 
+  function isValid(str) {
+	  return !/[\W]/.test(str);
+  }
   function addConsultant() {
     var consultants = [],
       nameUnique = true,
@@ -92,7 +95,7 @@ var ConsultantModule = (function() {
     dynamicData["role"] = DOM.$consultantroleinput.val();
     dynamicData["position"] = consultants.length + 1;
 
-    if (dynamicData["name"] !== "" && dynamicData["role"] !== "") {
+    if (dynamicData["name"] !== "" && dynamicData["role"] !== "" && isValid(dynamicData["name"]) && isValid(dynamicData["role"]) ) {
       consultants.each(function() {
         {
           if ($(this).attr("data-name") == dynamicData["name"]) {
@@ -111,7 +114,7 @@ var ConsultantModule = (function() {
         alert("Name is not unique");
       }
     } else {
-      alert("Please enter name and role");
+      alert("Please enter a valid name and role");
     }
   }
 
