@@ -1,4 +1,4 @@
-/*CREATE TABLE board (
+CREATE TABLE board (
 id 		            bigint NOT NULL AUTO_INCREMENT,
 name 	            varchar(100) NOT NULL,
 description         text,
@@ -61,45 +61,3 @@ board_id	    		bigint NOT NULL,
 access  				int NOT NULL DEFAULT 0,
 PRIMARY KEY (id)
 ); */
-
-
-
-
-
-/*
-EXAMPLE OF NON AUTO ID TABLE STRUCTURE
-
-CREATE TABLE board (
-id 		            bigint NOT NULL AUTO_INCREMENT,
-name 	            varchar(100) NOT NULL,
-description         text,
-PRIMARY KEY (id)
-);
-
-CREATE TABLE consultant (
-full_name       varchar(30),
-job_title       varchar(30),
-board_id        bigint NOT NULL REFERENCES board(id),
-board_position  int,
-PRIMARY KEY (full_name, board_id)
-);
-
-CREATE TABLE client (
-full_name           varchar(30),
-abbreviation        varchar(10),
-board_id            bigint REFERENCES board(id),
-board_position      int,
-CONSTRAINT unq_board_id_abbreviation UNIQUE(abbreviation, board_id),
-PRIMARY KEY (full_name, board_id)
-);
-
-CREATE TABLE allocation (
-board_id                bigint NOT NULL REFERENCES board(id),
-consultant_full_name    bigint NOT NULL REFERENCES consultant(full_name),
-client_abbreviation     bigint NOT NULL REFERENCES client(abbreviation),
-allocation_slot         int NOT NULL,
-office_status           int default 0,
-time_allocated          timestamp NOT NULL default current_timestamp ON UPDATE current_timestamp,
-PRIMARY KEY (consultant_full_name, allocation_slot)
-);
-*/
