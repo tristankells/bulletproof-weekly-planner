@@ -133,20 +133,20 @@ var ConsultantModule = (function() {
   /* ================= private AJAX methods =============== */
 
   function updateConsultantNameInDB(dynamicData) {
-    return $.post("php/updateConsultantName.php", {
+    return $.post("php/consultants/updateConsultantName.php", {
       dynamicData: dynamicData
     });
   }
 
   function addConsultantToDB(dynamicData) {
-    return $.post("php/addNewConsultant.php", {
+    return $.post("php/consultants/addNewConsultant.php", {
       dynamicData: dynamicData
     });
   }
 
   function deleteConsultantFromDB(dynamicData) {
     return $.post(
-      "php/removeConsultant.php", //Request data from server using POST, url is removeClient.php
+      "php/consultants/removeConsultant.php", //Request data from server using POST, url is removeClient.php
       {
         dynamicData: dynamicData
       }

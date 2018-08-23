@@ -16,10 +16,10 @@ if($_SESSION['authentication']!=1)
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
         crossorigin="anonymous">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="js/manage-calendar/BaseModule.js"></script>
-    <script src="js/manage-calendar/ClientModule.js"></script>
-    <script src="js/manage-calendar/ConsultantModule.js"></script>
-    <script src="js/manage-calendar/app.js"></script>
+    <script src="js/manage-calendar/SharedManageFunctionsModule.js"></script>
+    <script src="js/manage-calendar/ManageClientModule.js"></script>
+    <script src="js/manage-calendar/ManageConsultantModule.js"></script>
+    <script src="js/manage-calendar/manage_index.js"></script>
     <script src="js/UserSetting.js"></script>
     <link rel="stylesheet" href="style/style.css">
 </head>
@@ -72,6 +72,7 @@ if($_SESSION['authentication']!=1)
                     </thead>
                     <tbody id="consultantstablebody"></tbody>
                 </table>
+                <button id="removeallconsultantsbutton">Click To Delete All Consultants</button>
                 <table class="add-consultant-table">
                     <tr>
                         <td class="input-row">
@@ -92,8 +93,9 @@ if($_SESSION['authentication']!=1)
                         <th>ABBREVIATION</th>
                         <th>COLOUR</th>
                     </thead>
-                    <tbody id="clientstablebody"></tbody>
+                    <tbody id="clienttablebody"></tbody>
                 </table>
+                <button id="removeallclientsbutton">Click To Delete All Clients</button>
                 <table class="add-consultant-table">
                     <tr>
                         <td>

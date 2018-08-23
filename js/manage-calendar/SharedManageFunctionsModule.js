@@ -10,6 +10,7 @@ var BaseModule = (function() {
     Triggered from blur event on a name input box. Sends new name information
      for a client or consultant to be updated in the database
     */
+
   function changeName(updateDbFunction) {
     var dynamicData = {},
       $row = {},

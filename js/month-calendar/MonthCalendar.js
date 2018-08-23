@@ -71,7 +71,7 @@ $(document).ready(function() {
     }
 
     $.post(
-      "php/updateAllocation_month.php",
+      "php/consultants/updateAllocation_month.php",
       {
         col: col,
         allocated_to: allocated_to,

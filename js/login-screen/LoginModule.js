@@ -57,7 +57,7 @@ var LoginModule = (function() {
 
   /* =================== private AJAX methods ================= */
   function attemptLoginDB(dynamicData) {
-    return $.post("php/login.php", { dynamicData: dynamicData });
+    return $.post("php/user-profile/login.php", { dynamicData: dynamicData });
   }
 
   /* =================== public methods ================== */

@@ -7,14 +7,14 @@ Takes a client name handed in from POST and removes the the database record with
 that name.
  */
 
-require_once 'database.php';
+require_once '../database.php';
 
-$id = $_POST['id'];
+$board = 1;
 
 $query = "DELETE allocation
 FROM allocation 
 LEFT OUTER JOIN consultant ON allocation.consultant_id = consultant.id
-WHERE consultant.id = $id";
+WHERE consultant.board_id = $board";
 
 $conn->query($query);
 

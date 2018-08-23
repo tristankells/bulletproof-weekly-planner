@@ -7,7 +7,7 @@ Takes a client ID no handed in from POST and removes the the database record wit
 that name.
  */
 
-require_once 'database.php';
+require_once '../database.php';
 
 $dynamicData = $_POST['dynamicData'];
 $id = $dynamicData['id']; //Client name retrieved from post
