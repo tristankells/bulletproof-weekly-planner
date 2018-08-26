@@ -10,16 +10,17 @@ var ConsultantModule = (function() {
     DOM.$consultantnameinput = $("#consultantnameinput");
     DOM.$consultantroleinput = $("#consultantroleinput");
     DOM.$addconsultantbutton = $("#addconsultantbutton");
+    DOM.$removeAllConsultantsButton = $("#removeallconsultantsbutton");
   }
   // bind events
   function bindEvents() {
     DOM.$addconsultantbutton.click(addConsultant);
 
-    DOM.$consultanttablebody.on(
-      "click",
-      ".remove-consultant-btn",
-      deleteConsultant
-    );
+    DOM.$consultanttablebody.on("click", ".remove-consultant-btn", function() {
+      if (confirm("Press OK to delete consultant information")) {
+        deleteConsultant($(this).closest("tr"));
+      }
+    });
 
     DOM.$consultanttablebody.on("blur", ".consultant-name-input", function() {
       updateConsultantName(updateConsultantNameInDB);
@@ -28,6 +29,12 @@ var ConsultantModule = (function() {
     DOM.$consultanttablebody.on("keyup", ".consultant-name-input", function(e) {
       if (e.keyCode === 13) {
         this.blur();
+      }
+    });
+
+    DOM.$removeAllConsultantsButton.click(function() {
+      if (confirm("Press OK to delete all consultant information")) {
+        deleteAllConsultants();
       }
     });
   }
@@ -45,11 +52,12 @@ var ConsultantModule = (function() {
     //Add consultant name colunm
     $rowElement.append(
       $("<td></td>")
-      .addClass("custom-dark-bg").append(
-        $("<input></input>")
-          .addClass("consultant-name-input")
-          .val(consultant["full_name"])
-      )
+        .addClass("custom-dark-bg")
+        .append(
+          $("<input></input>")
+            .addClass("consultant-name-input")
+            .val(consultant["full_name"])
+        )
     );
 
     //Add consultant role colunm
@@ -61,10 +69,11 @@ var ConsultantModule = (function() {
         .addClass("clear-consultant-row")
 
         .append(
-          $("<i></i>").addClass(
-            "clear-consultant-btn clear-row-btn fas fa-minus-square fa-2x remove-consultant-btn"
-          )
-          .attr("data-id", consultant["id"])
+          $("<i></i>")
+            .addClass(
+              "clear-consultant-btn clear-row-btn fas fa-minus-square fa-2x remove-consultant-btn"
+            )
+            .attr("data-id", consultant["id"])
         )
     );
 
@@ -79,7 +88,7 @@ var ConsultantModule = (function() {
   }
 
   function isValid(str) {
-	  return !/[\W]/.test(str);
+    return /^[a-z\d\-_\s]+$/i.test(str);
   }
   function addConsultant() {
     var consultants = [],
@@ -92,7 +101,12 @@ var ConsultantModule = (function() {
     dynamicData["role"] = DOM.$consultantroleinput.val();
     dynamicData["position"] = consultants.length + 1;
 
-    if (dynamicData["name"] !== "" && dynamicData["role"] !== "" && isValid(dynamicData["name"]) && isValid(dynamicData["role"]) ) {
+    if (
+      dynamicData["name"] !== "" &&
+      dynamicData["role"] !== "" &&
+      isValid(dynamicData["name"]) &&
+      isValid(dynamicData["role"])
+    ) {
       consultants.each(function() {
         {
           if ($(this).attr("data-name") == dynamicData["name"]) {
@@ -115,19 +129,23 @@ var ConsultantModule = (function() {
     }
   }
 
-  function deleteConsultant() {
-    if (confirm("Press OK to delete consultant information")) {
-      var consultantRow = {},
-        dynamicData = {};
+  function deleteConsultant($consultantRow) {
+    var dynamicData = {};
 
-      consultantRow = $(event.target).closest("tr");
-      dynamicData["id"] = consultantRow.attr("data-id");
+    dynamicData["id"] = $consultantRow.attr("data-id");
 
-      //Ajax function to remove from database
-      deleteConsultantFromDB(dynamicData).done(function() {
-        consultantRow.remove(); //Remove the closest table row to the button
-      });
-    }
+    //Ajax function to remove from database
+    deleteConsultantFromDB(dynamicData).done(function() {
+      $consultantRow.remove(); //Remove the closest table row to the button
+    });
+  }
+
+  function deleteAllConsultants() {
+    var $consultantRows;
+    $consultantRows = DOM.$consultanttablebody.find("tr");
+    $consultantRows.each(function() {
+      deleteConsultant($(this));
+    });
   }
 
   /* ================= private AJAX methods =============== */
@@ -160,7 +178,6 @@ var ConsultantModule = (function() {
     bindEvents();
     render(consultants);
     updateConsultantName = BaseModule.changeName;
-    
   }
 
   /* =============== export public methods =============== */

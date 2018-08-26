@@ -162,9 +162,9 @@ var WeekConsultantModule = (function() {
     //Removed the clicked allocation class
     $(".clicked-allocation").removeClass("clicked-allocation");
 
-    updateAllocationInDB(dynamicData).done(function() {
-      updateClientsWhoCols();
-    });
+    updateClientsWhoCols();
+
+    updateAllocationInDB(dynamicData).done(function() {});
   }
 
   function updateConsultantPositions() {
@@ -178,7 +178,6 @@ var WeekConsultantModule = (function() {
     updateConsultantPositionsInDB(positions).done(function() {});
   }
 
-  
   function updateClientsWhoCols() {
     $("#clienttablebody > tr").each(function() {
       updateClientWhoCol($(this));
@@ -192,23 +191,22 @@ var WeekConsultantModule = (function() {
       clientWhoCol = {},
       x = 0;
 
+    console.log("updateClientWHoCAlled");
+
     clientID = $clientRow.attr("data-id");
     consultantNamesArray = getArrayOfConsultantNamesAllocatedToClient(clientID);
+    clientWhoCol = $clientRow.find(".who-column");
 
-    if (consultantNamesArray.length > 0) {
-      clientWhoCol = $clientRow.find(".who-column");
-      for (x in consultantNamesArray) {
-        consultantNamesString += consultantNamesArray[x];
-        if (consultantNamesArray.length > 1) {
-          if (x < consultantNamesArray.length - 1)
-            consultantNamesString += ", ";
-          {
-          }
+    for (x in consultantNamesArray) {
+      consultantNamesString += consultantNamesArray[x];
+      if (consultantNamesArray.length > 1) {
+        if (x < consultantNamesArray.length - 1) consultantNamesString += ", ";
+        {
         }
       }
-
-      clientWhoCol.html(consultantNamesString);
     }
+
+    clientWhoCol.html(consultantNamesString);
   }
 
   function getArrayOfConsultantNamesAllocatedToClient(clientID) {
@@ -220,6 +218,7 @@ var WeekConsultantModule = (function() {
       $consultanRow = $(this);
       if (checkConsultantAllocatedToClient(clientID, $consultanRow)) {
         consultantName = $consultanRow.attr("data-name");
+
         consultantNames.push(consultantName);
       }
     });
@@ -364,9 +363,10 @@ var WeekConsultantModule = (function() {
   }
 
   function clearConsutlantAllocationsIDB(id) {
-    return $.post("php/consultants/removeConsultantAllocations.php", { id: id });
+    return $.post("php/consultants/removeConsultantAllocations.php", {
+      id: id
+    });
   }
-
 
   /* =================== public methods ================== */
   // main init method

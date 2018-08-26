@@ -11,8 +11,6 @@ require_once '../database.php';
 
 $dynamicData = $_POST['dynamicData'];
 $id = $dynamicData['id']; //Client name retrieved from post
-$abbreviation = $dynamicData['abbreviation'];
-$name = $dynamicData['name'];
 $board = 1;
 
 $query = "DELETE FROM allocation WHERE client_id = $id";

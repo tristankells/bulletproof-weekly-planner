@@ -156,7 +156,7 @@ var ClientModule = (function() {
   }
 
   function isValid(str) {
-    return !/[\W]/.test(str);
+    return /^[a-z\d\-_\s]+$/i.test(str);
   }
   /* 
   function : addClient
@@ -228,8 +228,6 @@ var ClientModule = (function() {
     var dynamicData = {};
 
     dynamicData["id"] = $clientRow.attr("data-id");
-    dynamicData["abbreviation"] = $clientRow.attr("data-abbreviation");
-    dynamicData["name"] = $clientRow.attr("data-name");
 
     //Ajax function to remove from database
     deleteClientFromDB(dynamicData).done(function() {
@@ -239,7 +237,7 @@ var ClientModule = (function() {
 
   function deleteAllClients() {
     var $clientRows;
-    $clientRows =  DOM.$clienttablebody.find("tr");
+    $clientRows = DOM.$clienttablebody.find("tr");
     $clientRows.each(function() {
       deleteClient($(this));
     });
