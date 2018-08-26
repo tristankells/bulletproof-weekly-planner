@@ -53,10 +53,23 @@ var MonthClientsModule = (function() {
     }
   }
 
+  function renderPlaceHolderText() {
+    var $placeholderRow = $();
+
+    $placeholderRow = $("<tr></tr>").html(
+      "To add clients, pleasse go navigate to the manage page"
+    );
+    DOM.$clienttablebody.html($placeholderRow);
+  }
+
   function init(clients) {
     cacheDom();
-    renderTableRows(clients);
-    renderListItems(clients);
+    if (clients.length > 0) {
+      renderTableRows(clients);
+      renderListItems(clients);
+    } else {
+      renderPlaceHolderText();
+    } 
   }
 
   /*=========== export public methods ==========*/

@@ -56,6 +56,50 @@ var WeekConsultantModule = (function() {
     DOM.$resetAllocationsButton.on("click", function() {
       handleClearAllAllocationsClick();
     });
+
+    DOM.$consultantsTableBody.on("mouseenter", "tr", function() {
+      handleMouseEnteringConsultantRow($(this));
+    });
+
+    DOM.$consultantsTableBody.on("mouseleave", "tr", function() {
+      handleMouseLeavingConsultantRow($(this));
+    });
+
+    DOM.$consultantsTableBody.on("mouseenter", ".allocation-col", function() {
+      handleMouseEnteringAllocation($(this));
+    });
+
+    DOM.$consultantsTableBody.on("mouseleave", ".allocation-col", function() {
+      handleMouseLeavingAllocation($(this));
+    });
+  }
+
+  //Takes a allocation TD. Highlights the matching day and time.
+  function handleMouseEnteringAllocation($allocationCol) {
+    var allocationSlot = 0,
+      $dateSubheadings = $(),
+      $dates = $();
+
+    allocationSlot = $allocationCol.attr("data-slot");
+    $dates = $(".date");
+    $dateSubheadings = $(".date-subheading").find("th:not(:empty)");
+
+    $dateSubheadings.eq(allocationSlot).addClass("red-text");
+    $dates.eq(Math.floor(allocationSlot / 2)).addClass("red-text");
+  }
+
+  function handleMouseLeavingAllocation() {
+    $("th").removeClass("red-text");
+  }
+
+  //Highlight the name of the consultant when mouse enter consultant row
+  function handleMouseEnteringConsultantRow($consultantRow) {
+    $consultantRow.find(".consultant-header").addClass("red-text");
+  }
+
+  //Remove the highlight added to consultant row name when mouse leaves row
+  function handleMouseLeavingConsultantRow($consultantRow) {
+    $consultantRow.find(".consultant-header").removeClass("red-text");
   }
 
   function handlePositionChange($tableBody) {
@@ -345,6 +389,15 @@ var WeekConsultantModule = (function() {
     }
   }
 
+  function renderPlaceHolderText() {
+    var $placeholderRow = $();
+
+    $placeholderRow = $("<tr></tr>").html(
+      "To add consultants, pleasse go navigate to the manage page"
+    );
+    DOM.$consultantsTableBody.append($placeholderRow);
+  }
+
   /* ================= private AJAX methods =============== */
   function updateConsultantPositionsInDB(positions) {
     return $.post("php/consultants/updateConsultantPositions.php", {
@@ -372,9 +425,13 @@ var WeekConsultantModule = (function() {
   // main init method
   function init(consultants) {
     cacheDom();
-    bindEvents();
-    render(consultants);
-    updateClientsWhoCols();
+    if (consultants.length > 0) {
+      bindEvents();
+      render(consultants);
+      updateClientsWhoCols();
+    } else {
+      renderPlaceHolderText();
+    }
   }
 
   /* =============== export public methods =============== */

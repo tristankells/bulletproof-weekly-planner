@@ -53,6 +53,9 @@ $(document).ready(function() {
           saveNewClientPositions();
         }
       });
+
+
+
     });
   }
 

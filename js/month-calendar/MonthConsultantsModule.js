@@ -169,6 +169,15 @@ var MonthConsultantsModule = (function() {
     }
   }
 
+  function renderPlaceHolderText() {
+    var $placeholderRow = $();
+
+    $placeholderRow = $("<tr></tr>").html(
+      "To add consultants, pleasse go navigate to the manage page"
+    );
+    DOM.$consultanttablebody.html($placeholderRow);
+  }
+
   /*=========== private AJAX methods ==========*/
   function updateMonthlyAllocationInDB(dynamicData) {
     return $.post("php/consultants/updateAllocation_month.php", {
@@ -184,8 +193,12 @@ var MonthConsultantsModule = (function() {
   */
   function init(consultants) {
     cacheDom();
-    bindEvents();
-    renderTableRows(consultants);
+    if (consultants.length > 0) {
+      bindEvents();
+      renderTableRows(consultants);
+    } else {
+      renderPlaceHolderText();
+    }
   }
 
   /*=========== export public methods ==========*/

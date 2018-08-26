@@ -74,12 +74,20 @@ var WeekClientsModule = (function() {
     DOM.$clienttablebody.append($rowElement);
   }
 
-
   function render(clients) {
     var x = 0;
     for (x in clients) {
       renderClient(clients[x]);
     }
+  }
+
+  function renderPlaceHolderText() {
+    var $placeholderRow = $();
+
+    $placeholderRow = $("<tr></tr>").html(
+      "To add clients, pleasse go navigate to the manage page"
+    );
+    DOM.$clienttablebody.html($placeholderRow);
   }
   /*=========== public methods ==========*/
 
@@ -89,8 +97,12 @@ var WeekClientsModule = (function() {
 
   function init(clients) {
     cacheDom();
-    populateClientMenu(clients);
-    render(clients);
+    if (clients.length > 0) {
+      populateClientMenu(clients);
+      render(clients);
+    } else {
+      renderPlaceHolderText();
+    }
   }
 
   /*=========== export public methods ==========*/

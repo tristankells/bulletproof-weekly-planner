@@ -125,7 +125,6 @@ var ClientModule = (function() {
     //INSERT CUSTOM ICON
     $rowElement.append(
       $("<td></td>")
-        .html(client["colour"])
         .addClass("color-col")
     );
 
