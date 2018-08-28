@@ -55,13 +55,15 @@ if ($_SESSION['authentication'] != 1) {
         <div class="row" id="maindiv">
             <div class="col-lg-6 col-md-6 col-sm-10 mx-auto">
                 <div id="resetPasswordDiv">
-                    <div>Please enter your current password</div>
-                    <input type="text" id="oldPassword"><br>
-                    <div>Please enter you new password</div>
-                    <input type="text" class="new-passwords"><br>
-                    <div>Please enter your new password again</div>
-                    <input type="text" class="new-passwords"><br>
-                    <button id="resetPasswordButton">Reset Password</button>
+                    <form id="resetPasswordForm">
+                        <div>Please enter your current password</div>
+                        <input type="text" id="oldPassword"><br>
+                        <div>Please enter you new password</div>
+                        <input type="text" class="new-passwords"><br>
+                        <div>Please enter your new password again</div>
+                        <input type="text" class="new-passwords"><br>
+                        <input type="submit" id="resetPasswordButton" value="Reset Password" />
+                    </form>
                 </div>
             </div>
         </div>

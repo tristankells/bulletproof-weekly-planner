@@ -9,10 +9,12 @@ var ResetPasswordModule = (function() {
     DOM.$oldPasswordInput = $("#oldPassword");
     DOM.$newPasswordInputs = $(".new-passwords");
     DOM.$resetPasswordButton = $("#resetPasswordButton");
+    DOM.$resetPasswordForm = $("#resetPasswordForm");
   }
   // bind events
   function bindEvents() {
-    DOM.$resetPasswordButton.click(function() {
+    DOM.$resetPasswordForm.submit(function(e) {
+      e.preventDefault(e);
       handleResetPasswordButtonClick();
     });
   }

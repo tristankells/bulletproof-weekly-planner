@@ -16,6 +16,19 @@ $(document).ready(function() {
       });
   });
 
+  usermenubutton.on("click", function() {
+    event.preventDefault();
+    var pos = event.pageX - userMenu.width();
+    $("#usermenu")
+      .finish()
+      .toggle(100)
+      // In the right position (the mouse)
+      .css({
+        top: event.pageY + "px",
+        left: pos + "px"
+      });
+  });
+
   userMenu.on("click", "li", function() {
     var optionClicked = $(this).attr("data-action");
     switch (optionClicked) {
