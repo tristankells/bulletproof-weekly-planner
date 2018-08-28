@@ -39,7 +39,10 @@ var WeekClientsModule = (function() {
     $rowElement.append(
       $("<td></td>")
         .addClass("client-row-format client-name-input")
-        .css("vertical-align", "middle")
+        .css({
+          "vertical-align": "middle",
+          "font-style": "italic"
+        })
         .html(client["full_name"])
     );
 
@@ -49,7 +52,8 @@ var WeekClientsModule = (function() {
         .addClass("client-row-format")
         .css({
           "vertical-align": "middle",
-          "font-weight": "bold"
+          "font-weight": "bold",
+          "text-align": "center"
         })
         .html(client["abbreviation"])
     );
@@ -60,6 +64,7 @@ var WeekClientsModule = (function() {
       $("<td></td>")
         .addClass("who-column client-row-format")
         .css("vertical-align", "middle")
+        .html(client["who"])
     );
 
     //Add remove button
@@ -92,7 +97,7 @@ var WeekClientsModule = (function() {
   /*=========== public methods ==========*/
 
   /*
-    Return <li> elemnts for every client in the module array
+    Return <li> elements for every client in the module array
     */
 
   function init(clients) {

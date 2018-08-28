@@ -26,7 +26,6 @@ if ($_SESSION['authentication'] != 1) {
         crossorigin="anonymous">
     <link rel="manifest" href="js/manifest.json">
     <link rel="stylesheet" href="style/style.css">
-    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato:300,400,700,900" />
 </head>
 
 
@@ -45,8 +44,8 @@ if ($_SESSION['authentication'] != 1) {
     </ul>
     <div class="container-fluid">
         <div id="navigationBar" class="row">
-            <div id="top-logo" class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
-                <img src="/Glance/img/glance_logo_navyblue_lg.png" class="logo" alt="">
+            <div id="top-logo-div" class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
+             <div id="glance-logo">Glance.</div>
             </div>
             <div id="top-btn-group" class="btn-group-wrap col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <nav class="shift">
@@ -70,7 +69,7 @@ if ($_SESSION['authentication'] != 1) {
                 <table class="consultant-table table" id="consultantstable">
                     <thead id="consultantstablehead">
                         <tr class="dates" id="consultantstableheadrow">
-                            <th>
+                            <th style="padding: 0!important;">
                                 <div id="displaymonth"></div>
                                 <div id="displayyear"></div>
                             </th>
@@ -109,12 +108,12 @@ if ($_SESSION['authentication'] != 1) {
                 </div>
             </div>
             <div class="col-lg-12"></div>
-            <div class="col-lg-12 test-row" id="clientsdiv">
+            <div class="col-lg-12 mx-auto mb-5" id="clientsdiv">
                 <table class="table table-dark table-striped client-table" id="clientstable">
-                    <thead id="clienttablehead">
-                        <th>Client</th>
-                        <th>Abbreviation</th>
-                        <th>Who</th>
+                    <thead id="clienttablehead" style="margin-left:20px">
+                        <th style="width: 15%;">Client</th>
+                        <th style="width: 15%; text-align: center;">Abbreviation</th>
+                        <th style="width: 70%;">Who</th>
                     </thead>
                     <tbody id="clienttablebody">
                     </tbody>
