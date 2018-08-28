@@ -62,7 +62,7 @@ if ($_SESSION['authentication'] != 1) {
                         <input type="text" class="new-passwords"><br>
                         <div>Please enter your new password again</div>
                         <input type="text" class="new-passwords"><br>
-                        <input type="submit" id="resetPasswordButton" value="Reset Password" />
+                        <button type="submit" id="resetPasswordButton">Reset Password</button>
                     </form>
                 </div>
             </div>

@@ -53,7 +53,7 @@ if(isset($_SESSION['authentication'])&&$_SESSION['authentication']==1)
                 <form id='login-form'>
                     <input id='email-input' type="text" placeholder="email" />
                     <input id='password-input' type="password" placeholder="password" />
-                    <input type='submit' id='login-button' value='Login' />
+                    <button type='submit' id='login-button'>Login</button>
                 </form>
                  <p class="message">Not registered?
                     <a class="register-form-btn" href="#">Create an account</a>
