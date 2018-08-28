@@ -6,7 +6,7 @@ $(document).ready(function() {
   usermenubutton.on("contextmenu", function() {
     event.preventDefault();
     var pos = event.pageX - userMenu.width();
-   $("#usermenu")
+    $("#usermenu")
       .finish()
       .toggle(100)
       // In the right position (the mouse)
@@ -16,26 +16,25 @@ $(document).ready(function() {
       });
   });
 
-  userMenu.on("click","li", function() {
+  userMenu.on("click", "li", function() {
     var optionClicked = $(this).attr("data-action");
-    switch(optionClicked) {
+    switch (optionClicked) {
       case "1":
-        location.href="./php/logout.php";
+        location.href = "php/user-profile/logout.php";
         break;
       case "2":
-        alert("2 clicked");
+        location.href = "./reset-password.php";
         break;
       default:
         alert("nothing");
     }
-    });
+  });
 });
 
 var usersetting = (function() {
   "use strict";
   // placeholder for cached DOM elements
   var DOM = {};
-
 
   /* =================== private methods ================= */
   // cache DOM elements
@@ -48,7 +47,7 @@ var usersetting = (function() {
     DOM.$usermenubutton.on("contextmenu", function() {
       event.preventDefault();
       var pos = event.pageX - DOM.$userMenu.width();
-     $("#usermenu")
+      $("#usermenu")
         .finish()
         .toggle(100)
         // In the right position (the mouse)
@@ -58,21 +57,19 @@ var usersetting = (function() {
         });
     });
 
-    DOM.$userMenu.on("click","li", function() {
+    DOM.$userMenu.on("click", "li", function() {
       var optionClicked = $(this).attr("data-action");
-      switch(optionClicked) {
+      switch (optionClicked) {
         case "1":
-          location.href="./php/logout.php";
+          location.href = "./php/logout.php";
           break;
         case "2":
-          alert("2 clicked");
+          alert("Please make the password reset menu");
           break;
         default:
           alert("nothing");
       }
-      });
-
-
+    });
   }
 
   /* =================== public methods ================== */

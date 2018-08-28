@@ -8,6 +8,8 @@ $(document).ready(function() {
 
    DateModule.init();
 
+   ResetPasswordModule.init();
+
   function initialiseTables() {
     $.get("php/getConsultantsAndClients.php", function(data) {
       var databaseResults = [],

@@ -1,6 +1,8 @@
-<?php session_start(); 
-if($_SESSION['authentication']!=1)
-    header("Location: ./Error.php");?>
+<?php session_start();
+if ($_SESSION['authentication'] != 1) {
+    header("Location: ./Error.php");
+}
+?>
     <!DOCTYPE html>
 <html>
 
@@ -19,7 +21,7 @@ if($_SESSION['authentication']!=1)
     <script src="js/week-calendar/DateModule.js"></script>
     <script src="js/week-calendar/week_index.js"></script>
     <script src="js/UserSetting.js"></script>
-
+    <script src="js/reset-password/ResetPasswordModule.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
         crossorigin="anonymous">
     <link rel="manifest" href="js/manifest.json">
@@ -29,7 +31,6 @@ if($_SESSION['authentication']!=1)
 
 
 <body>
-
     <ul id='officemenu' class='custom-menu '>
         <li data-action="0">Office</li>
         <li data-action="1">On-Site</li>
@@ -40,7 +41,7 @@ if($_SESSION['authentication']!=1)
     </ul>
     <ul id='usermenu' class='custom-menu'>
         <li data-action="1">Logout</li>
-		<li data-action="2">something</li>
+		<li data-action="2">Reset Password</li>
     </ul>
     <div class="container-fluid">
         <div id="navigationBar" class="row">

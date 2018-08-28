@@ -619,3 +619,11 @@ td {
 .red-text {
   color: red !important;
 }
+
+#resetPasswordDiv {
+  text-align: center;
+}
+
+#resetPasswordDiv > input {
+  margin: 20px;
+}

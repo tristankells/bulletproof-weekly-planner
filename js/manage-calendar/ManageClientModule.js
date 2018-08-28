@@ -73,9 +73,9 @@ var ClientModule = (function() {
 
     $clientRow.attr("data-colour", newColour);
 
-    updateClientColourInDB(dynamicData).done(function() {
-      //EMPTY
-    });
+    updateClientColourInDB(dynamicData).done();
+
+    $(".custom-menu").hide(100);
   }
 
   function handleColourColClick() {
@@ -123,10 +123,7 @@ var ClientModule = (function() {
     );
 
     //INSERT CUSTOM ICON
-    $rowElement.append(
-      $("<td></td>")
-        .addClass("color-col")
-    );
+    $rowElement.append($("<td></td>").addClass("color-col"));
 
     //Add remove client button
 
