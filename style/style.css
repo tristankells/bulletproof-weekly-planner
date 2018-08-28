@@ -444,8 +444,13 @@ nav.shift ul li a:hover:after {
 }
 
 [data-office="2"] {
-  /*background-color: #c7d8c6; */
-  background-color: white;
+  background: repeating-linear-gradient(
+    45deg,
+    #606dbc,
+    #606dbc 10px,
+    #465298 10px,
+    #465298 20px
+  );
 }
 
 [data-office="0"] > td.color-col {
@@ -492,15 +497,6 @@ input {
   width: 70%;
 }
 
-<<<<<<< HEAD
-=======
-#clientstable th,
-tr,
-td {
-  padding: 14px;
-}
-
->>>>>>> bd5a2501cc594293b99dd8fe9d61acde6d0ced71
 /* Month view layout */
 
 .table-padding {
@@ -549,15 +545,12 @@ td {
   }
 }
 
-<<<<<<< HEAD
-=======
 #clienttable th,
 td {
   vertical-align: middle;
   padding: 15px !important;
 }
 
->>>>>>> bd5a2501cc594293b99dd8fe9d61acde6d0ced71
 /* Manage page layout */
 
 .manage-table {

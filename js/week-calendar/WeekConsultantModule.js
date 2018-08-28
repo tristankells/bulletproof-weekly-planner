@@ -210,7 +210,9 @@ var WeekConsultantModule = (function() {
 
     updateClientsWhoCols();
 
-    updateAllocationInDB(dynamicData).done(function() {});
+    updateAllocationInDB(dynamicData).done(function(data) {
+      alert(data);
+    });
   }
 
   function updateConsultantPositions() {
@@ -338,6 +340,8 @@ var WeekConsultantModule = (function() {
       $columnElement = {};
 
     for (i = 0; i < 10; i++) {
+      var allocation = {};
+
       $columnElement = $("<td></td>")
         .attr("data-slot", i)
         .attr("data-office", 0)
@@ -349,25 +353,12 @@ var WeekConsultantModule = (function() {
         .append($("<i></i>").addClass("fas fa-home home-icon"))  // ADD HOME ICON
         .append($("<i></i>").addClass("fas fa-plane away-icon")  // ADD AWAY ICON
         ));
-/*
-      var x = 0,
-        allocation = {};
-      for (x in consultant["allocations"]) {
-        allocation = consultant["allocations"][x];
-        if (allocation["allocationslot"] == i) {
-          $columnElement.html(allocation["abbreviation"]);
-          $columnElement.attr("data-id", allocation["id"]);
-          switch (allocation["officestatus"]) {
-            case "1":
-              $columnElement.attr("data-office", 1);
-              break;
-            case "2":
-              $columnElement.attr("data-office", 2);
-              break;
-          }
-        }
+
+      allocation = getColumnAllocation(consultant["allocations"], i);
+
+      if (allocation) {
+        $columnElement.attr("data-office", allocation["officestatus"]);
       }
-      */
       $rowElement.append($columnElement);
     }
 
@@ -391,21 +382,15 @@ var WeekConsultantModule = (function() {
     DOM.$consultantsTableBody.append($rowElement);
   }
 
-  // Create allocation column div
-  function createAllocationDiv(){
-
-    var allocationDiv = "";
-    var colourDiv = "";
-    var clientDiv = "";
-    var locationDiv = "";
-
-    colourDiv=$("<div></div>").addClass("colour-div");
-    clientDiv=$("<div></div>").addClass("client-div");
-    locationDiv=$("<div></div>").addClass("location-div");
-
-    colourDiv.add(clientDiv).add(locationDiv);
-
-    return colourDiv;
+  function getColumnAllocation(allocations, slot) {
+    var allocation = {};
+    for (x in allocations) {
+      allocation = allocations[x];
+      if (allocation["allocationslot"] == slot) {
+        return allocation;
+      }
+    }
+    return false;
   }
 
   // render DOM
