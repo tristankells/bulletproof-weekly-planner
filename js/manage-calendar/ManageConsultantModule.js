@@ -23,7 +23,7 @@ var ConsultantModule = (function() {
     });
 
     DOM.$consultanttablebody.on("blur", ".consultant-name-input", function() {
-      updateConsultantName(updateConsultantNameInDB);
+      BaseModule.changeName(updateConsultantNameInDB);
     });
 
     DOM.$consultanttablebody.on("keyup", ".consultant-name-input", function(e) {
@@ -38,8 +38,6 @@ var ConsultantModule = (function() {
       }
     });
   }
-
-  function updateConsultantName() {}
 
   function renderConsultant(consultant) {
     var $rowElement = $();
@@ -101,12 +99,7 @@ var ConsultantModule = (function() {
     dynamicData["role"] = DOM.$consultantroleinput.val();
     dynamicData["position"] = consultants.length + 1;
 
-    if (
-      dynamicData["name"] !== "" &&
-      dynamicData["role"] !== "" &&
-      isValid(dynamicData["name"]) &&
-      isValid(dynamicData["role"])
-    ) {
+    if (dynamicData["name"] !== "" && isValid(dynamicData["name"])) {
       consultants.each(function() {
         {
           if ($(this).attr("data-name") == dynamicData["name"]) {
@@ -173,11 +166,10 @@ var ConsultantModule = (function() {
 
   /* =================== public methods ================== */
   // main init method
-  function init(consultants, BaseModule) {
+  function init(consultants) {
     cacheDom();
     bindEvents();
     render(consultants);
-    updateConsultantName = BaseModule.changeName;
   }
 
   /* =============== export public methods =============== */
