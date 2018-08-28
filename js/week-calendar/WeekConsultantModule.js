@@ -160,11 +160,19 @@ var WeekConsultantModule = (function() {
   }
 
   function handleOfficeMenuClick($menuItem) {
-    var $allocationCol = {};
+    var $allocationCol = {},
+      allocation = {};
 
     $allocationCol = $(".clicked-allocation");
+    allocation["officestatus"] = $menuItem.attr("data-action");
 
-    $allocationCol.attr("data-office", $menuItem.attr("data-action"));
+    $allocationCol.attr("data-office", allocation["officestatus"]);
+
+    if (allocation["officestatus"] == 3) {
+      $allocationCol.html("");
+    } else {
+      $allocationCol.html(getAllocationDiv(allocation));
+    }
 
     updateAllocation($allocationCol);
   }
@@ -238,8 +246,6 @@ var WeekConsultantModule = (function() {
       consultantNamesString = "",
       clientWhoCol = {},
       x = 0;
-
-    console.log("updateClientWHoCAlled");
 
     clientID = $clientRow.attr("data-id");
     consultantNamesArray = getArrayOfConsultantNamesAllocatedToClient(clientID);
@@ -335,29 +341,32 @@ var WeekConsultantModule = (function() {
         )
     );
 
-    //append allocation columns
     var i = 0,
       $columnElement = {};
 
+    //append allocation columns
     for (i = 0; i < 10; i++) {
       var allocation = {};
 
       $columnElement = $("<td></td>")
         .attr("data-slot", i)
         .attr("data-office", 0)
+        .attr("data-id", 0)
+        .attr("data-colour", 0)
         .addClass("allocation-col table-bordered force-height");
-        //$columnElement.append(createAllocationDiv());
-        $columnElement.append($("<div></div>").addClass("colour-div"));
-        $columnElement.append($("<div></div>").addClass("client-div"));
-        $columnElement.append($("<div></div>").addClass("location-div")
-        .append($("<i></i>").addClass("fas fa-home home-icon"))  // ADD HOME ICON
-        .append($("<i></i>").addClass("fas fa-plane away-icon")  // ADD AWAY ICON
-        ));
+      //$columnElement.append(createAllocationDiv());
 
       allocation = getColumnAllocation(consultant["allocations"], i);
 
       if (allocation) {
-        $columnElement.attr("data-office", allocation["officestatus"]);
+        $columnElement
+          .attr("data-office", allocation["officestatus"])
+          .attr("data-colour", allocation["colour"]);
+        if (allocation["officestatus"] == 3) {
+          //Dont append a allocation div
+        } else {
+          $columnElement.append(getAllocationDiv(allocation));
+        }
       }
       $rowElement.append($columnElement);
     }
@@ -365,21 +374,49 @@ var WeekConsultantModule = (function() {
     $rowElement.append(
       $("<div></div>")
         .addClass("clear-consultant-row")
-        .append($("<div></div>").addClass("clear-consultant-container mx-auto my-auto")
-        .append($("<div></div>").addClass("last-updated").html(
-          "<i>Last Updated: <br>14:00 10/08</i>"
-        )
-        .append($("<div></div>")
         .append(
-          $("<i></i>").addClass(
-            "clear-consultant-btn clear-row-btn fas fa-minus-square fa-2x"
-          )
+          $("<div></div>")
+            .addClass("clear-consultant-container mx-auto my-auto")
+            .append(
+              $("<div></div>")
+                .addClass("last-updated")
+                .html("<i>Last Updated: <br>14:00 10/08</i>")
+                .append(
+                  $("<div></div>").append(
+                    $("<i></i>").addClass(
+                      "clear-consultant-btn clear-row-btn fas fa-minus-square fa-2x"
+                    )
+                  )
+                )
+            )
         )
-      )))
     );
 
     //Append row to consutlant table
     DOM.$consultantsTableBody.append($rowElement);
+  }
+
+  function getAllocationDiv(allocation) {
+    var colourDiv = {},
+      clientDiv = {},
+      locationDiv = {},
+      officeStatus = 0;
+
+    officeStatus = allocation["officestatus"];
+
+    colourDiv = $("<div></div>").addClass("colour-div");
+    clientDiv = $("<div></div>").addClass("client-div");
+    locationDiv = $("<div></div>").addClass("location-div");
+
+    if (officeStatus == 1) {
+      locationDiv.append($("<i></i>").addClass("fas fa-home home-icon")); // ADD HOME ICON
+    }
+
+    if (officeStatus == 2) {
+      locationDiv.append($("<i></i>").addClass("fas fa-plane away-icon")); // ADD AWAY ICON
+    }
+
+    return colourDiv.add(clientDiv).add(locationDiv);
   }
 
   function getColumnAllocation(allocations, slot) {

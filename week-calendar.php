@@ -33,7 +33,8 @@ if ($_SESSION['authentication'] != 1) {
     <ul id='officemenu' class='custom-menu '>
         <li data-action="0">Office</li>
         <li data-action="1">On-Site</li>
-        <li data-action="2">Leave</li>
+        <li data-action="2">From Home</li>
+        <li data-action="3">Leave</li>
     </ul>
     <ul id='clientmenu' class='custom-menu'>
         <li>Empty</li>
