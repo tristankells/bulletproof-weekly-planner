@@ -119,6 +119,9 @@ var ClientModule = (function() {
     $rowElement.append(
       $("<td></td>")
         .addClass("custom-dark-bg")
+        .css({
+          "text-align": "center"
+        })
         .html(client["abbreviation"])
     );
 

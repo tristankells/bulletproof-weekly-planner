@@ -16,6 +16,10 @@
   border: none;
 }
 
+#consultantstablebody > table, tr, td, th, tbody{
+  padding: 10px!important;
+}
+
 .consultant-name-input {
   background: #212529;
   border: none;
@@ -251,7 +255,7 @@ a:hover {
   font-family: Lato, sans-serif;
   font-size: 15px;
   font-weight: 400;
-  width: 15%;
+  width: 250px;
   letter-spacing: 1px;
   border: 1px solid black;
   background-color: white;
@@ -294,7 +298,10 @@ a:hover {
 .clear-consultant-row {
   width: 60px;
   height: 72px;
-  
+  line-height: 72px !important;
+  vertical-align: -webkit-baseline-middle !important;
+  text-align: center;
+  padding: auto;
 }
 
 .clear-consultant-container {
@@ -306,7 +313,6 @@ a:hover {
 }
 
 .clear-row-btn {
-  vertical-align: bottom;
   color: #212529;
 }
 
@@ -619,6 +625,7 @@ td {
 
 .manage-table {
   width: 100%;
+  padding-left: 50px;
 }
 
 .manage-table th {

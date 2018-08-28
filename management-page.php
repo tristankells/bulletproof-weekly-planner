@@ -63,7 +63,7 @@ if($_SESSION['authentication']!=1)
     <div class="container-fluid table-padding">
         <div class="row" id="maindiv">
             <div class="col-lg-6 col-md-6 col-sm-10 mx-auto">
-                <table class="manage-table mx-auto">
+                <table class="manage-table ml-5">
                     <thead>
                         <tr>
                             <th>NAME</th>
@@ -72,8 +72,10 @@ if($_SESSION['authentication']!=1)
                     </thead>
                     <tbody id="consultantstablebody"></tbody>
                 </table>
-                <button id="removeallconsultantsbutton">Click To Delete All Consultants</button>
-                <table class="add-consultant-table">
+                <div class="clear-button-container ml-2">
+                    <button id="removeallconsultantsbutton" class="clear-all-btn">Delete All Consultants</button>
+                </div>
+                <table class="add-consultant-table ml-5">
                     <tr>
                         <td class="input-row">
                             <input type="text" placeholder="Consultant Name..." id="consultantnameinput" />
@@ -87,16 +89,18 @@ if($_SESSION['authentication']!=1)
                     </tr>
                 </table>
 
-                <table class="manage-table mx-auto">
+                <table class="manage-table ml-5">
                     <thead>
-                        <th>NAME</th>
-                        <th>ABBREVIATION</th>
-                        <th>COLOUR</th>
+                        <th style="width: 60%;">Client</th>
+                        <th style="width: 20%; text-align: center;">Abbreviation</th>
+                        <th style="width: 20%;">Colour</th>
                     </thead>
                     <tbody id="clienttablebody"></tbody>
                 </table>
-                <button id="removeallclientsbutton">Click To Delete All Clients</button>
-                <table class="add-consultant-table">
+                <div class="clear-button-container ml-2">
+                    <button id="removeallclientsbutton" class="clear-all-btn">Delete All Clients</button>
+                </div>
+                <table class="add-consultant-table ml-5">
                     <tr>
                         <td>
                             <input type="text" placeholder="Client Name..." id="clientnameinput" />
