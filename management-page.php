@@ -35,7 +35,7 @@ if($_SESSION['authentication']!=1)
     </ul>
     <ul id='usermenu' class='custom-menu'>
         <li data-action="1">Logout</li>
-		<li data-action="2">something</li>
+		<li data-action="2">Reset Password</li>
     </ul>
 
     <div class="container-fluid">

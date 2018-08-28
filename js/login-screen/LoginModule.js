@@ -6,15 +6,18 @@ var LoginModule = (function() {
   /* =================== private methods ================= */
   // cache DOM elements
   function cacheDom() {
-    DOM.$loginForm = $(".login-form");
     DOM.$loginButton = $("#login-button");
     DOM.$emailInput = $("#email-input");
     DOM.$passwordInput = $("#password-input");
+    DOM.$loginForm = $("#login-form");
     DOM.$loginFormButton = $(".login-form-btn");
   }
   // bind events
   function bindEvents() {
-    DOM.$loginButton.click(handleLoginButtonClick);
+    DOM.$loginForm.submit(function(e) {
+      e.preventDefault(e);
+      handleLoginButtonClick();
+    });
 
     DOM.$loginFormButton.click(function() {
       animateLoginFormTransition(

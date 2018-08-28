@@ -668,3 +668,10 @@ table td {
 .transparent-bg {
   background-color: #434d57;
 }
+#resetPasswordDiv {
+  text-align: center;
+}
+
+#resetPasswordDiv > input {
+  margin: 20px;
+}

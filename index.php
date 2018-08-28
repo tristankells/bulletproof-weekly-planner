@@ -50,10 +50,12 @@ if(isset($_SESSION['authentication'])&&$_SESSION['authentication']==1)
                 </p>
             </div>
             <div class="login-form">
-                <input id='email-input' type="text" placeholder="email" />
-                <input id='password-input' type="password" placeholder="password" />
-                <button id='login-button'>Login</button>
-                <p class="message">Not registered?
+                <form id='login-form'>
+                    <input id='email-input' type="text" placeholder="email" />
+                    <input id='password-input' type="password" placeholder="password" />
+                    <button type='submit' id='login-button'>Login</button>
+                </form>
+                 <p class="message">Not registered?
                     <a class="register-form-btn" href="#">Create an account</a>
                 </p>
                 <p class="message">Forgot password?
