@@ -65,9 +65,10 @@ body {
 
 .allocation-col {
   text-align: center;
-  vertical-align: middle !important;
   font-weight: 400;
   letter-spacing: 1px;
+  width: 200px;
+  max-width: 200px;
 }
 
 .allocation-col:hover {
@@ -138,8 +139,8 @@ a:hover {
 .consultant-header {
   font-family: Lato, Arial;
   vertical-align: -webkit-baseline-middle;
-  max-width: 200px;
-  width: 200px;
+  max-width: 300px;
+  width: 300px;
   font-size: 17px;
   background-color: #212529;
   color: white;
@@ -274,21 +275,26 @@ a:hover {
 }
 
 .clear-all-btn:hover {
-  background-color: red;
+  background-color: rgb(197, 46, 46);
   color: white;
   cursor: pointer;
-  border: 1px solid red;
+  border: 1px solid rgb(197, 46, 46);
 }
 
 /* Remove buttons */
 
 .clear-consultant-row {
-  width: 20px;
-  height: 60px;
-  padding-top: 45%;
-  padding-bottom: 45%;
-  padding-left: 10px;
-  display: inline-block;
+  width: 60px;
+  height: 72px;
+  
+}
+
+.clear-consultant-container {
+  width: 100%;
+  height: 100%;
+  padding: 10%;
+  text-align: left;
+  vertical-align: middle;
 }
 
 .clear-row-btn {
@@ -297,7 +303,7 @@ a:hover {
 }
 
 .clear-row-btn:hover {
-  color: red;
+  color: rgb(197, 46, 46);
   cursor: pointer;
 }
 
@@ -632,29 +638,57 @@ td {
 }
 
 .client-label-gray {
-  background-color: gray;
+  background-color: rgb(114, 114, 114);
 }
 
 .force-height{
-  height: 1px;
+  height: 0.01px;
 }
 
-.full-width-cus {
+.colour-div {
+  display: inline-block;
+  width: 10%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+  background-color: rgb(218, 137, 137);
+}
+
+.client-div {
+  display: inline-block;
+  width: 70%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+  background-color: rgb(255, 255, 255);
+}
+
+.location-div {
+  position: relative;
+  display: inline-block;
   width: 20%;
   height: 100%;
   padding: 0px;
   margin: 0px;
+  background-color: rgb(255, 255, 255);
 }
 
-.full-width-cus2 {
-  width: 20%;
-  height: 100%;
-  padding: 0px;
-  margin: 0px;
+.home-icon {
+    position: absolute;
+    top: 4px;
+    right: 3px;
+    color: rgb(187, 187, 187);
+}
+
+.away-icon {
+    position: absolute;
+    bottom: 8px;
+    right: 1px;
+    color: rgb(187, 187, 187);
 }
 
 table td {
-  padding: 0 !important;
+  padding: 0px !important;
 }
 .custom-dark-bg input:hover {
   background-color: rgb(255, 226, 231);
@@ -662,7 +696,7 @@ table td {
 }
 
 .red-text {
-  color: red !important;
+  color: rgb(197, 46, 46) !important;
 }
 
 .transparent-bg {
@@ -674,4 +708,11 @@ table td {
 
 #resetPasswordDiv > input {
   margin: 20px;
+}
+
+.last-updated {
+  width: inherit;
+  height: 20px;
+  font-size: 8px;
+  color: rgb(206, 206, 206);
 }

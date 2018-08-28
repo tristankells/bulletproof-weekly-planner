@@ -341,8 +341,14 @@ var WeekConsultantModule = (function() {
       $columnElement = $("<td></td>")
         .attr("data-slot", i)
         .attr("data-office", 0)
-        .addClass("allocation-col table-bordered force-height"); //UNCOMMENT
-        $columnElement.append(createAllocationDiv());
+        .addClass("allocation-col table-bordered force-height");
+        //$columnElement.append(createAllocationDiv());
+        $columnElement.append($("<div></div>").addClass("colour-div"));
+        $columnElement.append($("<div></div>").addClass("client-div"));
+        $columnElement.append($("<div></div>").addClass("location-div")
+        .append($("<i></i>").addClass("fas fa-home home-icon"))  // ADD HOME ICON
+        .append($("<i></i>").addClass("fas fa-plane away-icon")  // ADD AWAY ICON
+        ));
 /*
       var x = 0,
         allocation = {};
@@ -368,12 +374,17 @@ var WeekConsultantModule = (function() {
     $rowElement.append(
       $("<div></div>")
         .addClass("clear-consultant-row")
-
+        .append($("<div></div>").addClass("clear-consultant-container mx-auto my-auto")
+        .append($("<div></div>").addClass("last-updated").html(
+          "<i>Last Updated: <br>14:00 10/08</i>"
+        )
+        .append($("<div></div>")
         .append(
           $("<i></i>").addClass(
             "clear-consultant-btn clear-row-btn fas fa-minus-square fa-2x"
           )
         )
+      )))
     );
 
     //Append row to consutlant table
@@ -382,26 +393,19 @@ var WeekConsultantModule = (function() {
 
   // Create allocation column div
   function createAllocationDiv(){
+
     var allocationDiv = "";
-    var locationStatusDiv = "";
+    var colourDiv = "";
+    var clientDiv = "";
+    var locationDiv = "";
 
+    colourDiv=$("<div></div>").addClass("colour-div");
+    clientDiv=$("<div></div>").addClass("client-div");
+    locationDiv=$("<div></div>").addClass("location-div");
 
-    locationStatusDiv = $("<div></div>").addClass("col-sm-2"); //Container to hold away and office icons
-    locationStatusDiv.append($("<div></div>").addClass("row add-forced-height"));
-    locationStatusDiv.append($("<div></div>").addClass("col-xs-12 client-label-red"));
-    locationStatusDiv.append($("<div></div>").addClass("row add-forced-height"));
-    locationStatusDiv.append($("<div></div>").addClass("col-xs-12 client-label-green"));
+    colourDiv.add(clientDiv).add(locationDiv);
 
-
-    allocationDiv=$("<div></div>").addClass("full-width-cus client-label-gray");
-    
-    /*
-    allocationDiv.append($("<div></div>").addClass("col-sm-2 client-label-yellow"));
-    allocationDiv.append($("<div></div>").addClass("col-sm-8 client-label-blue"));
-
-    //allocationDiv.append(locationStatusDiv);    */
-
-    return allocationDiv;
+    return colourDiv;
   }
 
   // render DOM

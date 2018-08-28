@@ -99,6 +99,10 @@ if ($_SESSION['authentication'] != 1) {
                     </tbody>
                 </table>
                 <div class="clear-button-container">
+                    <!--
+                        <div><p><small>Last Updated<br>10/02/18 14:00</small></p></div>
+                        -->
+
                     <button id="resetallocationbutton" class="clear-all-btn">CLEAR TABLE
                         <i class="remove-add-btn fas fa-trash-alt"></i>
                     </button>
