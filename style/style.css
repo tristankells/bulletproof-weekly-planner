@@ -664,3 +664,7 @@ table td {
 .red-text {
   color: red !important;
 }
+
+.transparent-bg {
+  background-color: #434d57;
+}

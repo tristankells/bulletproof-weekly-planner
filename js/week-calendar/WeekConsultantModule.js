@@ -94,12 +94,14 @@ var WeekConsultantModule = (function() {
 
   //Highlight the name of the consultant when mouse enter consultant row
   function handleMouseEnteringConsultantRow($consultantRow) {
-    $consultantRow.find(".consultant-header").addClass("red-text");
+    $consultantRow.find(".consultant-header").addClass("transparent-bg");
+    $consultantRow.find(".consultant-name-input").addClass("transparent-bg");
   }
 
   //Remove the highlight added to consultant row name when mouse leaves row
   function handleMouseLeavingConsultantRow($consultantRow) {
-    $consultantRow.find(".consultant-header").removeClass("red-text");
+    $consultantRow.find(".consultant-header").removeClass("transparent-bg");
+    $consultantRow.find(".consultant-name-input").removeClass("transparent-bg");
   }
 
   function handlePositionChange($tableBody) {
