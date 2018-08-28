@@ -210,7 +210,9 @@ var WeekConsultantModule = (function() {
 
     updateClientsWhoCols();
 
-    updateAllocationInDB(dynamicData).done(function() {});
+    updateAllocationInDB(dynamicData).done(function(data) {
+      alert(data);
+    });
   }
 
   function updateConsultantPositions() {
@@ -338,30 +340,20 @@ var WeekConsultantModule = (function() {
       $columnElement = {};
 
     for (i = 0; i < 10; i++) {
+      var allocation = {};
+
       $columnElement = $("<td></td>")
         .attr("data-slot", i)
         .attr("data-office", 0)
+        .attr("data-id", 0)
         .addClass("allocation-col table-bordered force-height"); //UNCOMMENT
-        $columnElement.append(createAllocationDiv());
-/*
-      var x = 0,
-        allocation = {};
-      for (x in consultant["allocations"]) {
-        allocation = consultant["allocations"][x];
-        if (allocation["allocationslot"] == i) {
-          $columnElement.html(allocation["abbreviation"]);
-          $columnElement.attr("data-id", allocation["id"]);
-          switch (allocation["officestatus"]) {
-            case "1":
-              $columnElement.attr("data-office", 1);
-              break;
-            case "2":
-              $columnElement.attr("data-office", 2);
-              break;
-          }
-        }
+      $columnElement.append(createAllocationDiv());
+
+      allocation = getColumnAllocation(consultant["allocations"], i);
+
+      if (allocation) {
+        $columnElement.attr("data-office", allocation["officestatus"]);
       }
-      */
       $rowElement.append($columnElement);
     }
 
@@ -381,20 +373,28 @@ var WeekConsultantModule = (function() {
   }
 
   // Create allocation column div
-  function createAllocationDiv(){
+  function createAllocationDiv() {
     var allocationDiv = "";
     var locationStatusDiv = "";
 
-
     locationStatusDiv = $("<div></div>").addClass("col-sm-2"); //Container to hold away and office icons
-    locationStatusDiv.append($("<div></div>").addClass("row add-forced-height"));
-    locationStatusDiv.append($("<div></div>").addClass("col-xs-12 client-label-red"));
-    locationStatusDiv.append($("<div></div>").addClass("row add-forced-height"));
-    locationStatusDiv.append($("<div></div>").addClass("col-xs-12 client-label-green"));
+    locationStatusDiv.append(
+      $("<div></div>").addClass("row add-forced-height")
+    );
+    locationStatusDiv.append(
+      $("<div></div>").addClass("col-xs-12 client-label-red")
+    );
+    locationStatusDiv.append(
+      $("<div></div>").addClass("row add-forced-height")
+    );
+    locationStatusDiv.append(
+      $("<div></div>").addClass("col-xs-12 client-label-green")
+    );
 
+    allocationDiv = $("<div></div>").addClass(
+      "full-width-cus client-label-gray"
+    );
 
-    allocationDiv=$("<div></div>").addClass("full-width-cus client-label-gray");
-    
     /*
     allocationDiv.append($("<div></div>").addClass("col-sm-2 client-label-yellow"));
     allocationDiv.append($("<div></div>").addClass("col-sm-8 client-label-blue"));
@@ -402,6 +402,17 @@ var WeekConsultantModule = (function() {
     //allocationDiv.append(locationStatusDiv);    */
 
     return allocationDiv;
+  }
+
+  function getColumnAllocation(allocations, slot) {
+    var allocation = {};
+    for (x in allocations) {
+      allocation = allocations[x];
+      if (allocation["allocationslot"] == slot) {
+        return allocation;
+      }
+    }
+    return false;
   }
 
   // render DOM
