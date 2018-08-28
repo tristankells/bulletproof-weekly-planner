@@ -53,6 +53,7 @@ if ($result->num_rows > 0) {
         $query = "SELECT
         client.abbreviation,
         client.id,
+        client.colour,
         allocation.allocation_slot,
         allocation.office_status
         FROM allocation
@@ -68,6 +69,7 @@ if ($result->num_rows > 0) {
                 $allocation = [
                     "id"  => $allocationRow['id'],
                     "abbreviation" => $allocationRow['abbreviation'],
+                    "colour" => $allocationRow['colour'],
                     "allocationslot" => $allocationRow['allocation_slot'],
                     "officestatus" => $allocationRow['office_status'],
                 ];

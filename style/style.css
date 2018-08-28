@@ -443,13 +443,13 @@ nav.shift ul li a:hover:after {
   background-color: white;
 }
 
-[data-office="2"] {
+[data-office="3"] {
   background: repeating-linear-gradient(
     45deg,
-    #606dbc,
-    #606dbc 10px,
-    #465298 10px,
-    #465298 20px
+    #e2e2e2,
+    #e2e2e2 10px,
+    #b3b2b2 10px,
+    #b3b2b2 20px
   );
 }
 
@@ -474,6 +474,30 @@ nav.shift ul li a:hover:after {
 }
 
 [data-colour="5"] > td.color-col {
+  background-color: rgb(133, 33, 199);
+}
+
+[data-office="0"] > .colour-div {
+  background-color: rgb(226, 13, 216);
+}
+
+[data-colour="1"] > .colour-div {
+  background-color: rgb(216, 134, 212);
+}
+
+[data-colour="2"] > .colour-div {
+  background-color: rgb(235, 152, 45);
+}
+
+[data-colour="3"] > .colour-div {
+  background-color: rgb(45, 58, 194);
+}
+
+[data-colour="4"] > .colour-div {
+  background-color: rgb(203, 42, 42);
+}
+
+[data-colour="5"] > .colour-div {
   background-color: rgb(133, 33, 199);
 }
 
