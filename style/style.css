@@ -125,7 +125,7 @@ a:hover {
 .consultant-info-format {
   display: inline-block;
   width: 90%;
-  padding: 0;
+  padding: 0.75rem !important;
 }
 
 .rolediv {
@@ -179,9 +179,9 @@ a:hover {
 @media only screen and (max-width: 426px) {
   .allocation-col {
     font-size: 10px;
-    width: 20px !important;
+    width: 20px;
     height: inherit;
-    padding: 2px !important;
+    padding: 2px;
   }
 
   td,
@@ -403,11 +403,6 @@ nav.shift ul li a:hover:after {
   text-align: center;
 }
 
-tbody > tr {
-  height: 60px;
-  font-size: 14px;
-}
-
 #managePage tr {
   font-size: 110%;
 }
@@ -485,9 +480,6 @@ input {
   for the size of your initial circle*/
   width: 20px;
   padding: 10px;
-  /*make it pretty*/
-  /*background: #000;
-  color: #f9f9f9; */
   border-style: solid;
   border-color: #9a9da0;
   border-width: thin;
@@ -497,10 +489,6 @@ input {
 
 #clientstable {
   width: 70%;
-}
-
-#clientstable th, tr, td {
-  padding: 14px;
 }
 
 /* Month view layout */
@@ -549,11 +537,6 @@ input {
   #clienttable {
     width: 100%;
   }
-}
-
-#clienttable th, td {
-  vertical-align: middle;
-  padding: 15px !important;
 }
 
 /* Manage page layout */
@@ -613,7 +596,50 @@ input {
   color: white;
 }
 
-.custom-dark-bg input:hover {
-  background-color: rgb(255, 226, 231);
-  color: black;
+.custom-dark-bg input:hover, input:focus {
+  background-color: rgb(255, 242, 242) !important;
+  color: rgb(0, 0, 0);
+}
+/* TESTING FOR WEEK VIEW */
+
+.client-label-red {
+  background-color: red;
+}
+
+.client-label-green {
+  background-color: green;
+}
+
+.client-label-blue {
+  background-color: blue;
+}
+
+.client-label-yellow {
+  background-color: yellow;
+}
+
+.client-label-gray {
+  background-color: gray;
+}
+
+.force-height{
+  height: 1px;
+}
+
+.full-width-cus {
+  width: 20%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+
+.full-width-cus2 {
+  width: 20%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+
+table td {
+  padding: 0 !important;
 }

@@ -218,15 +218,15 @@ var WeekConsultantModule = (function() {
 
     //append allocation columns
     var i = 0,
-      $columnElement = {},
-      $allocationDiv = {};
+      $columnElement = {};
 
     for (i = 0; i < 10; i++) {
       $columnElement = $("<td></td>")
         .attr("data-slot", i)
         .attr("data-office", 0)
-        .addClass("allocation-col table-bordered");
-
+        .addClass("allocation-col table-bordered force-height"); //UNCOMMENT
+        $columnElement.append(createAllocationDiv());
+/*
       var x = 0,
         allocation = {};
       for (x in consultant["allocations"]) {
@@ -244,9 +244,7 @@ var WeekConsultantModule = (function() {
           }
         }
       }
-
-      $columnElement.append($allocationDiv);
-
+      */
       $rowElement.append($columnElement);
     }
 
@@ -263,6 +261,30 @@ var WeekConsultantModule = (function() {
 
     //Append row to consutlant table
     DOM.$consultantsTableBody.append($rowElement);
+  }
+
+  // Create allocation column div
+  function createAllocationDiv(){
+    var allocationDiv = "";
+    var locationStatusDiv = "";
+
+
+    locationStatusDiv = $("<div></div>").addClass("col-sm-2"); //Container to hold away and office icons
+    locationStatusDiv.append($("<div></div>").addClass("row add-forced-height"));
+    locationStatusDiv.append($("<div></div>").addClass("col-xs-12 client-label-red"));
+    locationStatusDiv.append($("<div></div>").addClass("row add-forced-height"));
+    locationStatusDiv.append($("<div></div>").addClass("col-xs-12 client-label-green"));
+
+
+    allocationDiv=$("<div></div>").addClass("full-width-cus client-label-gray");
+    
+    /*
+    allocationDiv.append($("<div></div>").addClass("col-sm-2 client-label-yellow"));
+    allocationDiv.append($("<div></div>").addClass("col-sm-8 client-label-blue"));
+
+    //allocationDiv.append(locationStatusDiv);    */
+
+    return allocationDiv;
   }
 
   // render DOM
