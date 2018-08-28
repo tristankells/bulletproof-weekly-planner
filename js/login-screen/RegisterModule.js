@@ -77,7 +77,7 @@ var RegisterModule = (function() {
   /* =================== private AJAX methods ================= */
 
   function attemptRegisterNewUser(dynamicData) {
-    return $.post("php/register.php", {dynamicData : dynamicData});
+    return $.post("php/user-profile/register.php", {dynamicData : dynamicData});
   }
 
   /* =================== public methods ================== */

@@ -1,7 +1,7 @@
 <?php
 
 //Required to retrieve $conn variable used to connect the application database
-require_once 'database.php'
+require_once '../database.php';
 ;
 //Store the consultant ID, client name and the day/time of the client allocation
 
@@ -10,7 +10,7 @@ foreach ($_POST["positions"] as $position) {
 
     $id = $position[0];
     $newPosition = $position[1];
-    $query = "UPDATE consultant SET board_position = $newPosition WHERE id = $id";
+    $query = "UPDATE client SET board_position = $newPosition WHERE id = $id";
 
 //Run query on connection
     $result = $conn->query($query);

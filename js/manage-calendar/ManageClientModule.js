@@ -6,31 +6,36 @@ var ClientModule = (function() {
   /* =================== private methods ================= */
   // cache DOM elements
   function cacheDom() {
-    DOM.$clientstablebody = $("#clientstablebody");
+    DOM.$clienttablebody = $("#clienttablebody");
     DOM.$clientnameinput = $("#clientnameinput");
     DOM.$clientabbreviationinput = $("#clientabbreviationinput");
     DOM.$addclientbutton = $("#addclientbutton");
     DOM.$document = $(document);
     DOM.$colourmenu = $(".colour-menu");
+    DOM.$removeAllClientsButton = $("#removeallclientsbutton");
   }
 
   // bind events
   function bindEvents() {
     DOM.$addclientbutton.click(addClient);
 
-    DOM.$clientstablebody.on("click", ".remove-client-btn", deleteClient);
+    DOM.$clienttablebody.on("click", ".remove-client-btn", function(e) {
+      if (confirm("Press OK to delete client information")) {
+        deleteClient($(e.target).closest("tr"));
+      }
+    });
 
-    DOM.$clientstablebody.on("blur", ".client-name-input", function() {
+    DOM.$clienttablebody.on("blur", ".client-name-input", function() {
       updateClientName(updateClientNameInDB);
     });
 
-    DOM.$clientstablebody.on("keyup", ".client-name-input", function(e) {
+    DOM.$clienttablebody.on("keyup", ".client-name-input", function(e) {
       if (e.keyCode === 13) {
         this.blur();
       }
     });
 
-    DOM.$clientstablebody.on("click", ".color-col", handleColourColClick);
+    DOM.$clienttablebody.on("click", ".color-col", handleColourColClick);
 
     DOM.$colourmenu.on("click", "li", handleColourItemClick);
 
@@ -38,6 +43,12 @@ var ClientModule = (function() {
       if (!$(e.target).parents(".custom-menu").length > 0) {
         $(".clicked-client").removeClass("clicked-client");
         $(".custom-menu").hide(100);
+      }
+    });
+
+    DOM.$removeAllClientsButton.click(function() {
+      if (confirm("Press OK to delete all client information")) {
+        deleteAllClients();
       }
     });
   }
@@ -95,38 +106,44 @@ var ClientModule = (function() {
 
     //Add client name colunm
     $rowElement.append(
-      $("<td></td>").addClass("custom-dark-bg").append(
-        $("<input></input>")
-          .addClass("client-name-input")
-          .val(client["full_name"])
-      )
+      $("<td></td>")
+        .addClass("custom-dark-bg")
+        .append(
+          $("<input></input>")
+            .addClass("client-name-input")
+            .val(client["full_name"])
+        )
     );
 
     //Add client abbreviation colunm
-    $rowElement.append($("<td></td>").addClass("custom-dark-bg").html(client["abbreviation"]));
+    $rowElement.append(
+      $("<td></td>")
+        .addClass("custom-dark-bg")
+        .html(client["abbreviation"])
+    );
 
     //INSERT CUSTOM ICON
     $rowElement.append(
       $("<td></td>")
-        .html(client["colour"])
         .addClass("color-col")
     );
 
     //Add remove client button
-    
+
     $rowElement.append(
       $("<div></div>")
         .addClass("clear-consultant-row")
 
         .append(
-          $("<i></i>").addClass(
-            "remove-client-btn fas fa-minus-square fa-2x clear-row-btn"
-          )
-          .attr("data-id", client["id"])
+          $("<i></i>")
+            .addClass(
+              "remove-client-btn fas fa-minus-square fa-2x clear-row-btn"
+            )
+            .attr("data-id", client["id"])
         )
     );
 
-    DOM.$clientstablebody.append($rowElement);
+    DOM.$clienttablebody.append($rowElement);
   }
 
   // render clients to dom DOM
@@ -138,7 +155,7 @@ var ClientModule = (function() {
   }
 
   function isValid(str) {
-	  return !/[\W]/.test(str);
+    return /^[a-z\d\-_\s]+$/i.test(str);
   }
   /* 
   function : addClient
@@ -154,7 +171,7 @@ var ClientModule = (function() {
       abbreviationUnique = true,
       dynamicData = {};
 
-    clients = DOM.$clientstablebody.find("tr");
+    clients = DOM.$clienttablebody.find("tr");
 
     dynamicData["name"] = DOM.$clientnameinput.val();
     dynamicData[
@@ -162,7 +179,12 @@ var ClientModule = (function() {
     ] = DOM.$clientabbreviationinput.val().toUpperCase();
     dynamicData["position"] = clients.length + 1;
 
-    if (dynamicData["name"] !== "" && dynamicData["abbreviation"] !== "" && isValid(dynamicData["name"]) && isValid(dynamicData["abbreviation"])) {
+    if (
+      dynamicData["name"] !== "" &&
+      dynamicData["abbreviation"] !== "" &&
+      isValid(dynamicData["name"]) &&
+      isValid(dynamicData["abbreviation"])
+    ) {
       clients.each(function() {
         {
           if ($(this).attr("data-name") == dynamicData["name"]) {
@@ -201,45 +223,47 @@ var ClientModule = (function() {
   Takes no parameters. Delete parent client of a clicked remove client button. 
   */
 
-  function deleteClient() {
-    if (confirm("Press OK to delete client information")) {
-      var clientRow = {},
-        dynamicData = {};
+  function deleteClient($clientRow) {
+    var dynamicData = {};
 
-      clientRow = $(event.target).closest("tr");
-      dynamicData["id"] = clientRow.attr("data-id");
-      dynamicData["abbreviation"] = clientRow.attr("data-abbreviation");
-      dynamicData["name"] = clientRow.attr("data-name");
+    dynamicData["id"] = $clientRow.attr("data-id");
 
-      //Ajax function to remove from database
-      deleteClientFromDB(dynamicData).done(function() {
-        clientRow.remove(); //Remove the closest table row to the button
-      });
-    }
+    //Ajax function to remove from database
+    deleteClientFromDB(dynamicData).done(function() {
+      $clientRow.remove(); //Remove the closest table row to the button
+    });
+  }
+
+  function deleteAllClients() {
+    var $clientRows;
+    $clientRows = DOM.$clienttablebody.find("tr");
+    $clientRows.each(function() {
+      deleteClient($(this));
+    });
   }
 
   /* ================= private AJAX methods =============== */
   function updateClientNameInDB(dynamicData) {
-    return $.post("php/updateClientName.php", {
+    return $.post("php/clients/updateClientName.php", {
       dynamicData: dynamicData
     });
   }
 
   function updateClientColourInDB(dynamicData) {
-    return $.post("php/updateClientColour.php", {
+    return $.post("php/clients/updateClientColour.php", {
       dynamicData: dynamicData
     });
   }
 
   function addClientToDB(dynamicData) {
-    return $.post("php/addNewClient.php", {
+    return $.post("php/clients/addNewClient.php", {
       dynamicData: dynamicData
     });
   }
 
   function deleteClientFromDB(dynamicData) {
     return $.post(
-      "php/removeClient.php", //Request data from server using POST, url is removeClient.php
+      "php/clients/removeClient.php", //Request data from server using POST, url is removeClient.php
       {
         dynamicData: dynamicData
       }

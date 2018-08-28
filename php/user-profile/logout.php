@@ -1,4 +1,5 @@
 <?php
+require_once '../database.php';
 session_start();
 
 // Unset all of the session variables.

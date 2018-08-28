@@ -1,6 +1,6 @@
 <?php
 // Include config file
-require_once 'database.php';
+require_once '../database.php';
 
 // Define varaible and initilaise with empty values
 $dynamicData = "";

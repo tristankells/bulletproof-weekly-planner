@@ -56,6 +56,50 @@ var WeekConsultantModule = (function() {
     DOM.$resetAllocationsButton.on("click", function() {
       handleClearAllAllocationsClick();
     });
+
+    DOM.$consultantsTableBody.on("mouseenter", "tr", function() {
+      handleMouseEnteringConsultantRow($(this));
+    });
+
+    DOM.$consultantsTableBody.on("mouseleave", "tr", function() {
+      handleMouseLeavingConsultantRow($(this));
+    });
+
+    DOM.$consultantsTableBody.on("mouseenter", ".allocation-col", function() {
+      handleMouseEnteringAllocation($(this));
+    });
+
+    DOM.$consultantsTableBody.on("mouseleave", ".allocation-col", function() {
+      handleMouseLeavingAllocation($(this));
+    });
+  }
+
+  //Takes a allocation TD. Highlights the matching day and time.
+  function handleMouseEnteringAllocation($allocationCol) {
+    var allocationSlot = 0,
+      $dateSubheadings = $(),
+      $dates = $();
+
+    allocationSlot = $allocationCol.attr("data-slot");
+    $dates = $(".date");
+    $dateSubheadings = $(".date-subheading").find("th:not(:empty)");
+
+    $dateSubheadings.eq(allocationSlot).addClass("red-text");
+    $dates.eq(Math.floor(allocationSlot / 2)).addClass("red-text");
+  }
+
+  function handleMouseLeavingAllocation() {
+    $("th").removeClass("red-text");
+  }
+
+  //Highlight the name of the consultant when mouse enter consultant row
+  function handleMouseEnteringConsultantRow($consultantRow) {
+    $consultantRow.find(".consultant-header").addClass("red-text");
+  }
+
+  //Remove the highlight added to consultant row name when mouse leaves row
+  function handleMouseLeavingConsultantRow($consultantRow) {
+    $consultantRow.find(".consultant-header").removeClass("red-text");
   }
 
   function handlePositionChange($tableBody) {
@@ -162,9 +206,9 @@ var WeekConsultantModule = (function() {
     //Removed the clicked allocation class
     $(".clicked-allocation").removeClass("clicked-allocation");
 
-    updateAllocationInDB(dynamicData).done(function() {
-      updateClientsWhoCols();
-    });
+    updateClientsWhoCols();
+
+    updateAllocationInDB(dynamicData).done(function() {});
   }
 
   function updateConsultantPositions() {
@@ -176,6 +220,77 @@ var WeekConsultantModule = (function() {
     });
     //AJAX request to update consultant positions
     updateConsultantPositionsInDB(positions).done(function() {});
+  }
+
+  function updateClientsWhoCols() {
+    $("#clienttablebody > tr").each(function() {
+      updateClientWhoCol($(this));
+    });
+  }
+
+  function updateClientWhoCol($clientRow) {
+    var clientID = 0,
+      consultantNamesArray = [],
+      consultantNamesString = "",
+      clientWhoCol = {},
+      x = 0;
+
+    console.log("updateClientWHoCAlled");
+
+    clientID = $clientRow.attr("data-id");
+    consultantNamesArray = getArrayOfConsultantNamesAllocatedToClient(clientID);
+    clientWhoCol = $clientRow.find(".who-column");
+
+    for (x in consultantNamesArray) {
+      consultantNamesString += consultantNamesArray[x];
+      if (consultantNamesArray.length > 1) {
+        if (x < consultantNamesArray.length - 1) consultantNamesString += ", ";
+        {
+        }
+      }
+    }
+
+    clientWhoCol.html(consultantNamesString);
+  }
+
+  function getArrayOfConsultantNamesAllocatedToClient(clientID) {
+    var consultantNames = [],
+      $consultanRow = {},
+      consultantName = {};
+
+    $("#consultantstablebody > tr").each(function() {
+      $consultanRow = $(this);
+      if (checkConsultantAllocatedToClient(clientID, $consultanRow)) {
+        consultantName = $consultanRow.attr("data-name");
+
+        consultantNames.push(consultantName);
+      }
+    });
+
+    return consultantNames;
+  }
+
+  function checkConsultantAllocatedToClient(clientID, $consultantRow) {
+    var clientIDs = [],
+      allocated = false;
+
+    clientIDs = consulatantRowToClientIDArray($consultantRow);
+    for (x in clientIDs) {
+      if (clientID == clientIDs[x]) {
+        allocated = true;
+      }
+    }
+    return allocated;
+  }
+
+  function consulatantRowToClientIDArray($consultantRow) {
+    var clientIDs = [];
+
+    $consultantRow.find(".allocation-col[data-id]").each(function() {
+      clientIDs.push($(this).attr("data-id"));
+    });
+
+    return clientIDs;
   }
 
   function renderConsultant(consultant) {
@@ -296,106 +411,49 @@ var WeekConsultantModule = (function() {
     }
   }
 
+  function renderPlaceHolderText() {
+    var $placeholderRow = $();
+
+    $placeholderRow = $("<tr></tr>").html(
+      "To add consultants, pleasse go navigate to the manage page"
+    );
+    DOM.$consultantsTableBody.append($placeholderRow);
+  }
+
   /* ================= private AJAX methods =============== */
   function updateConsultantPositionsInDB(positions) {
-    return $.post("php/updateConsultantPositions.php", {
+    return $.post("php/consultants/updateConsultantPositions.php", {
       positions: positions
     });
   }
 
   function updateAllocationInDB(dynamicData) {
-    return $.post("php/updateAllocation.php", {
+    return $.post("php/consultants/updateAllocation.php", {
       dynamicData: dynamicData
     });
   }
 
   function clearAllAllocationsInDB() {
-    return $.get("php/removeAllAllocations.php");
+    return $.get("php/consultants/removeAllAllocations.php");
   }
 
   function clearConsutlantAllocationsIDB(id) {
-    return $.post("php/removeConsultantAllocations.php", { id: id });
-  }
-
-  function updateClientsWhoCols() {
-    $("#clienttablebody > tr").each(function() {
-      updateClientWhoCol($(this));
+    return $.post("php/consultants/removeConsultantAllocations.php", {
+      id: id
     });
-  }
-
-  function updateClientWhoCol($clientRow) {
-    var clientID = 0,
-      consultantNamesArray = [],
-      consultantNamesString = "",
-      clientWhoCol = {},
-      x = 0;
-
-    clientID = $clientRow.attr("data-id");
-    consultantNamesArray = getArrayOfConsultantNamesAllocatedToClient(clientID);
-
-    if (consultantNamesArray.length > 0) {
-      clientWhoCol = $clientRow.find(".who-column");
-      for (x in consultantNamesArray) {
-        consultantNamesString += consultantNamesArray[x];
-        if (consultantNamesArray.length > 1) {
-          if (x < consultantNamesArray.length - 1)
-            consultantNamesString += ", ";
-          {
-          }
-        }
-      }
-
-      clientWhoCol.html(consultantNamesString);
-    }
-  }
-
-  function getArrayOfConsultantNamesAllocatedToClient(clientID) {
-    var consultantNames = [],
-      $consultanRow = {},
-      consultantName = {};
-
-    $("#consultantstablebody > tr").each(function() {
-      $consultanRow = $(this);
-      if (checkConsultantAllocatedToClient(clientID, $consultanRow)) {
-        consultantName = $consultanRow.attr("data-name");
-        consultantNames.push(consultantName);
-      }
-    });
-
-    return consultantNames;
-  }
-
-  function checkConsultantAllocatedToClient(clientID, $consultantRow) {
-    var clientIDs = [],
-      allocated = false;
-
-    clientIDs = consulatantRowToClientIDArray($consultantRow);
-    for (x in clientIDs) {
-      if (clientID == clientIDs[x]) {
-        allocated = true;
-      }
-    }
-
-    return allocated;
-  }
-
-  function consulatantRowToClientIDArray($consultantRow) {
-    var clientIDs = [];
-
-    $consultantRow.find(".allocation-col[data-id]").each(function() {
-      clientIDs.push($(this).attr("data-id"));
-    });
-
-    return clientIDs;
   }
 
   /* =================== public methods ================== */
   // main init method
   function init(consultants) {
     cacheDom();
-    bindEvents();
-    render(consultants);
-    updateClientsWhoCols();
+    if (consultants.length > 0) {
+      bindEvents();
+      render(consultants);
+      updateClientsWhoCols();
+    } else {
+      renderPlaceHolderText();
+    }
   }
 
   /* =============== export public methods =============== */

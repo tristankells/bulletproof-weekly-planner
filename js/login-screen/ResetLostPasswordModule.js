@@ -44,7 +44,7 @@ var ResetLostPasswordModule = (function() {
   /* =================== private AJAX methods ================= */
 
   function resetPasswordDB(email) {
-    return $.post("php/forgottenPassword.php", { email: email });
+    return $.post("php/user-profile/forgottenPassword.php", { email: email });
   }
 
   /* =================== public methods ================== */
