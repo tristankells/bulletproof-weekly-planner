@@ -84,9 +84,6 @@ body {
 }
 
 .allocation-col:hover {
-  background-color: #212529;
-  color: white;
-  font-weight: 900;
   cursor: pointer;
 }
 
@@ -423,7 +420,6 @@ nav.shift ul li a:hover:after {
   cursor: pointer;
   transform: rotate(180deg);
   -webkit-transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1);
-  color: rgb(197, 46, 46);
 }
 
 #linksAndLogo {
@@ -497,55 +493,43 @@ nav.shift ul li a:hover:after {
     #b3b2b2 20px
   );
 }
+/* Week calendar colours */
 
-[data-office="0"] > td.color-col {
-  background-color: white;
+[data-colour="0"] > td.color-col, [data-colour="0"] > .colour-div {
+  background-color: white; /* DEFAULT */
 }
 
-[data-colour="1"] > td.color-col {
-  background-color: rgb(24, 133, 22);
+[data-colour="1"] > td.color-col, [data-colour="1"] >  .colour-div {
+  background-color:#9bcb9e; /* GREEN */
 }
 
-[data-colour="2"] > td.color-col {
-  background-color: rgb(235, 152, 45);
+[data-colour="2"] > td.color-col, [data-colour="2"] >  .colour-div {
+  background-color: #e5c691; /* ORANGE */
 }
 
-[data-colour="3"] > td.color-col {
-  background-color: rgb(19, 36, 214);
+[data-colour="3"] > td.color-col, [data-colour="3"] >  .colour-div {
+  background-color: #9abecb; /* BLUE */
 }
 
-[data-colour="4"] > td.color-col {
-  background-color: rgb(203, 42, 42);
+[data-colour="4"] > td.color-col, [data-colour="4"] >  .colour-div {
+  background-color: #e4acac; /* RED */
 }
 
-[data-colour="5"] > td.color-col {
-  background-color: rgb(133, 33, 199);
+[data-colour="5"] > td.color-col, [data-colour="5"] >  .colour-div {
+  background-color: #bb9bcb; /* PURPLE */
 }
 
-[data-office="0"] > .colour-div {
-  background-color: rgb(226, 13, 216);
+[data-colour="6"] > td.color-col, [data-colour="5"] >  .colour-div {
+  background-color: #f3f2bf; /* YELLOW */
 }
 
-[data-colour="1"] > .colour-div {
-  background-color: rgb(216, 134, 212);
+[data-colour="7"] > td.color-col, [data-colour="5"] >  .colour-div {
+  background-color: #cecece; /* GRAY */
 }
 
-[data-colour="2"] > .colour-div {
-  background-color: rgb(235, 152, 45);
+[data-colour="8"] > td.color-col, [data-colour="5"] >  .colour-div {
+  background-color: #979696; /* DARK GRAY */
 }
-
-[data-colour="3"] > .colour-div {
-  background-color: rgb(45, 58, 194);
-}
-
-[data-colour="4"] > .colour-div {
-  background-color: rgb(203, 42, 42);
-}
-
-[data-colour="5"] > .colour-div {
-  background-color: rgb(133, 33, 199);
-}
-
 input {
   color: inherit;
 }
@@ -683,27 +667,6 @@ td {
   background-color: rgb(255, 242, 242) !important;
   color: rgb(0, 0, 0);
 }
-/* TESTING FOR WEEK VIEW */
-
-.client-label-red {
-  background-color: red;
-}
-
-.client-label-green {
-  background-color: green;
-}
-
-.client-label-blue {
-  background-color: blue;
-}
-
-.client-label-yellow {
-  background-color: yellow;
-}
-
-.client-label-gray {
-  background-color: rgb(114, 114, 114);
-}
 
 .force-height{
   height: 0.01px;
@@ -715,7 +678,6 @@ td {
   height: 100%;
   padding: 0px;
   margin: 0px;
-  background-color: rgb(218, 137, 137);
 }
 
 .client-div {

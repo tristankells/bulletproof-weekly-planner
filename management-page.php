@@ -32,6 +32,9 @@ if($_SESSION['authentication']!=1)
         <li data-action="3">Blue</li>
         <li data-action="4">Red</li>
         <li data-action="5">Purple</li>
+        <li data-action="6">Yellow</li>
+        <li data-action="7">Gray</li>
+        <li data-action="8">Dark Gray</li>
     </ul>
     <ul id='usermenu' class='custom-menu'>
         <li data-action="1">Logout</li>

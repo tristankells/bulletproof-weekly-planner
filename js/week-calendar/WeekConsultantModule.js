@@ -1,4 +1,4 @@
-var WeekConsultantModule = (function() {
+var WeekConsultantModule = (function () {
   "use strict";
   // placeholder for cached DOM elements
   var DOM = {};
@@ -16,35 +16,35 @@ var WeekConsultantModule = (function() {
   function bindEvents() {
     //Bind sortalbe to consultant table
     DOM.$consultantsTableBody.sortable({
-      update: function() {
+      update: function () {
         handlePositionChange($(this));
       }
     });
 
     //Bind menu to allocation col right click
-    DOM.$consultantsTableBody.on("contextmenu", ".allocation-col", function() {
+    DOM.$consultantsTableBody.on("contextmenu", ".allocation-col", function () {
       handleAllocationRightClick($(this));
     });
 
     //Bind menu to allocation col left click
-    DOM.$consultantsTableBody.on("click", ".allocation-col", function() {
+    DOM.$consultantsTableBody.on("click", ".allocation-col", function () {
       handeleAllocationLeftClick($(this));
     });
 
-    DOM.$consultantsTableBody.on("click", ".clear-consultant-btn", function() {
+    DOM.$consultantsTableBody.on("click", ".clear-consultant-btn", function () {
       handleClearConsultantAllocationsClick($(this).closest("tr"));
     });
 
-    DOM.$clientMenu.on("click", "li", function() {
+    DOM.$clientMenu.on("click", "li", function () {
       handleClientMenuClick($(this));
     });
 
-    DOM.$officeMenu.on("click", "li", function() {
+    DOM.$officeMenu.on("click", "li", function () {
       handleOfficeMenuClick($(this));
     });
 
     //Bind mousdoen event to page
-    DOM.$document.on("mousedown", function(e) {
+    DOM.$document.on("mousedown", function (e) {
       // If the clicked element is not the menu
       if (!$(e.target).parents(".custom-menu").length > 0) {
         $(".clicked-allocation").removeClass("clicked-allocation");
@@ -53,23 +53,23 @@ var WeekConsultantModule = (function() {
       }
     });
 
-    DOM.$resetAllocationsButton.on("click", function() {
+    DOM.$resetAllocationsButton.on("click", function () {
       handleClearAllAllocationsClick();
     });
 
-    DOM.$consultantsTableBody.on("mouseenter", "tr", function() {
+    DOM.$consultantsTableBody.on("mouseenter", "tr", function () {
       handleMouseEnteringConsultantRow($(this));
     });
 
-    DOM.$consultantsTableBody.on("mouseleave", "tr", function() {
+    DOM.$consultantsTableBody.on("mouseleave", "tr", function () {
       handleMouseLeavingConsultantRow($(this));
     });
 
-    DOM.$consultantsTableBody.on("mouseenter", ".allocation-col", function() {
+    DOM.$consultantsTableBody.on("mouseenter", ".allocation-col", function () {
       handleMouseEnteringAllocation($(this));
     });
 
-    DOM.$consultantsTableBody.on("mouseleave", ".allocation-col", function() {
+    DOM.$consultantsTableBody.on("mouseleave", ".allocation-col", function () {
       handleMouseLeavingAllocation($(this));
     });
   }
@@ -105,7 +105,7 @@ var WeekConsultantModule = (function() {
   }
 
   function handlePositionChange($tableBody) {
-    $tableBody.find("tr").each(function(index) {
+    $tableBody.find("tr").each(function (index) {
       if ($(this).attr("data-position") != index + 1) {
         $(this)
           .attr("data-position", index + 1)
@@ -179,10 +179,10 @@ var WeekConsultantModule = (function() {
 
   function handleClearAllAllocationsClick() {
     if (confirm("Press OK to delete ALL allocation information")) {
-      clearAllAllocationsInDB().done(function() {
+      clearAllAllocationsInDB().done(function () {
         $(".allocation-col").html("");
 
-        $("#clienttablebody > tr").each(function() {
+        $("#clienttablebody > tr").each(function () {
           $(this)
             .find(".who-column")
             .html("");
@@ -199,7 +199,7 @@ var WeekConsultantModule = (function() {
 
       $consultantRow.find(".allocation-col").html("");
 
-      clearConsutlantAllocationsIDB(id).done(function() {});
+      clearConsutlantAllocationsIDB(id).done(function () { });
     }
   }
 
@@ -218,7 +218,7 @@ var WeekConsultantModule = (function() {
 
     updateClientsWhoCols();
 
-    updateAllocationInDB(dynamicData).done(function(data) {
+    updateAllocationInDB(dynamicData).done(function (data) {
       alert(data);
     });
   }
@@ -226,16 +226,16 @@ var WeekConsultantModule = (function() {
   function updateConsultantPositions() {
     var positions = [];
 
-    $(".consultant-updated").each(function() {
+    $(".consultant-updated").each(function () {
       positions.push([$(this).attr("data-id"), $(this).attr("data-position")]);
       $(this).removeClass("consultant-updated");
     });
     //AJAX request to update consultant positions
-    updateConsultantPositionsInDB(positions).done(function() {});
+    updateConsultantPositionsInDB(positions).done(function () { });
   }
 
   function updateClientsWhoCols() {
-    $("#clienttablebody > tr").each(function() {
+    $("#clienttablebody > tr").each(function () {
       updateClientWhoCol($(this));
     });
   }
@@ -268,7 +268,7 @@ var WeekConsultantModule = (function() {
       $consultanRow = {},
       consultantName = {};
 
-    $("#consultantstablebody > tr").each(function() {
+    $("#consultantstablebody > tr").each(function () {
       $consultanRow = $(this);
       if (checkConsultantAllocatedToClient(clientID, $consultanRow)) {
         consultantName = $consultanRow.attr("data-name");
@@ -296,7 +296,7 @@ var WeekConsultantModule = (function() {
   function consulatantRowToClientIDArray($consultantRow) {
     var clientIDs = [];
 
-    $consultantRow.find(".allocation-col[data-id]").each(function() {
+    $consultantRow.find(".allocation-col[data-id]").each(function () {
       clientIDs.push($(this).attr("data-id"));
     });
 
@@ -371,25 +371,16 @@ var WeekConsultantModule = (function() {
       $rowElement.append($columnElement);
     }
 
-    $rowElement.append(
-      $("<div></div>")
-        .addClass("clear-consultant-row")
-        .append(
-          $("<div></div>")
-            .addClass("clear-consultant-container mx-auto my-auto")
-            .append(
-              $("<div></div>")
-                .addClass("last-updated")
-                .html("<i>Last Updated: <br>14:00 10/08</i>")
-                .append(
-                  $("<div></div>").append(
-                    $("<i></i>").addClass(
-                      "clear-consultant-btn clear-row-btn fas fa-minus-square fa-2x"
-                    )
-                  )
-                )
-            )
-        )
+    $rowElement.append($("<div></div>")
+      .addClass("clear-consultant-row")
+      .append($("<div></div>")
+        /*.addClass("clear-consultant-container mx-auto my-auto")
+        .append($("<div></div>")
+          .addClass("last-updated"))
+        .append($("<div></div>") */
+          .append($("<i></i>")
+            .addClass("clear-consultant-btn clear-row-btn fas fa-minus-square fa-2x")
+          ))
     );
 
     //Append row to consutlant table
