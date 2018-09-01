@@ -35,7 +35,8 @@ var WeekClientsModule = (function() {
       "data-id": client["id"],
       "data-abbreviation": client["abbreviation"],
       "data-position": client["board_position"],
-      "data-name": client["full_name"]
+      "data-name": client["full_name"],
+      "data-colour": client["colour"]
     });
 
     //Add name column
@@ -48,6 +49,8 @@ var WeekClientsModule = (function() {
         })
         .html(client["full_name"])
     );
+
+    $rowElement.append($("<td></td>").addClass("color-col"));
 
     //Add abbreviation column
     $rowElement.append(
@@ -78,6 +81,8 @@ var WeekClientsModule = (function() {
         border: "none"
       })
     );
+
+
 
     DOM.$clienttablebody.append($rowElement);
   }

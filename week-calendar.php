@@ -113,7 +113,7 @@ if ($_SESSION['authentication'] != 1) {
             <div class="col-lg-12 mx-auto mb-5" id="clientsdiv">
                 <table class="table table-dark table-striped client-table" id="clientstable">
                     <thead id="clienttablehead" style="margin-left:20px">
-                        <th style="width: 15%;">Client</th>
+                        <th style="width: 15%;" colspan="2">Client</th>
                         <th style="width: 15%; text-align: center;">Abbreviation</th>
                         <th style="width: 70%;">Who</th>
                     </thead>

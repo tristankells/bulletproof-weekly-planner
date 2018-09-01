@@ -236,10 +236,13 @@ var WeekConsultantModule = (function() {
   }
 
   function updateAllocation($allocationCol) {
-    var allocation = {};
+    var allocation = {},
+      $consultantRow = {};
 
     //Retrieve all allocation information from the allocation column
-    allocation["consultantID"] = $allocationCol.parents("tr").attr("data-id");
+    $consultantRow = $allocationCol.parents("tr");
+
+    allocation["consultantID"] = $consultantRow.attr("data-id");
     allocation["abbreviation"] = $allocationCol.attr("data-abbreviation");
     allocation["colour"] = $allocationCol.attr("data-colour");
     allocation["clientID"] = $allocationCol.attr("data-id");
@@ -252,6 +255,8 @@ var WeekConsultantModule = (function() {
         allocation
       )
     );
+
+    //NEED TO INSERT NEW LATEST ALLOCATION DATE
 
     $(".custom-menu").hide(100);
 
@@ -393,6 +398,9 @@ var WeekConsultantModule = (function() {
       $rowElement.append(WeekAllocationModule.getAllocationTd(i, allocation));
     }
 
+    //TEMPORARY STORAGE FOR LATEST ALLOCATION DATE
+    console.log(getDateOfMostRecentAllocation(consultant["allocations"]));
+
     $rowElement.append(
       $("<div></div>")
         .addClass("clear-consultant-row")
@@ -425,8 +433,25 @@ var WeekConsultantModule = (function() {
     var x = 0;
 
     for (x in consultants) {
+      //PLACEHOLDER (NEED TO DECIDE TO WHERE TO PUT THIS INFORMATION)
       renderConsultant(consultants[x]);
     }
+  }
+
+  function getDateOfMostRecentAllocation(allocations) {
+    var latestAllocationDate = null,
+      allocationDate = new Date();
+
+    for (x in allocations) {
+      allocationDate = new Date(allocations[x]["timeAllocated"]);
+      //Set the latest allocation date to
+      if (latestAllocationDate == null) {
+        latestAllocationDate = allocationDate;
+      } else if (latestAllocationDate < allocationDate) {
+        latestAllocationDate = allocationDate;
+      }
+    }
+    return latestAllocationDate;
   }
 
   function renderPlaceHolderText() {

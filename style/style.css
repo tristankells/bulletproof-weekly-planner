@@ -3,8 +3,8 @@
 /* FONTS */
 
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400,700,900");
-@import url('https://fonts.googleapis.com/css?family=Roboto+Slab:400,700');
-@import url('https://fonts.googleapis.com/css?family=Montserrat:100,400,700');
+@import url("https://fonts.googleapis.com/css?family=Roboto+Slab:400,700");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:100,400,700");
 
 /* Set entire page to Lato font */
 
@@ -16,8 +16,12 @@
   border: none;
 }
 
-#consultantstablebody > table, tr, td, th, tbody{
-  padding: 10px!important;
+#consultantstablebody > table,
+tr,
+td,
+th,
+tbody {
+  padding: 10px !important;
 }
 
 .consultant-name-input {
@@ -30,10 +34,9 @@ body {
   font-family: Lato, Arial;
 }
 
-#consultantsdiv{
+#consultantsdiv {
   margin-top: 40px;
 }
-
 
 /*CSS for context menu adapted from https://stackoverflow.com/questions/4495626/making-custom-right-click-context-menus-for-my-web-app 12/07/2018 */
 
@@ -493,78 +496,73 @@ nav.shift ul li a:hover:after {
     #b3b2b2 20px
   );
 }
-/* Week calendar colours */
-
-[data-colour="0"] > td.color-col, [data-colour="0"] > .colour-div {
-  background-color: white; /* DEFAULT */
+/* ********* CLIENT COLOURS Begin ********** */
+[data-colour="0"] > .color-col,
+[data-colour="0"] > .colour-div {
+  background-color: white;
+  /* DEFAULT */
 }
-
-[data-colour="1"] > td.color-col, [data-colour="1"] >  .colour-div {
-  background-color:#9bcb9e; /* GREEN */
+[data-colour="1"] > .color-col,
+[data-colour="1"] > .colour-div {
+  background-color: #9bcb9e; /* GREEN */
 }
-
-[data-colour="2"] > td.color-col, [data-colour="2"] >  .colour-div {
+[data-colour="2"] > .color-col,
+[data-colour="2"] > .colour-div {
   background-color: #e5c691; /* ORANGE */
 }
-
-[data-colour="3"] > td.color-col, [data-colour="3"] >  .colour-div {
+[data-colour="3"] > .color-col,
+[data-colour="3"] > .colour-div {
   background-color: #9abecb; /* BLUE */
 }
-
-[data-colour="4"] > td.color-col, [data-colour="4"] >  .colour-div {
+[data-colour="4"] > .color-col,
+[data-colour="4"] > .colour-div {
   background-color: #e4acac; /* RED */
 }
-
-[data-colour="5"] > td.color-col, [data-colour="5"] >  .colour-div {
+[data-colour="5"] > .color-col,
+[data-colour="5"] > .colour-div {
   background-color: #bb9bcb; /* PURPLE */
 }
-
-[data-colour="6"] > td.color-col, [data-colour="5"] >  .colour-div {
+[data-colour="6"] > .color-col,
+[data-colour="6"] > .colour-div {
   background-color: #f3f2bf; /* YELLOW */
 }
-
-[data-colour="7"] > td.color-col, [data-colour="5"] >  .colour-div {
+[data-colour="7"] > .color-col,
+[data-colour="7"] > .colour-div {
   background-color: #cecece; /* GRAY */
 }
-
-[data-colour="8"] > td.color-col, [data-colour="5"] >  .colour-div {
+[data-colour="8"] > .color-col,
+[data-colour="8"] > .colour-div {
   background-color: #979696; /* DARK GRAY */
 }
+/* ********* CLIENT CALENDAR COLOURS End ********** */
 input {
   color: inherit;
 }
-
 .highlight-day {
-  height: 30px; /*change this and the width
-  for the size of your initial circle*/
+  height: 30px; /* change this and the width
+  for the size of your initial circle */
   width: 20px;
   padding: 10px;
   border-style: solid;
   border-color: #9a9da0;
   border-width: thin;
 }
-
 /* Week view layout */
-
 #clientstable {
   width: 100%;
   margin: auto;
 }
-
 /* Month view layout */
-
 .table-padding {
   padding-left: 15px;
   padding-top: 40px;
   padding-right: 15px;
 }
-
 #consultanttable {
   background: white;
   width: 100%;
   margin-bottom: 30px;
 }
-
 #consultanttable th {
   font-family: Lato;
   font-size: 14px;
@@ -575,43 +573,35 @@ input {
   border: none;
   letter-spacing: 1px;
 }
-
 #consultanttablebody td {
   vertical-align: middle !important;
   padding: 0px;
 }
-
 #clienttable {
   width: 30%;
   margin: auto;
   text-align: center;
 }
-
 @media only screen and (max-width: 800px) {
   #clienttable {
     width: 80%;
   }
 }
-
 @media only screen and (max-width: 580px) {
   #clienttable {
     width: 100%;
   }
 }
-
 #clienttable th,
 td {
   vertical-align: middle;
   padding: 0px;
 }
-
 /* Manage page layout */
-
 .manage-table {
   width: 100%;
   padding-left: 50px;
 }
-
 .manage-table th {
   font-family: Lato;
   font-size: 14px;
@@ -620,58 +610,48 @@ td {
   margin: 0;
   letter-spacing: 1px;
 }
-
 .manage-table td {
   border: 1px solid black;
 }
-
 .manage-table input {
   padding: 5px;
   border-radius: 2px;
   width: 100%;
 }
-
 .add-consultant-table {
   width: 95%;
   background-color: #212529;
   margin-bottom: 40px;
   margin-top: 30px;
 }
-
 .add-consultant-table input {
   width: 100%;
   padding: 5px;
   border-radius: 2px;
 }
-
 .add-consultant-table i {
   color: white;
 }
-
 .add-consultant-table i:hover {
   cursor: pointer;
   color: rgb(29, 187, 55);
 }
-
 .custom-dark-bg {
   background-color: #212529 !important;
   color: white;
 }
-
 .custom-dark-bg input {
   background-color: #212529 !important;
   color: white;
 }
-
-.custom-dark-bg input:hover, input:focus {
+.custom-dark-bg input:hover,
+input:focus {
   background-color: rgb(255, 242, 242) !important;
   color: rgb(0, 0, 0);
 }
-
-.force-height{
+.force-height {
   height: 0.01px;
 }
-
 .colour-div {
   display: inline-block;
   width: 10%;
@@ -679,7 +659,6 @@ td {
   padding: 0px;
   margin: 0px;
 }
-
 .client-div {
   display: inline-block;
   width: 70%;
@@ -689,13 +668,11 @@ td {
   background-color: rgb(255, 255, 255);
   position: relative;
 }
-
 .client-span {
   position: absolute;
-  top: 35%; 
+  top: 35%;
   left: 35%;
 }
-
 .location-div {
   position: relative;
   display: inline-block;
@@ -705,21 +682,18 @@ td {
   margin: 0px;
   background-color: rgb(255, 255, 255);
 }
-
 .home-icon {
-    position: absolute;
-    top: 4px;
-    right: 3px;
-    color: rgb(187, 187, 187);
+  position: absolute;
+  top: 4px;
+  right: 3px;
+  color: rgb(187, 187, 187);
 }
-
 .away-icon {
-    position: absolute;
-    bottom: 8px;
-    right: 1px;
-    color: rgb(187, 187, 187);
+  position: absolute;
+  bottom: 8px;
+  right: 1px;
+  color: rgb(187, 187, 187);
 }
-
 table td {
   padding: 0px;
 }
@@ -727,22 +701,18 @@ table td {
   background-color: rgb(255, 226, 231);
   color: black;
 }
-
 .red-text {
   color: rgb(197, 46, 46) !important;
 }
-
 .transparent-bg {
   background-color: #434d57;
 }
 #resetPasswordDiv {
   text-align: center;
 }
-
 #resetPasswordDiv > input {
   margin: 20px;
 }
-
 .last-updated {
   width: inherit;
   height: 20px;
