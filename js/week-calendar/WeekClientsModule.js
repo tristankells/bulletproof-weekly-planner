@@ -16,10 +16,13 @@ var WeekClientsModule = (function() {
   function populateClientMenu(clients) {
     var $clientListElement = {},
       client = {};
+
     for (x in clients) {
       client = clients[x];
+
       $clientListElement = $("<li></li>")
         .attr("data-id", client["id"])
+        .attr("data-colour", client["colour"])
         .html(client["abbreviation"]);
       DOM.$clientMenu.append($clientListElement);
     }

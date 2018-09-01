@@ -7,6 +7,7 @@ $(document).ready(function() {
     */
 
    DateModule.init();
+   WeekAllocationModule.init();
 
    ResetPasswordModule.init();
 

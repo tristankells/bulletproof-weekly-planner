@@ -687,6 +687,13 @@ td {
   padding: 0px;
   margin: 0px;
   background-color: rgb(255, 255, 255);
+  position: relative;
+}
+
+.client-span {
+  position: absolute;
+  top: 35%; 
+  left: 35%;
 }
 
 .location-div {

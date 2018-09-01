@@ -67,11 +67,11 @@ if ($result->num_rows > 0) {
         if ($allocationResult->num_rows > 0) {
             while ($allocationRow = $allocationResult->fetch_assoc()) {
                 $allocation = [
-                    "id"  => $allocationRow['id'],
+                    "clientID" => $allocationRow['id'],
                     "abbreviation" => $allocationRow['abbreviation'],
                     "colour" => $allocationRow['colour'],
-                    "allocationslot" => $allocationRow['allocation_slot'],
-                    "officestatus" => $allocationRow['office_status'],
+                    "allocationSlot" => $allocationRow['allocation_slot'],
+                    "officeStatus" => $allocationRow['office_status'],
                 ];
                 array_push($allocations, $allocation);
             }

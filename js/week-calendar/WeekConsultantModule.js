@@ -1,4 +1,4 @@
-var WeekConsultantModule = (function () {
+var WeekConsultantModule = (function() {
   "use strict";
   // placeholder for cached DOM elements
   var DOM = {};
@@ -16,35 +16,35 @@ var WeekConsultantModule = (function () {
   function bindEvents() {
     //Bind sortalbe to consultant table
     DOM.$consultantsTableBody.sortable({
-      update: function () {
+      update: function() {
         handlePositionChange($(this));
       }
     });
 
     //Bind menu to allocation col right click
-    DOM.$consultantsTableBody.on("contextmenu", ".allocation-col", function () {
+    DOM.$consultantsTableBody.on("contextmenu", ".allocation-col", function() {
       handleAllocationRightClick($(this));
     });
 
     //Bind menu to allocation col left click
-    DOM.$consultantsTableBody.on("click", ".allocation-col", function () {
+    DOM.$consultantsTableBody.on("click", ".allocation-col", function() {
       handeleAllocationLeftClick($(this));
     });
 
-    DOM.$consultantsTableBody.on("click", ".clear-consultant-btn", function () {
+    DOM.$consultantsTableBody.on("click", ".clear-consultant-btn", function() {
       handleClearConsultantAllocationsClick($(this).closest("tr"));
     });
 
-    DOM.$clientMenu.on("click", "li", function () {
+    DOM.$clientMenu.on("click", "li", function() {
       handleClientMenuClick($(this));
     });
 
-    DOM.$officeMenu.on("click", "li", function () {
+    DOM.$officeMenu.on("click", "li", function() {
       handleOfficeMenuClick($(this));
     });
 
     //Bind mousdoen event to page
-    DOM.$document.on("mousedown", function (e) {
+    DOM.$document.on("mousedown", function(e) {
       // If the clicked element is not the menu
       if (!$(e.target).parents(".custom-menu").length > 0) {
         $(".clicked-allocation").removeClass("clicked-allocation");
@@ -53,23 +53,23 @@ var WeekConsultantModule = (function () {
       }
     });
 
-    DOM.$resetAllocationsButton.on("click", function () {
+    DOM.$resetAllocationsButton.on("click", function() {
       handleClearAllAllocationsClick();
     });
 
-    DOM.$consultantsTableBody.on("mouseenter", "tr", function () {
+    DOM.$consultantsTableBody.on("mouseenter", "tr", function() {
       handleMouseEnteringConsultantRow($(this));
     });
 
-    DOM.$consultantsTableBody.on("mouseleave", "tr", function () {
+    DOM.$consultantsTableBody.on("mouseleave", "tr", function() {
       handleMouseLeavingConsultantRow($(this));
     });
 
-    DOM.$consultantsTableBody.on("mouseenter", ".allocation-col", function () {
+    DOM.$consultantsTableBody.on("mouseenter", ".allocation-col", function() {
       handleMouseEnteringAllocation($(this));
     });
 
-    DOM.$consultantsTableBody.on("mouseleave", ".allocation-col", function () {
+    DOM.$consultantsTableBody.on("mouseleave", ".allocation-col", function() {
       handleMouseLeavingAllocation($(this));
     });
   }
@@ -105,7 +105,7 @@ var WeekConsultantModule = (function () {
   }
 
   function handlePositionChange($tableBody) {
-    $tableBody.find("tr").each(function (index) {
+    $tableBody.find("tr").each(function(index) {
       if ($(this).attr("data-position") != index + 1) {
         $(this)
           .attr("data-position", index + 1)
@@ -143,51 +143,77 @@ var WeekConsultantModule = (function () {
       });
   }
 
+  //Handles the click on the custom client menu, when trying to allocate
   function handleClientMenuClick($menuItem) {
-    var $allocationCol = {};
+    var $allocationTd = {};
 
-    $allocationCol = $(".clicked-allocation");
+    $allocationTd = $(".clicked-allocation");
 
-    if ($menuItem.html() == "Empty") {
-      $allocationCol.html("").removeAttr("data-id");
-    } else {
-      $allocationCol
-        .html($menuItem.html())
-        .attr("data-id", $menuItem.attr("data-id"));
+    if ($allocationTd) {
     }
 
-    updateAllocation($allocationCol);
+    if ($menuItem.html() == "EMPTY") {
+      $allocationTd
+        .attr("data-abbreviation", "")
+        .attr("data-id", 0)
+        .attr("data-colour", 0)
+        .attr("data-office", 0);
+    } else {
+      $allocationTd
+        .attr("data-abbreviation", $menuItem.html())
+        .attr("data-id", $menuItem.attr("data-id"))
+        .attr("data-colour", $menuItem.attr("data-colour"));
+
+      if ($allocationTd.attr("data-office") == 3) {
+        $allocationTd.attr("data-office", 0);
+      }
+    }
+
+    updateAllocation($allocationTd);
   }
 
   function handleOfficeMenuClick($menuItem) {
     var $allocationCol = {},
-      allocation = {};
+      selectedOfficeStatus = 0;
 
-    $allocationCol = $(".clicked-allocation");
-    allocation["officestatus"] = $menuItem.attr("data-action");
+    $allocationCol = $(".clicked-allocation"); //Get click allocation col
+    selectedOfficeStatus = $menuItem.attr("data-action"); //Get the chosesn office status
 
-    $allocationCol.attr("data-office", allocation["officestatus"]);
+    $allocationCol.attr("data-office", selectedOfficeStatus); //Set the new allocation office status
 
-    if (allocation["officestatus"] == 3) {
-      $allocationCol.html("");
-    } else {
-      $allocationCol.html(getAllocationDiv(allocation));
+    if (selectedOfficeStatus == 3) {
+      $allocationCol
+        .attr("data-abbreviation", "")
+        .attr("data-id", 0)
+        .attr("data-colour", 0);
     }
-
     updateAllocation($allocationCol);
   }
 
   function handleClearAllAllocationsClick() {
     if (confirm("Press OK to delete ALL allocation information")) {
-      clearAllAllocationsInDB().done(function () {
-        $(".allocation-col").html("");
-
-        $("#clienttablebody > tr").each(function () {
-          $(this)
-            .find(".who-column")
-            .html("");
-        });
+      //Empty all the consultants allocations
+      $("#consultantstablebody > tr").each(function() {
+        $(this)
+          .find(".allocation-col")
+          .each(function(index) {
+            $(this).replaceWith(
+              WeekAllocationModule.getAllocationTd(index, false)
+            );
+          });
       });
+
+      //Empty all the client who columns
+      $("#clienttablebody > tr").each(function() {
+        $(this)
+          .find(".who-column")
+          .html("");
+      });
+
+      updateClientsWhoCols();
+
+      //Post request
+      clearAllAllocationsInDB().done();
     }
   }
 
@@ -197,45 +223,60 @@ var WeekConsultantModule = (function () {
 
       id = $consultantRow.attr("data-id");
 
-      $consultantRow.find(".allocation-col").html("");
+      //Empty all the consultants allocations
+      $consultantRow.find(".allocation-col").each(function(index) {
+        $(this).replaceWith(WeekAllocationModule.getAllocationTd(index, false));
+      });
 
-      clearConsutlantAllocationsIDB(id).done(function () { });
+      updateClientsWhoCols();
+
+      //Post request
+      clearConsutlantAllocationsIDB(id).done();
     }
   }
 
   function updateAllocation($allocationCol) {
-    var dynamicData = {};
+    var allocation = {};
 
-    dynamicData["consultantID"] = $allocationCol.parents("tr").attr("data-id");
-    dynamicData["clientID"] = $allocationCol.attr("data-id");
-    dynamicData["officeStatus"] = $allocationCol.attr("data-office");
-    dynamicData["allocationSlot"] = $allocationCol.attr("data-slot");
+    //Retrieve all allocation information from the allocation column
+    allocation["consultantID"] = $allocationCol.parents("tr").attr("data-id");
+    allocation["abbreviation"] = $allocationCol.attr("data-abbreviation");
+    allocation["colour"] = $allocationCol.attr("data-colour");
+    allocation["clientID"] = $allocationCol.attr("data-id");
+    allocation["officeStatus"] = $allocationCol.attr("data-office");
+    allocation["allocationSlot"] = $allocationCol.attr("data-slot");
 
-    // Hide it AFTER the action was triggered
+    $allocationCol.replaceWith(
+      WeekAllocationModule.getAllocationTd(
+        allocation["allocationSlot"],
+        allocation
+      )
+    );
+
     $(".custom-menu").hide(100);
-    //Removed the clicked allocation class
+
     $(".clicked-allocation").removeClass("clicked-allocation");
 
     updateClientsWhoCols();
 
-    updateAllocationInDB(dynamicData).done(function (data) {
-      alert(data);
+    updateAllocationInDB(allocation).done(function(data) {
+      console.log(data);
     });
   }
 
   function updateConsultantPositions() {
     var positions = [];
 
-    $(".consultant-updated").each(function () {
+    $(".consultant-updated").each(function() {
       positions.push([$(this).attr("data-id"), $(this).attr("data-position")]);
       $(this).removeClass("consultant-updated");
     });
     //AJAX request to update consultant positions
-    updateConsultantPositionsInDB(positions).done(function () { });
+    updateConsultantPositionsInDB(positions).done(function() {});
   }
 
   function updateClientsWhoCols() {
-    $("#clienttablebody > tr").each(function () {
+    $("#clienttablebody > tr").each(function() {
       updateClientWhoCol($(this));
     });
   }
@@ -268,7 +309,7 @@ var WeekConsultantModule = (function () {
       $consultanRow = {},
       consultantName = {};
 
-    $("#consultantstablebody > tr").each(function () {
+    $("#consultantstablebody > tr").each(function() {
       $consultanRow = $(this);
       if (checkConsultantAllocatedToClient(clientID, $consultanRow)) {
         consultantName = $consultanRow.attr("data-name");
@@ -296,7 +337,7 @@ var WeekConsultantModule = (function () {
   function consulatantRowToClientIDArray($consultantRow) {
     var clientIDs = [];
 
-    $consultantRow.find(".allocation-col[data-id]").each(function () {
+    $consultantRow.find(".allocation-col[data-id]").each(function() {
       clientIDs.push($(this).attr("data-id"));
     });
 
@@ -341,80 +382,38 @@ var WeekConsultantModule = (function () {
         )
     );
 
-    var i = 0,
-      $columnElement = {};
+    var i = 0;
 
     //append allocation columns
     for (i = 0; i < 10; i++) {
       var allocation = {};
 
-      $columnElement = $("<td></td>")
-        .attr("data-slot", i)
-        .attr("data-office", 0)
-        .attr("data-id", 0)
-        .attr("data-colour", 0)
-        .addClass("allocation-col table-bordered force-height");
-      //$columnElement.append(createAllocationDiv());
-
       allocation = getColumnAllocation(consultant["allocations"], i);
 
-      if (allocation) {
-        $columnElement
-          .attr("data-office", allocation["officestatus"])
-          .attr("data-colour", allocation["colour"]);
-        if (allocation["officestatus"] == 3) {
-          //Dont append a allocation div
-        } else {
-          $columnElement.append(getAllocationDiv(allocation));
-        }
-      }
-      $rowElement.append($columnElement);
+      $rowElement.append(WeekAllocationModule.getAllocationTd(i, allocation));
     }
 
-    $rowElement.append($("<div></div>")
-      .addClass("clear-consultant-row")
-      .append($("<div></div>")
-        /*.addClass("clear-consultant-container mx-auto my-auto")
-        .append($("<div></div>")
-          .addClass("last-updated"))
-        .append($("<div></div>") */
-          .append($("<i></i>")
-            .addClass("clear-consultant-btn clear-row-btn fas fa-minus-square fa-2x")
-          ))
+    $rowElement.append(
+      $("<div></div>")
+        .addClass("clear-consultant-row")
+        .append(
+          $("<div></div>").append(
+            $("<i></i>").addClass(
+              "clear-consultant-btn clear-row-btn fas fa-minus-square fa-2x"
+            )
+          )
+        )
     );
 
     //Append row to consutlant table
     DOM.$consultantsTableBody.append($rowElement);
   }
 
-  function getAllocationDiv(allocation) {
-    var colourDiv = {},
-      clientDiv = {},
-      locationDiv = {},
-      officeStatus = 0;
-
-    officeStatus = allocation["officestatus"];
-
-    colourDiv = $("<div></div>").addClass("colour-div");
-    clientDiv = $("<div></div>").addClass("client-div");
-    locationDiv = $("<div></div>").addClass("location-div");
-
-    if (officeStatus == 1) {
-      locationDiv.append($("<i></i>").addClass("fas fa-home home-icon")); // ADD HOME ICON
-    }
-
-    if (officeStatus == 2) {
-      locationDiv.append($("<i></i>").addClass("fas fa-plane away-icon")); // ADD AWAY ICON
-    }
-
-    return colourDiv.add(clientDiv).add(locationDiv);
-  }
-
   function getColumnAllocation(allocations, slot) {
     var allocation = {};
     for (x in allocations) {
       allocation = allocations[x];
-      if (allocation["allocationslot"] == slot) {
+      if (allocation["allocationSlot"] == slot) {
         return allocation;
       }
     }
