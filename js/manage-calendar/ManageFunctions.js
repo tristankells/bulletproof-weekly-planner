@@ -1,4 +1,4 @@
-var BaseModule = (function() {
+var ManageFunctions = (function() {
   /* =================== public methods ================== */
 
   /*

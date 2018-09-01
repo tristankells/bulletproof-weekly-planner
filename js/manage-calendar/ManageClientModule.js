@@ -17,7 +17,23 @@ var ClientModule = (function() {
 
   // bind events
   function bindEvents() {
-    DOM.$addclientbutton.click(addClient);
+    DOM.$addclientbutton.click(function() {
+      addClient();
+    });
+
+    DOM.$clientnameinput.on("keyup", function(e) {
+      if (e.keyCode === 13) {
+        this.blur();
+        addClient();
+      }
+    });
+
+    DOM.$clientabbreviationinput.on("keyup", function(e) {
+      if (e.keyCode === 13) {
+        this.blur();
+        addClient();
+      }
+    });
 
     DOM.$clienttablebody.on("click", ".remove-client-btn", function(e) {
       if (confirm("Press OK to delete client information")) {
@@ -26,7 +42,7 @@ var ClientModule = (function() {
     });
 
     DOM.$clienttablebody.on("blur", ".client-name-input", function() {
-      updateClientName(updateClientNameInDB);
+      ManageFunctions.changeName(updateClientNameInDB);
     });
 
     DOM.$clienttablebody.on("keyup", ".client-name-input", function(e) {
@@ -272,12 +288,10 @@ var ClientModule = (function() {
 
   /* =================== public methods ================== */
   // main init method
-  function init(clients, BaseModule) {
+  function init(clients) {
     cacheDom();
     bindEvents();
     render(clients);
-    //Set the update name function to the BaseModule.changeName function
-    updateClientName = BaseModule.changeName;
   }
 
   /* =============== export public methods =============== */

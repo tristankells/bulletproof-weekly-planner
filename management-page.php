@@ -16,7 +16,7 @@ if($_SESSION['authentication']!=1)
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
         crossorigin="anonymous">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="js/manage-calendar/SharedManageFunctionsModule.js"></script>
+    <script src="js/manage-calendar/ManageFunctions.js"></script>
     <script src="js/manage-calendar/ManageClientModule.js"></script>
     <script src="js/manage-calendar/ManageConsultantModule.js"></script>
     <script src="js/manage-calendar/manage_index.js"></script>

@@ -14,7 +14,23 @@ var ConsultantModule = (function() {
   }
   // bind events
   function bindEvents() {
-    DOM.$addconsultantbutton.click(addConsultant);
+    DOM.$addconsultantbutton.click(function() {
+      addConsultant();
+    });
+
+    DOM.$consultantnameinput.on("keyup", function(e) {
+      if (e.keyCode === 13) {
+        this.blur();
+        addConsultant();
+      }
+    });
+
+    DOM.$consultantroleinput.on("keyup", function(e) {
+      if (e.keyCode === 13) {
+        this.blur();
+        addConsultant();
+      }
+    });
 
     DOM.$consultanttablebody.on("click", ".remove-consultant-btn", function() {
       if (confirm("Press OK to delete consultant information")) {
@@ -23,7 +39,7 @@ var ConsultantModule = (function() {
     });
 
     DOM.$consultanttablebody.on("blur", ".consultant-name-input", function() {
-      BaseModule.changeName(updateConsultantNameInDB);
+      ManageFunctions.changeName(updateConsultantNameInDB);
     });
 
     DOM.$consultanttablebody.on("keyup", ".consultant-name-input", function(e) {
