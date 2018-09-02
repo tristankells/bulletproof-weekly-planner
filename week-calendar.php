@@ -33,9 +33,9 @@ if ($_SESSION['authentication'] != 1) {
 <body>
     <ul id='officemenu' class='custom-menu '>
         <li data-action="0">At Office</li>
-        <li data-action="2">From Home</li>
-        <li data-action="1">On Site</li>
-        <li data-action="3">Leave</li>
+        <li data-action="2"><i class="fas fa-home"></i>  From Home</li>
+        <li data-action="1"><i class="fas fa-plane"></i>  On Site</li>
+        <li data-action="3" class="stripes">Leave</li>
     </ul>
     <ul id='clientmenu' class='custom-menu'>
         <li>EMPTY</li>

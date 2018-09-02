@@ -161,8 +161,8 @@ a:hover {
 .consultant-header {
   font-family: Lato, Arial;
   vertical-align: -webkit-baseline-middle;
-  max-width: 300px;
-  width: 300px;
+  max-width: 180px;
+  width: 180px;
   font-size: 17px;
   background-color: #212529;
   color: white;
@@ -490,6 +490,26 @@ nav.shift ul li a:hover:after {
     #ececec 10px,
     #fafafa 10px,
     #fafafa 20px
+  );
+}
+
+.stripes {
+  background: repeating-linear-gradient(
+    45deg,
+    #ececec,
+    #ececec 10px,
+    #fafafa 10px,
+    #fafafa 20px
+  );
+}
+
+.stripes:hover {
+  background: repeating-linear-gradient(
+    45deg,
+    #5a5a5a,
+    #5a5a5a 10px,
+    #272727 10px,
+    #272727 20px
   );
 }
 /* ********* CLIENT COLOURS Begin ********** */
