@@ -42,7 +42,7 @@ var ClientModule = (function() {
     });
 
     DOM.$clienttablebody.on("blur", ".client-name-input", function() {
-      ManageFunctions.changeName(updateClientNameInDB);
+      ManageFunctionsModule.changeName(updateClientNameInDB);
     });
 
     DOM.$clienttablebody.on("keyup", ".client-name-input", function(e) {
@@ -50,6 +50,18 @@ var ClientModule = (function() {
         this.blur();
       }
     });
+
+    DOM.$clienttablebody.on("blur", ".client-abbreviation-input", function() {
+      updateClientAbbreviation($(this));
+    });
+
+    DOM.$clienttablebody.on("keyup", ".client-abbreviation-input", function(e) {
+      if (e.keyCode === 13) {
+        this.blur();
+      }
+    });
+
+    updateClientAbbreviation;
 
     DOM.$clienttablebody.on("click", ".color-col", handleColourColClick);
 
@@ -107,9 +119,6 @@ var ClientModule = (function() {
       });
   }
 
-  //Inherited from BaseModule.changeName function; See BaseModule.js
-  function updateClientName() {}
-
   //Render a client to DOM
   function renderClient(client) {
     var $rowElement = $();
@@ -138,7 +147,11 @@ var ClientModule = (function() {
         .css({
           "text-align": "center"
         })
-        .html(client["abbreviation"])
+        .append(
+          $("<input></input>")
+            .addClass("client-abbreviation-input")
+            .val(client["abbreviation"])
+        )
     );
 
     //INSERT CUSTOM ICON
@@ -258,9 +271,69 @@ var ClientModule = (function() {
     });
   }
 
+  function checkClientAbbreviationUnique(abbreviation) {
+    var unique = true;
+
+    DOM.$clienttablebody.find("tr").each(function() {
+      console.log(abbreviation + $(this).attr("data-abbreviation"));
+      if (abbreviation == $(this).attr("data-abbreviation")) {
+        console.log("Duplicate");
+        unique = false;
+      }
+    });
+
+    return unique;
+  }
+
+  //Triggers on the blur of a client abbreviation input
+  function updateClientAbbreviation($input) {
+    var dynamicData = {},
+      $clientRow = {},
+      orginalAbbreviation = "";
+
+    $clientRow = $input.closest("tr");
+    orginalAbbreviation = $clientRow.attr("data-abbreviation");
+    dynamicData["abbreviation"] = $input.val().toUpperCase();
+
+    //Check if the name has actually changed
+    if (dynamicData["abbreviation"] == orginalAbbreviation) {
+      $input.val(orginalAbbreviation);
+    }
+    //Check abbreviation is not more than 3 characters
+    else if (dynamicData["abbreviation"].length > 3) {
+      alert("Sorry, your client abbrevation can't be more than 3 characters.");
+      $input.val(orginalAbbreviation);
+    }
+    //If abbreviation is 0 characters
+    else if (dynamicData["abbreviation"].length <= 0) {
+      alert("Sorry, your client has to have an abbrevation.");
+      $input.val(orginalAbbreviation);
+    }
+    //Check abbreviation unique
+    else if (
+      checkClientAbbreviationUnique(dynamicData["abbreviation"]) == false
+    ) {
+      alert("Sorry, your client abbrevation has to be unique.");
+      $input.val(orginalAbbreviation);
+    }
+    //If new abreivation is valid
+    else {
+      $input.val(dynamicData["abbreviation"]);
+      $clientRow.attr("data-abbreviation", dynamicData["abbreviation"]);
+      dynamicData["id"] = $clientRow.attr("data-id");
+      updateClientAbbreviationInDB(dynamicData).done();
+    }
+  }
+
   /* ================= private AJAX methods =============== */
   function updateClientNameInDB(dynamicData) {
     return $.post("php/clients/updateClientName.php", {
+      dynamicData: dynamicData
+    });
+  }
+
+  function updateClientAbbreviationInDB(dynamicData) {
+    return $.post("php/clients/updateClientAbbreviation.php", {
       dynamicData: dynamicData
     });
   }

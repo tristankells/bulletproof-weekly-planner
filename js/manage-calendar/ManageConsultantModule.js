@@ -39,10 +39,20 @@ var ConsultantModule = (function() {
     });
 
     DOM.$consultanttablebody.on("blur", ".consultant-name-input", function() {
-      ManageFunctions.changeName(updateConsultantNameInDB);
+      ManageFunctionsModule.changeName(updateConsultantNameInDB);
     });
 
     DOM.$consultanttablebody.on("keyup", ".consultant-name-input", function(e) {
+      if (e.keyCode === 13) {
+        this.blur();
+      }
+    });
+
+    DOM.$consultanttablebody.on("blur", ".consultant-role-input", function() {
+      updateConsultantRole($(this));
+    });
+
+    DOM.$consultanttablebody.on("keyup", ".consultant-role-input", function(e) {
       if (e.keyCode === 13) {
         this.blur();
       }
@@ -75,7 +85,13 @@ var ConsultantModule = (function() {
     );
 
     //Add consultant role colunm
-    $rowElement.append($("<td></td>").html(consultant["job_title"]));
+    $rowElement.append(
+      $("<td></td>").append(
+        $("<input></input>")
+          .addClass("consultant-role-input")
+          .val(consultant["job_title"])
+      )
+    );
 
     //Add remove consultant button
     $rowElement.append(
@@ -157,10 +173,34 @@ var ConsultantModule = (function() {
     });
   }
 
+  function updateConsultantRole($input) {
+    var dynamicData = {},
+      $consultantRow = {},
+      orginalRole = "";
+
+    $consultantRow = $input.closest("tr");
+    orginalRole = $consultantRow.attr("data-role");
+    dynamicData["role"] = $input.val();
+
+    if (dynamicData["role"] == orginalRole) {
+      //DO NOTHING
+    } else {
+      dynamicData["id"] = $input.closest("tr").attr("data-id");
+      $consultantRow.attr("data-role", dynamicData["role"]);
+      updateConsultantRoleInDB(dynamicData).done();
+    }
+  }
+
   /* ================= private AJAX methods =============== */
 
   function updateConsultantNameInDB(dynamicData) {
     return $.post("php/consultants/updateConsultantName.php", {
+      dynamicData: dynamicData
+    });
+  }
+
+  function updateConsultantRoleInDB(dynamicData) {
+    return $.post("php/consultants/updateConsultantRole.php", {
       dynamicData: dynamicData
     });
   }
