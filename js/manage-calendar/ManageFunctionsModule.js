@@ -1,4 +1,4 @@
-var ManageFunctions = (function() {
+var ManageFunctionsModule = (function() {
   /* =================== public methods ================== */
 
   /*
@@ -14,16 +14,17 @@ var ManageFunctions = (function() {
   function changeName(updateDbFunction) {
     var dynamicData = {},
       $row = {},
-      orginalName = "";
+      originalName = "";
 
     $row = $(event.target).closest("tr");
     dynamicData["name"] = $(event.target).val();
 
-    orginalName = $row.attr("data-name");
-    if (dynamicData["name"] != orginalName) {
+    originalName = $row.attr("data-name");
+    if (dynamicData["name"] != originalName) {
       dynamicData["id"] = $row.attr("data-id");
       updateDbFunction(dynamicData).done(function(data) {});
     } else {
+      
     }
   }
 

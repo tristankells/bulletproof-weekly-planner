@@ -18,8 +18,14 @@ var DateModule = (function() {
       currentYear = {},
       months = [];
 
-    currentDate = new Date();
     monday = new Date();
+    currentDate = new Date();
+
+    if (currentDate.getDay() == 6 || currentDate.getDay() == 0) {
+      currentDate.setDate(currentDate.getDate() + 7);
+      monday.setDate(monday.getDate() + 7);
+    }
+
     currentYear = currentDate.getFullYear();
 
     months = [

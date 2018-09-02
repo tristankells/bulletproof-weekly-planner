@@ -13,7 +13,8 @@
   font-family: Lato;
 }
 
-.client-name-input {
+.client-name-input,
+.client-abbreviation-input {
   border: none;
 }
 
@@ -28,6 +29,15 @@ tbody {
 .consultant-name-input {
   background: #212529;
   border: none;
+}
+
+.consultant-role-input {
+  background-color: #f9f9f9;
+  border: none;
+}
+
+.consultant-role-input:hover {
+  background-color: rgb(255, 226, 231);
 }
 
 body {
@@ -521,17 +531,20 @@ li[data-colour="5"],
 [data-colour="6"] > .color-col,
 li[data-colour="6"],
 [data-colour="6"] > .colour-div {
-  background-color: #f3f2bf; /* YELLOW */
+  background-color: #f3f2bf;
+  /* YELLOW */
 }
 [data-colour="7"] > .color-col,
 li[data-colour="7"],
 [data-colour="7"] > .colour-div {
-  background-color: #cecece; /* GRAY */
+  background-color: #cecece;
+  /* GRAY */
 }
 [data-colour="8"] > .color-col,
 li[data-colour="8"],
 [data-colour="8"] > .colour-div {
-  background-color: #979696; /* DARK GRAY */
+  background-color: #979696;
+  /* DARK GRAY */
 }
 /* ********* CLIENT CALENDAR COLOURS End ********** */
 input {
@@ -712,7 +725,6 @@ table td {
 #resetPasswordForm > input {
   margin: 30px;
 }
-
 .last-updated {
   width: inherit;
   height: 20px;
