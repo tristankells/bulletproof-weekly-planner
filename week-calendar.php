@@ -47,7 +47,7 @@ if ($_SESSION['authentication'] != 1) {
     <div class="container-fluid">
         <div id="navigationBar" class="row">
             <div id="top-logo-div" class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
-             <div id="glance-logo">Glance.</div>
+             <div id="glance-logo">G.</div>
             </div>
             <div id="top-btn-group" class="btn-group-wrap col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <nav class="shift">

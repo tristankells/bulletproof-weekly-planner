@@ -35,7 +35,7 @@ if(isset($_SESSION['authentication'])&&$_SESSION['authentication']==1)
 <body>
     <div class="container-fluid login-page" id="background">
         <div class="row-fluid logo">
-            <img class="logo-image" src="img/glance_logo_white_lg.png">
+            <img class="logo-image" src="img/bulletproof-logo-white.png">
         </div>
         <div class="form">
             <div class="register-form">

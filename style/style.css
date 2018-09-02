@@ -4,7 +4,8 @@
 
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400,700,900");
 @import url("https://fonts.googleapis.com/css?family=Roboto+Slab:400,700");
-@import url("https://fonts.googleapis.com/css?family=Montserrat:100,400,700");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:100,400,700,900");
+
 
 /* Set entire page to Lato font */
 
@@ -440,28 +441,13 @@ nav.shift ul li a:hover:after {
 
 #glance-logo {
   font-family: Montserrat, sans-serif;
-  font-weight: 700;
+  font-weight: 900;
   font-size: 30px;
-  height: 100%;
-  width: 13%;
-  letter-spacing: 15px;
-  padding-left: 5px;
-  margin-right: auto;
-  color: #f9f9f9;
-  background-color: #212529;
-  text-align: center;
+  letter-spacing: -1px;
+  color: #212529;
+  text-align: left;
   line-height: 50px;
   vertical-align: -webkit-baseline-middle;
-  -webkit-transition: 0.5s cubic-bezier(0.445, 0.05, 0.55, 0.95);
-}
-
-#glance-logo:hover {
-  width: 50%;
-  letter-spacing: 0px;
-  text-align: left;
-  transition: 2s cubic-bezier(0.075, 0.82, 0.165, 1);
-  background: rgb(197, 46, 46);
-  color: white;
 }
 
 @media only screen and (max-width: 580px) {
@@ -490,10 +476,10 @@ nav.shift ul li a:hover:after {
 [data-office="3"] {
   background: repeating-linear-gradient(
     45deg,
-    #e2e2e2,
-    #e2e2e2 10px,
-    #b3b2b2 10px,
-    #b3b2b2 20px
+    #ececec,
+    #ececec 10px,
+    #fafafa 10px,
+    #fafafa 20px
   );
 }
 /* ********* CLIENT COLOURS Begin ********** */
