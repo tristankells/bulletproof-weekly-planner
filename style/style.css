@@ -309,10 +309,13 @@ a:hover {
 .clear-consultant-row {
   width: 60px;
   height: 72px;
-  line-height: 72px !important;
   vertical-align: -webkit-baseline-middle !important;
   text-align: center;
   padding: auto;
+}
+
+.last-updated-div {
+  font-size: 60%;
 }
 
 .clear-consultant-container {

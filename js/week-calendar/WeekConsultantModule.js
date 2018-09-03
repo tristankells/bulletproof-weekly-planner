@@ -264,6 +264,10 @@ var WeekConsultantModule = (function() {
 
     updateClientsWhoCols();
 
+    $consultantRow
+      .find(".last-updated-div")
+      .html(convertDateToString(new Date()));
+
     updateAllocationInDB(allocation).done(function(data) {
       console.log(data);
     });
@@ -405,10 +409,13 @@ var WeekConsultantModule = (function() {
       $("<div></div>")
         .addClass("clear-consultant-row")
         .append(
-          $("<div></div>").append(
-            $("<i></i>").addClass(
-              "clear-consultant-btn clear-row-btn fas fa-minus-square fa-2x"
-            )
+          $("<div></div>")
+            .html(getDateOfMostRecentAllocation(consultant["allocations"]))
+            .addClass("last-updated-div")
+        )
+        .append(
+          $("<i></i>").addClass(
+            "clear-consultant-btn clear-row-btn fas fa-minus-square fa-2x"
           )
         )
     );
@@ -438,9 +445,31 @@ var WeekConsultantModule = (function() {
     }
   }
 
+  function convertDateToString(date) {
+    var stringDate = "",
+      min = 0,
+      hour = 0,
+      day = 0,
+      month = 0,
+      year = 0;
+
+    min = date.getMinutes();
+    hour = date.getHours();
+    day = date.getDate();
+    month = date.getMonth();
+    year = date.getFullYear();
+
+    stringDate = hour + ":" + min + " " + day + "/" + month + "/" + year;
+
+    return stringDate;
+  }
+
   function getDateOfMostRecentAllocation(allocations) {
     var latestAllocationDate = null,
-      allocationDate = new Date();
+      allocationDate = new Date(),
+      lastAllocationString = "";
+
+    lastAllocationString = "00:00 00/00/0000";
 
     for (x in allocations) {
       allocationDate = new Date(allocations[x]["timeAllocated"]);
@@ -451,7 +480,11 @@ var WeekConsultantModule = (function() {
         latestAllocationDate = allocationDate;
       }
     }
-    return latestAllocationDate;
+
+    if (latestAllocationDate != null) {
+      lastAllocationString = convertDateToString(latestAllocationDate);
+    }
+    return lastAllocationString;
   }
 
   function renderPlaceHolderText() {
