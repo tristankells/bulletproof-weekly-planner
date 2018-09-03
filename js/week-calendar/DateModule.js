@@ -93,7 +93,7 @@ var DateModule = (function() {
   }
 
   /* =================== public methods ================== */
-  // main init method
+  // main init method 
   function init() {
     cacheDom();
     render();
