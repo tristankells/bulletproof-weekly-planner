@@ -6,7 +6,6 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Slab:400,700");
 @import url("https://fonts.googleapis.com/css?family=Montserrat:100,400,700,900");
 
-
 /* Set entire page to Lato font */
 
 * {
@@ -495,7 +494,6 @@ nav.shift ul li a:hover:after {
     #fafafa 20px
   );
 }
-
 .stripes {
   background: repeating-linear-gradient(
     45deg,
@@ -505,7 +503,6 @@ nav.shift ul li a:hover:after {
     #fafafa 20px
   );
 }
-
 .stripes:hover {
   background: repeating-linear-gradient(
     45deg,
@@ -748,9 +745,14 @@ table td {
 #resetPasswordForm > input {
   margin: 30px;
 }
+
 .last-updated {
   width: inherit;
   height: 20px;
   font-size: 8px;
   color: rgb(206, 206, 206);
+}
+
+#toggleweekbutton {
+  margin: 0 auto;
 }

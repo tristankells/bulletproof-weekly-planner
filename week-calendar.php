@@ -67,6 +67,7 @@ if ($_SESSION['authentication'] != 1) {
     </div>
     <div class="container-fluid">
         <div class="row" id="maindiv">
+        <button id="toggleweekbutton">Next Week</button>
             <div class="col-lg-12" id="consultantsdiv">
                 <table class="consultant-table table" id="consultantstable">
                     <thead id="consultantstablehead">
