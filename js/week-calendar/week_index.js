@@ -1,6 +1,5 @@
 //Load the javascript when the page is loaded
 $(document).ready(function() {
-
   DateModule.init();
   WeekAllocationModule.init();
   ResetPasswordModule.init();
@@ -10,7 +9,7 @@ $(document).ready(function() {
       var databaseResults = [],
         clients = [],
         consultants = [];
-
+    //  console.log(data);
       databaseResults = JSON.parse(data); //Store consultant and client arrays recieved from server
 
       consultants = databaseResults[0]; //Store array of consultants

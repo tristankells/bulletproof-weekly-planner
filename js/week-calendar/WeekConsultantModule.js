@@ -13,7 +13,6 @@ var WeekConsultantModule = (function() {
     DOM.$officeMenu = $("#officemenu");
     DOM.$document = $(document);
     DOM.$resetAllocationsButton = $("#resetallocationbutton");
-    DOM.$toggleWeekButton = $("#toggleweekbutton");
   }
   // bind events
   function bindEvents() {
@@ -75,10 +74,6 @@ var WeekConsultantModule = (function() {
     DOM.$consultantsTableBody.on("mouseleave", ".allocation-col", function() {
       handleMouseLeavingAllocation($(this));
     });
-
-    DOM.$toggleWeekButton.click(function() {
-      handleToggleWeekButtonClick();
-    });
   }
 
   //Takes a allocation TD. Highlights the matching day and time.
@@ -95,33 +90,6 @@ var WeekConsultantModule = (function() {
     $dates.eq(Math.floor(allocationSlot / 2)).addClass("red-text");
   }
 
-  //Toggle between this week and next week
-  function handleToggleWeekButtonClick() {
-    console.log("toggle clicked");
-    if (currentWeek == 1) {
-      currentWeek = 2;
-    } else if (currentWeek == 2) {
-      currentWeek = 1;
-    }
-
-    DOM.$toggleWeekButton.html("Week " + currentWeek);
-
-    retrieveConsultantsAndClientFromDB().done(
-      data => (globalConsultants = JSON.parse(data)[0])
-    ); //Store consultant and client arrays recieved from server
-
-    DOM.$consultantsTableBody.find("tr").each((index, element) => {
-      $(element)
-        .find(".allocation-col")
-        .remove();
-
-      $(element)
-        .find(".consultant-header")
-        .after(
-          getConsultantAllocationCols(globalConsultants[index]["allocations"])
-        );
-    });
-  }
 
   function handleMouseLeavingAllocation() {
     $("th").removeClass("red-text");
@@ -283,7 +251,13 @@ var WeekConsultantModule = (function() {
     allocation["clientID"] = $allocationCol.attr("data-id");
     allocation["officeStatus"] = $allocationCol.attr("data-office");
     allocation["allocationSlot"] = $allocationCol.attr("data-slot");
-    allocation["week"] = currentWeek;
+    //Get timestamp and format to MYSQL datetime
+    allocation["timeCreated"] = new Date()
+      .toJSON()
+      .slice(0, 19)
+      .replace("T", " ");
+
+    console.log(allocation["timeStamp"]);
 
     $allocationCol.replaceWith(
       WeekAllocationModule.getAllocationTd(
@@ -449,21 +423,11 @@ var WeekConsultantModule = (function() {
     DOM.$consultantsTableBody.append($rowElement);
   }
 
-  //Takes all of a client allocations and returns all of the allocations
-  function getAllocationsForCurrentWeek(allAllocations) {
-    var thisWeeksAllocations = [];
-
-    thisWeeksAllocations = allAllocations.filter(
-      allocation => allocation.week == currentWeek
-    );
-
-    return thisWeeksAllocations;
-  }
 
   //Return 10 allocations columns (to be appened to consultant row)
   function getConsultantAllocationCols(allocations) {
     var $allocationCols = $(),
-      currentWeekAllocations = getAllocationsForCurrentWeek(allocations);
+      currentWeekAllocations = allocations;
 
     for (let i = 0; i < 10; i++) {
       var allocation = {},
@@ -583,7 +547,7 @@ var WeekConsultantModule = (function() {
   // main init method
   function init(consultants) {
     cacheDom();
-    DOM.$toggleWeekButton.html("Week " + currentWeek);
+
     if (consultants.length > 0) {
       bindEvents();
       globalConsultants = consultants;
