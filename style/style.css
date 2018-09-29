@@ -790,37 +790,18 @@ table td {
   float: left;
 }
 
-.previousWeekButtonContainer a {
-  color: black;
-  cursor: pointer;
-}
-
-.previousWeekButtonContainer a:hover {
-  color: rgb(197, 46, 46);
-  font-weight: bold;
-  text-decoration: none;
-}
-
 .previousWeekButtonContainer i:hover {
   cursor: pointer;
+  color: rgb(197, 46, 46);
 }
 
 .nextWeekButtonContainer{
   float: right;
 }
 
-.nextWeekButtonContainer a {
-  color: black;
-}
-
-.nextWeekButtonContainer a:hover {
-  color: rgb(197, 46, 46);
-  font-weight: bold;
-  text-decoration: none;
-}
-
 .nextWeekButtonContainer i:hover {
   cursor: pointer;
+  color: rgb(197, 46, 46);
 }
 
 .changeWeekButton {

@@ -70,17 +70,13 @@ if ($_SESSION['authentication'] != 1) {
         <div class="row" id="maindiv">
             <div id="weekNavButtons">
                 <div class="previousWeekButtonContainer">
-                    <a href="#">
                         <button class="changeWeekButton" id="previousWeekButton"><i class="fas fa-arrow-left"></i></button>
                         <span style="font-size: 0.8em;">Previous </span>
-                    </a>
                     
                 </div>
                 <div class="nextWeekButtonContainer">
-                    <a href="#">
                         <span style="font-size: 0.8em;">Next </span>
                         <button class="changeWeekButton" id="nextWeekButton"><i class="fas fa-arrow-right"></i></button>
-                    </a>
                 </div>
             </div>
             <div class="col-lg-12" id="consultantsdiv">
