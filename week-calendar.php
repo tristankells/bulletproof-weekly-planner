@@ -68,8 +68,8 @@ if ($_SESSION['authentication'] != 1) {
     <div class="container-fluid">
         <div class="row" id="maindiv">
             <div id="weekNavButtons">
-                <button id="previousWeekButton">Previous Week</button>
-                <button id="nextWeekButton">Next Week</button>
+                <button id="previousWeekButton"><i class="fas fa-arrow-left"></i></button>
+                <button id="nextWeekButton"><i class="fas fa-arrow-right"></i></button>
             </div>
             <div class="col-lg-12" id="consultantsdiv">
                 <table class="consultant-table table" id="consultantstable">
