@@ -11,6 +11,22 @@ var DateModule = (function() {
     DOM.$consultantsTableHeadRow = $("#consultantstableheadrow");
   }
 
+  //Return date object containing this weeks monday and sunday
+  function thisWeeksMondaySunday(week) {
+    var dates = {};
+    dates.monday = new Date();
+    dates.sunday = new Date();
+
+    //Store current monday and sunday
+    dates.monday = getMonday();
+    dates.monday.setDate(dates.monday.getDate() + week * 7);
+    dates.monday.setHours(0, 0, 0);
+    dates.sunday.setDate(dates.monday.getDate() + 6);
+    dates.sunday.setHours(11, 59, 59);
+
+    return dates;
+  }
+
   function getMonday() {
     var monday = new Date();
     switch (monday.getDay()) {
@@ -108,6 +124,7 @@ var DateModule = (function() {
   /* =============== export public methods =============== */
   return {
     init: init,
-    getMonday: getMonday
+    getMonday: getMonday,
+    thisWeeksMondaySunday: thisWeeksMondaySunday
   };
 })();
