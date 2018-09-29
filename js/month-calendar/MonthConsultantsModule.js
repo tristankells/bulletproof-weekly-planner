@@ -110,7 +110,7 @@ var MonthConsultantsModule = (function() {
       .attr("data-id", consultant["id"]); //Add consultant id to row
     row.append($("<td></td>").html(consultant["full_name"])); //Add client name colunm
 
-    //Add all allocated  clients from the weekly view to the this week colunm
+    //Add all allocated  clients from the weekly view to the current week colunm
     var weekClientNames = "";
     for (x in consultant["week_allocations"]) {
       if (
