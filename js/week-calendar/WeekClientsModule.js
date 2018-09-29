@@ -50,6 +50,7 @@ var WeekClientsModule = (function() {
         .html(client["full_name"])
     );
 
+    //Add color column
     $rowElement.append($("<td></td>").addClass("color-col"));
 
     //Add abbreviation column

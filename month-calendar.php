@@ -75,7 +75,9 @@ if($_SESSION['authentication']!=1)
                         <table id="clienttable" class="table table-dark table-striped table-bordered">
                             <thead id="clienttablehead">
                                 <tr id="clienttableheadrow">
-                                    <th>CLIENTS</th>
+                                    <th style="width: 60%">Clients</th>
+                                    <th style="width: 10%">Color</th>
+                                    <th style="width: 30%">Abbreviation</th>
                                 </tr>
                             </thead>
                             <tbody id="clienttablebody" style="font-weight:bold">
