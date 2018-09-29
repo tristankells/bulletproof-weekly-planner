@@ -1,26 +1,9 @@
 var WeekAllocationModule = (function() {
   "use strict";
-  // placeholder for cached DOM elements
-  var DOM = {};
 
   /* =================== private methods ================= */
-  // cache DOM elements
-  function cacheDom() {}
 
   //Takes a allocation object, and returns a allocation <div> containing that allocation's data
-  function getAllocationDiv(allocation) {
-    var $colourDiv = {},
-      $clientAbbreviationDiv = {},
-      $officeStatusDiv = {};
-
-    $colourDiv = $("<div></div>").addClass("colour-div");
-    $clientAbbreviationDiv = getAllocationClientAbbreviationDiv(
-      allocation["abbreviation"]
-    );
-    $officeStatusDiv = getAllocationOfficeStatusDiv(allocation["officeStatus"]);
-
-    return $colourDiv.add($clientAbbreviationDiv).add($officeStatusDiv);
-  }
 
   //Takes a string representing a client abbreviation and returns a client abbreviation <div>, one part of the allocation <div>
   function getAllocationClientAbbreviationDiv(clientAbbreviation) {
@@ -52,6 +35,8 @@ var WeekAllocationModule = (function() {
 
     return $officeStatusDiv;
   }
+
+  /* =================== public methods ================== */
 
   //Takes a int represeting col index, and an allocation (or null). Returns a
   function getAllocationTd(i, allocation) {
@@ -86,15 +71,22 @@ var WeekAllocationModule = (function() {
     return $allocationTd;
   }
 
-  /* =================== public methods ================== */
-  // main init method
-  function init() {
-    cacheDom();
+  function getAllocationDiv(allocation) {
+    var $colourDiv = {},
+      $clientAbbreviationDiv = {},
+      $officeStatusDiv = {};
+
+    $colourDiv = $("<div></div>").addClass("colour-div");
+    $clientAbbreviationDiv = getAllocationClientAbbreviationDiv(
+      allocation["abbreviation"]
+    );
+    $officeStatusDiv = getAllocationOfficeStatusDiv(allocation["officeStatus"]);
+
+    return $colourDiv.add($clientAbbreviationDiv).add($officeStatusDiv);
   }
 
   /* =============== export public methods =============== */
   return {
-    init: init,
     getAllocationDiv: getAllocationDiv,
     getAllocationTd: getAllocationTd
   };

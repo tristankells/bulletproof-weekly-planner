@@ -1,7 +1,6 @@
 //Load the javascript when the page is loaded
 $(document).ready(function() {
   DateModule.init();
-  WeekAllocationModule.init();
   ResetPasswordModule.init();
 
   function initialiseTables() {
@@ -9,27 +8,16 @@ $(document).ready(function() {
       var databaseResults = [],
         clients = [],
         consultants = [];
-    //  console.log(data);
+
       databaseResults = JSON.parse(data); //Store consultant and client arrays recieved from server
 
       consultants = databaseResults[0]; //Store array of consultants
 
       clients = databaseResults[1]; //Store array of clients
 
-      /*
-            Iterate through the arrays of clients and consultants and ouput the information stored in these arrays
-            to the page tables
-
-
-            */
-
       WeekClientsModule.init(clients);
-
+      WeekConsultantStorageModule.init(consultants);
       WeekConsultantModule.init(consultants);
-
-      //  for (x in consultants) {
-      //   addConsultantToTable(consultants[x], clients);
-      //  }
 
       //Using the jquery UI library, makes items within tbody elements sortable
       //THE START OF POSITION TRACKING FUNCTIONALITY NEED TO BE EXPANDED UPON

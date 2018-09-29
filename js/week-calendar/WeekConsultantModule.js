@@ -2,8 +2,7 @@ var WeekConsultantModule = (function() {
   "use strict";
   // placeholder for cached DOM elements
   var DOM = {},
-    currentWeek = 1,
-    globalConsultants = [];
+    global = {};
 
   /* =================== private methods ================= */
   // cache DOM elements
@@ -13,6 +12,8 @@ var WeekConsultantModule = (function() {
     DOM.$officeMenu = $("#officemenu");
     DOM.$document = $(document);
     DOM.$resetAllocationsButton = $("#resetallocationbutton");
+    DOM.$previousWeekButton = $("#previousWeekButton");
+    DOM.$nextWeekButton = $("#nextWeekButton");
   }
   // bind events
   function bindEvents() {
@@ -74,6 +75,32 @@ var WeekConsultantModule = (function() {
     DOM.$consultantsTableBody.on("mouseleave", ".allocation-col", function() {
       handleMouseLeavingAllocation($(this));
     });
+
+    DOM.$previousWeekButton.on("click", function() {
+      handleWeekNavigationButtonClick(-1);
+    });
+
+    DOM.$nextWeekButton.on("click", function() {
+      handleWeekNavigationButtonClick(1);
+    });
+  }
+
+  function handleWeekNavigationButtonClick(number) {
+    global.week += number;
+    console.log(global.week);
+
+    var consultants = WeekConsultantStorageModule.getConsultantsWeeksAllocations(
+      global.week
+    );
+
+    DOM.$consultantsTableBody.find("tr").each((index, element) => {
+      $(element)
+        .find(".allocation-col")
+        .remove();
+      $(element)
+        .find(".consultant-header")
+        .after(getConsultantAllocationCols(consultants[index].allocations));
+    });
   }
 
   //Takes a allocation TD. Highlights the matching day and time.
@@ -89,7 +116,6 @@ var WeekConsultantModule = (function() {
     $dateSubheadings.eq(allocationSlot).addClass("red-text");
     $dates.eq(Math.floor(allocationSlot / 2)).addClass("red-text");
   }
-
 
   function handleMouseLeavingAllocation() {
     $("th").removeClass("red-text");
@@ -240,7 +266,8 @@ var WeekConsultantModule = (function() {
 
   function updateAllocation($allocationCol) {
     var allocation = {},
-      $consultantRow = {};
+      $consultantRow = {},
+      timeCreated = new Date();
 
     //Retrieve all allocation information from the allocation column
     $consultantRow = $allocationCol.parents("tr");
@@ -251,13 +278,17 @@ var WeekConsultantModule = (function() {
     allocation["clientID"] = $allocationCol.attr("data-id");
     allocation["officeStatus"] = $allocationCol.attr("data-office");
     allocation["allocationSlot"] = $allocationCol.attr("data-slot");
+
     //Get timestamp and format to MYSQL datetime
-    allocation["timeCreated"] = new Date()
+
+    timeCreated.setDate(timeCreated.getDate() + global.week * 7);
+
+    allocation["timeCreated"] = timeCreated
       .toJSON()
       .slice(0, 19)
       .replace("T", " ");
 
-    console.log(allocation["timeStamp"]);
+    console.log(allocation["timeCreated"]);
 
     $allocationCol.replaceWith(
       WeekAllocationModule.getAllocationTd(
@@ -265,8 +296,6 @@ var WeekConsultantModule = (function() {
         allocation
       )
     );
-
-    //NEED TO INSERT NEW LATEST ALLOCATION DATE
 
     $(".custom-menu").hide(100);
 
@@ -279,7 +308,7 @@ var WeekConsultantModule = (function() {
       .html(convertDateToString(new Date()));
 
     updateAllocationInDB(allocation).done(function(data) {
-      console.log(data);
+      // console.log(data);
     });
   }
 
@@ -423,7 +452,6 @@ var WeekConsultantModule = (function() {
     DOM.$consultantsTableBody.append($rowElement);
   }
 
-
   //Return 10 allocations columns (to be appened to consultant row)
   function getConsultantAllocationCols(allocations) {
     var $allocationCols = $(),
@@ -539,10 +567,6 @@ var WeekConsultantModule = (function() {
     });
   }
 
-  function retrieveConsultantsAndClientFromDB() {
-    return $.get("php/getConsultantsAndClients.php");
-  }
-
   /* =================== public methods ================== */
   // main init method
   function init(consultants) {
@@ -550,8 +574,10 @@ var WeekConsultantModule = (function() {
 
     if (consultants.length > 0) {
       bindEvents();
-      globalConsultants = consultants;
-      render(globalConsultants);
+      global.week = 0;
+      render(
+        WeekConsultantStorageModule.getConsultantsWeeksAllocations(global.week)
+      );
       updateClientsWhoCols();
     } else {
       renderPlaceHolderText();
