@@ -624,7 +624,7 @@ input {
   padding: 0px;
 }
 #clienttable {
-  width: 30%;
+  width: 50%;
   margin: auto;
   text-align: center;
 }
@@ -645,9 +645,9 @@ td {
 }
 .month-tab {
   border-radius: 25px;
-  padding: 12px;
+  padding: 10px;
   margin: 2px;
-  font-size: 15px;
+  font-size: 14px;
   font-weight: bold;
   letter-spacing: 1px;
 }

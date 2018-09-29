@@ -60,6 +60,8 @@ var MonthConsultantsModule = (function() {
     dynamicData["consultantID"] = $consultantRow.attr("data-id");
     dynamicData["clientID"] = $clientMenuItem.attr("data-id");
     dynamicData["isAdding"] = 1;
+    dynamicData["abbreviation"]= $clientMenuItem.attr("data-abbreviation");
+    dynamicData["colour"]= $clientMenuItem.attr("data-colour");
 
     if ($clientMenuItem.attr("data-flag") == 1) {
       dynamicData["isAdding"] = 0;
@@ -75,12 +77,9 @@ var MonthConsultantsModule = (function() {
       });
 
       if (clientNotAllreadyAdded) {
-        var $clientSpan = $();
-        $clientSpan = $("<span></span>")
-          .html(clientName)
-          .attr("data-name", clientName);
+        
 
-        $allocationCol.append($clientSpan);
+        $allocationCol.append(renderClientTab(dynamicData["abbreviation"], dynamicData["colour"]));
       } else {
         console.log("client already added");
 
@@ -119,10 +118,8 @@ var MonthConsultantsModule = (function() {
         !(consultant["week_allocations"][x]["allocated_to"] == "Open") &&
         !(consultant["week_allocations"][x]["allocated_to"] == "Leave")
       ) {
-        weekClientNames.append($("<span></span>")
-          .addClass("month-tab")
-          .attr("data-color", consultant["week_allocations"][x]["colour"]) //Add data color to span
-          .html(consultant["week_allocations"][x]["allocated_to"])
+        weekClientNames.append( 
+          renderClientTab((consultant["week_allocations"][x]["allocated_to"]), (consultant["week_allocations"][x]["colour"]))
         )
          
       }
@@ -143,10 +140,8 @@ var MonthConsultantsModule = (function() {
       if (allocations) {
         for (x in allocations) {
           $allocationCol.append(
-            $("<span></span>")
-              .html(allocations[x]["full_name"])
-              .attr("data-name", allocations[x]["full_name"])
-          );
+            renderClientTab((allocations[x]["abbreviation"]), (allocations[x]["colour"]))
+          )
         }
       }
 
@@ -167,6 +162,14 @@ var MonthConsultantsModule = (function() {
       }
     }
     return returnAllocations;
+  }
+
+  // Render client tab color and format with abbreviated client name
+  function renderClientTab (abbreviation, colour){
+    return $("<span></span>")
+        .addClass("month-tab")
+        .attr("data-color", colour) //Add data color to span
+        .html(abbreviation)
   }
 
   //Render <tr> elements for every consultant in the module array
