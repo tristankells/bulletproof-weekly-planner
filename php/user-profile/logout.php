@@ -14,7 +14,10 @@ if (ini_get("session.use_cookies")) {
         $params["secure"], $params["httponly"]
     );
 }
-
+if (isset($_COOKIE['email'])) {
+    unset($_COOKIE['email']);
+    setcookie('email', null, -1, '/');
+}  
 // Finally, destroy the session.
 session_destroy();
 header("Location: ../../index.php");

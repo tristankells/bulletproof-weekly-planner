@@ -9,6 +9,7 @@ var LoginModule = (function() {
     DOM.$loginButton = $("#login-button");
     DOM.$emailInput = $("#email-input");
     DOM.$passwordInput = $("#password-input");
+	 DOM.$staying_logged = $("#staying_logged");
     DOM.$loginForm = $("#login-form");
     DOM.$loginFormButton = $(".login-form-btn");
   }
@@ -46,12 +47,14 @@ var LoginModule = (function() {
 
   function retrieveLoginInfoEntered() {
     var email = "",
-      password = "";
+      password = "",
+      staying_logged="";
 
     email = DOM.$emailInput.val();
     password = DOM.$passwordInput.val();
+    staying_logged = DOM.$staying_logged.prop("checked");
 
-    return { email: email, password: password };
+    return { email: email, password: password, staying_logged: staying_logged };
   }
 
   function animateLoginFormTransition() {}
