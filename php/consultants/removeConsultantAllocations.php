@@ -9,12 +9,17 @@ that name.
 
 require_once '../database.php';
 
-$id = $_POST['id'];
+$dynamicData = $_POST['dynamicData'];
+$id = $dynamicData['id'];
+$monday = $dynamicData["monday"];
+$sunday = $dynamicData["sunday"];
 
 $query = "DELETE allocation
-FROM allocation 
-LEFT OUTER JOIN consultant ON allocation.consultant_id = consultant.id
-WHERE consultant.id = $id";
+    FROM allocation
+    LEFT OUTER JOIN consultant ON allocation.consultant_id = consultant.id
+    WHERE consultant.id = $id
+    AND date_created >= '$monday'
+    AND date_created <= '$sunday'";
 
 $conn->query($query);
 
