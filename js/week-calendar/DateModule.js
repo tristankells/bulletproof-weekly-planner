@@ -27,6 +27,21 @@ var DateModule = (function() {
     return dates;
   }
 
+  function thisWeeksMondaySundayStringified(week) {
+    var monday, sunday;
+
+    monday = DateModule.getMonday();
+    monday.setDate(monday.getDate() + week * 7);
+    monday.setHours(0, 0, 0);
+    sunday = new Date(monday.getTime() + 6 * 24 * 60 * 60 * 1000);
+    sunday.setHours(23, 59, 59);
+
+    monday = monday.toLocaleDateString();
+    sunday = sunday.toLocaleDateString();
+
+    return { monday: monday, sunday: sunday };
+  }
+
   function getMonday() {
     var monday = new Date();
     switch (monday.getDay()) {
@@ -125,6 +140,7 @@ var DateModule = (function() {
   return {
     init: init,
     getMonday: getMonday,
-    thisWeeksMondaySunday: thisWeeksMondaySunday
+    thisWeeksMondaySunday: thisWeeksMondaySunday,
+    thisWeeksMondaySundayStringified: thisWeeksMondaySundayStringified
   };
 })();

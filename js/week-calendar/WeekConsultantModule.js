@@ -251,7 +251,7 @@ var WeekConsultantModule = (function() {
       updateClientsWhoCols();
 
       //Post request
-      clearAllAllocationsInDB().done();
+      clearAllAllocationsInDB(DateModule.thisWeeksMondaySundayStringified()).done();
     }
   }
 
@@ -298,12 +298,13 @@ var WeekConsultantModule = (function() {
       .slice(0, 19)
       .replace("T", " ");
 
-    mondaySunday = DateModule.thisWeeksMondaySunday(global.week);
-    console.log(allocation["timeCreated"]);
+    mondaySunday = DateModule.thisWeeksMondaySundayStringified(global.week);
 
-    allocation["monday"] = mondaySunday.monday.toLocaleDateString();
+    allocation["monday"] = mondaySunday.monday;
+    allocation["sunday"] = mondaySunday.sunday;
 
-    allocation["sunday"] = mondaySunday.sunday.toLocaleDateString();
+    console.log(allocation["monday"] + allocation["sunday"]);
+
     $allocationCol.replaceWith(
       WeekAllocationModule.getAllocationTd(
         allocation["allocationSlot"],
@@ -571,17 +572,19 @@ var WeekConsultantModule = (function() {
     });
   }
 
-  function clearAllAllocationsInDB() {
-    return $.get("php/consultants/removeAllAllocations.php");
+  function clearAllAllocationsInDB(dynamicData) {
+    return $.post("php/consultants/removeAllAllocations.php", {
+      dynamicData: dynamicData
+    });
   }
 
   function getConsultantAndClientsFromDB() {
     return $.get("php/getConsultantsAndClients.php");
   }
 
-  function clearConsutlantAllocationsIDB(id) {
+  function clearConsutlantAllocationsIDB(dynamicData) {
     return $.post("php/consultants/removeConsultantAllocations.php", {
-      id: id
+      dynamicData: dynamicData
     });
   }
 
