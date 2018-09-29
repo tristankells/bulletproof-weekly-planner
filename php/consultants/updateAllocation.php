@@ -8,8 +8,7 @@ $id = $dynamicData["consultantID"];
 $clientID = $dynamicData["clientID"];
 $allocationSlot = $dynamicData["allocationSlot"];
 $officeStatus = $dynamicData["officeStatus"];
-
-
+$timeCreated = $dynamicData["timeCreated"];
 
 $query = "DELETE FROM allocation
             WHERE consultant_id = $id
@@ -18,13 +17,12 @@ $query = "DELETE FROM allocation
 $conn->query($query);
 
 if ($clientID == 0) {
-    $query = "INSERT INTO allocation (consultant_id, allocation_slot, office_status)
-    VALUES ($id, $allocationSlot, $officeStatus)";
+    $query = "INSERT INTO allocation (consultant_id, allocation_slot, office_status, week_no)
+    VALUES ($id, $allocationSlot, $officeStatus, $week)";
 } else {
-    $query = "INSERT INTO allocation (consultant_id, client_id, allocation_slot, office_status)
-    VALUES ($id, $clientID, $allocationSlot, $officeStatus)";
+    $query = "INSERT INTO allocation (consultant_id, client_id, allocation_slot, office_status, date_created)
+    VALUES ($id, $clientID, $allocationSlot, $officeStatus, '$timeCreated')";
 }
-
 
 //Run query on connection
 $conn->query($query);

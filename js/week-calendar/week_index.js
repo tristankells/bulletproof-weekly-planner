@@ -1,22 +1,15 @@
 //Load the javascript when the page is loaded
 $(document).ready(function() {
-  /*  
-        @function initialiseTables
-
-        Fill the client and consulsant table bodies with information from the mySQL database. 
-    */
-
-   DateModule.init();
-   WeekAllocationModule.init();
-
-   ResetPasswordModule.init();
+  DateModule.init();
+  WeekAllocationModule.init();
+  ResetPasswordModule.init();
 
   function initialiseTables() {
     $.get("php/getConsultantsAndClients.php", function(data) {
       var databaseResults = [],
         clients = [],
         consultants = [];
-
+    //  console.log(data);
       databaseResults = JSON.parse(data); //Store consultant and client arrays recieved from server
 
       consultants = databaseResults[0]; //Store array of consultants
@@ -29,7 +22,6 @@ $(document).ready(function() {
 
 
             */
-
 
       WeekClientsModule.init(clients);
 
@@ -56,9 +48,6 @@ $(document).ready(function() {
           saveNewClientPositions();
         }
       });
-
-
-
     });
   }
 
@@ -79,4 +68,3 @@ $(document).ready(function() {
     );
   }
 });
-

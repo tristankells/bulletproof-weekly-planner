@@ -1,39 +1,40 @@
 CREATE TABLE board (
-id 		            bigint NOT NULL AUTO_INCREMENT,
-name 	            varchar(100) NOT NULL,
-description         text,
-PRIMARY KEY (id)
+    id 		            bigint NOT NULL AUTO_INCREMENT,
+    name 	            varchar(100) NOT NULL,
+    description         text,
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE client (
-id                  bigint NOT NULL AUTO_INCREMENT,
-full_name           varchar(30),
-abbreviation        varchar(10),
-board_id            bigint REFERENCES board(id),
-board_position      int,
-colour               int DEFAULT 0,
-CONSTRAINT unq_board_id_client_name UNIQUE(full_name, board_position),
-CONSTRAINT unq_board_id_abbreviation UNIQUE(abbreviation, board_position),
-PRIMARY KEY (id)
+    id                  bigint NOT NULL AUTO_INCREMENT,
+    full_name           varchar(30),
+    abbreviation        varchar(10),
+    board_id            bigint REFERENCES board(id),
+    board_position      int,
+    colour               int DEFAULT 0,
+    CONSTRAINT unq_board_id_client_name UNIQUE(full_name, board_position),
+    CONSTRAINT unq_board_id_abbreviation UNIQUE(abbreviation, board_position),
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE consultant (
-id              bigint NOT NULL AUTO_INCREMENT,
-full_name       varchar(30),
-job_title       varchar(30),
-board_id        bigint NOT NULL REFERENCES board(id),
-board_position  int,
-CONSTRAINT unq_board_id_consultant_name UNIQUE(full_name, board_position),
-PRIMARY KEY (id)
+    id              bigint NOT NULL AUTO_INCREMENT,
+    full_name       varchar(30),
+    job_title       varchar(30),
+    board_id        bigint NOT NULL REFERENCES board(id),
+    board_position  int,
+    CONSTRAINT unq_board_id_consultant_name UNIQUE(full_name, board_position),
+    PRIMARY KEY (id)
 );
 
 CREATE TABLE allocation (
-consultant_id       bigint NOT NULL REFERENCES consultant(id),
-client_id           bigint  REFERENCES client(id),
-allocation_slot     int NOT NULL,
-office_status       int default 0,
-time_allocated      timestamp NOT NULL default current_timestamp ON UPDATE current_timestamp,
-PRIMARY KEY (consultant_id, allocation_slot)
+    consultant_id       bigint NOT NULL REFERENCES consultant(id),
+    client_id           bigint  REFERENCES client(id),
+    allocation_slot     int NOT NULL,
+    office_status       int default 0,
+    date_created        datetime NOT NULL ,
+    date_updated        datetime NOT NULL default current_timestamp ON UPDATE current_timestamp,
+    PRIMARY KEY (consultant_id, allocation_slot)
 );
 
 CREATE TABLE monthly_allocation (

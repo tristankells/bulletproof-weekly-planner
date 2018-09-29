@@ -56,7 +56,8 @@ if ($result->num_rows > 0) {
         client.colour,
         allocation.allocation_slot,
         allocation.office_status,
-        allocation.time_allocated
+        allocation.date_created,
+        allocation.date_updated
         FROM allocation
         LEFT OUTER JOIN client ON client.id = allocation.client_id
         WHERE consultant_id =  $id";
@@ -73,7 +74,8 @@ if ($result->num_rows > 0) {
                     "colour" => $allocationRow['colour'],
                     "allocationSlot" => $allocationRow['allocation_slot'],
                     "officeStatus" => $allocationRow['office_status'],
-                    "timeAllocated" => $allocationRow['time_allocated'],
+                    "timeCreated" => $allocationRow['date_created'],
+                    "timeUpdated" => $allocationRow['date_updated'],
                 ];
                 array_push($allocations, $allocation);
             }
@@ -85,6 +87,7 @@ if ($result->num_rows > 0) {
             "name" => $row['full_name'],
             "role" => $row['job_title'],
             "position" => $row['board_position'],
+
             "allocations" => $allocations,
         ];
         array_push($consultants, $consultant);

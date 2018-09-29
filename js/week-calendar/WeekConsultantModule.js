@@ -1,7 +1,9 @@
 var WeekConsultantModule = (function() {
   "use strict";
   // placeholder for cached DOM elements
-  var DOM = {};
+  var DOM = {},
+    currentWeek = 1,
+    globalConsultants = [];
 
   /* =================== private methods ================= */
   // cache DOM elements
@@ -87,6 +89,7 @@ var WeekConsultantModule = (function() {
     $dateSubheadings.eq(allocationSlot).addClass("red-text");
     $dates.eq(Math.floor(allocationSlot / 2)).addClass("red-text");
   }
+
 
   function handleMouseLeavingAllocation() {
     $("th").removeClass("red-text");
@@ -248,6 +251,13 @@ var WeekConsultantModule = (function() {
     allocation["clientID"] = $allocationCol.attr("data-id");
     allocation["officeStatus"] = $allocationCol.attr("data-office");
     allocation["allocationSlot"] = $allocationCol.attr("data-slot");
+    //Get timestamp and format to MYSQL datetime
+    allocation["timeCreated"] = new Date()
+      .toJSON()
+      .slice(0, 19)
+      .replace("T", " ");
+
+    console.log(allocation["timeStamp"]);
 
     $allocationCol.replaceWith(
       WeekAllocationModule.getAllocationTd(
@@ -391,19 +401,8 @@ var WeekConsultantModule = (function() {
         )
     );
 
-    var i = 0;
-
-    //append allocation columns
-    for (i = 0; i < 10; i++) {
-      var allocation = {};
-
-      allocation = getColumnAllocation(consultant["allocations"], i);
-
-      $rowElement.append(WeekAllocationModule.getAllocationTd(i, allocation));
-    }
-
-    //TEMPORARY STORAGE FOR LATEST ALLOCATION DATE
-    console.log(getDateOfMostRecentAllocation(consultant["allocations"]));
+    //Append allocations columns to row
+    $rowElement.append(getConsultantAllocationCols(consultant["allocations"]));
 
     $rowElement.append(
       $("<div></div>")
@@ -422,6 +421,27 @@ var WeekConsultantModule = (function() {
 
     //Append row to consutlant table
     DOM.$consultantsTableBody.append($rowElement);
+  }
+
+
+  //Return 10 allocations columns (to be appened to consultant row)
+  function getConsultantAllocationCols(allocations) {
+    var $allocationCols = $(),
+      currentWeekAllocations = allocations;
+
+    for (let i = 0; i < 10; i++) {
+      var allocation = {},
+        $allocation = $();
+
+      allocation = getColumnAllocation(currentWeekAllocations, i);
+      $allocation = WeekAllocationModule.getAllocationTd(i, allocation);
+      if (i == 0) {
+        $allocationCols = $allocation;
+      } else {
+        $allocationCols = $allocationCols.add($allocation);
+      }
+    }
+    return $allocationCols;
   }
 
   function getColumnAllocation(allocations, slot) {
@@ -519,13 +539,19 @@ var WeekConsultantModule = (function() {
     });
   }
 
+  function retrieveConsultantsAndClientFromDB() {
+    return $.get("php/getConsultantsAndClients.php");
+  }
+
   /* =================== public methods ================== */
   // main init method
   function init(consultants) {
     cacheDom();
+
     if (consultants.length > 0) {
       bindEvents();
-      render(consultants);
+      globalConsultants = consultants;
+      render(globalConsultants);
       updateClientsWhoCols();
     } else {
       renderPlaceHolderText();
