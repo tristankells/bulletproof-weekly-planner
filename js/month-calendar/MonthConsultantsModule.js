@@ -107,21 +107,28 @@ var MonthConsultantsModule = (function() {
     var row = {}; //Initialise variable
 
     row = $("<tr></tr>") //Create new table row
+      .addClass("monthViewRow")
       .attr("data-id", consultant["id"]); //Add consultant id to row
-    row.append($("<td></td>").html(consultant["full_name"])); //Add client name colunm
+    row.append($("<td></td>").addClass("custom-dark-bg month-consultant-view").html(consultant["full_name"])); //Add client name colunm
 
     //Add all allocated  clients from the weekly view to the current week colunm
-    var weekClientNames = "";
+    var weekClientNames = $("<td></td>");
+
     for (x in consultant["week_allocations"]) {
       if (
         !(consultant["week_allocations"][x]["allocated_to"] == "Open") &&
         !(consultant["week_allocations"][x]["allocated_to"] == "Leave")
       ) {
-        weekClientNames +=
-          consultant["week_allocations"][x]["allocated_to"] + " ";
+        weekClientNames.append($("<span></span>")
+          .addClass("month-tab")
+          .attr("data-color", consultant["week_allocations"][x]["colour"]) //Add data color to span
+          .html(consultant["week_allocations"][x]["allocated_to"])
+        )
+         
       }
     }
-    row.append($("<td></td>").html(weekClientNames));
+    
+    row.append(weekClientNames);
 
     //Loop through weeks in month, and check existing allocations
     for (var i = 2; i <= 4; i++) {

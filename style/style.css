@@ -94,6 +94,7 @@ body {
   width: 200px;
   max-width: 200px;
   padding: 0px !important;
+  font-size: 13px;
 }
 
 .allocation-col:hover {
@@ -515,55 +516,64 @@ nav.shift ul li a:hover:after {
 }
 /* ********* CLIENT COLOURS Begin ********** */
 [data-colour="0"] > .color-col,
-[data-colour="0"] > .colour-div {
+[data-colour="0"] > .colour-div,
+.month-tab[data-color="0"] {
   background-color: white;
   /* DEFAULT */
 }
 [data-colour="1"] > .color-col,
 li[data-colour="1"],
-[data-colour="1"] > .colour-div {
+[data-colour="1"] > .colour-div,
+.month-tab[data-color="1"] {
   background-color: #9bcb9e;
   /* GREEN */
 }
 [data-colour="2"] > .color-col,
 li[data-colour="2"],
-[data-colour="2"] > .colour-div {
+[data-colour="2"] > .colour-div,
+.month-tab[data-color="2"] {
   background-color: #e5c691;
   /* ORANGE */
 }
 [data-colour="3"] > .color-col,
 li[data-colour="3"],
-[data-colour="3"] > .colour-div {
+[data-colour="3"] > .colour-div,
+.month-tab[data-color="3"] {
   background-color: #9abecb;
   /* BLUE */
 }
 [data-colour="4"] > .color-col,
 li[data-colour="4"],
-[data-colour="4"] > .colour-div {
+[data-colour="4"] > .colour-div,
+.month-tab[data-color="4"] {
   background-color: #e4acac;
   /* RED */
 }
 [data-colour="5"] > .color-col,
 li[data-colour="5"],
-[data-colour="5"] > .colour-div {
+[data-colour="5"] > .colour-div,
+.month-tab[data-color="5"] {
   background-color: #bb9bcb;
   /* PURPLE */
 }
 [data-colour="6"] > .color-col,
 li[data-colour="6"],
-[data-colour="6"] > .colour-div {
+[data-colour="6"] > .colour-div,
+.month-tab[data-color="6"] {
   background-color: #f3f2bf;
   /* YELLOW */
 }
 [data-colour="7"] > .color-col,
 li[data-colour="7"],
-[data-colour="7"] > .colour-div {
+[data-colour="7"] > .colour-div,
+.month-tab[data-color="7"] {
   background-color: #cecece;
   /* GRAY */
 }
 [data-colour="8"] > .color-col,
 li[data-colour="8"],
-[data-colour="8"] > .colour-div {
+[data-colour="8"] > .colour-div,
+.month-tab[data-color="8"] {
   background-color: #979696;
   /* DARK GRAY */
 }
@@ -586,6 +596,8 @@ input {
   width: 100%;
   margin: auto;
 }
+
+
 /* Month view layout */
 .table-padding {
   padding-left: 15px;
@@ -630,6 +642,18 @@ input {
 td {
   vertical-align: middle;
   padding: 0px;
+}
+.month-tab {
+  border-radius: 25px;
+  padding: 12px;
+  margin: 2px;
+  font-size: 15px;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.monthViewRow {
+height: 72px;
 }
 /* Manage page layout */
 .manage-table {
@@ -748,6 +772,7 @@ table td {
   margin: 30px;
 }
 
+/* Last updated section */
 .last-updated {
   width: inherit;
   height: 20px;
@@ -755,6 +780,7 @@ table td {
   color: rgb(206, 206, 206);
 }
 
+/* Week navigation - previous and next buttons */
 #weekNavButtons {
   margin: 10px;
   width: 100%;
@@ -801,3 +827,4 @@ table td {
   background: transparent;
   border: none;
 }
+
