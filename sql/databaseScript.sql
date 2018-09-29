@@ -34,7 +34,7 @@ CREATE TABLE allocation (
     office_status       int default 0,
     date_created        datetime NOT NULL ,
     date_updated        datetime NOT NULL default current_timestamp ON UPDATE current_timestamp,
-    PRIMARY KEY (consultant_id, allocation_slot)
+    PRIMARY KEY (consultant_id, allocation_slot, date_created)
 );
 
 CREATE TABLE monthly_allocation (

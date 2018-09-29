@@ -11,6 +11,34 @@ var DateModule = (function() {
     DOM.$consultantsTableHeadRow = $("#consultantstableheadrow");
   }
 
+  function getMonday() {
+    var monday = new Date();
+    switch (monday.getDay()) {
+      case 0:
+        monday.setDate(monday.getDate() - 7);
+        break;
+      case 1:
+        monday.setDate(monday.getDate());
+        break;
+      case 2:
+        monday.setDate(monday.getDate() - 1);
+        break;
+      case 3:
+        monday.setDate(monday.getDate() - 2);
+        break;
+      case 4:
+        monday.setDate(monday.getDate() - 3);
+        break;
+      case 5:
+        monday.setDate(monday.getDate() - 4);
+        break;
+      case 6:
+        monday.setDate(monday.getDate() - 5);
+        break;
+    }
+    return monday;
+  }
+
   // render DOM
   function render() {
     var currentDate = {},
@@ -43,29 +71,7 @@ var DateModule = (function() {
       "December"
     ];
 
-    switch (currentDate.getDay()) {
-      case 0:
-        monday.setDate(monday.getDate() - 7);
-        break;
-      case 1:
-        monday.setDate(monday.getDate());
-        break;
-      case 2:
-        monday.setDate(monday.getDate() - 1);
-        break;
-      case 3:
-        monday.setDate(monday.getDate() - 2);
-        break;
-      case 4:
-        monday.setDate(monday.getDate() - 3);
-        break;
-      case 5:
-        monday.setDate(monday.getDate() - 4);
-        break;
-      case 6:
-        monday.setDate(monday.getDate() - 5);
-        break;
-    }
+    monday = getMonday();
 
     DOM.$displayMonth.append(months[currentDate.getMonth()].toUpperCase());
     DOM.$displayYear.append(currentYear);
@@ -93,7 +99,7 @@ var DateModule = (function() {
   }
 
   /* =================== public methods ================== */
-  // main init method 
+  // main init method
   function init() {
     cacheDom();
     render();
@@ -101,6 +107,7 @@ var DateModule = (function() {
 
   /* =============== export public methods =============== */
   return {
-    init: init
+    init: init,
+    getMonday: getMonday
   };
 })();

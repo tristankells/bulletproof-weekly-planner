@@ -16,10 +16,11 @@ if ($_SESSION['authentication'] != 1) {
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="js/week-calendar/DateModule.js"></script>
     <script src="js/week-calendar/WeekAllocationModule.js"></script>
+    <script src="js/week-calendar/WeekConsultantStorageModule.js"></script>
     <script src="js/week-calendar/WeekClientsModule.js"></script>
     <script src="js/week-calendar/WeekConsultantModule.js"></script>
-    <script src="js/week-calendar/DateModule.js"></script>
     <script src="js/week-calendar/week_index.js"></script>
     <script src="js/UserSetting.js"></script>
     <script src="js/reset-password/ResetPasswordModule.js"></script>
