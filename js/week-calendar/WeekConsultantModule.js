@@ -87,19 +87,28 @@ var WeekConsultantModule = (function() {
 
   function handleWeekNavigationButtonClick(number) {
     global.week += number;
-    ("");
 
-    var consultants = WeekConsultantStorageModule.getConsultantsWeeksAllocations(
-      global.week
-    );
+    getConsultantAndClientsFromDB().done(data => {
+      var databaseResults = JSON.parse(data);
+      //Store consultant and client arrays recieved from server
+      var consultants = databaseResults[0]; //Store array of consultants
 
-    DOM.$consultantsTableBody.find("tr").each((index, element) => {
-      $(element)
-        .find(".allocation-col")
-        .remove();
-      $(element)
-        .find(".consultant-header")
-        .after(getConsultantAllocationCols(consultants[index].allocations));
+      WeekConsultantStorageModule.init(consultants);
+
+      var thisWeeksConsultants = WeekConsultantStorageModule.getConsultantsWeeksAllocations(
+        global.week
+      );
+
+      DOM.$consultantsTableBody.find("tr").each((index, element) => {
+        $(element)
+          .find(".allocation-col")
+          .remove();
+        $(element)
+          .find(".consultant-header")
+          .after(
+            getConsultantAllocationCols(thisWeeksConsultants[index].allocations)
+          );
+      });
     });
   }
 
@@ -564,6 +573,10 @@ var WeekConsultantModule = (function() {
 
   function clearAllAllocationsInDB() {
     return $.get("php/consultants/removeAllAllocations.php");
+  }
+
+  function getConsultantAndClientsFromDB() {
+    return $.get("php/getConsultantsAndClients.php");
   }
 
   function clearConsutlantAllocationsIDB(id) {
