@@ -27,6 +27,42 @@ var DateModule = (function() {
     return dates;
   }
 
+  //Return a string with the date of this week's friday in the format yyyy-mm-dd
+  function getSundayString(week) {
+    var sundayString = "";
+    var monday = getMonday(week);
+    monday.setDate(monday.getDate() + week * 7);
+    monday.setHours(0, 0, 0);
+    
+    var sunday = new Date(monday.getTime() + 6 * 24 * 60 * 60 * 1000);
+    sunday.setHours(22, 59, 59);
+    sunday = new Date(sunday.getTime() + 1000 * 60 * 60 * 14);
+
+    sundayString = sunday
+      .toISOString()
+      .slice(0, 19)
+      .replace("T", " ");
+
+    return sundayString;
+  }
+
+  function getMondayString(week) {
+    var mondayString = "";
+    var monday = getMonday(week);
+    monday.setDate(monday.getDate() + week * 7);
+    monday.setHours(0, 0, 0);
+
+    //Correct for the change to iso
+    monday = new Date(monday.getTime() + 1000 * 60 * 60 * 13);
+
+    mondayString = monday
+      .toISOString()
+      .slice(0, 19)
+      .replace("T", " ");
+
+    return mondayString;
+  }
+
   function thisWeeksMondaySundayStringified(week) {
     var monday, sunday;
 
@@ -42,7 +78,7 @@ var DateModule = (function() {
     return { monday: monday, sunday: sunday };
   }
 
-  function getMonday() {
+  function getMonday(week) {
     var monday = new Date();
     switch (monday.getDay()) {
       case 0:
@@ -67,6 +103,7 @@ var DateModule = (function() {
         monday.setDate(monday.getDate() - 5);
         break;
     }
+
     return monday;
   }
 
@@ -140,6 +177,8 @@ var DateModule = (function() {
   return {
     init: init,
     getMonday: getMonday,
+    getSundayString: getSundayString,
+    getMondayString: getMondayString,
     thisWeeksMondaySunday: thisWeeksMondaySunday,
     thisWeeksMondaySundayStringified: thisWeeksMondaySundayStringified
   };

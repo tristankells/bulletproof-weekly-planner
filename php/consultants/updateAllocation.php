@@ -9,9 +9,6 @@ $clientID = $dynamicData["clientID"];
 $allocationSlot = $dynamicData["allocationSlot"];
 $officeStatus = $dynamicData["officeStatus"];
 $timeCreated = $dynamicData["timeCreated"];
-//$monday = date("Y-m-d", strtotime($dynamicData["monday"]));
-//$sunday = date("Y-m-d", strtotime($dynamicData["sunday"]));
-
 $monday = $dynamicData["monday"];
 $sunday = $dynamicData["sunday"];
 

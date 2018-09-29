@@ -251,7 +251,9 @@ var WeekConsultantModule = (function() {
       updateClientsWhoCols();
 
       //Post request
-      clearAllAllocationsInDB(DateModule.thisWeeksMondaySundayStringified()).done();
+      clearAllAllocationsInDB(
+        DateModule.thisWeeksMondaySundayStringified()
+      ).done();
     }
   }
 
@@ -298,19 +300,8 @@ var WeekConsultantModule = (function() {
       .slice(0, 19)
       .replace("T", " ");
 
-    mondaySunday = DateModule.thisWeeksMondaySundayStringified(global.week);
-
-    allocation["monday"] = mondaySunday.monday;
-    allocation["sunday"] = mondaySunday.sunday;
-
-    allocation["monday"] = replaceAll(allocation["monday"],"/","-");
-    allocation["sunday"] = replaceAll( allocation["sunday"],"/","-");
-
-    function replaceAll(str, find, replace) {
-      return str.replace(new RegExp(find, 'g'), replace);
-  }
-
-    console.log(allocation["monday"] + allocation["sunday"]);
+    allocation["monday"] = DateModule.getMondayString(global.week);
+    allocation["sunday"] = DateModule.getSundayString(global.week);
 
     $allocationCol.replaceWith(
       WeekAllocationModule.getAllocationTd(
