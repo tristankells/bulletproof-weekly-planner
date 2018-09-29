@@ -45,7 +45,7 @@ body {
 }
 
 #consultantsdiv {
-  margin-top: 40px;
+  margin-top: 10px;
 }
 
 /*CSS for context menu adapted from https://stackoverflow.com/questions/4495626/making-custom-right-click-context-menus-for-my-web-app 12/07/2018 */
@@ -133,13 +133,11 @@ body {
   cursor: pointer;
 }
 
-.draggable-icon,
-a {
+.draggable-icon a {
   color: rgb(199, 199, 199);
 }
 
-.draggable-icon,
-a:hover {
+.draggable-icon a:hover {
   color: #ffffff;
 }
 
@@ -340,6 +338,7 @@ a:hover {
 #navigationBar {
   border-bottom: 1px solid rgb(231, 231, 231);
   height: 50px;
+  background-color: white;
 }
 nav {
   width: 100%;
@@ -568,6 +567,7 @@ li[data-colour="8"],
   background-color: #979696;
   /* DARK GRAY */
 }
+
 /* ********* CLIENT CALENDAR COLOURS End ********** */
 input {
   color: inherit;
@@ -756,5 +756,48 @@ table td {
 }
 
 #weekNavButtons {
-  margin: 0 auto;
+  margin: 10px;
+  width: 100%;
+}
+
+.previousWeekButtonContainer{
+  float: left;
+}
+
+.previousWeekButtonContainer a {
+  color: black;
+  cursor: pointer;
+}
+
+.previousWeekButtonContainer a:hover {
+  color: rgb(197, 46, 46);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.previousWeekButtonContainer i:hover {
+  cursor: pointer;
+}
+
+.nextWeekButtonContainer{
+  float: right;
+}
+
+.nextWeekButtonContainer a {
+  color: black;
+}
+
+.nextWeekButtonContainer a:hover {
+  color: rgb(197, 46, 46);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.nextWeekButtonContainer i:hover {
+  cursor: pointer;
+}
+
+.changeWeekButton {
+  background: transparent;
+  border: none;
 }

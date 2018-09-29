@@ -1,4 +1,11 @@
-<?php session_start(); 
+<?php 
+	session_start(); 
+if(isset($_COOKIE['email']))
+{
+    $_SESSION['email'] = $_COOKIE['email'];
+	$_SESSION['authentication']=1;
+}
+
 if(isset($_SESSION['authentication'])&&$_SESSION['authentication']==1)
     header("Location: ./week-calendar.php");?>
     <!DOCTYPE html>
@@ -53,6 +60,7 @@ if(isset($_SESSION['authentication'])&&$_SESSION['authentication']==1)
                 <form id='login-form'>
                     <input id='email-input' type="text" placeholder="email" />
                     <input id='password-input' type="password" placeholder="password" />
+					Staying logged<input id='staying_logged' type="checkbox" />
                     <button type='submit' id='login-button'>Login</button>
                 </form>
                  <p class="message">Not registered?

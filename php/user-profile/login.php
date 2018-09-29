@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
     } else {
         $email = mysqli_escape_string($conn, $dynamicData['email']);
         $password = mysqli_escape_string($conn, $dynamicData['password']);
-
+$staying_logged = mysqli_escape_string($conn, $dynamicData['staying_logged']);
         $passwordCheckQuery = "SELECT email,login_password FROM user_profile WHERE email='$email'";
 
         //Check if query succesful
@@ -44,6 +44,10 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
                     session_start();
                     $_SESSION['email'] = $email;
                     $_SESSION['authentication'] = 1;
+					if($staying_logged=="true")
+					{
+						setcookie('email', $email, time() + (86400 * 7), "/");
+					}
                     echo ('success');
                 }
             }
