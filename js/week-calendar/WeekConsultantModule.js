@@ -303,6 +303,13 @@ var WeekConsultantModule = (function() {
     allocation["monday"] = mondaySunday.monday;
     allocation["sunday"] = mondaySunday.sunday;
 
+    allocation["monday"] = replaceAll(allocation["monday"],"/","-");
+    allocation["sunday"] = replaceAll( allocation["sunday"],"/","-");
+
+    function replaceAll(str, find, replace) {
+      return str.replace(new RegExp(find, 'g'), replace);
+  }
+
     console.log(allocation["monday"] + allocation["sunday"]);
 
     $allocationCol.replaceWith(
