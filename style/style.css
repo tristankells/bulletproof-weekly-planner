@@ -316,6 +316,8 @@ a:hover {
 
 .last-updated-div {
   font-size: 60%;
+  color: rgb(160, 160, 160);
+  font-style: italic;
 }
 
 .clear-consultant-container {
