@@ -698,6 +698,13 @@ height: 72px;
   background-color: #212529 !important;
   color: white;
 }
+.white-bg {
+  background-color: white;
+}
+
+.white-bg input {
+  background-color: white;
+}
 .custom-dark-bg input {
   background-color: #212529 !important;
   color: white;

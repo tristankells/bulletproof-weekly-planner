@@ -86,7 +86,9 @@ var ConsultantModule = (function() {
 
     //Add consultant role colunm
     $rowElement.append(
-      $("<td></td>").append(
+      $("<td></td>")
+      .addClass("white-bg")
+      .append(
         $("<input></input>")
           .addClass("consultant-role-input")
           .val(consultant["job_title"])

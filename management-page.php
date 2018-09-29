@@ -75,9 +75,7 @@ if($_SESSION['authentication']!=1)
                     </thead>
                     <tbody id="consultantstablebody"></tbody>
                 </table>
-                <div class="clear-button-container ml-2">
-                    <button id="removeallconsultantsbutton" class="clear-all-btn">Delete All Consultants</button>
-                </div>
+                
                 <table class="add-consultant-table ml-5">
                     <tr>
                         <td class="input-row">
@@ -91,6 +89,9 @@ if($_SESSION['authentication']!=1)
                         </td>
                     </tr>
                 </table>
+                <div class="clear-button-container ml-2">
+                    <button id="removeallconsultantsbutton" class="clear-all-btn">Delete All Consultants</button>
+                </div>
 
                 <table class="manage-table ml-5">
                     <thead>
@@ -100,9 +101,7 @@ if($_SESSION['authentication']!=1)
                     </thead>
                     <tbody id="clienttablebody"></tbody>
                 </table>
-                <div class="clear-button-container ml-2">
-                    <button id="removeallclientsbutton" class="clear-all-btn">Delete All Clients</button>
-                </div>
+                
                 <table class="add-consultant-table ml-5">
                     <tr>
                         <td>
@@ -117,6 +116,9 @@ if($_SESSION['authentication']!=1)
                         </td>
                     </tr>
                 </table>
+                <div class="clear-button-container ml-2">
+                    <button id="removeallclientsbutton" class="clear-all-btn">Delete All Clients</button>
+                </div>
             </div>
         </div>
     </div>
