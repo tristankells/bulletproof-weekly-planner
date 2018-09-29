@@ -87,7 +87,7 @@ var WeekConsultantModule = (function() {
 
   function handleWeekNavigationButtonClick(number) {
     global.week += number;
-    console.log(global.week);
+    ("");
 
     var consultants = WeekConsultantStorageModule.getConsultantsWeeksAllocations(
       global.week
@@ -267,7 +267,8 @@ var WeekConsultantModule = (function() {
   function updateAllocation($allocationCol) {
     var allocation = {},
       $consultantRow = {},
-      timeCreated = new Date();
+      timeCreated = new Date(),
+      mondaySunday = {};
 
     //Retrieve all allocation information from the allocation column
     $consultantRow = $allocationCol.parents("tr");
@@ -288,8 +289,21 @@ var WeekConsultantModule = (function() {
       .slice(0, 19)
       .replace("T", " ");
 
+    mondaySunday = DateModule.thisWeeksMondaySunday(global.week);
+    console.log(mondaySunday);
     console.log(allocation["timeCreated"]);
 
+    allocation["monday"] = mondaySunday.monday.toLocaleDateString();
+
+    console.log(allocation["monday"]);
+    console.log(mondaySunday.monday);
+
+    allocation["sunday"] = mondaySunday.sunday
+      .toJSON()
+      .slice(0, 19)
+      .replace("T", " ");
+    console.log(allocation["sunday"]);
+    console.log(mondaySunday.sunday);
     $allocationCol.replaceWith(
       WeekAllocationModule.getAllocationTd(
         allocation["allocationSlot"],
@@ -308,7 +322,7 @@ var WeekConsultantModule = (function() {
       .html(convertDateToString(new Date()));
 
     updateAllocationInDB(allocation).done(function(data) {
-      // console.log(data);
+      console.log(data);
     });
   }
 

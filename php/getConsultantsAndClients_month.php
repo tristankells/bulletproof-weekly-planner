@@ -73,7 +73,8 @@ if ($result->num_rows > 0) {
         }
 
         $query = "SELECT DISTINCT
-        client.full_name
+        client.abbreviation,
+        client.colour
         FROM client
         LEFT OUTER JOIN allocation ON client.id = allocation.client_id
         WHERE allocation.consultant_id =$id";
@@ -84,7 +85,8 @@ if ($result->num_rows > 0) {
         if ($allocationResult->num_rows > 0) {
             while ($allocationRow = $allocationResult->fetch_assoc()) {
                 $allocation = [
-                    "allocated_to" => $allocationRow['full_name'],
+                    "allocated_to" => $allocationRow['abbreviation'],
+                    "colour" => $allocationRow['colour'],
                 ];
                 array_push($weekAllocations, $allocation);
             }

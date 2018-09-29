@@ -10,6 +10,7 @@ var WeekConsultantStorageModule = (function() {
   //Takes a positive or negative number, indicating the number of weeks in the past or in the future respectively
   //Returns all of the consultants allocations for that week
   function getConsultantsWeeksAllocations(week) {
+    console.log(global.consultants);
     var returnConsultants = [];
     //Make copy of global consultant variables.
     let consultants = JSON.parse(JSON.stringify(global.consultants));
