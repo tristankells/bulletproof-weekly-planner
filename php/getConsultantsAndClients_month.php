@@ -53,7 +53,9 @@ if ($result->num_rows > 0) {
         $query = "SELECT
         monthly_allocation.consultant_id,
         monthly_allocation.allocation_slot,
-        client.full_name
+        client.full_name,
+        client.abbreviation,
+        client.colour
         FROM monthly_allocation
         INNER JOIN client ON monthly_allocation.client_id = client.id
         WHERE consultant_id =  $id";
@@ -66,6 +68,8 @@ if ($result->num_rows > 0) {
                 $allocation = [
                     "consultant_id" => $allocationRow['consultant_id'],
                     "full_name" => $allocationRow['full_name'],
+                    "colour" => $allocationRow['colour'],
+                    "abbreviation" => $allocationRow['abbreviation'],
                     "allocation_slot" => $allocationRow['allocation_slot'],
                 ];
                 array_push($monthlyAllocations, $allocation);

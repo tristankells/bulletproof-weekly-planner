@@ -21,7 +21,7 @@ var DateModule = (function() {
     dates.monday = getMonday();
     dates.monday.setDate(dates.monday.getDate() + week * 7);
     dates.monday.setHours(0, 0, 0);
-    dates.sunday.setDate(dates.monday.getDate() + 6);
+    dates.sunday.setDate(dates.monday.getDate() + 7);
     dates.sunday.setHours(11, 59, 59);
 
     return dates;

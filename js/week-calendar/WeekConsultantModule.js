@@ -290,20 +290,11 @@ var WeekConsultantModule = (function() {
       .replace("T", " ");
 
     mondaySunday = DateModule.thisWeeksMondaySunday(global.week);
-    console.log(mondaySunday);
     console.log(allocation["timeCreated"]);
 
     allocation["monday"] = mondaySunday.monday.toLocaleDateString();
 
-    console.log(allocation["monday"]);
-    console.log(mondaySunday.monday);
-
-    allocation["sunday"] = mondaySunday.sunday
-      .toJSON()
-      .slice(0, 19)
-      .replace("T", " ");
-    console.log(allocation["sunday"]);
-    console.log(mondaySunday.sunday);
+    allocation["sunday"] = mondaySunday.sunday.toLocaleDateString();
     $allocationCol.replaceWith(
       WeekAllocationModule.getAllocationTd(
         allocation["allocationSlot"],

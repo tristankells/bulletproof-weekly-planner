@@ -9,15 +9,17 @@ $clientID = $dynamicData["clientID"];
 $allocationSlot = $dynamicData["allocationSlot"];
 $officeStatus = $dynamicData["officeStatus"];
 $timeCreated = $dynamicData["timeCreated"];
-$monday = $dynamicData["monday"];
-$sunday = $dynamicData["sunday"];
+$monday = date("Y-m-d", strtotime($dynamicData["monday"]));
+$sunday = date("Y-m-d", strtotime($dynamicData["sunday"]));
+
+
+echo ($monday . "       " . $sunday);
 
 $query = "DELETE FROM allocation
             WHERE consultant_id = $id
-            AND allocation_slot = $allocationSlot,
-            AND date_created >= '$monday' AND date_created <= '$sunday'";
-
-echo($monday . $sunday);
+            AND allocation_slot = $allocationSlot
+            AND date_created >= '$monday'
+            AND date_created <= '$sunday'";
 $conn->query($query);
 
 if ($clientID == 0) {
