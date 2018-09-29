@@ -12,9 +12,6 @@ $timeCreated = $dynamicData["timeCreated"];
 $monday = date("Y-m-d", strtotime($dynamicData["monday"]));
 $sunday = date("Y-m-d", strtotime($dynamicData["sunday"]));
 
-
-echo ($monday . "       " . $sunday);
-
 $query = "DELETE FROM allocation
             WHERE consultant_id = $id
             AND allocation_slot = $allocationSlot
