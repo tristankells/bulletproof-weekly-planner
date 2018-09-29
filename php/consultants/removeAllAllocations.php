@@ -11,8 +11,8 @@ require_once '../database.php';
 
 $board = 1;
 $dynamicData = $_POST["dynamicData"];
-$monday = date("Y-m-d", strtotime($dynamicData["monday"]));
-$sunday = date("Y-m-d", strtotime($dynamicData["sunday"]));
+$monday = $dynamicData["monday"];
+$sunday = $dynamicData["sunday"];
 
 $query = "DELETE allocation
 FROM allocation

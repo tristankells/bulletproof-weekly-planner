@@ -251,9 +251,10 @@ var WeekConsultantModule = (function() {
       updateClientsWhoCols();
 
       //Post request
-      clearAllAllocationsInDB(
-        DateModule.thisWeeksMondaySundayStringified()
-      ).done();
+      clearAllAllocationsInDB({
+        monday: DateModule.getMondayString(global.week),
+        sunday: DateModule.getSundayString(global.week)
+      }).done();
     }
   }
 
