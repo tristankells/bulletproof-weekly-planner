@@ -60,13 +60,15 @@ if(isset($_SESSION['authentication'])&&$_SESSION['authentication']==1)
                 <form id='login-form'>
                     <input id='email-input' type="text" placeholder="email" />
                     <input id='password-input' type="password" placeholder="password" />
-					<input id='staying_logged' type="checkbox"/> <span>Stay logged in </span>
                     <button type='submit' id='login-button'>Login</button>
+                    <input style="float:left; width: 10%; margin: 10px 0 15px 0;" id='staying_logged' type="checkbox"/> 
+                    <p style="font-size: 10px; width: 90%; margin: 10px 0 15px 0; text-align: left;">Keep me signed in</p>
+                    
                 </form>
-                 <p class="message">Not registered?
-                    <a class="register-form-btn" href="#">Create an account</a>
-                </p>
-                <p class="message">Forgot password?
+                <p class="message">
+                    Not registered?
+                    <a class="register-form-btn" href="#">Create an account</a><br>
+                    Forgot password?
                     <a class="reset-form-btn" href="#">Reset password</a>
                 </p>
             </div>

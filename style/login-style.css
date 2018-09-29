@@ -76,8 +76,6 @@
         margin: auto;
     }
 
-    
-
     .form button:hover,
     .form button:active,
     .form button:focus {
@@ -86,13 +84,13 @@
         cursor: pointer;
     }
 
-    .form .message {
-        margin: 15px 0 0;
+    .message {
+        margin: 20px 0 0;
         color: #b3b3b3;
         font-size: 12px;
     }
 
-    .form .message a {
+    .message a {
         color: #1A2930;
         text-decoration: none;
     }
