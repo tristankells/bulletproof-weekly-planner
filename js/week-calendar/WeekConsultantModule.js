@@ -109,6 +109,8 @@ var WeekConsultantModule = (function() {
             getConsultantAllocationCols(thisWeeksConsultants[index].allocations)
           );
       });
+
+      DateModule.render(global.week);
     });
   }
 
@@ -299,6 +301,11 @@ var WeekConsultantModule = (function() {
     //Get timestamp and format to MYSQL datetime
 
     timeCreated.setDate(timeCreated.getDate() + global.week * 7);
+
+    //If it is saturday or sunday, allocation date is moved to the following week
+    if (timeCreated.getDay() == 6 || timeCreated.getDay() == 0) {
+      timeCreated.setDate(timeCreated.getDate() + 7);
+    }
 
     allocation["timeCreated"] = timeCreated
       .toJSON()

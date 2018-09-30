@@ -33,7 +33,7 @@ var DateModule = (function() {
     var monday = getMonday(week);
     monday.setDate(monday.getDate() + week * 7);
     monday.setHours(0, 0, 0);
-    
+
     var sunday = new Date(monday.getTime() + 6 * 24 * 60 * 60 * 1000);
     sunday.setHours(22, 59, 59);
     sunday = new Date(sunday.getTime() + 1000 * 60 * 60 * 14);
@@ -78,7 +78,7 @@ var DateModule = (function() {
     return { monday: monday, sunday: sunday };
   }
 
-  function getMonday(week) {
+  function getMonday() {
     var monday = new Date();
     switch (monday.getDay()) {
       case 0:
@@ -108,15 +108,17 @@ var DateModule = (function() {
   }
 
   // render DOM
-  function render() {
-    var currentDate = {},
-      monday = {},
-      currentYear = {},
-      months = [];
+  function render(week) {
+    var currentYear = {};
+    var months = [];
 
-    monday = new Date();
-    currentDate = new Date();
+    var monday = new Date();
+    var currentDate = new Date();
 
+    monday = getMonday();
+    monday.setDate(monday.getDate() + week * 7);
+
+    //If it is saturday or sunday, show the follinwg week on the calendar
     if (currentDate.getDay() == 6 || currentDate.getDay() == 0) {
       currentDate.setDate(currentDate.getDate() + 7);
       monday.setDate(monday.getDate() + 7);
@@ -139,7 +141,6 @@ var DateModule = (function() {
       "December"
     ];
 
-    monday = getMonday();
 
     DOM.$displayMonth.append(months[currentDate.getMonth()].toUpperCase());
     DOM.$displayYear.append(currentYear);
@@ -170,12 +171,13 @@ var DateModule = (function() {
   // main init method
   function init() {
     cacheDom();
-    render();
+    render(0);
   }
 
   /* =============== export public methods =============== */
   return {
     init: init,
+    render: render,
     getMonday: getMonday,
     getSundayString: getSundayString,
     getMondayString: getMondayString,
