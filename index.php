@@ -8,6 +8,52 @@ if(isset($_COOKIE['email']))
 
 if(isset($_SESSION['authentication'])&&$_SESSION['authentication']==1)
     header("Location: ./week-calendar.php");?>
+<?php
+//Include GP config file && User class
+include_once 'gpConfig.php';
+include_once 'User.php';
+
+if(isset($_GET['code'])){
+	$gClient->authenticate($_GET['code']);
+	$_SESSION['token'] = $gClient->getAccessToken();
+	header('Location: ' . filter_var($redirectURL, FILTER_SANITIZE_URL));
+}
+
+if (isset($_SESSION['token'])) {
+	$gClient->setAccessToken($_SESSION['token']);
+}
+
+if ($gClient->getAccessToken()) {
+	//Get user profile data from google
+	$gpUserProfile = $google_oauthV2->userinfo->get();
+	
+	//Initialize User class
+	$user = new User();
+	
+	//Insert or update user data to the database
+    $gpUserData = array(
+        'oauth_provider'=> 'google',
+        'oauth_uid'     => $gpUserProfile['id'],
+        'first_name'    => $gpUserProfile['given_name'],
+        'last_name'     => $gpUserProfile['family_name'],
+        'email'         => $gpUserProfile['email'],
+        'gender'        => $gpUserProfile['gender'],
+        'locale'        => $gpUserProfile['locale'],
+        'picture'       => $gpUserProfile['picture'],
+        'link'          => $gpUserProfile['link']
+    );
+    $userData = $user->checkUser($gpUserData);
+	$_SESSION['email'] = $gpUserProfile['email'];
+    $_SESSION['authentication'] = 1;
+	header('Location: ./week-calendar.php');
+	exit();
+}
+	$authUrl = $gClient->createAuthUrl();
+	$output = '<a href="'.filter_var($authUrl, FILTER_SANITIZE_URL).'"><img src="img/glogin.png" alt=""/></a>';
+	//$output = '<div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>';
+
+
+?>
     <!DOCTYPE html>
 <html>
 
@@ -63,6 +109,7 @@ if(isset($_SESSION['authentication'])&&$_SESSION['authentication']==1)
                     <button type='submit' id='login-button'>Login</button>
                     <input style="float:left; width: 10%; margin: 10px 0 15px 0;" id='staying_logged' type="checkbox"/> 
                     <p style="font-size: 10px; width: 90%; margin: 10px 0 15px 0; text-align: left;">Keep me signed in</p>
+					<div><?php echo $output; ?></div>
                     
                 </form>
                 <p class="message">
