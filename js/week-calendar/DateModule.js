@@ -30,6 +30,7 @@ var DateModule = (function() {
   //Return a string with the date of this week's friday in the format yyyy-mm-dd
   function getSundayString(week) {
     var sundayString = "";
+    var currentDate = new Date();
     var monday = getMonday(week);
     monday.setDate(monday.getDate() + week * 7);
     monday.setHours(0, 0, 0);
@@ -37,6 +38,11 @@ var DateModule = (function() {
     var sunday = new Date(monday.getTime() + 6 * 24 * 60 * 60 * 1000);
     sunday.setHours(22, 59, 59);
     sunday = new Date(sunday.getTime() + 1000 * 60 * 60 * 14);
+
+
+    if (currentDate.getDay() == 6 || currentDate.getDay() == 0) {
+      sunday.setDate(sunday.getDate() + 7);
+    }
 
     sundayString = sunday
       .toISOString()
@@ -49,11 +55,16 @@ var DateModule = (function() {
   function getMondayString(week) {
     var mondayString = "";
     var monday = getMonday(week);
+    var currentDate = new Date();
     monday.setDate(monday.getDate() + week * 7);
     monday.setHours(0, 0, 0);
 
     //Correct for the change to iso
     monday = new Date(monday.getTime() + 1000 * 60 * 60 * 13);
+
+    if (currentDate.getDay() == 6 || currentDate.getDay() == 0) {
+      monday.setDate(monday.getDate() + 7);
+    }
 
     mondayString = monday
       .toISOString()

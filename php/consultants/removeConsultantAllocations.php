@@ -14,6 +14,8 @@ $id = $dynamicData['id'];
 $monday = $dynamicData["monday"];
 $sunday = $dynamicData["sunday"];
 
+echo($monday . $sunday);
+
 $query = "DELETE allocation
     FROM allocation
     LEFT OUTER JOIN consultant ON allocation.consultant_id = consultant.id

@@ -42,9 +42,12 @@ var WeekConsultantStorageModule = (function() {
       sunday.setDate(sunday.getDate() + 7);
     }
 
+    console.log(monday);
+    console.log(sunday);
     consultant.allocations.forEach(allocation => {
       //Store allocation date
       const allocationDate = new Date(allocation.timeCreated);
+      console.log(allocationDate);
       //If allocation date is between monday and sunday of the diplaying week,
       //push allocation to the return array
       if (allocationDate >= monday && allocationDate <= sunday) {

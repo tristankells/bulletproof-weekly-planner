@@ -278,15 +278,14 @@ var WeekConsultantModule = (function() {
         id: id,
         monday: DateModule.getMondayString(global.week),
         sunday: DateModule.getSundayString(global.week)
-      }).done();
+      }).done(data => console.log(data));
     }
   }
 
   function updateAllocation($allocationCol) {
     var allocation = {},
       $consultantRow = {},
-      timeCreated = new Date(),
-      mondaySunday = {};
+      timeCreated = new Date();
 
     //Retrieve all allocation information from the allocation column
     $consultantRow = $allocationCol.parents("tr");
@@ -301,6 +300,7 @@ var WeekConsultantModule = (function() {
     //Get timestamp and format to MYSQL datetime
 
     timeCreated.setDate(timeCreated.getDate() + global.week * 7);
+    timeCreated = new Date(timeCreated.getTime() + 1000 * 60 * 60 * 14);
 
     //If it is saturday or sunday, allocation date is moved to the following week
     if (timeCreated.getDay() == 6 || timeCreated.getDay() == 0) {
