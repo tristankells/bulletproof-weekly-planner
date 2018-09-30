@@ -109,11 +109,10 @@ var DateModule = (function() {
 
   // render DOM
   function render(week) {
-    var currentYear = {};
-    var months = [];
-
     var monday = new Date();
     var currentDate = new Date();
+    updateDisplayMonth(week);
+    updateDisplayYear(week);
 
     monday = getMonday();
     monday.setDate(monday.getDate() + week * 7);
@@ -124,9 +123,37 @@ var DateModule = (function() {
       monday.setDate(monday.getDate() + 7);
     }
 
-    currentYear = currentDate.getFullYear();
+    DOM.$consultantsTableHeadRow.find(".date").each(function() {
+      var day = 0;
+      day = monday.getDate() + $(this).index() - 1;
 
-    months = [
+      if (day > 31) {
+        day = day - 31;
+      }
+
+      var dayOfWeek = $(this).html();
+      $(this).html("");
+
+      var $span = $("<span></span>").html(dayOfWeek + "  " + day);
+
+      if (currentDate.getDate() == day) {
+        //PLACEHOLDER CURRENT DAY HIGHLIGHT
+        $span.addClass("highlight-day");
+      }
+
+      $(this).append($span);
+    });
+  }
+
+  //Updates the month and days to represent the new week being viewed.
+  function updateDisplayDates(week) {
+    updateDisplayMonth(week);
+    updateDisplayDays(week);
+    updateDisplayYear(week);
+  }
+
+  function updateDisplayMonth(week) {
+    var months = [
       "January",
       "February",
       "March",
@@ -141,9 +168,24 @@ var DateModule = (function() {
       "December"
     ];
 
+    var currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() + week * 7);
+    if (currentDate.getDay() == 6 || currentDate.getDay() == 0) {
+      currentDate.setDate(currentDate.getDate() + 7);
+    }
 
-    DOM.$displayMonth.append(months[currentDate.getMonth()].toUpperCase());
-    DOM.$displayYear.append(currentYear);
+    DOM.$displayMonth.html(months[currentDate.getMonth()].toUpperCase());
+  }
+
+  function updateDisplayDays(week) {
+    var monday = getMonday();
+    var currentDate = new Date();
+    monday.setDate(monday.getDate() + week * 7);
+
+    //If it is saturday or sunday, show the follinwg week on the calendar
+    if (currentDate.getDay() == 6 || currentDate.getDay() == 0) {
+      monday.setDate(monday.getDate() + 7);
+    }
 
     DOM.$consultantsTableHeadRow.find(".date").each(function() {
       var day = 0;
@@ -153,18 +195,29 @@ var DateModule = (function() {
         day = day - 31;
       }
 
-      var dayOfWeek = $(this).html();
-      $(this).html("");
+      var dayOfWeek = $(this)
+        .children()
+        .html();
+      console.log(dayOfWeek);
 
-      var $span = $("<span><span>").html(dayOfWeek + "  " + day);
+      var $span = $("<span></span>").html(dayOfWeek.slice(0, 3) + "  " + day);
 
       if (currentDate.getDate() == day) {
         //PLACEHOLDER CURRENT DAY HIGHLIGHT
         $span.addClass("highlight-day");
       }
 
-      $(this).append($span);
+      $(this).html($span);
     });
+  }
+
+  function updateDisplayYear(week) {
+    var currentDate = new Date();
+    currentDate.setDate(currentDate.getDate() + week * 7);
+    if (currentDate.getDay() == 6 || currentDate.getDay() == 0) {
+      currentDate.setDate(currentDate.getDate() + 7);
+    }
+    DOM.$displayYear.html(currentDate.getFullYear());
   }
 
   /* =================== public methods ================== */
@@ -182,6 +235,7 @@ var DateModule = (function() {
     getSundayString: getSundayString,
     getMondayString: getMondayString,
     thisWeeksMondaySunday: thisWeeksMondaySunday,
-    thisWeeksMondaySundayStringified: thisWeeksMondaySundayStringified
+    thisWeeksMondaySundayStringified: thisWeeksMondaySundayStringified,
+    updateDisplayDates: updateDisplayDates
   };
 })();

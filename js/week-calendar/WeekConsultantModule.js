@@ -110,7 +110,7 @@ var WeekConsultantModule = (function() {
           );
       });
 
-      DateModule.render(global.week);
+      DateModule.updateDisplayDates(global.week);
     });
   }
 
