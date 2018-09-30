@@ -82,7 +82,7 @@ var DateModule = (function() {
     var monday = new Date();
     switch (monday.getDay()) {
       case 0:
-        monday.setDate(monday.getDate() - 7);
+        monday.setDate(monday.getDate() - 6);
         break;
       case 1:
         monday.setDate(monday.getDate());
