@@ -611,6 +611,8 @@ var WeekConsultantModule = (function() {
       );
       updateClientsWhoCols();
     } else {
+      //Redirect to managment page if the application has no consultants
+      window.location.replace("management-page.php");
       renderPlaceHolderText();
     }
   }
