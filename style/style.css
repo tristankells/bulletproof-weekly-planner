@@ -17,6 +17,11 @@
   border: none;
 }
 
+#currentWeekButton {
+  margin: 0 auto;
+  text-align: center;
+}
+
 #consultantstablebody > table,
 tr,
 td,
@@ -532,52 +537,44 @@ li[data-colour="1"],
 li[data-colour="2"],
 [data-colour="2"] > .colour-div,
 .month-tab[data-color="2"] {
-  background-color: #e5c691;
-  /* ORANGE */
+  background-color: #e5c691; /* ORANGE */
 }
 [data-colour="3"] > .color-col,
 li[data-colour="3"],
 [data-colour="3"] > .colour-div,
 .month-tab[data-color="3"] {
-  background-color: #9abecb;
-  /* BLUE */
+  background-color: #9abecb; /* BLUE */
 }
 [data-colour="4"] > .color-col,
 li[data-colour="4"],
 [data-colour="4"] > .colour-div,
 .month-tab[data-color="4"] {
-  background-color: #e4acac;
-  /* RED */
+  background-color: #e4acac; /* RED */
 }
 [data-colour="5"] > .color-col,
 li[data-colour="5"],
 [data-colour="5"] > .colour-div,
 .month-tab[data-color="5"] {
-  background-color: #bb9bcb;
-  /* PURPLE */
+  background-color: #bb9bcb; /* PURPLE */
 }
 [data-colour="6"] > .color-col,
 li[data-colour="6"],
 [data-colour="6"] > .colour-div,
 .month-tab[data-color="6"] {
-  background-color: #f3f2bf;
-  /* YELLOW */
+  background-color: #f3f2bf; /* YELLOW */
 }
 [data-colour="7"] > .color-col,
 li[data-colour="7"],
 [data-colour="7"] > .colour-div,
 .month-tab[data-color="7"] {
-  background-color: #cecece;
-  /* GRAY */
+  background-color: #cecece; /* GRAY */
 }
 [data-colour="8"] > .color-col,
 li[data-colour="8"],
 [data-colour="8"] > .colour-div,
 .month-tab[data-color="8"] {
-  background-color: #979696;
-  /* DARK GRAY */
+  background-color: #979696; /* DARK GRAY */
 }
-
 /* ********* CLIENT CALENDAR COLOURS End ********** */
 input {
   color: inherit;
@@ -596,8 +593,6 @@ input {
   width: 100%;
   margin: auto;
 }
-
-
 /* Month view layout */
 .table-padding {
   padding-left: 15px;
@@ -651,9 +646,8 @@ td {
   font-weight: bold;
   letter-spacing: 1px;
 }
-
 .monthViewRow {
-height: 72px;
+  height: 72px;
 }
 /* Manage page layout */
 .manage-table {
@@ -701,7 +695,6 @@ height: 72px;
 .white-bg {
   background-color: white;
 }
-
 .white-bg input {
   background-color: white;
 }
@@ -778,7 +771,6 @@ table td {
 #resetPasswordForm > input {
   margin: 30px;
 }
-
 /* Last updated section */
 .last-updated {
   width: inherit;
@@ -786,33 +778,33 @@ table td {
   font-size: 8px;
   color: rgb(206, 206, 206);
 }
-
 /* Week navigation - previous and next buttons */
 #weekNavButtons {
   margin: 10px;
   width: 100%;
+  padding: 0;
+  margin: 0 1%;
 }
-
-.previousWeekButtonContainer{
+.previousWeekButtonContainer {
   float: left;
 }
-
 .previousWeekButtonContainer i:hover {
   cursor: pointer;
   color: rgb(197, 46, 46);
 }
-
-.nextWeekButtonContainer{
+.nextWeekButtonContainer {
   float: right;
 }
-
 .nextWeekButtonContainer i:hover {
   cursor: pointer;
   color: rgb(197, 46, 46);
 }
-
 .changeWeekButton {
   background: transparent;
   border: none;
 }
 
+#currentWeekButton {
+  margin: 0 auto;
+  text-align: center;
+}

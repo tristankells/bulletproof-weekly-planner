@@ -14,6 +14,7 @@ var WeekConsultantModule = (function() {
     DOM.$resetAllocationsButton = $("#resetallocationbutton");
     DOM.$previousWeekButton = $("#previousWeekButton");
     DOM.$nextWeekButton = $("#nextWeekButton");
+    DOM.$currentWeekButton = $("#currentWeekButton");
   }
   // bind events
   function bindEvents() {
@@ -83,6 +84,11 @@ var WeekConsultantModule = (function() {
     DOM.$nextWeekButton.on("click", function() {
       handleWeekNavigationButtonClick(1);
     });
+
+    DOM.$currentWeekButton.on("click", function() {
+      global.week = 0;
+      handleWeekNavigationButtonClick(0);
+    });
   }
 
   function handleWeekNavigationButtonClick(number) {
@@ -111,6 +117,7 @@ var WeekConsultantModule = (function() {
       });
 
       DateModule.updateDisplayDates(global.week);
+      updateClientsWhoCols();
     });
   }
 

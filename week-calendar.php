@@ -72,12 +72,13 @@ if ($_SESSION['authentication'] != 1) {
                 <div class="previousWeekButtonContainer">
                         <button class="changeWeekButton" id="previousWeekButton"><i class="fas fa-arrow-left"></i></button>
                         <span style="font-size: 0.8em;">Previous </span>
-
                 </div>
+
                 <div class="nextWeekButtonContainer">
                         <span style="font-size: 0.8em;">Next </span>
                         <button class="changeWeekButton" id="nextWeekButton"><i class="fas fa-arrow-right"></i></button>
                 </div>
+                <div id="currentWeekButton"><button>Current</button></div>
             </div>
             <div class="col-lg-12" id="consultantsdiv">
                 <table class="consultant-table table" id="consultantstable">
@@ -112,10 +113,6 @@ if ($_SESSION['authentication'] != 1) {
                     </tbody>
                 </table>
                 <div class="clear-button-container">
-                    <!--
-                        <div><p><small>Last Updated<br>10/02/18 14:00</small></p></div>
-                        -->
-
                     <button id="resetallocationbutton" class="clear-all-btn">CLEAR TABLE
                         <i class="remove-add-btn fas fa-trash-alt"></i>
                     </button>
