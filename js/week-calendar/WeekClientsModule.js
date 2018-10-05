@@ -83,8 +83,6 @@ var WeekClientsModule = (function() {
       })
     );
 
-
-
     DOM.$clienttablebody.append($rowElement);
   }
 
@@ -115,6 +113,8 @@ var WeekClientsModule = (function() {
       populateClientMenu(clients);
       render(clients);
     } else {
+      //Redirect to managment page if the application has no clients
+      window.location.replace("management-page.php");
       renderPlaceHolderText();
     }
   }

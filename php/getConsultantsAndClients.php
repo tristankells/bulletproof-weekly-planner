@@ -94,6 +94,7 @@ if ($result->num_rows > 0) {
     }
 }
 // Convert Array to JSON String
-$returnArrays = array($consultants, $clients);
-echo json_encode($returnArrays);
+$data['consultants'] = $consultants;
+$data['clients'] = $clients;
+echo json_encode($data);
 mysqli_close($conn);

@@ -70,8 +70,8 @@ var ConsultantModule = (function() {
     //Begin new consultant row
     $rowElement = $("<tr></tr>")
       .attr("data-id", consultant["id"])
-      .attr("data-name", consultant["full_name"])
-      .attr("data-role", consultant["job_title"]);
+      .attr("data-name", consultant["name"])
+      .attr("data-role", consultant["role"]);
 
     //Add consultant name colunm
     $rowElement.append(
@@ -80,7 +80,7 @@ var ConsultantModule = (function() {
         .append(
           $("<input></input>")
             .addClass("consultant-name-input")
-            .val(consultant["full_name"])
+            .val(consultant["name"])
         )
     );
 
@@ -91,7 +91,7 @@ var ConsultantModule = (function() {
       .append(
         $("<input></input>")
           .addClass("consultant-role-input")
-          .val(consultant["job_title"])
+          .val(consultant["role"])
       )
     );
 

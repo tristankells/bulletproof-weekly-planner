@@ -60,8 +60,8 @@ var MonthConsultantsModule = (function() {
     dynamicData["consultantID"] = $consultantRow.attr("data-id");
     dynamicData["clientID"] = $clientMenuItem.attr("data-id");
     dynamicData["isAdding"] = 1;
-    dynamicData["abbreviation"]= $clientMenuItem.attr("data-abbreviation");
-    dynamicData["colour"]= $clientMenuItem.attr("data-colour");
+    dynamicData["abbreviation"] = $clientMenuItem.attr("data-abbreviation");
+    dynamicData["colour"] = $clientMenuItem.attr("data-colour");
 
     if ($clientMenuItem.attr("data-flag") == 1) {
       dynamicData["isAdding"] = 0;
@@ -77,9 +77,9 @@ var MonthConsultantsModule = (function() {
       });
 
       if (clientNotAllreadyAdded) {
-        
-
-        $allocationCol.append(renderClientTab(dynamicData["abbreviation"], dynamicData["colour"]));
+        $allocationCol.append(
+          renderClientTab(dynamicData["abbreviation"], dynamicData["colour"])
+        );
       } else {
         console.log("client already added");
 
@@ -108,7 +108,11 @@ var MonthConsultantsModule = (function() {
     row = $("<tr></tr>") //Create new table row
       .addClass("monthViewRow")
       .attr("data-id", consultant["id"]); //Add consultant id to row
-    row.append($("<td></td>").addClass("custom-dark-bg month-consultant-view").html(consultant["full_name"])); //Add client name colunm
+    row.append(
+      $("<td></td>")
+        .addClass("custom-dark-bg month-consultant-view")
+        .html(consultant["full_name"])
+    ); //Add client name colunm
 
     //Add all allocated  clients from the weekly view to the current week colunm
     var weekClientNames = $("<td></td>");
@@ -118,13 +122,15 @@ var MonthConsultantsModule = (function() {
         !(consultant["week_allocations"][x]["allocated_to"] == "Open") &&
         !(consultant["week_allocations"][x]["allocated_to"] == "Leave")
       ) {
-        weekClientNames.append( 
-          renderClientTab((consultant["week_allocations"][x]["allocated_to"]), (consultant["week_allocations"][x]["colour"]))
-        )
-         
+        weekClientNames.append(
+          renderClientTab(
+            consultant["week_allocations"][x]["allocated_to"],
+            consultant["week_allocations"][x]["colour"]
+          )
+        );
       }
     }
-    
+
     row.append(weekClientNames);
 
     //Loop through weeks in month, and check existing allocations
@@ -140,8 +146,11 @@ var MonthConsultantsModule = (function() {
       if (allocations) {
         for (x in allocations) {
           $allocationCol.append(
-            renderClientTab((allocations[x]["abbreviation"]), (allocations[x]["colour"]))
-          )
+            renderClientTab(
+              allocations[x]["abbreviation"],
+              allocations[x]["colour"]
+            )
+          );
         }
       }
 
@@ -165,11 +174,11 @@ var MonthConsultantsModule = (function() {
   }
 
   // Render client tab color and format with abbreviated client name
-  function renderClientTab (abbreviation, colour){
+  function renderClientTab(abbreviation, colour) {
     return $("<span></span>")
-        .addClass("month-tab")
-        .attr("data-color", colour) //Add data color to span
-        .html(abbreviation)
+      .addClass("month-tab")
+      .attr("data-color", colour) //Add data color to span
+      .html(abbreviation);
   }
 
   //Render <tr> elements for every consultant in the module array
@@ -204,7 +213,7 @@ var MonthConsultantsModule = (function() {
   function init(consultants) {
     cacheDom();
     if (consultants.length > 0) {
-      bindEvents();
+      // bindEvents();
       renderTableRows(consultants);
     } else {
       renderPlaceHolderText();

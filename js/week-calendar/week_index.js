@@ -11,9 +11,9 @@ $(document).ready(function() {
 
       databaseResults = JSON.parse(data); //Store consultant and client arrays recieved from server
 
-      consultants = databaseResults[0]; //Store array of consultants
+      consultants = databaseResults.consultants; //Store array of consultants
 
-      clients = databaseResults[1]; //Store array of clients
+      clients = databaseResults.clients; //Store array of clients
 
       WeekClientsModule.init(clients);
       WeekConsultantStorageModule.init(consultants);

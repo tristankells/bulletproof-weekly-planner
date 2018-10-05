@@ -39,7 +39,6 @@ var DateModule = (function() {
     sunday.setHours(22, 59, 59);
     sunday = new Date(sunday.getTime() + 1000 * 60 * 60 * 14);
 
-
     if (currentDate.getDay() == 6 || currentDate.getDay() == 0) {
       sunday.setDate(sunday.getDate() + 7);
     }
@@ -130,29 +129,26 @@ var DateModule = (function() {
 
     //If it is saturday or sunday, show the follinwg week on the calendar
     if (currentDate.getDay() == 6 || currentDate.getDay() == 0) {
-      currentDate.setDate(currentDate.getDate() + 7);
       monday.setDate(monday.getDate() + 7);
     }
-
     DOM.$consultantsTableHeadRow.find(".date").each(function() {
-      var day = 0;
-      day = monday.getDate() + $(this).index() - 1;
+      var dayOfWeek = new Date();
+      dayOfWeek.setDate(monday.getDate() + $(this).index() - 1);
 
-      if (day > 31) {
-        day = day - 31;
-      }
+      var $span = $("<span></span>").html(
+        $(this).html() + "  " + dayOfWeek.getDate()
+      );
 
-      var dayOfWeek = $(this).html();
-      $(this).html("");
-
-      var $span = $("<span></span>").html(dayOfWeek + "  " + day);
-
-      if (currentDate.getDate() == day) {
+      if (
+        currentDate.getDate() === dayOfWeek.getDate() &&
+        currentDate.getMonth() === dayOfWeek.getMonth() &&
+        currentDate.getYear() === dayOfWeek.getYear()
+      ) {
         //PLACEHOLDER CURRENT DAY HIGHLIGHT
         $span.addClass("highlight-day");
       }
 
-      $(this).append($span);
+      $(this).html($span);
     });
   }
 
@@ -199,21 +195,27 @@ var DateModule = (function() {
     }
 
     DOM.$consultantsTableHeadRow.find(".date").each(function() {
-      var day = 0;
-      day = monday.getDate() + $(this).index() - 1;
+      var day = monday;
+      day.setDate(monday.getDate() + $(this).index() - 1);
+    
 
-      if (day > 31) {
-        day = day - 31;
-      }
-
+      var $span = $("<span></span>").html(
+        $(this).html() + "  " + day.getDate()
+      );
       var dayOfWeek = $(this)
         .children()
         .html();
-      console.log(dayOfWeek);
 
-      var $span = $("<span></span>").html(dayOfWeek.slice(0, 3) + "  " + day);
+      var $span = $("<span></span>").html(
+        dayOfWeek.slice(0, 3) + "  " + day.getDate()
+      );
 
-      if (currentDate.getDate() == day) {
+
+      if (
+        currentDate.getDate() === day.getDate() &&
+        currentDate.getMonth() === day.getMonth() &&
+        currentDate.getYear() === day.getYear()
+      ) {
         //PLACEHOLDER CURRENT DAY HIGHLIGHT
         $span.addClass("highlight-day");
       }

@@ -91,7 +91,7 @@ var WeekConsultantModule = (function() {
     getConsultantAndClientsFromDB().done(data => {
       var databaseResults = JSON.parse(data);
       //Store consultant and client arrays recieved from server
-      var consultants = databaseResults[0]; //Store array of consultants
+      var consultants = databaseResults.consultants; //Store array of consultants
 
       WeekConsultantStorageModule.init(consultants);
 
