@@ -298,9 +298,10 @@ var WeekConsultantModule = (function() {
     allocation["allocationSlot"] = $allocationCol.attr("data-slot");
 
     //Get timestamp and format to MYSQL datetime
-
     timeCreated.setDate(timeCreated.getDate() + global.week * 7);
-    timeCreated = new Date(timeCreated.getTime() + 1000 * 60 * 60 * 14);
+    timeCreated = new Date(timeCreated.getTime());
+
+    console.log(timeCreated);
 
     //If it is saturday or sunday, allocation date is moved to the following week
     if (timeCreated.getDay() == 6 || timeCreated.getDay() == 0) {
