@@ -407,7 +407,6 @@ nav.shift ul li a {
 }
 nav.shift ul li a:hover {
   color: rgb(255, 255, 255);
-  font-weight: 
 }
 nav.shift ul li a:after {
   display: block;
@@ -800,9 +799,7 @@ input:focus {
 }
 
 .laptop-icon {
-  position: absolute;
-  bottom: 50%;
-  right: 50%;
+
 }
 
 table td {
