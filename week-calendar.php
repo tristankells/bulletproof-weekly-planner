@@ -74,13 +74,13 @@ if ($_SESSION['authentication'] != 1) {
         <div class="row" id="maindiv">
             <div id="weekNavButtons">
                 <div class="previousWeekButtonContainer">
-                        <button class="changeWeekButton" ><i class="fas fa-arrow-left"></i></button>
+                        <button id="previousWeekArrow" class="changeWeekButton" ><i class="fas fa-arrow-left"></i></button>
                         <span id="previousWeekButton" style="font-size: 0.8em;">Previous</span>
                 </div>
                 <div class="currentWeekButtonContainer"><span id="currentWeekButton" style="font-size: 0.8em;">Current</span></div>
                 <div class="nextWeekButtonContainer">
                         <span id="nextWeekButton" style="font-size: 0.8em;">Next </span>
-                        <button class="changeWeekButton"><i class="fas fa-arrow-right"></i></button>
+                        <button id="nextWeekArrow" class="changeWeekButton"><i class="fas fa-arrow-right"></i></button>
                 </div>
                 
             </div>

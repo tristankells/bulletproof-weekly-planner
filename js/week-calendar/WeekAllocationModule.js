@@ -34,9 +34,14 @@ var WeekAllocationModule = (function() {
     }
 
     if (officeStatus == 4) {
-      //console.log("ss");
       $officeStatusDiv.append($("<i></i>").addClass("fas fa-handshake home-icon"));
     }
+
+    if (officeStatus == 5) {
+      $officeStatusDiv.append($("<i></i>").addClass("fas fa-laptop fa-2x laptop-icon"));
+    }
+
+
 
     return $officeStatusDiv;
   }
