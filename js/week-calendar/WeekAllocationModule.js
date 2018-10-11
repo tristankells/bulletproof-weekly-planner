@@ -37,12 +37,6 @@ var WeekAllocationModule = (function() {
       $officeStatusDiv.append($("<i></i>").addClass("fas fa-handshake home-icon"));
     }
 
-    if (officeStatus == 5) {
-      $officeStatusDiv.append($("<i></i>").addClass("fas fa-laptop fa-2x laptop-icon"));
-    }
-
-
-
     return $officeStatusDiv;
   }
 
@@ -75,7 +69,13 @@ var WeekAllocationModule = (function() {
 
     //If the allocation is NOT LEAVE, then render the allocation divs
     if (allocation["officeStatus"] != 3) {
-      $allocationTd.append(getAllocationDiv(allocation));
+      if (allocation["officeStatus"] !=5) {
+        $allocationTd.append(getAllocationDiv(allocation));
+      }
+    }
+
+    if (allocation["officeStatus"] == 5) {
+      $allocationTd.append($("<i></i>").addClass("fas fa-laptop fa-2x laptop-icon"));
     }
 
     return $allocationTd;

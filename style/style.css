@@ -17,13 +17,6 @@
   border: none;
 }
 
-#consultantstable {
-  box-shadow: 0 0 20px rgba(0,0,0,0.03), 0 0 15px rgba(0,0,0,0.03);
-  background-color: white;
-  border-radius: 10px;
-  margin-top: 20px;
-}
-
 #consultantstablebody > table,
 tr,
 td,
@@ -53,7 +46,19 @@ body {
 }
 
 #consultantsdiv {
-  margin-top: 10px;
+  background-color: white;
+  border-radius: 30px;
+  padding: 20px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.03), 0 0 15px rgba(0,0,0,0.03);
+  margin: 30px 0px 50px 0px;
+}
+
+#clientsdiv {
+  background-color: white;
+  border-radius: 30px;
+  padding: 50px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.03), 0 0 15px rgba(0,0,0,0.03);
+  margin: 0px 0px 50px 0px;
 }
 
 /*CSS for context menu adapted from https://stackoverflow.com/questions/4495626/making-custom-right-click-context-menus-for-my-web-app 12/07/2018 */
@@ -74,6 +79,18 @@ body {
   color: #212529;
   border-radius: 5px;
   padding: 0;
+}
+
+.custom-menu-subheader {
+  font-family: sans-serif;
+  letter-spacing: 1px;
+  color: #212529;
+  padding: 8px 12px;
+  border-bottom: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: #d6d6d6;
+  font-size: 13px;
+  font-weight: bold;
 }
 
 /* Each of the items in the list */
@@ -162,6 +179,7 @@ body {
   font-weight: lighter;
   vertical-align: top;
   font-size: 15px;
+  color: rgb(168, 168, 168);
 }
 
 .consultant-header {
@@ -268,7 +286,6 @@ body {
   text-align: center;
   margin-bottom: 30px;
   margin-top: 30px;
-
 }
 
 .clear-all-btn {
@@ -276,6 +293,23 @@ body {
   font-size: 15px;
   font-weight: 400;
   width: 250px;
+  letter-spacing: 1px;
+  border: 1px solid black;
+  background-color: white;
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin: auto;
+  box-shadow: 0 15px 20px rgba(0,0,0,0.02), 0 6px 6px rgba(0,0,0,0.02);
+  border-radius: 10px;
+}
+
+.copy-all-btn {
+  font-family: Lato, sans-serif;
+  font-size: 15px;
+  font-weight: 400;
+  width: 300px;
   letter-spacing: 1px;
   border: 1px solid black;
   background-color: white;
@@ -318,7 +352,7 @@ body {
 /* Remove buttons */
 
 .clear-consultant-row {
-  width: 60px;
+  width: 45px;
   height: 72px;
   vertical-align: -webkit-baseline-middle !important;
   text-align: center;
@@ -341,6 +375,8 @@ body {
 
 .clear-row-btn {
   color: #212529;
+  margin-top: 20px;
+  font-size: 22px;
 }
 
 .clear-row-btn:hover {
@@ -514,6 +550,10 @@ nav.shift ul li a:hover:after {
     #fafafa 20px
   );
 }
+
+[data-office="5"] {
+
+}
 .stripes {
   background: repeating-linear-gradient(
     45deg,
@@ -652,6 +692,12 @@ input {
 td {
   vertical-align: middle;
   padding: 0px;
+}
+
+#clienttablehead th {
+  background-color: white !important;
+  color: black;
+  border: none;
 }
 .month-tab {
   border-radius: 25px;
@@ -799,7 +845,9 @@ input:focus {
 }
 
 .laptop-icon {
-
+  margin-top: 20px;
+  margin-bottom: auto;
+  color: rgb(187, 187, 187);
 }
 
 table td {

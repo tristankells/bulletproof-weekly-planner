@@ -45,7 +45,8 @@ var WeekClientsModule = (function() {
         .addClass("client-row-format client-name-input")
         .css({
           "vertical-align": "middle",
-          "font-style": "italic"
+          "font-style": "italic",
+          "text-align": "center"
         })
         .html(client["full_name"])
     );
@@ -74,14 +75,7 @@ var WeekClientsModule = (function() {
         .html(client["who"])
     );
 
-    //Add remove button
-    $rowElement.append(
-      $("<td></td>").css({
-        "vertical-align": "middle",
-        "text-align": "center",
-        border: "none"
-      })
-    );
+
 
     DOM.$clienttablebody.append($rowElement);
   }

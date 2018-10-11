@@ -224,6 +224,9 @@ var WeekConsultantModule = (function() {
       if ($allocationTd.attr("data-office") == 3) {
         $allocationTd.attr("data-office", 0);
       }
+      if ($allocationTd.attr("data-office") == 5) {
+        $allocationTd.attr("data-office", 0);
+      }
     }
 
     updateAllocation($allocationTd);
@@ -239,6 +242,12 @@ var WeekConsultantModule = (function() {
     $allocationCol.attr("data-office", selectedOfficeStatus); //Set the new allocation office status
     console.log(selectedOfficeStatus);
     if (selectedOfficeStatus == 3) {
+      $allocationCol
+        .attr("data-abbreviation", "")
+        .attr("data-id", 0)
+        .attr("data-colour", 0);
+    }
+    if (selectedOfficeStatus == 5) {
       $allocationCol
         .attr("data-abbreviation", "")
         .attr("data-id", 0)
@@ -480,13 +489,8 @@ var WeekConsultantModule = (function() {
       $("<div></div>")
         .addClass("clear-consultant-row")
         .append(
-          $("<div></div>")
-            .html(getDateOfMostRecentAllocation(consultant["allocations"]))
-            .addClass("last-updated-div")
-        )
-        .append(
           $("<i></i>").addClass(
-            "clear-consultant-btn clear-row-btn fas fa-minus-square fa-2x"
+            "clear-consultant-btn clear-row-btn fas fa-minus-square"
           )
         )
     );

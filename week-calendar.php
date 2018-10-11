@@ -33,12 +33,16 @@ if ($_SESSION['authentication'] != 1) {
 
 <body>
     <ul id='officemenu' class='custom-menu '>
+        <div class="custom-menu-subheader"> Client </div>
         <li data-action="0">At Office</li>
         <li data-action="2"><i class="fas fa-home"></i>  From Home</li>
         <li data-action="1"><i class="fas fa-plane"></i>  On Site</li>
         <li data-action="4"><i class="fas fa-handshake"></i> Meeting</li>
-        <li data-action="3" class="stripes">Leave</li>
+        <div class="custom-menu-subheader"> Non-Client </div>
+        
         <li data-action="5"><i class="fas fa-laptop"></i> Other</li>
+        <li data-action="3" class="stripes">Leave</li>
+        
         
     </ul>
     <ul id='clientmenu' class='custom-menu'>
@@ -90,11 +94,11 @@ if ($_SESSION['authentication'] != 1) {
                                 <div id="displaymonth"></div>
                                 <div id="displayyear"></div>
                             </th>
-                            <th class="date" colspan="2">MON</th>
-                            <th class="date" colspan="2">TUE</th>
-                            <th class="date" colspan="2">WED</th>
-                            <th class="date" colspan="2">THU</th>
-                            <th class="date" colspan="2">FRI</th>
+                            <th class="date" colspan="2">Mon</th>
+                            <th class="date" colspan="2">Tue</th>
+                            <th class="date" colspan="2">Wed</th>
+                            <th class="date" colspan="2">Thu</th>
+                            <th class="date" colspan="2">Fri</th>
                         </tr>
                         <tr class="date-subheading">
                             <th></th>
@@ -115,18 +119,25 @@ if ($_SESSION['authentication'] != 1) {
                     </tbody>
                 </table>
                 <div class="clear-button-container">
-                    <button id="resetallocationbutton" class="clear-all-btn">CLEAR TABLE
+                    <button class="copy-all-btn">Duplicate Previous Week
+                        <i class="fas fa-copy"></i>
+                    </button>
+                    <button id="resetallocationbutton" class="clear-all-btn">Clear Table
                         <i class="remove-add-btn fas fa-trash-alt"></i>
                     </button>
+                    <p style="font-size: 10px; color: lightgray; float: right; text-align: right;"> 
+                    Last Updated: <span> Today </span><br/>Time: <span>10:00pm</span><br/>Date: <span>10/02/2018 </span></p>
+                    
                 </div>
             </div>
             <div class="col-lg-12"></div>
             <div class="col-lg-12 mx-auto mb-5" id="clientsdiv">
+                <div class="manage-table-header">Clients</div>
                 <table class="table table-dark table-striped client-table" id="clientstable">
-                    <thead id="clienttablehead" style="margin-left:20px">
-                        <th style="width: 15%;" colspan="2">Client</th>
-                        <th style="width: 15%; text-align: center;">Abbreviation</th>
-                        <th style="width: 70%;">Who</th>
+                    <thead id="clienttablehead">
+                        <th style="letter-spacing: 1px; text-align: center; width: 15%;" colspan="2">Client</th>
+                        <th style="letter-spacing: 1px; text-align: center; width: 15%; text-align: center;">Abbreviation</th>
+                        <th style="letter-spacing: 1px; width: 70%;">Consultant</th>
                     </thead>
                     <tbody id="clienttablebody">
                     </tbody>
