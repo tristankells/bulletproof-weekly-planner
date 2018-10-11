@@ -17,9 +17,11 @@
   border: none;
 }
 
-#currentWeekButton {
-  margin: 0 auto;
-  text-align: center;
+#consultantstable {
+  box-shadow: 0 0 20px rgba(0,0,0,0.03), 0 0 15px rgba(0,0,0,0.03);
+  background-color: white;
+  border-radius: 10px;
+  margin-top: 20px;
 }
 
 #consultantstablebody > table,
@@ -29,6 +31,7 @@ th,
 tbody {
   padding: 10px !important;
 }
+
 
 .consultant-name-input {
   background: #212529;
@@ -228,7 +231,7 @@ body {
 
 .table thead > tr.dates > th.monthyear {
   font-size: 50px;
-  padding-left: 0;
+  padding-left: 0px;
   padding-top: 10px;
   padding-bottom: 0;
 }
@@ -249,6 +252,7 @@ body {
   letter-spacing: 5px;
   text-align: left;
   float: left;
+  padding: 8px 0px 0px 8px;
 }
 
 #displayyear {
@@ -257,12 +261,14 @@ body {
   font-weight: 100;
   letter-spacing: 5px;
   float: left;
+  padding: 8px 0px 0px 8px;
 }
 
 .clear-button-container {
   text-align: center;
   margin-bottom: 30px;
   margin-top: 30px;
+
 }
 
 .clear-all-btn {
@@ -278,6 +284,8 @@ body {
   padding-top: 10px;
   padding-bottom: 10px;
   margin: auto;
+  box-shadow: 0 15px 20px rgba(0,0,0,0.02), 0 6px 6px rgba(0,0,0,0.02);
+  border-radius: 10px;
 }
 
 @media only screen and (max-width: 426px) {
@@ -342,14 +350,13 @@ body {
 
 /* Custom Navigation Bar */
 #navigationBar {
-  border-bottom: 1px solid rgb(231, 231, 231);
   height: 50px;
   background-color: white;
+  box-shadow: 0 15px 20px rgba(0,0,0,0.02), 0 6px 6px rgba(0,0,0,0.02);
 }
 nav {
   width: 100%;
   height: 100%;
-  position: absolute;
   margin: 0;
   padding: 0;
   text-align: center;
@@ -361,7 +368,6 @@ nav ul {
   margin: 0;
   padding: 0;
   height: 100%;
-  text-align: center;
 }
 nav ul li {
   display: inline-block;
@@ -374,7 +380,7 @@ nav ul li a {
   display: inline-block;
   padding: 15px;
   text-decoration: none;
-  color: rgb(109, 109, 109);
+  color: rgb(0, 0, 0);
   font-family: Lato;
   font-weight: 400;
   font-size: 12px;
@@ -382,6 +388,7 @@ nav ul li a {
   text-transform: uppercase;
   margin: 0;
   height: 100%;
+  min-width: 100px;
   text-align: center;
 }
 
@@ -400,7 +407,7 @@ nav.shift ul li a {
 }
 nav.shift ul li a:hover {
   color: rgb(255, 255, 255);
-  text-decoration: none;
+  font-weight: 
 }
 nav.shift ul li a:after {
   display: block;
@@ -418,12 +425,19 @@ nav.shift ul li a:after {
   visibility: none;
   opacity: 0;
   z-index: -1;
+  border-radius: 3px;
+  
 }
 
 nav.shift ul li a:hover:after {
   opacity: 1;
   visibility: visible;
   height: 100%;
+}
+
+.highlight-current-page {
+  font-weight: 900;
+  box-shadow: inset 0px 0px 3px #c1c1c1;
 }
 
 /* Adjusts the settings icon to the center of the nav bar */
@@ -458,11 +472,11 @@ nav.shift ul li a:hover:after {
   margin: 5px;
 }
 
-#glance-logo {
+#logo {
   font-family: Montserrat, sans-serif;
-  font-weight: 900;
-  font-size: 30px;
-  letter-spacing: -1px;
+  font-weight: 700;
+  font-size: 20px;
+  letter-spacing: 2px;
   color: #212529;
   text-align: left;
   line-height: 50px;
@@ -620,7 +634,9 @@ input {
 }
 #clienttable {
   width: 50%;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
   text-align: center;
 }
 @media only screen and (max-width: 800px) {
@@ -650,9 +666,17 @@ td {
   height: 72px;
 }
 /* Manage page layout */
+
+.main-div-background {
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.03), 0 0 15px rgba(0,0,0,0.03);
+
+}
 .manage-table {
   width: 100%;
   padding-left: 50px;
+  border-top-left-radius: 20px;
 }
 .manage-table th {
   font-family: Lato;
@@ -675,18 +699,26 @@ td {
   background-color: #212529;
   margin-bottom: 40px;
   margin-top: 30px;
+  border-radius: 5px;
 }
 .add-consultant-table input {
   width: 100%;
   padding: 5px;
-  border-radius: 2px;
+  border-radius: 5px;
+  border: none;
+  font-size: 13px;
 }
+
+.add-consultant-table input:focus, input:hover {
+  outline: 0;
+}
+
 .add-consultant-table i {
   color: white;
 }
 .add-consultant-table i:hover {
   cursor: pointer;
-  color: rgb(29, 187, 55);
+  color: rgb(82, 151, 92);
 }
 .custom-dark-bg {
   background-color: #212529 !important;
@@ -705,7 +737,8 @@ td {
 .custom-dark-bg input:hover,
 input:focus {
   background-color: rgb(255, 242, 242) !important;
-  color: rgb(0, 0, 0);
+  color: rgb(53, 53, 53);
+  outline: 0;
 }
 .force-height {
   height: 0.01px;
@@ -778,33 +811,50 @@ table td {
   font-size: 8px;
   color: rgb(206, 206, 206);
 }
-/* Week navigation - previous and next buttons */
+/* Week navigation - previous, current and next links */
 #weekNavButtons {
-  margin: 10px;
-  width: 100%;
-  padding: 0;
-  margin: 0 1%;
+  margin: 0 auto;
+  width: auto;
+  padding: 10px 4px 10px 4px;
+  text-align:center;
+  background-color: white;
+  box-shadow: 0 15px 20px rgba(0,0,0,0.02), 0 6px 6px rgba(0,0,0,0.02);
+  border-radius: 0px 0px 25px 25px;
+  
 }
+
+#weekNavButtons > .previousWeekButtonContainer span:hover, .nextWeekButtonContainer span:hover, .currentWeekButtonContainer span:hover {
+  cursor: pointer;
+  color: rgb(197, 46, 46);
+}
+
 .previousWeekButtonContainer {
-  float: left;
+  float:left;
+  width:100px;
 }
-.previousWeekButtonContainer i:hover {
-  cursor: pointer;
-  color: rgb(197, 46, 46);
+.previousWeekButtonContainer span {
+  font-family: Montserrat, sans-serif;
 }
+
 .nextWeekButtonContainer {
-  float: right;
+  float:right;
+  width:100px;
 }
-.nextWeekButtonContainer i:hover {
-  cursor: pointer;
-  color: rgb(197, 46, 46);
+
+.nextWeekButtonContainer span {
+  font-family: Montserrat, sans-serif;
+}
+
+.currentWeekButtonContainer {
+  display: inline-block;
+  margin:0 auto;
+  width:100px;
+}
+
+.currentWeekButtonContainer span {
+  font-family: Montserrat, sans-serif;
 }
 .changeWeekButton {
   background: transparent;
   border: none;
-}
-
-#currentWeekButton {
-  margin: 0 auto;
-  text-align: center;
 }

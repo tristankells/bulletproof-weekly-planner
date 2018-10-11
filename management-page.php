@@ -43,15 +43,15 @@ if($_SESSION['authentication']!=1)
 
     <div class="container-fluid">
         <div id="navigationBar" class="row">
-            <div id="top-logo-div" class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
-             <div id="glance-logo">B.</div>
+        <div id="top-logo-div" class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
+             <div id="logo">BP.</div>
             </div>
             <div id="top-btn-group" class="btn-group-wrap col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <nav class="shift">
                     <ul>
                         <li><a href="week-calendar.php">Week</a></li>
                         <li><a href="month-calendar.php">Month</a></li>
-                        <li><a href="management-page.php">Manage</a></li>
+                        <li><a class="highlight-current-page" href="management-page.php">Manage</a></li>
                     </ul>
                 </nav>
             </div>
@@ -65,18 +65,18 @@ if($_SESSION['authentication']!=1)
 
     <div class="container-fluid table-padding">
         <div class="row" id="maindiv">
-            <div class="col-lg-6 col-md-6 col-sm-10 mx-auto">
-                <table class="manage-table ml-5">
+            <div class="col-lg-5 col-md-10 col-sm-10 mb-5 mx-auto main-div-background">
+                <table class="manage-table ml-2">
                     <thead>
                         <tr>
-                            <th>NAME</th>
-                            <th>ROLE</th>
+                            <th>Consultant</th>
+                            <th>Role</th>
                         </tr>
                     </thead>
                     <tbody id="consultantstablebody"></tbody>
                 </table>
                 
-                <table class="add-consultant-table ml-5">
+                <table class="add-consultant-table ml-2">
                     <tr>
                         <td class="input-row">
                             <input type="text" placeholder="Consultant Name..." id="consultantnameinput" />
@@ -89,11 +89,12 @@ if($_SESSION['authentication']!=1)
                         </td>
                     </tr>
                 </table>
-                <div class="clear-button-container ml-2">
+                <div class="clear-button-container">
                     <button id="removeallconsultantsbutton" class="clear-all-btn">Delete All Consultants</button>
                 </div>
-
-                <table class="manage-table ml-5">
+</div>
+            <div class="col-lg-5 col-md-10 col-sm-10 mb-5 mx-auto main-div-background">
+                <table class="manage-table ml-2">
                     <thead>
                         <th style="width: 60%;">Client</th>
                         <th style="width: 20%; text-align: center;">Abbreviation</th>
@@ -102,7 +103,7 @@ if($_SESSION['authentication']!=1)
                     <tbody id="clienttablebody"></tbody>
                 </table>
                 
-                <table class="add-consultant-table ml-5">
+                <table class="add-consultant-table ml-2">
                     <tr>
                         <td>
                             <input type="text" placeholder="Client Name..." id="clientnameinput" />
@@ -119,7 +120,8 @@ if($_SESSION['authentication']!=1)
                 <div class="clear-button-container ml-2">
                     <button id="removeallclientsbutton" class="clear-all-btn">Delete All Clients</button>
                 </div>
-            </div>
+</div>
+            
         </div>
     </div>
 </body>

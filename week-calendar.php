@@ -37,23 +37,25 @@ if ($_SESSION['authentication'] != 1) {
         <li data-action="2"><i class="fas fa-home"></i>  From Home</li>
         <li data-action="1"><i class="fas fa-plane"></i>  On Site</li>
         <li data-action="3" class="stripes">Leave</li>
+        <li data-action="4" class="stripes">Other</li>
     </ul>
     <ul id='clientmenu' class='custom-menu'>
         <li>EMPTY</li>
     </ul>
     <ul id='usermenu' class='custom-menu'>
         <li data-action="1">Logout</li>
-		<li data-action="2">Reset Password</li>
+        <li data-action="2">Reset Password</li>
+        <li data-action="3"><label for="one">Colorblind Mode &nbsp; <input type="checkbox" id="one" /></label></li>
     </ul>
     <div class="container-fluid">
         <div id="navigationBar" class="row">
             <div id="top-logo-div" class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
-             <div id="glance-logo">B.</div>
+             <div id="logo">BP.</div>
             </div>
             <div id="top-btn-group" class="btn-group-wrap col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <nav class="shift">
                     <ul>
-                      <li><a href="week-calendar.php">Week</a></li>
+                      <li><a class="highlight-current-page" href="week-calendar.php">Week</a></li>
                       <li><a href="month-calendar.php">Month</a></li>
                       <li><a href="management-page.php">Manage</a></li>
                     </ul>
@@ -70,21 +72,21 @@ if ($_SESSION['authentication'] != 1) {
         <div class="row" id="maindiv">
             <div id="weekNavButtons">
                 <div class="previousWeekButtonContainer">
-                        <button class="changeWeekButton" id="previousWeekButton"><i class="fas fa-arrow-left"></i></button>
-                        <span style="font-size: 0.8em;">Previous </span>
+                        <button class="changeWeekButton" ><i class="fas fa-arrow-left"></i></button>
+                        <span id="previousWeekButton" style="font-size: 0.8em;">Previous</span>
                 </div>
-
+                <div class="currentWeekButtonContainer"><span id="currentWeekButton" style="font-size: 0.8em;">Current</span></div>
                 <div class="nextWeekButtonContainer">
-                        <span style="font-size: 0.8em;">Next </span>
-                        <button class="changeWeekButton" id="nextWeekButton"><i class="fas fa-arrow-right"></i></button>
+                        <span id="nextWeekButton" style="font-size: 0.8em;">Next </span>
+                        <button class="changeWeekButton"><i class="fas fa-arrow-right"></i></button>
                 </div>
-                <div id="currentWeekButton"><button>Current</button></div>
+                
             </div>
             <div class="col-lg-12" id="consultantsdiv">
                 <table class="consultant-table table" id="consultantstable">
                     <thead id="consultantstablehead">
                         <tr class="dates" id="consultantstableheadrow">
-                            <th style="padding: 0!important;">
+                            <th style="padding: 0!important; min-width: 200px;">
                                 <div id="displaymonth"></div>
                                 <div id="displayyear"></div>
                             </th>

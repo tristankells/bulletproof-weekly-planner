@@ -31,13 +31,13 @@ if($_SESSION['authentication']!=1)
     <div class="container-fluid">
         <div id="navigationBar" class="row">
         <div id="top-logo-div" class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
-             <div id="glance-logo">B.</div>
+             <div id="logo">BP.</div>
             </div>
             <div id="top-btn-group" class="btn-group-wrap col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <nav class="shift">
                     <ul>
                         <li><a href="week-calendar.php">Week</a></li>
-                        <li><a href="month-calendar.php">Month</a></li>
+                        <li><a class="highlight-current-page" href="month-calendar.php">Month</a></li>
                         <li><a href="management-page.php">Manage</a></li>
                     </ul>
                 </nav>
@@ -52,6 +52,7 @@ if($_SESSION['authentication']!=1)
     <div class="container-fluid table-padding">
         <div class="row" id="maindiv">
             <div class="col-lg-12" id="consultantsdiv">
+            <div class="panel panel-default">
                     <table id="consultanttable" class="table table-padding table-bordered">
                             <thead id="consultanttablehead">
                                 <tr id="consultanttableheadrow">
@@ -65,7 +66,9 @@ if($_SESSION['authentication']!=1)
                             <tbody id="consultanttablebody">
                             </tbody>
                         </table>
-                        <table id="clienttable" class="table table-dark table-striped table-bordered">
+</div>
+                        <div class="panel panel-default">
+                        <table id="clienttable" class="table table-dark table-striped">
                             <thead id="clienttablehead">
                                 <tr id="clienttableheadrow">
                                     <th style="width: 60%">Clients</th>
@@ -76,6 +79,7 @@ if($_SESSION['authentication']!=1)
                             <tbody id="clienttablebody" style="font-weight:bold">
                             </tbody>
                         </table>
+                        </div>
             </div>
         </div>
     </div>
