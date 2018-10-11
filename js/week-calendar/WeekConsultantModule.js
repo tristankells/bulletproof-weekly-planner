@@ -227,7 +227,7 @@ var WeekConsultantModule = (function() {
     selectedOfficeStatus = $menuItem.attr("data-action"); //Get the chosesn office status
 
     $allocationCol.attr("data-office", selectedOfficeStatus); //Set the new allocation office status
-
+    console.log(selectedOfficeStatus);
     if (selectedOfficeStatus == 3) {
       $allocationCol
         .attr("data-abbreviation", "")
