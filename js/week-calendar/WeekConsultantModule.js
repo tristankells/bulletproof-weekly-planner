@@ -15,6 +15,8 @@ var WeekConsultantModule = (function() {
     DOM.$previousWeekButton = $("#previousWeekButton");
     DOM.$nextWeekButton = $("#nextWeekButton");
     DOM.$currentWeekButton = $("#currentWeekButton");
+    DOM.$previousWeekArrow = $("#previousWeekArrow");
+    DOM.$nextWeekArrow = $("#nextWeekArrow");
   }
   // bind events
   function bindEvents() {
@@ -88,6 +90,14 @@ var WeekConsultantModule = (function() {
     DOM.$currentWeekButton.on("click", function() {
       global.week = 0;
       handleWeekNavigationButtonClick(0);
+    });
+
+    DOM.$previousWeekArrow.on("click", function() {
+      handleWeekNavigationButtonClick(-1);
+    });
+
+    DOM.$nextWeekArrow.on("click", function() {
+      handleWeekNavigationButtonClick(1);
     });
   }
 

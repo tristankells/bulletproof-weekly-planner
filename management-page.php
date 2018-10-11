@@ -66,6 +66,7 @@ if($_SESSION['authentication']!=1)
     <div class="container-fluid table-padding">
         <div class="row" id="maindiv">
             <div class="col-lg-5 col-md-10 col-sm-10 mb-5 mx-auto main-div-background">
+                <div class="manage-table-header">Consultants</div>
                 <table class="manage-table ml-2">
                     <thead>
                         <tr>
@@ -94,11 +95,14 @@ if($_SESSION['authentication']!=1)
                 </div>
 </div>
             <div class="col-lg-5 col-md-10 col-sm-10 mb-5 mx-auto main-div-background">
+            <div class="manage-table-header">Clients</div>
                 <table class="manage-table ml-2">
                     <thead>
-                        <th style="width: 60%;">Client</th>
-                        <th style="width: 20%; text-align: center;">Abbreviation</th>
-                        <th style="width: 20%;">Colour</th>
+                        <tr>
+                            <th style="width: 60%;">Client</th>
+                            <th style="width: 20%; text-align: center;">Abbreviation</th>
+                            <th style="width: 20%;">Colour</th>
+                        </tr>
                     </thead>
                     <tbody id="clienttablebody"></tbody>
                 </table>

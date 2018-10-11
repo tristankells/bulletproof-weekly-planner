@@ -407,7 +407,6 @@ nav.shift ul li a {
 }
 nav.shift ul li a:hover {
   color: rgb(255, 255, 255);
-  font-weight: 
 }
 nav.shift ul li a:after {
   display: block;
@@ -678,6 +677,19 @@ td {
   padding-left: 50px;
   border-top-left-radius: 20px;
 }
+
+.manage-table-header {
+  font-family: Lato;
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  padding: 15px 0px 15px 0px;
+  margin: 0;
+  letter-spacing: 1px;
+  border-bottom: 1px;
+  border-color: #ebebeb;
+  border-bottom-style: solid;
+}
 .manage-table th {
   font-family: Lato;
   font-size: 14px;
@@ -785,6 +797,11 @@ input:focus {
   right: 1px;
   color: rgb(187, 187, 187);
 }
+
+.laptop-icon {
+
+}
+
 table td {
   padding: 0px;
 }
@@ -827,6 +844,14 @@ table td {
   cursor: pointer;
   color: rgb(197, 46, 46);
 }
+
+#previousWeekArrow:hover, #nextWeekArrow:hover, #previousWeekArrow:focus, #nextWeekArrow:focus {
+  cursor: pointer;
+  color: rgb(197, 46, 46);
+  outline: 0;
+}
+
+
 
 .previousWeekButtonContainer {
   float:left;
