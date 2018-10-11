@@ -479,6 +479,11 @@ var WeekConsultantModule = (function() {
             "clear-consultant-btn clear-row-btn fas fa-minus-square fa-2x"
           )
         )
+        .append(
+          $("<i></i>").addClass(
+            "copy-consultant-row-btn clear-row-btn fas fa-copy fa-2x"
+          )
+        )
     );
 
     //Append row to consutlant table
