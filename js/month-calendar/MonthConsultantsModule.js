@@ -13,164 +13,75 @@ var MonthConsultantsModule = (function() {
     DOM.$document = $(document);
   }
 
-  function bindEvents() {
-    DOM.$consultanttablebody.on("click", ".allocation", function() {
-      handleAllocationLeftClick($(this));
-    });
+  function getConsultantTableRow(consultant) {
+    var $row = getConsultantRow(consultant.id); //Add consultant id to row
+    $row.append(getConsultantNameCol(consultant.name)); //Add client name colunm
 
-    DOM.$document.on("mousedown", function(e) {
-      if (!$(e.target).parents(".custom-menu").length > 0) {
-        $(".clicked").removeClass("clicked");
-        // Hide it
-        $(".custom-menu").hide(100);
-      }
-    });
-
-    DOM.$clientMenu.on("click", "li", function() {
-      handleClientMenuClick($(this));
-    });
-  }
-
-  function handleAllocationLeftClick($allocationDiv) {
-    $(".clicked").removeClass("clicked");
-    $allocationDiv.addClass("clicked");
-
-    DOM.$clientMenu
-      .finish()
-      .toggle(100)
-      // In the right position (the mouse)
-      .css({
-        top: event.pageY + "px",
-        left: event.pageX + "px"
-      });
-  }
-
-  function handleClientMenuClick($clientMenuItem) {
-    var $allocationCol = $(),
-      $consultantRow = $(),
-      $clientNameSpans = $(),
-      dynamicData = {},
-      clientName = "";
-    clientNotAllreadyAdded = true;
-
-    $allocationCol = $(".clicked");
-    $consultantRow = $allocationCol.closest("tr");
-
-    dynamicData["col"] = $allocationCol.attr("data-week");
-    dynamicData["consultantID"] = $consultantRow.attr("data-id");
-    dynamicData["clientID"] = $clientMenuItem.attr("data-id");
-    dynamicData["isAdding"] = 1;
-    dynamicData["abbreviation"] = $clientMenuItem.attr("data-abbreviation");
-    dynamicData["colour"] = $clientMenuItem.attr("data-colour");
-
-    if ($clientMenuItem.attr("data-flag") == 1) {
-      dynamicData["isAdding"] = 0;
-      $allocationCol.empty();
-    } else {
-      $clientNameSpans = $allocationCol.find("span");
-      clientName = $clientMenuItem.attr("data-name");
-
-      $clientNameSpans.each(function() {
-        if ($(this).attr("data-name") == clientName) {
-          clientNotAllreadyAdded = false;
-        }
-      });
-
-      if (clientNotAllreadyAdded) {
-        $allocationCol.append(
-          renderClientTab(dynamicData["abbreviation"], dynamicData["colour"])
-        );
-      } else {
-        console.log("client already added");
-
-        $allocationCol.find("span[data-name='" + clientName + "']").remove();
-
-        dynamicData["isAdding"] = 2;
-      }
+    var week = 0;
+    for (week; week < 4; week++) {
+      $row.append(getConsultantAllocationsCol(consultant.allocations, week));
     }
 
-    updateMonthlyAllocationInDB(dynamicData).done(function(data) {
-      if (data == "success") {
-        console.log("success");
-      } else {
-        console.log(data);
-      }
-    });
-
-    $(".clicked").removeClass("clicked");
-    // Hide it
-    $(".custom-menu").hide(100);
+    return $row;
   }
 
-  function renderTableRow(consultant) {
-    var row = {}; //Initialise variable
-
-    row = $("<tr></tr>") //Create new table row
+  function getConsultantRow(id) {
+    return ($row = $("<tr></tr>") //Create new table row
       .addClass("monthViewRow")
-      .attr("data-id", consultant["id"]); //Add consultant id to row
-    row.append(
-      $("<td></td>")
-        .addClass("custom-dark-bg month-consultant-view")
-        .html(consultant["full_name"])
-    ); //Add client name colunm
-
-    //Add all allocated  clients from the weekly view to the current week colunm
-    var weekClientNames = $("<td></td>");
-
-    for (x in consultant["week_allocations"]) {
-      if (
-        !(consultant["week_allocations"][x]["allocated_to"] == "Open") &&
-        !(consultant["week_allocations"][x]["allocated_to"] == "Leave")
-      ) {
-        weekClientNames.append(
-          renderClientTab(
-            consultant["week_allocations"][x]["allocated_to"],
-            consultant["week_allocations"][x]["colour"]
-          )
-        );
-      }
-    }
-
-    row.append(weekClientNames);
-
-    //Loop through weeks in month, and check existing allocations
-    for (var i = 2; i <= 4; i++) {
-      var allocations = [],
-        $allocationCol = $();
-
-      $allocationCol = $("<td></td>")
-        .addClass("allocation")
-        .attr("data-week", i);
-
-      allocations = getAllocationsForWeek(consultant["monthly_allocations"], i);
-      if (allocations) {
-        for (x in allocations) {
-          $allocationCol.append(
-            renderClientTab(
-              allocations[x]["abbreviation"],
-              allocations[x]["colour"]
-            )
-          );
-        }
-      }
-
-      row.append($allocationCol);
-    }
-
-    DOM.$consultanttablebody.append(row);
+      .attr("data-id", id)); //Add consultant id to row
   }
 
-  function getAllocationsForWeek(allocations, col) {
-    var returnAllocations = [];
+  //Return consultant name <td/>
+  function getConsultantNameCol(name) {
+    return $("<td></td>")
+      .addClass("custom-dark-bg month-consultant-view")
+      .html(name);
+  }
 
-    for (y in allocations) {
-      allocation = allocations[y];
-      if (allocation["allocation_slot"] == col) {
-        //if column is matching
-        returnAllocations.push(allocation);
-      }
-    }
-    return returnAllocations;
+  //Return consultant allocation <td/>
+  function getConsultantAllocationsCol(allocations, week) {
+    //All consultants alocations for this week
+    var weekAllocations = getAllocationsForWeek(allocations, week);
+    //All consultants allocations for this week which are not null
+    var weekAllocationsNoNull = getAllClientAllocations(weekAllocations);
+ //All consultants allocations for this week which are not null and have a uniqueID
+    var listOfUniqueClientAllocations = getArrayOfUniqueClientAllocations(
+      weekAllocationsNoNull
+    );
+
+    var $allocationCol = $("<td></td>")
+      .addClass("allocation")
+      .attr("data-week", week);
+
+    listOfUniqueClientAllocations.forEach(allocation => {
+      $allocationCol.append(
+        renderClientTab(allocation.abbreviation, allocation.colour)
+      );
+    });
+
+    return $allocationCol;
+  }
+
+  function getAllocationsForWeek(allocations, week) {
+    return allocations.filter(allocation => {
+      //Store allocation time created
+      const timeCreated = new Date(allocation.timeCreated);
+      //Return allocation if made between a given Monday and Sunday
+      return (
+        timeCreated >= DateModule.updatedGetMonday(week) &&
+        timeCreated <= DateModule.updatedGetSunday(week)
+      );
+    });
+  }
+
+  //Return only allocations attached to a client (no leave or null)
+  function getAllClientAllocations(allocations) {
+    return allocations.filter(allocation => allocation.clientID !== null);
+  }
+
+  //Return all allocations which are unique (one allocations for each unique client ID)
+  function getArrayOfUniqueClientAllocations(allocations) {
+    return allocations.filter((e, i) => allocations.findIndex(a => a["clientID"] === e["clientID"]) === i);
   }
 
   // Render client tab color and format with abbreviated client name
@@ -184,7 +95,7 @@ var MonthConsultantsModule = (function() {
   //Render <tr> elements for every consultant in the module array
   function renderTableRows(consultants) {
     for (x in consultants) {
-      renderTableRow(consultants[x]);
+      DOM.$consultanttablebody.append(getConsultantTableRow(consultants[x]));
     }
   }
 
@@ -196,13 +107,7 @@ var MonthConsultantsModule = (function() {
     );
     DOM.$consultanttablebody.html($placeholderRow);
   }
-
-  /*=========== private AJAX methods ==========*/
-  function updateMonthlyAllocationInDB(dynamicData) {
-    return $.post("php/consultants/updateAllocation_month.php", {
-      dynamicData: dynamicData
-    });
-  }
+  
 
   /*=========== public methods ==========*/
 

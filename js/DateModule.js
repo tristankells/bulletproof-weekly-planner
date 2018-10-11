@@ -27,6 +27,47 @@ var DateModule = (function() {
     return dates;
   }
 
+   //Return a date object for Monday of the current week (offset by the week parameter to look 
+  //at Sundays of weeks in the past or future) with the time set to 00:00:00
+  function updatedGetMonday(week) {
+    var monday = new Date();
+    switch (monday.getDay()) {
+      case 0:
+        monday.setDate(monday.getDate() - 6);
+        break;
+      case 1:
+        monday.setDate(monday.getDate());
+        break;
+      case 2:
+        monday.setDate(monday.getDate() - 1);
+        break;
+      case 3:
+        monday.setDate(monday.getDate() - 2);
+        break;
+      case 4:
+        monday.setDate(monday.getDate() - 3);
+        break;
+      case 5:
+        monday.setDate(monday.getDate() - 4);
+        break;
+      case 6:
+        monday.setDate(monday.getDate() - 5);
+        break;
+    }
+    monday.setDate(monday.getDate() + week * 7);
+    monday.setHours(0, 0, 0);
+    return monday;
+  }
+
+  //Return a date object for Sunday of the current week (offset by the week parameter to look 
+  //at Sundays of weeks in the past or future) with the time set to 23:59:59
+  function updatedGetSunday(week) {
+    var sunday = updatedGetMonday(week);
+    sunday.setDate(sunday.getDate() + 6);
+    sunday.setHours(23, 59, 59);
+    return sunday;
+  }
+
   //Return a string with the date of this week's friday in the format yyyy-mm-dd
   function getSundayString(week) {
     var sundayString = "";
@@ -197,7 +238,6 @@ var DateModule = (function() {
     DOM.$consultantsTableHeadRow.find(".date").each(function() {
       var day = monday;
       day.setDate(monday.getDate() + $(this).index() - 1);
-    
 
       var $span = $("<span></span>").html(
         $(this).html() + "  " + day.getDate()
@@ -209,7 +249,6 @@ var DateModule = (function() {
       var $span = $("<span></span>").html(
         dayOfWeek.slice(0, 3) + "  " + day.getDate()
       );
-
 
       if (
         currentDate.getDate() === day.getDate() &&
@@ -249,6 +288,8 @@ var DateModule = (function() {
     getMondayString: getMondayString,
     thisWeeksMondaySunday: thisWeeksMondaySunday,
     thisWeeksMondaySundayStringified: thisWeeksMondaySundayStringified,
-    updateDisplayDates: updateDisplayDates
+    updateDisplayDates: updateDisplayDates,
+    updatedGetMonday: updatedGetMonday,
+    updatedGetSunday: updatedGetSunday
   };
 })();

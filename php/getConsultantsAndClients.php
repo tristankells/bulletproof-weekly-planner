@@ -60,7 +60,8 @@ if ($result->num_rows > 0) {
         allocation.date_updated
         FROM allocation
         LEFT OUTER JOIN client ON client.id = allocation.client_id
-        WHERE consultant_id =  $id";
+        WHERE consultant_id =  $id
+        ORDER BY allocation.date_created ASC ";
 
         $allocationResult = $conn->query($query);
 

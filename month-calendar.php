@@ -17,6 +17,7 @@ if($_SESSION['authentication']!=1)
         crossorigin="anonymous">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="style/style.css">
+    <script src="js/DateModule.js"></script>
     <script src="js/month-calendar/MonthClientsModule.js"></script>
     <script src="js/month-calendar/MonthConsultantsModule.js"></script>
     <script src="js/month-calendar/month_index.js"></script>
@@ -27,14 +28,6 @@ if($_SESSION['authentication']!=1)
 </script>
 
 <body>
-    <ul id="clientmenu" class='custom-menu'>
-    <li data-action='0' data-flag='1'>Delete</li>
-    </ul>
-    <ul id='usermenu' class='custom-menu'>
-        <li data-action="1">Logout</li>
-		<li data-action="2">Reset Password</li>
-    </ul>
-
     <div class="container-fluid">
         <div id="navigationBar" class="row">
         <div id="top-logo-div" class="col-lg-3 col-md-3 col-sm-3 col-xs-9">

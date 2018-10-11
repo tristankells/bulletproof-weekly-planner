@@ -2,21 +2,16 @@ $(document).ready(function() {
   setUpMonthCalendar();
 
   function getClientsAndConsultants() {
-    return $.get("php/getConsultantsAndClients_month.php");
+    return $.get("php/getConsultantsAndClients.php");
   }
 
   function setUpMonthCalendar() {
     getClientsAndConsultants().done(function(data) {
-      var databaseResults = [],
-        clients = [],
-        consultants = [];
+      //Store consultant and client arrays recieved from server
+      var databaseResults = JSON.parse(data);
 
-      databaseResults = JSON.parse(data); //Store consultant and client arrays recieved from server
-
-      consultants = databaseResults.consultants; //Store array of consultants
-      clients = databaseResults.clients; //Store array of clients
-      MonthClientsModule.init(clients);
-      MonthConsultantsModule.init(consultants);
+      MonthClientsModule.init(databaseResults.clients);
+      MonthConsultantsModule.init(databaseResults.consultants);
     });
   }
 });
