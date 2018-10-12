@@ -20,16 +20,18 @@ $query = "DELETE FROM allocation
             AND date_created >= '$monday'
             AND date_created <= '$sunday'";
 $conn->query($query);
-
-if ($clientID == 0) {
+if (($clientID == 0 || $clientID == null) && $officeStatus == 0) {
+//Do nothing, AKA dont add empty allocation
+} else if ($clientID == 0) {
     $query = "INSERT INTO allocation (consultant_id, allocation_slot, office_status,  date_created)
     VALUES ($id, $allocationSlot, $officeStatus, '$timeCreated')";
+    $conn->query($query);
 } else {
     $query = "INSERT INTO allocation (consultant_id, client_id, allocation_slot, office_status, date_created)
     VALUES ($id, $clientID, $allocationSlot, $officeStatus, '$timeCreated')";
+    $conn->query($query);
 }
 
 //Run query on connection
-$conn->query($query);
 
 echo ($conn->error);
