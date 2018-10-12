@@ -95,29 +95,30 @@ var WeekConsultantModule = (function() {
     });
   }
 
-  // function handleCopyConsultantClick($copyConsultantButton) {
-  //   const $consultantRow = $copyConsultantButton.closest("tr");
+  function handleCopyConsultantClick($copyConsultantButton) {
+    const $consultantRow = $copyConsultantButton.closest("tr");
 
-  //   var thisWeeksConsultants = WeekConsultantStorageModule.getConsultantsWeeksAllocations(
-  //     global.week - 1
-  //   );
-  //   console.log($consultantRow);
-  //   // console.log(thisWeeksConsultants);
+    var thisWeeksConsultants = WeekConsultantStorageModule.getConsultantsWeeksAllocations(
+      global.week - 1
+    );
 
-  //   var currentConsultant = thisWeeksConsultants.filter(consultant => {
-  //     return consultant.id === $consultantRow.attr("data-id");
-  //   })[0];
+    var currentConsultant = thisWeeksConsultants.filter(consultant => {
+      return consultant.id === $consultantRow.attr("data-id");
+    })[0];
 
+    //Drop all allocations from row
+    $consultantRow.find(".allocation-col").remove();
 
-  //   console.log(currentConsultant);
-  //   $consultantRow.find(".allocation-col").remove();
+    //Populate with allocations from previous week
+    $consultantRow
+      .find(".consultant-header")
+      .after(getConsultantAllocationCols(currentConsultant.allocations));
 
-  //   $consultantRow
-  //     .find(".consultant-header")
-  //     .after(
-  //       getConsultantAllocationCols(currentConsultant.allocations)
-  //     );
-  // }
+    //Push new row to information to database
+    $consultantRow.find(".allocation-col").each(function() {
+      updateAllocation($(this));
+    });
+  }
 
   function handleWeekNavigationButtonClick(number) {
     global.week += number;
