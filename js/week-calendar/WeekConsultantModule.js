@@ -41,7 +41,13 @@ var WeekConsultantModule = (function() {
     });
 
     DOM.$consultantsTableBody.on("click", ".copy-consultant-btn", function() {
-      handleCopyConsultantClick($(this));
+      if (
+        confirm(
+          "Press OK to replace all of this consultant's allocations with those from last week"
+        )
+      ) {
+        handleCopyConsultantClick($(this));
+      }
     });
 
     DOM.$clientMenu.on("click", "li", function() {
@@ -96,7 +102,13 @@ var WeekConsultantModule = (function() {
     });
 
     DOM.$copyAllBtn.on("click", function() {
-      handleCopyTableClick();
+      if (
+        confirm(
+          "Press OK to replace all this week's allocations with allocations from previous week"
+        )
+      ) {
+        handleCopyTableClick();
+      }
     });
   }
 
@@ -122,7 +134,10 @@ var WeekConsultantModule = (function() {
     // console.log(thisWeeksConsultants);
 
     DOM.$consultantsTableBody.find("tr").each((index, element) => {
-      copyPreviousWeekAllocations($(element), thisWeeksConsultants[index].allocations);
+      copyPreviousWeekAllocations(
+        $(element),
+        thisWeeksConsultants[index].allocations
+      );
     });
 
     // DOM.$consultantsTableBody.find("tr").each(function() {
