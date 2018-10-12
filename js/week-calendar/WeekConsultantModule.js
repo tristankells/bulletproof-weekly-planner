@@ -12,8 +12,6 @@ var WeekConsultantModule = (function() {
     DOM.$officeMenu = $("#officemenu");
     DOM.$document = $(document);
     DOM.$resetAllocationsButton = $("#resetallocationbutton");
-    DOM.$previousWeekButton = $("#previousWeekButton");
-    DOM.$nextWeekButton = $("#nextWeekButton");
     DOM.$currentWeekButton = $("#currentWeekButton");
     DOM.$previousWeekArrow = $("#previousWeekArrow");
     DOM.$nextWeekArrow = $("#nextWeekArrow");
@@ -39,6 +37,10 @@ var WeekConsultantModule = (function() {
 
     DOM.$consultantsTableBody.on("click", ".clear-consultant-btn", function() {
       handleClearConsultantAllocationsClick($(this).closest("tr"));
+    });
+
+    DOM.$consultantsTableBody.on("click", ".copy-consultant-btn", function() {
+      handleCopyConsultantClick($(this));
     });
 
     DOM.$clientMenu.on("click", "li", function() {
@@ -79,14 +81,6 @@ var WeekConsultantModule = (function() {
       handleMouseLeavingAllocation($(this));
     });
 
-    DOM.$previousWeekButton.on("click", function() {
-      handleWeekNavigationButtonClick(-1);
-    });
-
-    DOM.$nextWeekButton.on("click", function() {
-      handleWeekNavigationButtonClick(1);
-    });
-
     DOM.$currentWeekButton.on("click", function() {
       global.week = 0;
       handleWeekNavigationButtonClick(0);
@@ -100,6 +94,30 @@ var WeekConsultantModule = (function() {
       handleWeekNavigationButtonClick(1);
     });
   }
+
+  // function handleCopyConsultantClick($copyConsultantButton) {
+  //   const $consultantRow = $copyConsultantButton.closest("tr");
+
+  //   var thisWeeksConsultants = WeekConsultantStorageModule.getConsultantsWeeksAllocations(
+  //     global.week - 1
+  //   );
+  //   console.log($consultantRow);
+  //   // console.log(thisWeeksConsultants);
+
+  //   var currentConsultant = thisWeeksConsultants.filter(consultant => {
+  //     return consultant.id === $consultantRow.attr("data-id");
+  //   })[0];
+
+
+  //   console.log(currentConsultant);
+  //   $consultantRow.find(".allocation-col").remove();
+
+  //   $consultantRow
+  //     .find(".consultant-header")
+  //     .after(
+  //       getConsultantAllocationCols(currentConsultant.allocations)
+  //     );
+  // }
 
   function handleWeekNavigationButtonClick(number) {
     global.week += number;
@@ -495,7 +513,7 @@ var WeekConsultantModule = (function() {
         )
         .append(
           $("<i></i>").addClass(
-            "copy-consultant-row-btn clear-row-btn fas fa-copy fa-2x"
+            "copy-consultant-btn clear-row-btn fas fa-copy fa-2x"
           )
         )
     );

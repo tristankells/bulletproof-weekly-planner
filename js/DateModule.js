@@ -27,7 +27,7 @@ var DateModule = (function() {
     return dates;
   }
 
-   //Return a date object for Monday of the current week (offset by the week parameter to look 
+  //Return a date object for Monday of the current week (offset by the week parameter to look
   //at Sundays of weeks in the past or future) with the time set to 00:00:00
   function updatedGetMonday(week) {
     var monday = new Date();
@@ -59,7 +59,7 @@ var DateModule = (function() {
     return monday;
   }
 
-  //Return a date object for Sunday of the current week (offset by the week parameter to look 
+  //Return a date object for Sunday of the current week (offset by the week parameter to look
   //at Sundays of weeks in the past or future) with the time set to 23:59:59
   function updatedGetSunday(week) {
     var sunday = updatedGetMonday(week);
@@ -226,9 +226,8 @@ var DateModule = (function() {
   }
 
   function updateDisplayDays(week) {
-    var monday = getMonday();
+    const monday = updatedGetMonday(week);
     var currentDate = new Date();
-    monday.setDate(monday.getDate() + week * 7);
 
     //If it is saturday or sunday, show the follinwg week on the calendar
     if (currentDate.getDay() == 6 || currentDate.getDay() == 0) {
@@ -236,12 +235,11 @@ var DateModule = (function() {
     }
 
     DOM.$consultantsTableHeadRow.find(".date").each(function() {
-      var day = monday;
-      day.setDate(monday.getDate() + $(this).index() - 1);
+      var day = new Date(monday.getTime());
 
-      var $span = $("<span></span>").html(
-        $(this).html() + "  " + day.getDate()
-      );
+      day.setDate(monday.getDate() + $(this).index() - 1);
+      // console.log(day);
+
       var dayOfWeek = $(this)
         .children()
         .html();

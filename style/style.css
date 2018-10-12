@@ -25,7 +25,6 @@ tbody {
   padding: 10px !important;
 }
 
-
 .consultant-name-input {
   background: #212529;
   border: none;
@@ -49,7 +48,7 @@ body {
   background-color: white;
   border-radius: 30px;
   padding: 20px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.03), 0 0 15px rgba(0,0,0,0.03);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.03), 0 0 15px rgba(0, 0, 0, 0.03);
   margin: 30px 0px 50px 0px;
 }
 
@@ -57,7 +56,7 @@ body {
   background-color: white;
   border-radius: 30px;
   padding: 50px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.03), 0 0 15px rgba(0,0,0,0.03);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.03), 0 0 15px rgba(0, 0, 0, 0.03);
   margin: 0px 0px 50px 0px;
 }
 
@@ -301,7 +300,7 @@ body {
   padding-top: 10px;
   padding-bottom: 10px;
   margin: auto;
-  box-shadow: 0 15px 20px rgba(0,0,0,0.02), 0 6px 6px rgba(0,0,0,0.02);
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.02), 0 6px 6px rgba(0, 0, 0, 0.02);
   border-radius: 10px;
 }
 
@@ -318,7 +317,7 @@ body {
   padding-top: 10px;
   padding-bottom: 10px;
   margin: auto;
-  box-shadow: 0 15px 20px rgba(0,0,0,0.02), 0 6px 6px rgba(0,0,0,0.02);
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.02), 0 6px 6px rgba(0, 0, 0, 0.02);
   border-radius: 10px;
 }
 
@@ -375,8 +374,9 @@ body {
 
 .clear-row-btn {
   color: #212529;
-  margin-top: 20px;
-  font-size: 22px;
+  margin-top: 56%;
+  font-size: 20px;
+  margin-left: 11.1%;
 }
 
 .clear-row-btn:hover {
@@ -388,7 +388,7 @@ body {
 #navigationBar {
   height: 50px;
   background-color: white;
-  box-shadow: 0 15px 20px rgba(0,0,0,0.02), 0 6px 6px rgba(0,0,0,0.02);
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.02), 0 6px 6px rgba(0, 0, 0, 0.02);
 }
 nav {
   width: 100%;
@@ -461,7 +461,6 @@ nav.shift ul li a:after {
   opacity: 0;
   z-index: -1;
   border-radius: 3px;
-  
 }
 
 nav.shift ul li a:hover:after {
@@ -550,9 +549,7 @@ nav.shift ul li a:hover:after {
     #fafafa 20px
   );
 }
-
 [data-office="5"] {
-
 }
 .stripes {
   background: repeating-linear-gradient(
@@ -693,7 +690,6 @@ td {
   vertical-align: middle;
   padding: 0px;
 }
-
 #clienttablehead th {
   background-color: white !important;
   color: black;
@@ -711,19 +707,16 @@ td {
   height: 72px;
 }
 /* Manage page layout */
-
 .main-div-background {
   background-color: white;
   border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.03), 0 0 15px rgba(0,0,0,0.03);
-
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.03), 0 0 15px rgba(0, 0, 0, 0.03);
 }
 .manage-table {
   width: 100%;
   padding-left: 50px;
   border-top-left-radius: 20px;
 }
-
 .manage-table-header {
   font-family: Lato;
   font-size: 18px;
@@ -766,11 +759,10 @@ td {
   border: none;
   font-size: 13px;
 }
-
-.add-consultant-table input:focus, input:hover {
+.add-consultant-table input:focus,
+input:hover {
   outline: 0;
 }
-
 .add-consultant-table i {
   color: white;
 }
@@ -788,6 +780,7 @@ td {
 .white-bg input {
   background-color: white;
 }
+
 .custom-dark-bg input {
   background-color: #212529 !important;
   color: white;
@@ -843,13 +836,11 @@ input:focus {
   right: 1px;
   color: rgb(187, 187, 187);
 }
-
 .laptop-icon {
   margin-top: 20px;
   margin-bottom: auto;
   color: rgb(187, 187, 187);
 }
-
 table td {
   padding: 0px;
 }
@@ -881,49 +872,46 @@ table td {
   margin: 0 auto;
   width: auto;
   padding: 10px 4px 10px 4px;
-  text-align:center;
+  text-align: center;
   background-color: white;
-  box-shadow: 0 15px 20px rgba(0,0,0,0.02), 0 6px 6px rgba(0,0,0,0.02);
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.02), 0 6px 6px rgba(0, 0, 0, 0.02);
   border-radius: 0px 0px 25px 25px;
-  
 }
-
-#weekNavButtons > .previousWeekButtonContainer span:hover, .nextWeekButtonContainer span:hover, .currentWeekButtonContainer span:hover {
+#weekNavButtons > .previousWeekButtonContainer span:hover,
+.nextWeekButtonContainer span:hover,
+.currentWeekButtonContainer span:hover {
   cursor: pointer;
   color: rgb(197, 46, 46);
 }
-
-#previousWeekArrow:hover, #nextWeekArrow:hover, #previousWeekArrow:focus, #nextWeekArrow:focus {
+#previousWeekArrow:hover,
+#nextWeekArrow:hover,
+#previousWeekArrow:focus,
+#nextWeekArrow:focus {
   cursor: pointer;
   color: rgb(197, 46, 46);
   outline: 0;
 }
-
-
-
 .previousWeekButtonContainer {
-  float:left;
-  width:100px;
+  float: left;
+  width: 100px;
 }
+
 .previousWeekButtonContainer span {
   font-family: Montserrat, sans-serif;
 }
-
 .nextWeekButtonContainer {
-  float:right;
-  width:100px;
+  float: right;
+  width: 100px;
 }
-
 .nextWeekButtonContainer span {
   font-family: Montserrat, sans-serif;
 }
 
 .currentWeekButtonContainer {
   display: inline-block;
-  margin:0 auto;
-  width:100px;
+  margin: 0 auto;
+  width: 100px;
 }
-
 .currentWeekButtonContainer span {
   font-family: Montserrat, sans-serif;
 }
