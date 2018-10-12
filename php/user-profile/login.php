@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         $email = mysqli_escape_string($conn, $dynamicData['email']);
         $password = mysqli_escape_string($conn, $dynamicData['password']);
 $staying_logged = mysqli_escape_string($conn, $dynamicData['staying_logged']);
-        $passwordCheckQuery = "SELECT email,login_password FROM user_profile WHERE email='$email'";
+        $passwordCheckQuery = "SELECT email, login_password, theme FROM user_profile WHERE email='$email'";
 
         //Check if query succesful
         if ($passwordCheckSql = mysqli_query($conn, $passwordCheckQuery)) {
@@ -35,6 +35,7 @@ $staying_logged = mysqli_escape_string($conn, $dynamicData['staying_logged']);
                 $user_profilePassword = "";
                 while ($row = mysqli_fetch_assoc($passwordCheckSql)) {
                     $user_profilePassword = $row['login_password'];
+                    $theme = $row['theme'];
                 }
                 if (!(password_verify($password, $user_profilePassword))) {
                     echo ("Incorrect password");
@@ -43,6 +44,7 @@ $staying_logged = mysqli_escape_string($conn, $dynamicData['staying_logged']);
                     //Save email to session
                     session_start();
                     $_SESSION['email'] = $email;
+                    $_SESSION['theme'] = $theme;
                     $_SESSION['authentication'] = 1;
 					if($staying_logged=="true")
 					{

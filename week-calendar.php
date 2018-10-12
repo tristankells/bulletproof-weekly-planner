@@ -2,6 +2,7 @@
 if ($_SESSION['authentication'] != 1) {
     header("Location: ./Error.php");
 }
+
 ?>
     <!DOCTYPE html>
 <html>
@@ -39,11 +40,8 @@ if ($_SESSION['authentication'] != 1) {
         <li data-action="1"><i class="fas fa-plane"></i>  On Site</li>
         <li data-action="4"><i class="fas fa-handshake"></i> Meeting</li>
         <div class="custom-menu-subheader"> Non-Client </div>
-        
         <li data-action="5"><i class="fas fa-laptop"></i> Other</li>
         <li data-action="3" class="stripes">Leave</li>
-        
-        
     </ul>
     <ul id='clientmenu' class='custom-menu'>
         <li>EMPTY</li>
@@ -81,10 +79,9 @@ if ($_SESSION['authentication'] != 1) {
                         <button id="previousWeekArrow" class="changeWeekButton" ><i class="fas fa-arrow-left"></i><span id="previousWeekButton" style="font-size: 0.8em;">&nbsp; Previous</span></button>
                 </div>
                 <div class="currentWeekButtonContainer"><span id="currentWeekButton" style="font-size: 0.8em;">Current</span></div>
-                <div class="nextWeekButtonContainer">      
+                <div class="nextWeekButtonContainer">
                         <button id="nextWeekArrow" class="changeWeekButton"><span id="nextWeekButton" style="font-size: 0.8em;">Next &nbsp;</span><i class="fas fa-arrow-right"></i></button>
                 </div>
-                
             </div>
             <div class="col-lg-12" id="consultantsdiv">
                 <table class="consultant-table table" id="consultantstable">
@@ -125,9 +122,9 @@ if ($_SESSION['authentication'] != 1) {
                     <button id="resetallocationbutton" class="clear-all-btn">Clear Table
                         <i class="remove-add-btn fas fa-trash-alt"></i>
                     </button>
-                    <p style="font-size: 10px; color: lightgray; float: right; text-align: right;"> 
+                    <p style="font-size: 10px; color: lightgray; float: right; text-align: right;">
                     Last Updated: <span> Today </span><br/>Time: <span>10:00pm</span><br/>Date: <span>10/02/2018 </span></p>
-                    
+
                 </div>
             </div>
             <div class="col-lg-12"></div>
@@ -145,6 +142,48 @@ if ($_SESSION['authentication'] != 1) {
             </div>
         </div>
     </div>
+    <script type="text/javascript">
+
+
+    //Load the javascript when the page is loaded
+    $(document).ready(function() {
+
+    var email = "<?php echo ($_SESSION['email']); ?>";
+
+    console.log(email);
+
+    var theme = <?php echo ($_SESSION['theme']); ?>;
+
+    console.log(theme);
+    DateModule.init();
+    ResetPasswordModule.init();
+
+  
+
+  initialiseTables(theme);
+
+
+  function saveNewClientPositions() {
+    var positions = [];
+    $(".client-updated").each(function() {
+      positions.push([$(this).prop("id"), $(this).attr("data-position")]);
+      $(this).removeClass("client-updated");
+    });
+    $.post(
+      "php/clients/updateClientPositions.php",
+      {
+        positions: positions
+      },
+      function() {}
+    );
+  }
+});
+
+
+
+
+    </script>
+
 </body>
 
 </html>
