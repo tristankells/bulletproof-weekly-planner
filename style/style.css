@@ -341,7 +341,8 @@ body {
   }
 }
 
-.clear-all-btn:hover {
+.clear-all-btn:hover,
+.copy-all-btn:hover {
   background-color: rgb(197, 46, 46);
   color: white;
   cursor: pointer;
@@ -780,7 +781,6 @@ input:hover {
 .white-bg input {
   background-color: white;
 }
-
 .custom-dark-bg input {
   background-color: #212529 !important;
   color: white;
@@ -895,7 +895,6 @@ table td {
   float: left;
   width: 100px;
 }
-
 .previousWeekButtonContainer span {
   font-family: Montserrat, sans-serif;
 }
@@ -906,7 +905,6 @@ table td {
 .nextWeekButtonContainer span {
   font-family: Montserrat, sans-serif;
 }
-
 .currentWeekButtonContainer {
   display: inline-block;
   margin: 0 auto;
