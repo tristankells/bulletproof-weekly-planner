@@ -15,6 +15,7 @@ var WeekConsultantModule = (function() {
     DOM.$currentWeekButton = $("#currentWeekButton");
     DOM.$previousWeekArrow = $("#previousWeekArrow");
     DOM.$nextWeekArrow = $("#nextWeekArrow");
+    DOM.$copyAllBtn = $(".copy-all-btn");
   }
   // bind events
   function bindEvents() {
@@ -93,6 +94,10 @@ var WeekConsultantModule = (function() {
     DOM.$nextWeekArrow.on("click", function() {
       handleWeekNavigationButtonClick(1);
     });
+
+    DOM.$copyAllBtn.on("click", function() {
+      handleCopyTableClick();
+    });
   }
 
   function handleCopyConsultantClick($copyConsultantButton) {
@@ -106,15 +111,31 @@ var WeekConsultantModule = (function() {
       return consultant.id === $consultantRow.attr("data-id");
     })[0];
 
-    //Drop all allocations from row
-    $consultantRow.find(".allocation-col").remove();
+    copyPreviousWeekAllocations($consultantRow, currentConsultant.allocations);
+  }
 
-    //Populate with allocations from previous week
+  function handleCopyTableClick() {
+    var thisWeeksConsultants = WeekConsultantStorageModule.getConsultantsWeeksAllocations(
+      global.week - 1
+    );
+
+    // console.log(thisWeeksConsultants);
+
+    DOM.$consultantsTableBody.find("tr").each((index, element) => {
+      copyPreviousWeekAllocations($(element), thisWeeksConsultants[index].allocations);
+    });
+
+    // DOM.$consultantsTableBody.find("tr").each(function() {
+    //   copyPreviousWeekAllocations($(this), thisWeeksConsultants[index]);
+    // });
+  }
+
+  function copyPreviousWeekAllocations($consultantRow, lastWeekAllocations) {
+    $consultantRow.find(".allocation-col").remove();
     $consultantRow
       .find(".consultant-header")
-      .after(getConsultantAllocationCols(currentConsultant.allocations));
+      .after(getConsultantAllocationCols(lastWeekAllocations));
 
-    //Push new row to information to database
     $consultantRow.find(".allocation-col").each(function() {
       updateAllocation($(this));
     });
@@ -259,7 +280,6 @@ var WeekConsultantModule = (function() {
     selectedOfficeStatus = $menuItem.attr("data-action"); //Get the chosesn office status
 
     $allocationCol.attr("data-office", selectedOfficeStatus); //Set the new allocation office status
-    console.log(selectedOfficeStatus);
     if (selectedOfficeStatus == 3) {
       $allocationCol
         .attr("data-abbreviation", "")
@@ -345,8 +365,6 @@ var WeekConsultantModule = (function() {
     //Get timestamp and format to MYSQL datetime
     timeCreated.setDate(timeCreated.getDate() + global.week * 7);
     timeCreated = new Date(timeCreated.getTime());
-
-    console.log(timeCreated);
 
     //If it is saturday or sunday, allocation date is moved to the following week
     if (timeCreated.getDay() == 6 || timeCreated.getDay() == 0) {
