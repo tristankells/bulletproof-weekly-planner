@@ -30,15 +30,15 @@ if ($_SESSION['authentication'] != 1) {
 
 <body>
     <ul class='custom-menu colour-menu'>
-        <li data-action="0">Default</li>
-        <li data-action="1">Green</li>
-        <li data-action="2">Orange</li>
-        <li data-action="3">Blue</li>
-        <li data-action="4">Red</li>
-        <li data-action="5">Purple</li>
-        <li data-action="6">Yellow</li>
-        <li data-action="7">Gray</li>
-        <li data-action="8">Dark Gray</li>
+        <li data-colour="0" data-action="0">Default</li>
+        <li data-colour="1" data-action="1">Green</li>
+        <li data-colour="2" data-action="2">Orange</li>
+        <li data-colour="3" data-action="3">Blue</li>
+        <li data-colour="4" data-action="4">Red</li>
+        <li data-colour="5" data-action="5">Purple</li>
+        <li data-colour="6" data-action="6">Yellow</li>
+        <li data-colour="7" data-action="7">Gray</li>
+        <li data-colour="8" data-action="8">Dark Gray</li>
     </ul>
     <ul id='usermenu' class='custom-menu'>
         <li data-action="1">Logout</li>

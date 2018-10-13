@@ -17,15 +17,21 @@ var ThemeModule = (function() {
       DOM.$consultantTable.removeClass("theme-one");
       DOM.$consultantTable.addClass("theme-two");
 
-       DOM.$clientTable.removeClass("theme-one");
-       DOM.$clientTable.addClass("theme-two");
+      DOM.$clientTable.removeClass("theme-one");
+      DOM.$clientTable.addClass("theme-two");
+
+      $(".colour-menu").removeClass("theme-one");
+      $(".colour-menu").addClass("theme-two");
     } else {
       theme = 0;
       DOM.$consultantTable.removeClass("theme-two");
       DOM.$consultantTable.addClass("theme-one");
 
-       DOM.$clientTable.removeClass("theme-two");
-       DOM.$clientTable.addClass("theme-one");
+      DOM.$clientTable.removeClass("theme-two");
+      DOM.$clientTable.addClass("theme-one");
+
+      $(".colour-menu").removeClass("theme-two");
+      $(".colour-menu").addClass("theme-one");
     }
 
     updateThemeInDB(theme).done(function(data) {
@@ -48,14 +54,16 @@ var ThemeModule = (function() {
     if (theme === 0) {
       $("input#one").prop("checked", false);
       DOM.$consultantTable.addClass("theme-one");
-       DOM.$clientTable.addClass("theme-one");
+      DOM.$clientTable.addClass("theme-one");
+      $(".colour-menu").addClass("theme-one");
     }
 
     //If theme is set to 1, add the theme-two class to both tables
     if (theme === 1) {
       $("input#one").prop("checked", true);
       DOM.$consultantTable.addClass("theme-two");
-       DOM.$clientTable.addClass("theme-two");
+      DOM.$clientTable.addClass("theme-two");
+      $(".colour-menu").addClass("theme-two");
     }
   }
 

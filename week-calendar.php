@@ -73,8 +73,11 @@ if ($_SESSION['authentication'] != 1) {
                     </ul>
                   </nav>
             </div>
+
             <div class="settings-icon-top col-lg-3 col-md-3 col-sm-3 col-xs-3">
+
                 <div>
+                <span class="user-email"><?php echo (explode("@", $_SESSION['email'])[0]); ?></span>
                 <i id="usermenubutton" class="fas fa-cog fa-2x"></i>
                 </div>
             </div>
@@ -165,7 +168,7 @@ if ($_SESSION['authentication'] != 1) {
     DateModule.init();
     ResetPasswordModule.init();
 
-  
+
 
   initialiseTables(theme);
 

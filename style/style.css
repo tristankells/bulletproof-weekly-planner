@@ -4,7 +4,6 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Slab:400,700");
 @import url("https://fonts.googleapis.com/css?family=Montserrat:100,400,700,900");
 
-
 /********************************** Login Page **********************************/
 
 #resetPasswordDiv {
@@ -16,7 +15,6 @@
 
 /********************************** Login Page END **********************************/
 
-
 /* Set entire page to Lato font */
 
 /* ALERTS */
@@ -27,78 +25,78 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.50);
-  z-index: 999999
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999999;
 }
 .dialog-overlay .dialog {
   width: 400px;
   margin: 100px auto 0;
   background-color: #fff;
-  box-shadow: 0 0 20px rgba(0,0,0,.2);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   border-radius: 3px;
-  overflow: hidden
+  overflow: hidden;
 }
 .dialog-overlay .dialog header {
   padding: 10px 8px;
   background-color: #f6f7f9;
-  border-bottom: 1px solid #e5e5e5
+  border-bottom: 1px solid #e5e5e5;
 }
 .dialog-overlay .dialog header h3 {
   font-size: 14px;
   margin: 0;
   color: #555;
-  display: inline-block
+  display: inline-block;
 }
 .dialog-overlay .dialog header .fa-close {
   float: right;
   color: #c4c5c7;
   cursor: pointer;
-  transition: all .5s ease;
+  transition: all 0.5s ease;
   padding: 0 2px;
-  border-radius: 1px    
+  border-radius: 1px;
 }
 .dialog-overlay .dialog header .fa-close:hover {
-  color: #b9b9b9
+  color: #b9b9b9;
 }
 .dialog-overlay .dialog header .fa-close:active {
-  box-shadow: 0 0 5px #673AB7;
-  color: #a2a2a2
+  box-shadow: 0 0 5px #673ab7;
+  color: #a2a2a2;
 }
 .dialog-overlay .dialog .dialog-msg {
-  padding: 12px 10px
+  padding: 12px 10px;
 }
-.dialog-overlay .dialog .dialog-msg p{
+.dialog-overlay .dialog .dialog-msg p {
   margin: 0;
   font-size: 15px;
-  color: #333
+  color: #333;
 }
 .dialog-overlay .dialog footer {
   border-top: 1px solid #e5e5e5;
-  padding: 8px 10px
+  padding: 8px 10px;
 }
 .dialog-overlay .dialog footer .controls {
-  direction: rtl
+  direction: rtl;
 }
 .dialog-overlay .dialog footer .controls .button {
   padding: 5px 15px;
-  border-radius: 3px
+  border-radius: 3px;
 }
 .button {
-cursor: pointer
+  cursor: pointer;
 }
 .button-default {
   background-color: rgb(248, 248, 248);
   border: 1px solid rgba(204, 204, 204, 0.5);
-  color: #5D5D5D;
+  color: #5d5d5d;
 }
 .button-danger {
   background-color: #f44336;
   border: 1px solid #d32f2f;
-  color: #f5f5f5
+  color: #f5f5f5;
 }
 .link {
-padding: 5px 10px;
-cursor: pointer
+  padding: 5px 10px;
+  cursor: pointer;
 }
 
 /*.warning-alert {
@@ -118,8 +116,6 @@ cursor: pointer
 .client-abbreviation-input {
   border: none;
 }
-
-
 
 .consultant-name-input {
   background: #212529;
@@ -377,8 +373,6 @@ body {
   padding: 8px 0px 0px 8px;
 }
 
-
-
 /* Remove buttons */
 
 .clear-button-container {
@@ -628,7 +622,6 @@ nav.shift ul li a:hover:after {
 }
 /********************************** Custom Navigation Bar END **********************************/
 
-
 /********************************** Client colours **********************************/
 .theme-one [data-colour="0"] > .color-col,
 .theme-one [data-colour="0"] > .colour-div,
@@ -639,11 +632,11 @@ nav.shift ul li a:hover:after {
 .theme-one [data-colour="1"] > .color-col,
 .theme-one li[data-colour="1"],
 .theme-one [data-colour="1"] > .colour-div,
-.month-tab[data-color="1"] {
+.theme-one .month-tab[data-color="1"] {
   background-color: #9bcb9e;
   /* GREEN */
 }
-.theme-one  [data-colour="2"] > .color-col,
+.theme-one [data-colour="2"] > .color-col,
 .theme-one li[data-colour="2"],
 .theme-one [data-colour="2"] > .colour-div,
 .theme-one .month-tab[data-color="2"] {
@@ -755,7 +748,6 @@ nav.shift ul li a:hover:after {
     #fafafa 20px
   );
 }
-
 .stripes {
   background: repeating-linear-gradient(
     45deg,
@@ -774,10 +766,8 @@ nav.shift ul li a:hover:after {
     #272727 20px
   );
 }
-/********************************** Client colours & allocation options END **********************************/
-
-/****************************************** Week view layout ******************************************/
-
+/* ********************************* Client colours & allocation options END ********************************* */
+/* ***************************************** Week view layout ***************************************** */
 #consultantstablebody > table,
 tr,
 td,
@@ -785,12 +775,10 @@ th,
 tbody {
   padding: 10px !important;
 }
-
 #clientstable {
   width: 100%;
   margin: auto;
 }
-
 .highlight-day {
   height: 30px;
   width: 20px;
@@ -799,7 +787,6 @@ tbody {
   border-color: #9a9da0;
   border-width: thin;
 }
-
 /* Allocation div style */
 .force-height {
   height: 0.01px;
@@ -845,7 +832,6 @@ tbody {
   margin-bottom: auto;
   color: rgb(187, 187, 187);
 }
-
 /* Week navigation - previous, current and next links */
 #weekNavButtons {
   margin-left: auto;
@@ -898,19 +884,16 @@ tbody {
   background: transparent;
   border: none;
 }
-/****************************************** Week view layout END ******************************************/
-
-/******************************************** Month view layout *******************************************/
+/* ***************************************** Week view layout END ***************************************** */
+/* ******************************************* Month view layout ****************************************** */
 .table-padding {
   padding-left: 15px;
   padding-top: 40px;
   padding-right: 15px;
 }
-
 .table-border-light-gray {
   border: 1px solid #dee2e6;
 }
-
 #consultanttable {
   background: white;
   width: 100%;
@@ -965,10 +948,8 @@ td {
 .monthViewRow {
   height: 72px;
 }
-/******************************************** Month view layout END *******************************************/
-
-/******************************************** Manage page layout **********************************************/
-
+/* ******************************************* Month view layout END ****************************************** */
+/* ******************************************* Manage page layout ********************************************* */
 .main-div-background {
   background-color: white;
   border-radius: 10px;
@@ -1052,9 +1033,7 @@ input:focus {
   color: rgb(53, 53, 53);
   outline: 0;
 }
-/******************************************** Manage page layout END **********************************************/
-
-
+/* ******************************************* Manage page layout END ********************************************* */
 table td {
   padding: 0px;
 }
@@ -1068,5 +1047,6 @@ table td {
 .transparent-bg {
   background-color: #434d57;
 }
-
-
+.user-email {
+  margin:6%;
+}

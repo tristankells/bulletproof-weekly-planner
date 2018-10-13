@@ -32,15 +32,15 @@ if ($_SESSION['authentication'] != 1) {
     </ul>
     <div class="container-fluid">
         <div id="navigationBar" class="row">
-            <div id="top-logo-div" class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
-             <div id="glance-logo">B.</div>
+        <div id="top-logo-div" class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
+             <div id="logo">BP.</div>
             </div>
             <div id="top-btn-group" class="btn-group-wrap col-lg-6 col-md-6 col-sm-6 col-xs-6">
                 <nav class="shift">
                     <ul>
                         <li><a href="week-calendar.php">Week</a></li>
                         <li><a href="month-calendar.php">Month</a></li>
-                        <li><a href="management-page.php">Manage</a></li>
+                        <li><a class="highlight-current-page" href="management-page.php">Manage</a></li>
                     </ul>
                 </nav>
             </div>
