@@ -834,16 +834,10 @@ tbody {
   margin: 0px;
   background-color: rgb(255, 255, 255);
 }
-.home-icon {
+.status-icon {
   position: absolute;
   top: 4px;
   right: 3px;
-  color: rgb(187, 187, 187);
-}
-.away-icon {
-  position: absolute;
-  bottom: 8px;
-  right: 1px;
   color: rgb(187, 187, 187);
 }
 .laptop-icon {
