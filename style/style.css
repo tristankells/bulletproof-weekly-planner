@@ -1,10 +1,21 @@
-/* Inputs with the class .client-name-input now as appear as normal text  */
-
 /* FONTS */
 
 @import url("https://fonts.googleapis.com/css?family=Lato:300,400,700,900");
 @import url("https://fonts.googleapis.com/css?family=Roboto+Slab:400,700");
 @import url("https://fonts.googleapis.com/css?family=Montserrat:100,400,700,900");
+
+
+/********************************** Login Page **********************************/
+
+#resetPasswordDiv {
+  text-align: center;
+}
+#resetPasswordForm > input {
+  margin: 30px;
+}
+
+/********************************** Login Page END **********************************/
+
 
 /* Set entire page to Lato font */
 
@@ -17,13 +28,7 @@
   border: none;
 }
 
-#consultantstablebody > table,
-tr,
-td,
-th,
-tbody {
-  padding: 10px !important;
-}
+
 
 .consultant-name-input {
   background: #212529;
@@ -49,13 +54,13 @@ body {
   border-radius: 30px;
   padding: 20px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.03), 0 0 15px rgba(0, 0, 0, 0.03);
-  margin: 30px 0px 50px 0px;
+  margin: 0px 0px 50px 0px;
 }
 
 #clientsdiv {
   background-color: white;
   border-radius: 30px;
-  padding: 50px;
+  padding: 20px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.03), 0 0 15px rgba(0, 0, 0, 0.03);
   margin: 0px 0px 50px 0px;
 }
@@ -281,6 +286,10 @@ body {
   padding: 8px 0px 0px 8px;
 }
 
+
+
+/* Remove buttons */
+
 .clear-button-container {
   text-align: center;
   margin-bottom: 30px;
@@ -349,20 +358,12 @@ body {
   border: 1px solid rgb(197, 46, 46);
 }
 
-/* Remove buttons */
-
 .clear-consultant-row {
   width: 45px;
   height: 72px;
   vertical-align: -webkit-baseline-middle !important;
   text-align: center;
   padding: auto;
-}
-
-.last-updated-div {
-  font-size: 60%;
-  color: rgb(160, 160, 160);
-  font-style: italic;
 }
 
 .clear-consultant-container {
@@ -385,7 +386,7 @@ body {
   cursor: pointer;
 }
 
-/* Custom Navigation Bar */
+/********************************** Custom Navigation Bar **********************************/
 #navigationBar {
   height: 50px;
   background-color: white;
@@ -476,7 +477,6 @@ nav.shift ul li a:hover:after {
 }
 
 /* Adjusts the settings icon to the center of the nav bar */
-
 .settings-icon-top {
   text-align: right;
   vertical-align: -webkit-baseline-middle;
@@ -501,6 +501,8 @@ nav.shift ul li a:hover:after {
 #managePage tr {
   font-size: 110%;
 }
+
+/* Logo style */
 .logo {
   width: auto;
   height: 35px;
@@ -534,43 +536,10 @@ nav.shift ul li a:hover:after {
     justify-content: center;
   }
 }
+/********************************** Custom Navigation Bar END **********************************/
 
-/*Added css to colour elements */
 
-[data-office="1"] {
-  background-color: white;
-}
-
-[data-office="3"] {
-  background: repeating-linear-gradient(
-    45deg,
-    #ececec,
-    #ececec 10px,
-    #fafafa 10px,
-    #fafafa 20px
-  );
-}
-[data-office="5"] {
-}
-.stripes {
-  background: repeating-linear-gradient(
-    45deg,
-    #ececec,
-    #ececec 10px,
-    #fafafa 10px,
-    #fafafa 20px
-  );
-}
-.stripes:hover {
-  background: repeating-linear-gradient(
-    45deg,
-    #5a5a5a,
-    #5a5a5a 10px,
-    #272727 10px,
-    #272727 20px
-  );
-}
-/* ********* CLIENT COLOURS Begin ********** */
+/********************************** Client colours **********************************/
 .theme-one [data-colour="0"] > .color-col,
 .theme-one [data-colour="0"] > .colour-div,
 .theme-one .month-tab[data-color="0"] {
@@ -626,7 +595,7 @@ nav.shift ul li a:hover:after {
 .theme-one .month-tab[data-color="8"] {
   background-color: #979696; /* DARK GRAY */
 }
-/* ********* COLOURBLIND CLIENT COLOURS BEGIN ********** */
+/***************** Colourblind colours *****************/
 .theme-two [data-colour="0"] > .color-col,
 .theme-two [data-colour="0"] > .colour-div,
 .theme-two .month-tab[data-color="0"] {
@@ -680,30 +649,184 @@ nav.shift ul li a:hover:after {
 .theme-two .month-tab[data-color="8"] {
   background-color: #212529; /* DARK GRAY */
 }
-/* ********* CLIENT CALENDAR COLOURS End ********** */
-input {
-  color: inherit;
+
+/* Additional allocation options */
+
+[data-office="1"] {
+  background-color: white;
 }
+
+[data-office="3"] {
+  background: repeating-linear-gradient(
+    45deg,
+    #ececec,
+    #ececec 10px,
+    #fafafa 10px,
+    #fafafa 20px
+  );
+}
+
+.stripes {
+  background: repeating-linear-gradient(
+    45deg,
+    #ececec,
+    #ececec 10px,
+    #fafafa 10px,
+    #fafafa 20px
+  );
+}
+.stripes:hover {
+  background: repeating-linear-gradient(
+    45deg,
+    #5a5a5a,
+    #5a5a5a 10px,
+    #272727 10px,
+    #272727 20px
+  );
+}
+/********************************** Client colours & allocation options END **********************************/
+
+/****************************************** Week view layout ******************************************/
+
+#consultantstablebody > table,
+tr,
+td,
+th,
+tbody {
+  padding: 10px !important;
+}
+
+#clientstable {
+  width: 100%;
+  margin: auto;
+}
+
 .highlight-day {
-  height: 30px; /* change this and the width
-  for the size of your initial circle */
+  height: 30px;
   width: 20px;
   padding: 10px;
   border-style: solid;
   border-color: #9a9da0;
   border-width: thin;
 }
-/* Week view layout */
-#clientstable {
-  width: 100%;
-  margin: auto;
+
+/* Allocation div style */
+.force-height {
+  height: 0.01px;
 }
-/* Month view layout */
+.colour-div {
+  display: inline-block;
+  width: 10%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+.client-div {
+  display: inline-block;
+  width: 70%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+  background-color: rgb(255, 255, 255);
+  position: relative;
+}
+.client-span {
+  position: absolute;
+  top: 35%;
+  left: 35%;
+}
+.location-div {
+  position: relative;
+  display: inline-block;
+  width: 20%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+  background-color: rgb(255, 255, 255);
+}
+.home-icon {
+  position: absolute;
+  top: 4px;
+  right: 3px;
+  color: rgb(187, 187, 187);
+}
+.away-icon {
+  position: absolute;
+  bottom: 8px;
+  right: 1px;
+  color: rgb(187, 187, 187);
+}
+.laptop-icon {
+  margin-top: 20px;
+  margin-bottom: auto;
+  color: rgb(187, 187, 187);
+}
+
+/* Week navigation - previous, current and next links */
+#weekNavButtons {
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+  width: auto;
+  padding: 10px 4px 10px 4px;
+  text-align: center;
+  background-color: white;
+  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.02), 0 6px 6px rgba(0, 0, 0, 0.02);
+  border-radius: 0px 0px 25px 25px;
+}
+#weekNavButtons > .previousWeekButtonContainer span:hover,
+.nextWeekButtonContainer span:hover,
+.currentWeekButtonContainer span:hover {
+  cursor: pointer;
+  color: rgb(197, 46, 46);
+}
+#previousWeekArrow:hover,
+#nextWeekArrow:hover,
+#previousWeekArrow:focus,
+#nextWeekArrow:focus {
+  cursor: pointer;
+  color: rgb(197, 46, 46);
+  outline: 0;
+}
+.previousWeekButtonContainer {
+  float: left;
+  width: 100px;
+}
+.previousWeekButtonContainer span {
+  font-family: Montserrat, sans-serif;
+}
+.nextWeekButtonContainer {
+  float: right;
+  width: 100px;
+}
+.nextWeekButtonContainer span {
+  font-family: Montserrat, sans-serif;
+}
+.currentWeekButtonContainer {
+  display: inline-block;
+  margin: 0 auto;
+  width: 100px;
+}
+.currentWeekButtonContainer span {
+  font-family: Montserrat, sans-serif;
+}
+.changeWeekButton {
+  background: transparent;
+  border: none;
+}
+/****************************************** Week view layout END ******************************************/
+
+/******************************************** Month view layout *******************************************/
 .table-padding {
   padding-left: 15px;
   padding-top: 40px;
   padding-right: 15px;
 }
+
+.table-border-light-gray {
+  border: 1px solid #dee2e6;
+}
+
 #consultanttable {
   background: white;
   width: 100%;
@@ -724,9 +847,6 @@ input {
   padding: 0px;
 }
 #clienttable {
-  width: 50%;
-  margin-left: auto;
-  margin-right: auto;
   margin-bottom: 20px;
   text-align: center;
 }
@@ -761,7 +881,10 @@ td {
 .monthViewRow {
   height: 72px;
 }
-/* Manage page layout */
+/******************************************** Month view layout END *******************************************/
+
+/******************************************** Manage page layout **********************************************/
+
 .main-div-background {
   background-color: white;
   border-radius: 10px;
@@ -845,56 +968,9 @@ input:focus {
   color: rgb(53, 53, 53);
   outline: 0;
 }
-.force-height {
-  height: 0.01px;
-}
-.colour-div {
-  display: inline-block;
-  width: 10%;
-  height: 100%;
-  padding: 0px;
-  margin: 0px;
-}
-.client-div {
-  display: inline-block;
-  width: 70%;
-  height: 100%;
-  padding: 0px;
-  margin: 0px;
-  background-color: rgb(255, 255, 255);
-  position: relative;
-}
-.client-span {
-  position: absolute;
-  top: 35%;
-  left: 35%;
-}
-.location-div {
-  position: relative;
-  display: inline-block;
-  width: 20%;
-  height: 100%;
-  padding: 0px;
-  margin: 0px;
-  background-color: rgb(255, 255, 255);
-}
-.home-icon {
-  position: absolute;
-  top: 4px;
-  right: 3px;
-  color: rgb(187, 187, 187);
-}
-.away-icon {
-  position: absolute;
-  bottom: 8px;
-  right: 1px;
-  color: rgb(187, 187, 187);
-}
-.laptop-icon {
-  margin-top: 20px;
-  margin-bottom: auto;
-  color: rgb(187, 187, 187);
-}
+/******************************************** Manage page layout END **********************************************/
+
+
 table td {
   padding: 0px;
 }
@@ -908,66 +984,5 @@ table td {
 .transparent-bg {
   background-color: #434d57;
 }
-#resetPasswordDiv {
-  text-align: center;
-}
-#resetPasswordForm > input {
-  margin: 30px;
-}
-/* Last updated section */
-.last-updated {
-  width: inherit;
-  height: 20px;
-  font-size: 8px;
-  color: rgb(206, 206, 206);
-}
-/* Week navigation - previous, current and next links */
-#weekNavButtons {
-  margin: 0 auto;
-  width: auto;
-  padding: 10px 4px 10px 4px;
-  text-align: center;
-  background-color: white;
-  box-shadow: 0 15px 20px rgba(0, 0, 0, 0.02), 0 6px 6px rgba(0, 0, 0, 0.02);
-  border-radius: 0px 0px 25px 25px;
-}
-#weekNavButtons > .previousWeekButtonContainer span:hover,
-.nextWeekButtonContainer span:hover,
-.currentWeekButtonContainer span:hover {
-  cursor: pointer;
-  color: rgb(197, 46, 46);
-}
-#previousWeekArrow:hover,
-#nextWeekArrow:hover,
-#previousWeekArrow:focus,
-#nextWeekArrow:focus {
-  cursor: pointer;
-  color: rgb(197, 46, 46);
-  outline: 0;
-}
-.previousWeekButtonContainer {
-  float: left;
-  width: 100px;
-}
-.previousWeekButtonContainer span {
-  font-family: Montserrat, sans-serif;
-}
-.nextWeekButtonContainer {
-  float: right;
-  width: 100px;
-}
-.nextWeekButtonContainer span {
-  font-family: Montserrat, sans-serif;
-}
-.currentWeekButtonContainer {
-  display: inline-block;
-  margin: 0 auto;
-  width: 100px;
-}
-.currentWeekButtonContainer span {
-  font-family: Montserrat, sans-serif;
-}
-.changeWeekButton {
-  background: transparent;
-  border: none;
-}
+
+

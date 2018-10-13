@@ -61,40 +61,45 @@ if ($_SESSION['authentication'] != 1) {
     <div class="container-fluid table-padding">
         <div class="row" id="maindiv">
             <div class="col-lg-12" id="consultantsdiv">
-            <div class="panel panel-default">
-                    <table id="consultanttable" class="table table-padding table-bordered">
-                            <thead id="consultanttablehead">
-                                <tr id="consultanttableheadrow">
-                                    <th>CONSULTANTS</th>
-                                    <th>CURRENT WEEK </th>
-                                    <th>WEEK 2 </th>
-                                    <th>WEEK 3 </th>
-                                    <th>WEEK 4 </th>
-                                </tr>
-                            </thead>
-                            <tbody id="consultanttablebody">
-                            </tbody>
-                        </table>
-</div>
-                        <div class="panel panel-default">
-                        <table id="clienttable" class="table table-dark table-striped">
-                            <thead id="clienttablehead">
-                                <tr id="clienttableheadrow">
-                                    <th style="width: 60%">Clients</th>
-                                    <th style="width: 10%">Color</th>
-                                    <th style="width: 30%">Abbreviation</th>
-                                </tr>
-                            </thead>
-                            <tbody id="clienttablebody" style="font-weight:bold">
-                            </tbody>
-                        </table>
-                        </div>
+            <div class="manage-table-header">Month Overview</div>
+                <table id="consultanttable" class="table table-padding">
+                    <thead id="consultanttablehead">
+                        <tr id="consultanttableheadrow">
+                                    <th style="text-align: center;">Consultants</th>
+                                    <th style="text-align: center;">Current Week </th>
+                                    <th style="text-align: center;">Week 2 </th>
+                                    <th style="text-align: center;">Week 3 </th>
+                                    <th style="text-align: center;">Week 4 </th>
+                        </tr>
+                    </thead>
+                    <tbody id="consultanttablebody">
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-lg-12" id="clientsdiv">
+            <div class="manage-table-header">Clients</div>
+                <table id="clienttable" class="table table-dark table-striped">
+                    <thead id="clienttablehead">
+                        <tr id="clienttableheadrow">
+                                    <th style="width: 70%">Clients</th>
+                                    <th style="width: 5%">Color</th>
+                                    <th style="width: 25%">Abbreviation</th>
+                        </tr>
+                    </thead>
+                    <tbody id="clienttablebody" style="font-weight:bold">
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 
 <script type="text/javascript">
     $(document).ready(function() {
+
+        var email = "<?php echo ($_SESSION['email']); ?>";
+
+        console.log(email);
+
 
         var email = "<?php echo ($_SESSION['email']); ?>";
 

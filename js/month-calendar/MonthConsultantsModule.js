@@ -34,7 +34,7 @@ var MonthConsultantsModule = (function() {
   //Return consultant name <td/>
   function getConsultantNameCol(name) {
     return $("<td></td>")
-      .addClass("custom-dark-bg month-consultant-view")
+      .addClass("custom-dark-bg month-consultant-view table-border-light-gray")
       .html(name);
   }
 
@@ -50,7 +50,7 @@ var MonthConsultantsModule = (function() {
     );
 
     var $allocationCol = $("<td></td>")
-      .addClass("allocation")
+      .addClass("allocation table-border-light-gray")
       .attr("data-week", week);
 
     listOfUniqueClientAllocations.forEach(allocation => {

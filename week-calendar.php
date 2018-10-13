@@ -128,7 +128,6 @@ if ($_SESSION['authentication'] != 1) {
 
                 </div>
             </div>
-            <div class="col-lg-12"></div>
             <div class="col-lg-12 mx-auto mb-5" id="clientsdiv">
                 <div class="manage-table-header">Clients</div>
                 <table class="table table-dark table-striped client-table" id="clientstable">
