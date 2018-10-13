@@ -16,6 +16,8 @@ var WeekConsultantModule = (function() {
     DOM.$previousWeekArrow = $("#previousWeekArrow");
     DOM.$nextWeekArrow = $("#nextWeekArrow");
     DOM.$copyAllBtn = $(".copy-all-btn");
+    DOM.$lastUpdatedTime = $("#lastUpdatedTime");
+    DOM.$lastUpdatedDate = $("#lastUpdatedDate");
   }
   // bind events
   function bindEvents() {
@@ -616,7 +618,7 @@ var WeekConsultantModule = (function() {
     return stringDate;
   }
 
-  function getDateOfMostRecentAllocation(allocations) {
+  function updateLastUpdated(allocations) {
     var latestAllocationDate = null,
       allocationDate = new Date(),
       lastAllocationString = "";
@@ -624,7 +626,7 @@ var WeekConsultantModule = (function() {
     lastAllocationString = "00:00 00/00/0000";
 
     for (x in allocations) {
-      allocationDate = new Date(allocations[x]["timeAllocated"]);
+      allocationDate = new Date(allocations[x]["date_updated"]);
       //Set the latest allocation date to
       if (latestAllocationDate == null) {
         latestAllocationDate = allocationDate;
@@ -636,7 +638,19 @@ var WeekConsultantModule = (function() {
     if (latestAllocationDate != null) {
       lastAllocationString = convertDateToString(latestAllocationDate);
     }
-    return lastAllocationString;
+  }
+
+  function renderLastUpdated(date) {
+    var test = new Date();
+    var minutes = test.getMinutes();
+    if(minutes < 10){
+
+    }
+
+    DOM.$lastUpdatedTime.html(test.getHours() + ":" + test.getMinutes());
+    DOM.$lastUpdatedDate.html(
+      test.getDay() + "/" + test.getMonth() + "/" + test.getFullYear()
+    );
   }
 
   function renderPlaceHolderText() {
@@ -681,6 +695,7 @@ var WeekConsultantModule = (function() {
   // main init method
   function init(consultants) {
     cacheDom();
+    renderLastUpdated();
 
     if (consultants.length > 0) {
       bindEvents();
