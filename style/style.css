@@ -689,7 +689,7 @@ nav.shift ul li a:hover:after {
 .theme-two [data-colour="0"] > .color-col,
 .theme-two [data-colour="0"] > .colour-div,
 .theme-two .month-tab[data-color="0"] {
-  background-color: #ffffd9; /* DEFAULT */
+  background-color: #ffffff; /* DEFAULT */
 }
 .theme-two [data-colour="1"] > .color-col,
 .theme-two li[data-colour="1"],
