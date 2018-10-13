@@ -27,7 +27,8 @@ if ($_SESSION['authentication'] != 1) {
 <body>
 <ul id='usermenu' class='custom-menu'>
         <li data-action="1">Logout</li>
-		<li data-action="2">Reset Password</li>
+        <li data-action="2">Reset Password</li>
+        <li data-action="4">Register A New User Account</li>
     </ul>
     <div class="container-fluid">
         <div id="navigationBar" class="row">

@@ -1,4 +1,3 @@
-console.log("eeee");
 $(document).ready(function() {
   var userMenu = $("#usermenu");
   var usermenubutton = $("#usermenubutton");
@@ -16,15 +15,15 @@ $(document).ready(function() {
       });
   });
 
-    $(document).click(function(event) { 
-      if(!$(event.target).closest('#usermenu').length) {
-          if($('#usermenu').is(":visible")) {
-              $('#usermenu').hide();
-          }
-      }        
+  $(document).click(function(event) {
+    if (!$(event.target).closest("#usermenu").length) {
+      if ($("#usermenu").is(":visible")) {
+        $("#usermenu").hide();
+      }
+    }
   });
 
-  usermenubutton.click(function(event){
+  usermenubutton.click(function(event) {
     event.stopPropagation();
   });
 
@@ -50,62 +49,10 @@ $(document).ready(function() {
       case "2":
         location.href = "./reset-password.php";
         break;
+      case "4":
+        location.href = "./register-page.php";
+        break;
       default:
     }
   });
 });
-
-var usersetting = (function() {
-  "use strict";
-  // placeholder for cached DOM elements
-  var DOM = {};
-
-  /* =================== private methods ================= */
-  // cache DOM elements
-  function cacheDom() {
-    DOM.$userMenu = $("#usermenu");
-    DOM.$usermenubutton = $("#usermenubutton");
-  }
-  // bind events
-  function bindEvents() {
-    DOM.$usermenubutton.on("contextmenu", function() {
-      event.preventDefault();
-      var pos = event.pageX - DOM.$userMenu.width();
-      $("#usermenu")
-        .finish()
-        .toggle(100)
-        // In the right position (the mouse)
-        .css({
-          top: event.pageY + "px",
-          left: pos + "px"
-        });
-    });
-
-    DOM.$userMenu.on("click", "li", function() {
-      var optionClicked = $(this).attr("data-action");
-      switch (optionClicked) {
-        case "1":
-          location.href = "./php/logout.php";
-          break;
-        case "2":
-          alert("Please make the password reset menu");
-          break;
-        default:
-          alert("nothing");
-      }
-    });
-  }
-
-  /* =================== public methods ================== */
-  // main init method
-  function init() {
-    cacheDom();
-    bindEvents();
-    console.log("SSS");
-  }
-
-  /* =============== export public methods =============== */
-  return {
-    init: init
-  };
-})();

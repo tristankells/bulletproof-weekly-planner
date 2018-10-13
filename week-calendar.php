@@ -51,6 +51,7 @@ if ($_SESSION['authentication'] != 1) {
         <li data-action="1">Logout</li>
         <li data-action="2">Reset Password</li>
         <li data-action="3"><label for="one">Colorblind Mode &nbsp; <input type="checkbox" id="one" /></label></li>
+        <li data-action="4">Register A New User Account</li>
     </ul>
     <div class="container-fluid">
         <div id="navigationBar" class="row">

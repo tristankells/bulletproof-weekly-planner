@@ -91,17 +91,6 @@ if ($gClient->getAccessToken()) {
             <img class="logo-image" src="img/bulletproof-logo-white.png">
         </div>
         <div class="form">
-            <div class="register-form">
-                <input type="text" id='register-firstname-input' placeholder="first name" />
-                <input type="text" id='register-lastname-input' placeholder="last name" />
-                <input type="text" id='register-email-input' placeholder="email address" />
-                <input type="password" id='register-password-input' placeholder="password" />
-                <input type="password" id='register-repassword-input' placeholder="enter password again" />
-                <button id='register-button'>Create</button>
-                <p class="message">Already registered?
-                    <a class="login-form-btn" href="#">Sign In</a>
-                </p>
-            </div>
             <div class="login-form">
                 <form id='login-form'>
                     <input id='email-input' type="text" placeholder="email" />
@@ -109,22 +98,18 @@ if ($gClient->getAccessToken()) {
                     <button type='submit' id='login-button'>Login</button>
                     <input style="float:left; width: 10%; margin: 10px 0 15px 0;" id='staying_logged' type="checkbox"/> 
                     <p style="font-size: 10px; width: 90%; margin: 10px 0 15px 0; text-align: left;">Keep me signed in</p>
-					<div><?php echo $output; ?></div>
-                    
+					<!-- <div><?php echo $output; ?></div> -->
                 </form>
                 <p class="message">
-                    Not registered?
-                    <a class="register-form-btn" href="#">Create an account</a><br>
+                    <!-- Not registered?
+                    <a class="register-form-btn" href="#">Create an account</a><br> -->
                     Forgot password?
                     <a class="reset-form-btn" href="#">Reset password</a>
                 </p>
             </div>
             <div class="reset-form">
                 <input id='reset-email-input' type="text" placeholder="email" />
-                <button id='reset-btn'>Reset password</button>
-                <p class="message">Not registered?
-                    <a class="register-form-btn" href="#">Create an account</a>
-                </p>
+                <button id='reset-btn'>Reset Password</button>
                 <p class="message">Remember your password?
                     <a class="login-form-btn" href="#">Sign In</a>
                 </p>

@@ -13,21 +13,17 @@ var RegisterModule = (function() {
     DOM.$rePasswordInput = $("#register-repassword-input");
     DOM.$emailInput = $("#register-email-input");
     DOM.$registerFormButton = $(".register-form-btn");
-
   }
   // bind events
   function bindEvents() {
     DOM.$registerButton.click(handleRegisterButtonClick);
-    DOM.$registerFormButton.click( function() {
-        animateLoginFormTransition(
-            $(this)
-              .closest("div")
-              .add(".register-form")
-          )
-    }
-        
-       
-    )
+    DOM.$registerFormButton.click(function() {
+      animateLoginFormTransition(
+        $(this)
+          .closest("div")
+          .add(".register-form")
+      );
+    });
   }
   // handle click events
   function handleRegisterButtonClick() {
@@ -44,9 +40,12 @@ var RegisterModule = (function() {
         if (dynamicData["password"] == dynamicData["rePassword"]) {
           attemptRegisterNewUser(dynamicData).done(function(data) {
             if (data == "success") {
-              window.location.href = "./index.php";
+              alert(
+                "Success. New user account created. Navigating back to your account"
+              );
+              location.href = "index.php";
             } else {
-            alert(data);
+              alert(data);
             }
           });
         } else {
@@ -63,7 +62,7 @@ var RegisterModule = (function() {
   }
 
   function checkNoInputIsEmpty(dynamicData) {
-      var x = 0;
+    var x = 0;
     for (x in dynamicData) {
       if (dynamicData[x].length == 0) {
         return false;
@@ -72,12 +71,12 @@ var RegisterModule = (function() {
     return true;
   }
 
-
-
   /* =================== private AJAX methods ================= */
 
   function attemptRegisterNewUser(dynamicData) {
-    return $.post("php/user-profile/register.php", {dynamicData : dynamicData});
+    return $.post("php/user-profile/register.php", {
+      dynamicData: dynamicData
+    });
   }
 
   /* =================== public methods ================== */
@@ -89,13 +88,13 @@ var RegisterModule = (function() {
     animateLoginFormTransition = SharedFunctions.animateLoginFormTransition;
   }
 
-   //Inherited function from login-screen/app.js
-   function animateLoginFormTransition() {}
+  //Inherited function from login-screen/app.js
+  function animateLoginFormTransition() {}
 
-   function isEmail() {}
+  function isEmail() {}
 
   /* =============== export public methods =============== */
   return {
-    init: init,
+    init: init
   };
 })();
