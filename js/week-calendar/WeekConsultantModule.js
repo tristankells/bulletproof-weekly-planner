@@ -43,14 +43,10 @@ var WeekConsultantModule = (function() {
     });
 
     DOM.$consultantsTableBody.on("click", ".copy-consultant-btn", function() {
-      if (
-        confirm(
-          "Press OK to replace all of this consultant's allocations with those from last week"
-        )
-      ) {
-        handleCopyConsultantClick($(this));
-      }
+        Confirm('Copy Row', 'This will copy the previous weeks row, are you sure you want to do this?', 
+        'Yes', 'Cancel', handleCopyConsultantClick, $(this))
     });
+
 
     DOM.$clientMenu.on("click", "li", function() {
       handleClientMenuClick($(this));
@@ -104,15 +100,46 @@ var WeekConsultantModule = (function() {
     });
 
     DOM.$copyAllBtn.on("click", function() {
-      if (
-        confirm(
-          "Press OK to replace all this week's allocations with allocations from previous week"
-        )
-      ) {
-        handleCopyTableClick();
-      }
+        Confirm('Copy All', 'This will copy all allocations from the previous week, are you sure you want to do this?', 
+        'Yes', 'Cancel', handleCopyTableClick, null)
     });
   }
+
+  function Confirm(title, msg, $true, $false, functionname, thisbutton) { /*change*/
+    var $content =  "<div class='dialog-overlay'>" +
+                    "<div class='dialog'><header>" +
+                     " <h3> " + title + " </h3> " +
+                     "<i class='fa fa-close'></i>" +
+                 "</header>" +
+                 "<div class='dialog-msg'>" +
+                     " <p> " + msg + " </p> " +
+                 "</div>" +
+                 "<footer>" +
+                     "<div class='controls'>" +
+                         " <button class='button button-danger doAction'>" + $true + "</button> " +
+                         " <button class='button button-default cancelAction'>" + $false + "</button> " +
+                     "</div>" +
+                 "</footer>" +
+              "</div>" +
+            "</div>";
+     $('body').prepend($content);
+
+  $('.doAction').click(function () {
+    $(this).parents('.dialog-overlay').fadeOut(500, function () {
+      $(this).remove();
+
+      functionname(thisbutton);
+
+      console.log(functionname);
+      console.log(thisbutton);
+    });
+  });
+$('.cancelAction, .fa-close').click(function () {
+    $(this).parents('.dialog-overlay').fadeOut(500, function () {
+      $(this).remove();
+    });
+  });
+}
 
   function handleCopyConsultantClick($copyConsultantButton) {
     const $consultantRow = $copyConsultantButton.closest("tr");
