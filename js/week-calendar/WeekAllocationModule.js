@@ -26,15 +26,15 @@ var WeekAllocationModule = (function() {
     $officeStatusDiv = $("<div></div>").addClass("location-div");
 
     if (officeStatus == 1) {
-      $officeStatusDiv.append($("<i></i>").addClass("fas fa-plane away-icon"));
+      $officeStatusDiv.append($("<i></i>").addClass("fas fa-plane status-icon"));
     }
 
     if (officeStatus == 2) {
-      $officeStatusDiv.append($("<i></i>").addClass("fas fa-home home-icon"));
+      $officeStatusDiv.append($("<i></i>").addClass("fas fa-home status-icon"));
     }
 
     if (officeStatus == 4) {
-      $officeStatusDiv.append($("<i></i>").addClass("fas fa-handshake home-icon"));
+      $officeStatusDiv.append($("<i></i>").addClass("fas fa-handshake status-icon"));
     }
 
     return $officeStatusDiv;

@@ -53,6 +53,12 @@ if ($_SESSION['authentication'] != 1) {
         <li data-action="3"><label for="one">Colorblind Mode &nbsp; <input type="checkbox" id="one" /></label></li>
         <li data-action="4">Register A New User Account</li>
     </ul>
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <strong>Hi there! Welcome to Glance.</strong> &nbsp;&nbsp;Heres a tip! Right click on any allocation to change client or set leave :)
+</div>
     <div class="container-fluid">
         <div id="navigationBar" class="row">
             <div id="top-logo-div" class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
@@ -184,7 +190,6 @@ if ($_SESSION['authentication'] != 1) {
 
 
     </script>
-
 </body>
 
 </html>
