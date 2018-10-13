@@ -555,6 +555,20 @@ nav.shift ul li a:hover:after {
   height: 100%;
 }
 
+.user-email {
+  display: inline-block;
+  margin-right: 20px;
+  height: 50px;
+  font-family: Montserrat, sans-serif;
+  font-weight: 700;
+  font-size: 10px;
+  text-transform: capitalize;
+  letter-spacing: 2px;
+  color: #212529;
+  line-height: 50px;
+  vertical-align: -webkit-baseline-middle;
+}
+
 .highlight-current-page {
   font-weight: 900;
   box-shadow: inset 0px 0px 3px #c1c1c1;
@@ -565,7 +579,6 @@ nav.shift ul li a:hover:after {
   text-align: right;
   vertical-align: -webkit-baseline-middle;
   line-height: 50px;
-  margin-top: 5px;
 }
 
 #usermenubutton {
@@ -1047,6 +1060,4 @@ table td {
 .transparent-bg {
   background-color: #434d57;
 }
-.user-email {
-  margin:6%;
-}
+

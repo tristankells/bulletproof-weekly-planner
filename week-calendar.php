@@ -61,7 +61,7 @@ if ($_SESSION['authentication'] != 1) {
 </div>
     <div class="container-fluid">
         <div id="navigationBar" class="row">
-            <div id="top-logo-div" class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
+            <div id="top-logo-div" class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
              <div id="logo">BP.</div>
             </div>
             <div id="top-btn-group" class="btn-group-wrap col-lg-6 col-md-6 col-sm-6 col-xs-6">
@@ -74,11 +74,11 @@ if ($_SESSION['authentication'] != 1) {
                   </nav>
             </div>
 
-            <div class="settings-icon-top col-lg-3 col-md-3 col-sm-3 col-xs-3">
-
+            <div class="text-right col-lg-3 col-md-3 col-sm-3 col-xs-3">
+                
                 <div>
-                <span class="user-email"><?php echo (explode("@", $_SESSION['email'])[0]); ?></span>
-                <i id="usermenubutton" class="fas fa-cog fa-2x"></i>
+                    <span class="user-email"><?php echo (explode("@", $_SESSION['email'])[0]); ?></span>
+                    <i id="usermenubutton" class="settings-icon-top fas fa-cog fa-2x"></i>
                 </div>
             </div>
         </div>

@@ -60,6 +60,9 @@ INSERT INTO `user_profile` (`id`, `first_name`, `last_name`, `email`, `login_pas
 (1, 'Junha', 'Yu', 'test@gmail.com', '$2y$10$h61qCV9myUMxYD6VcWI2IOq63Okl7ioDmMM64/ez7rAoIwrz6HQEe', '', ''),
 (2, 'Junha', 'Yu', 'junehayu@gmail.com', '', 'google', '109571180129366142465');
 
+INSERT INTO `user_profile` (`id`, `first_name`, `last_name`, `email`, `login_password`, `external_type`, `external_id`) VALUES
+(1, 'Admin', 'Admin', 'admin@admin.com', 'admin', '', '');
+
 
 ALTER TABLE `user_profile`
   ADD PRIMARY KEY (`id`),
