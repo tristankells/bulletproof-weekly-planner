@@ -1,6 +1,8 @@
-<?php session_start(); 
-if($_SESSION['authentication']!=1)
-    header("Location: ./Error.php");?>
+<?php session_start();
+if ($_SESSION['authentication'] != 1) {
+    header("Location: ./Error.php");
+}
+?>
     <!DOCTYPE html>
 <html>
 
@@ -28,6 +30,11 @@ if($_SESSION['authentication']!=1)
 </script>
 
 <body>
+<ul id='usermenu' class='custom-menu'>
+        <li data-action="1">Logout</li>
+        <li data-action="2">Reset Password</li>
+        <li data-action="3"><label for="one">Colorblind Mode &nbsp; <input type="checkbox" id="one" /></label></li>
+    </ul>
     <div class="container-fluid">
         <div id="navigationBar" class="row">
         <div id="top-logo-div" class="col-lg-3 col-md-3 col-sm-3 col-xs-9">
@@ -84,7 +91,7 @@ if($_SESSION['authentication']!=1)
         </div>
     </div>
 
-    
+
 </body>
 
 </html>

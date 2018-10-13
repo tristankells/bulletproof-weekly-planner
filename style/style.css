@@ -571,60 +571,114 @@ nav.shift ul li a:hover:after {
   );
 }
 /* ********* CLIENT COLOURS Begin ********** */
-[data-colour="0"] > .color-col,
-[data-colour="0"] > .colour-div,
-.month-tab[data-color="0"] {
+.theme-one [data-colour="0"] > .color-col,
+.theme-one [data-colour="0"] > .colour-div,
+.theme-one .month-tab[data-color="0"] {
   background-color: white;
   /* DEFAULT */
 }
-[data-colour="1"] > .color-col,
-li[data-colour="1"],
-[data-colour="1"] > .colour-div,
+.theme-one [data-colour="1"] > .color-col,
+.theme-one li[data-colour="1"],
+.theme-one [data-colour="1"] > .colour-div,
 .month-tab[data-color="1"] {
   background-color: #9bcb9e;
   /* GREEN */
 }
-[data-colour="2"] > .color-col,
-li[data-colour="2"],
-[data-colour="2"] > .colour-div,
-.month-tab[data-color="2"] {
+.theme-one  [data-colour="2"] > .color-col,
+.theme-one li[data-colour="2"],
+.theme-one [data-colour="2"] > .colour-div,
+.theme-one .month-tab[data-color="2"] {
   background-color: #e5c691; /* ORANGE */
 }
-[data-colour="3"] > .color-col,
-li[data-colour="3"],
-[data-colour="3"] > .colour-div,
-.month-tab[data-color="3"] {
+.theme-one [data-colour="3"] > .color-col,
+.theme-one li[data-colour="3"],
+.theme-one [data-colour="3"] > .colour-div,
+.theme-one .month-tab[data-color="3"] {
   background-color: #9abecb; /* BLUE */
 }
-[data-colour="4"] > .color-col,
-li[data-colour="4"],
-[data-colour="4"] > .colour-div,
-.month-tab[data-color="4"] {
+.theme-one [data-colour="4"] > .color-col,
+.theme-one li[data-colour="4"],
+.theme-one [data-colour="4"] > .colour-div,
+.theme-one .month-tab[data-color="4"] {
   background-color: #e4acac; /* RED */
 }
-[data-colour="5"] > .color-col,
-li[data-colour="5"],
-[data-colour="5"] > .colour-div,
-.month-tab[data-color="5"] {
+.theme-one [data-colour="5"] > .color-col,
+.theme-one li[data-colour="5"],
+.theme-one [data-colour="5"] > .colour-div,
+.theme-one .month-tab[data-color="5"] {
   background-color: #bb9bcb; /* PURPLE */
 }
-[data-colour="6"] > .color-col,
-li[data-colour="6"],
-[data-colour="6"] > .colour-div,
-.month-tab[data-color="6"] {
+.theme-one [data-colour="6"] > .color-col,
+.theme-one li[data-colour="6"],
+.theme-one [data-colour="6"] > .colour-div,
+.theme-one .month-tab[data-color="6"] {
   background-color: #f3f2bf; /* YELLOW */
 }
-[data-colour="7"] > .color-col,
-li[data-colour="7"],
-[data-colour="7"] > .colour-div,
-.month-tab[data-color="7"] {
+.theme-one [data-colour="7"] > .color-col,
+.theme-one li[data-colour="7"],
+.theme-one [data-colour="7"] > .colour-div,
+.theme-one .month-tab[data-color="7"] {
   background-color: #cecece; /* GRAY */
 }
-[data-colour="8"] > .color-col,
-li[data-colour="8"],
-[data-colour="8"] > .colour-div,
-.month-tab[data-color="8"] {
+.theme-one [data-colour="8"] > .color-col,
+.theme-one li[data-colour="8"],
+.theme-one [data-colour="8"] > .colour-div,
+.theme-one .month-tab[data-color="8"] {
   background-color: #979696; /* DARK GRAY */
+}
+/* ********* COLOURBLIND CLIENT COLOURS BEGIN ********** */
+.theme-two [data-colour="0"] > .color-col,
+.theme-two [data-colour="0"] > .colour-div,
+.theme-two .month-tab[data-color="0"] {
+  background-color: #212529; /* DEFAULT */
+}
+.theme-two [data-colour="1"] > .color-col,
+.theme-two li[data-colour="1"],
+.theme-two [data-colour="1"] > .colour-div,
+.theme-two .month-tab[data-color="1"] {
+  background-color: #212529; /* GREEN */
+}
+.theme-two [data-colour="2"] > .color-col,
+.theme-two li[data-colour="2"],
+.theme-two [data-colour="2"] > .colour-div,
+.theme-two .month-tab[data-color="2"] {
+  background-color: #212529; /* ORANGE */
+}
+.theme-two [data-colour="3"] > .color-col,
+.theme-two li[data-colour="3"],
+.theme-two [data-colour="3"] > .colour-div,
+.theme-two .month-tab[data-color="3"] {
+  background-color: #212529; /* BLUE */
+}
+.theme-two [data-colour="4"] > .color-col,
+.theme-two li[data-colour="4"],
+.theme-two [data-colour="4"] > .colour-div,
+.theme-two .month-tab[data-color="4"] {
+  background-color: #212529; /* RED */
+}
+.theme-two [data-colour="5"] > .color-col,
+.theme-two li[data-colour="5"],
+.theme-two [data-colour="5"] > .colour-div,
+.theme-two .month-tab[data-color="5"] {
+  background-color: #212529; /* PURPLE */
+}
+.theme-two [data-colour="6"] > .color-col,
+.theme-two li[data-colour="6"],
+.theme-two [data-colour="6"] > .colour-div,
+.theme-two .month-tab[data-color="6"] {
+  background-color: #212529; /* YELLOW */
+}
+.theme-two [data-colour="7"] > .color-col,
+.theme-two li[data-colour="7"],
+.theme-two [data-colour="7"] > .colour-div,
+.theme-two .month-tab[data-color="7"] {
+  background-color: #212529; /* GRAY */
+}
+.theme-two [data-colour="8"] > .color-col,
+.theme-two li[data-colour="8"],
+.theme-two [data-colour="8"] > .colour-div,
+.theme-two .month-tab[data-color="8"] {
+  background-color: #212529; /* DARK GRAY */
 }
 /* ********* CLIENT CALENDAR COLOURS End ********** */
 input {

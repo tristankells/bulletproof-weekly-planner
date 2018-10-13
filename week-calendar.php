@@ -24,6 +24,7 @@ if ($_SESSION['authentication'] != 1) {
     <script src="js/week-calendar/WeekConsultantModule.js"></script>
     <script src="js/week-calendar/week_index.js"></script>
     <script src="js/UserSetting.js"></script>
+    <script src="js/ThemeModule.js"></script>
     <script src="js/reset-password/ResetPasswordModule.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
         crossorigin="anonymous">

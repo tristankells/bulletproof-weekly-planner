@@ -14,11 +14,8 @@ function initialiseTables(theme) {
     WeekConsultantStorageModule.init(consultants);
     WeekConsultantModule.init(consultants);
 
-    if (theme === 1) {
-      $("input#one").prop("checked", true);
-    }
-
-    bindEvents();
+    ThemeModule.init(theme, $("#consultantstablebody"), $("#clientstable"));
+    $();
 
     //Using the jquery UI library, makes items within tbody elements sortable
     //THE START OF POSITION TRACKING FUNCTIONALITY NEED TO BE EXPANDED UPON
@@ -38,29 +35,4 @@ function initialiseTables(theme) {
       }
     });
   });
-
-  function bindEvents() {
-    $("input#one").change(function() {
-      // console.log($(this).prop("checked"));
-      updateTheme($(this).prop("checked"));
-    });
-  }
-
-  function updateTheme(checked) {
-    var theme = 0;
-    if (checked) {
-      theme = 1;
-    } else {
-      theme = 0;
-    }
-
-    updateThemeInDB(theme).done(function(data) {
-      console.log(data);
-      console.log("Updated in db");
-    });
-  }
-
-  function updateThemeInDB(theme) {
-    return $.post("php/user-profile/updateTheme.php", { theme: theme });
-  }
 }

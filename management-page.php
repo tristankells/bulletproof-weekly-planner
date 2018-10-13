@@ -1,6 +1,8 @@
-<?php session_start(); 
-if($_SESSION['authentication']!=1)
-    header("Location: ./Error.php");?>
+<?php session_start();
+if ($_SESSION['authentication'] != 1) {
+    header("Location: ./Error.php");
+}
+?>
     <!DOCTYPE html>
 <html>
 
@@ -38,7 +40,8 @@ if($_SESSION['authentication']!=1)
     </ul>
     <ul id='usermenu' class='custom-menu'>
         <li data-action="1">Logout</li>
-		<li data-action="2">Reset Password</li>
+        <li data-action="2">Reset Password</li>
+        <li data-action="3"><label for="one">Colorblind Mode &nbsp; <input type="checkbox" id="one" /></label></li>
     </ul>
 
     <div class="container-fluid">
@@ -76,7 +79,7 @@ if($_SESSION['authentication']!=1)
                     </thead>
                     <tbody id="consultantstablebody"></tbody>
                 </table>
-                
+
                 <table class="add-consultant-table ml-2">
                     <tr>
                         <td class="input-row">
@@ -106,7 +109,7 @@ if($_SESSION['authentication']!=1)
                     </thead>
                     <tbody id="clienttablebody"></tbody>
                 </table>
-                
+
                 <table class="add-consultant-table ml-2">
                     <tr>
                         <td>
@@ -125,9 +128,26 @@ if($_SESSION['authentication']!=1)
                     <button id="removeallclientsbutton" class="clear-all-btn">Delete All Clients</button>
                 </div>
 </div>
-            
+
         </div>
     </div>
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+        var email = "<?php echo ($_SESSION['email']); ?>";
+
+        console.log(email);
+
+        var theme = <?php echo ($_SESSION['theme']); ?>;
+
+        console.log(theme);
+        DateModule.init();
+        ResetPasswordModule.init();
+        
+        setUpMonthCalendar(theme);
+
+});
+</script>
 </body>
 
 </html>
