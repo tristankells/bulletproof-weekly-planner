@@ -15,12 +15,11 @@
 
 /********************************** Login Page END **********************************/
 
-/* Set entire page to Lato font */
-
 /* ALERTS */
 
 .dialog-overlay {
-  position: absolute;
+  position: fixed;
+  height: 100%;
   top: 0;
   left: 0;
   right: 0;
@@ -30,7 +29,7 @@
 }
 .dialog-overlay .dialog {
   width: 400px;
-  margin: 100px auto 0;
+  margin: 200px auto 0;
   background-color: #fff;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
   border-radius: 3px;
@@ -76,6 +75,8 @@
 }
 .dialog-overlay .dialog footer .controls {
   direction: rtl;
+  float: right;
+  margin: 3px 0px 10px 0px;
 }
 .dialog-overlay .dialog footer .controls .button {
   padding: 5px 15px;
@@ -93,20 +94,12 @@
   background-color: #f44336;
   border: 1px solid #d32f2f;
   color: #f5f5f5;
+  margin-left: auto;
 }
 .link {
   padding: 5px 10px;
   cursor: pointer;
 }
-
-/*.warning-alert {
-  position: absolute;
-  left: 50%;
-  margin-left: -250px;
-  top: 50%;
-  margin-top: -50px;
-  z-index: 200;
-} */
 
 * {
   font-family: Lato;
