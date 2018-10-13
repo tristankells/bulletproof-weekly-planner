@@ -124,7 +124,7 @@ if ($_SESSION['authentication'] != 1) {
                         <i class="remove-add-btn fas fa-trash-alt"></i>
                     </button>
                     <p style="font-size: 10px; color: lightgray; float: right; text-align: right;">
-                    Last Updated: <span> Today </span><br/>Time: <span>10:00pm</span><br/>Date: <span>10/02/2018 </span></p>
+                    Last Updated<br/>Time: <span id=lastUpdatedTime>10:00pm</span><br/>Date: <span id="lastUpdatedDate">10/02/2018 </span></p>
 
                 </div>
             </div>
