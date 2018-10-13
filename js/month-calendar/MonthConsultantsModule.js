@@ -17,8 +17,8 @@ var MonthConsultantsModule = (function() {
     var $row = getConsultantRow(consultant.id); //Add consultant id to row
     $row.append(getConsultantNameCol(consultant.name)); //Add client name colunm
 
-    var week = 0;
-    for (week; week < 4; week++) {
+    var week = 1;
+    for (week; week <= 4; week++) {
       $row.append(getConsultantAllocationsCol(consultant.allocations, week));
     }
 
