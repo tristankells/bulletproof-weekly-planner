@@ -172,6 +172,10 @@ var WeekConsultantModule = (function() {
         global.week
       );
 
+      updateLastUpdated(
+        WeekConsultantStorageModule.getConsultantsWeeksAllocations(global.week)
+      );
+
       DOM.$consultantsTableBody.find("tr").each((index, element) => {
         $(element)
           .find(".allocation-col")
@@ -413,6 +417,8 @@ var WeekConsultantModule = (function() {
       .find(".last-updated-div")
       .html(convertDateToString(new Date()));
 
+    renderLastUpdated(new Date());
+
     updateAllocationInDB(allocation).done(function(data) {
       console.log(data);
     });
@@ -592,7 +598,6 @@ var WeekConsultantModule = (function() {
   // render DOM
   function render(consultants) {
     var x = 0;
-
     for (x in consultants) {
       //PLACEHOLDER (NEED TO DECIDE TO WHERE TO PUT THIS INFORMATION)
       renderConsultant(consultants[x]);
@@ -618,15 +623,14 @@ var WeekConsultantModule = (function() {
     return stringDate;
   }
 
-  function updateLastUpdated(allocations) {
-    var latestAllocationDate = null,
-      allocationDate = new Date(),
-      lastAllocationString = "";
+  function updateLastUpdated(consultants) {
+    var allocations = returnAllAllocations(consultants);
 
-    lastAllocationString = "00:00 00/00/0000";
+    var latestAllocationDate = null,
+      allocationDate = new Date();
 
     for (x in allocations) {
-      allocationDate = new Date(allocations[x]["date_updated"]);
+      allocationDate = new Date(allocations[x]["timeUpdated"]);
       //Set the latest allocation date to
       if (latestAllocationDate == null) {
         latestAllocationDate = allocationDate;
@@ -635,22 +639,41 @@ var WeekConsultantModule = (function() {
       }
     }
 
-    if (latestAllocationDate != null) {
-      lastAllocationString = convertDateToString(latestAllocationDate);
-    }
+    latestAllocationDate;
+
+    renderLastUpdated(latestAllocationDate);
   }
 
+  function returnAllAllocations(consultants) {
+    var returnArray = [];
+    consultants.forEach(consultant => {
+      consultant["allocations"].forEach(allocation => {
+        returnArray.push(allocation);
+      });
+    });
+    return returnArray;
+  }
+
+  //Format a date object to be rendered at the last updated part of the page
   function renderLastUpdated(date) {
-    var test = new Date();
-    var minutes = test.getMinutes();
-    if(minutes < 10){
+    if (date === null) {
+      DOM.$lastUpdatedTime.html("");
+      DOM.$lastUpdatedDate.html("");
+    } else {
+      var minutes = date.getMinutes();
+      var minutesString = "";
 
+      if (minutes < 10) {
+        var minutesString = "0" + minutes.toString();
+      } else {
+        var minutesString = minutes.toString();
+      }
+
+      DOM.$lastUpdatedTime.html(date.getHours() + ":" + minutesString);
+      DOM.$lastUpdatedDate.html(
+        date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear()
+      );
     }
-
-    DOM.$lastUpdatedTime.html(test.getHours() + ":" + test.getMinutes());
-    DOM.$lastUpdatedDate.html(
-      test.getDay() + "/" + test.getMonth() + "/" + test.getFullYear()
-    );
   }
 
   function renderPlaceHolderText() {
@@ -695,12 +718,15 @@ var WeekConsultantModule = (function() {
   // main init method
   function init(consultants) {
     cacheDom();
-    renderLastUpdated();
 
     if (consultants.length > 0) {
       bindEvents();
       global.week = 0;
+
       render(
+        WeekConsultantStorageModule.getConsultantsWeeksAllocations(global.week)
+      );
+      updateLastUpdated(
         WeekConsultantStorageModule.getConsultantsWeeksAllocations(global.week)
       );
       updateClientsWhoCols();
