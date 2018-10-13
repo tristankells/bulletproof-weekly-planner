@@ -599,55 +599,55 @@ nav.shift ul li a:hover:after {
 .theme-two [data-colour="0"] > .color-col,
 .theme-two [data-colour="0"] > .colour-div,
 .theme-two .month-tab[data-color="0"] {
-  background-color: #212529; /* DEFAULT */
+  background-color: #ffffd9; /* DEFAULT */
 }
 .theme-two [data-colour="1"] > .color-col,
 .theme-two li[data-colour="1"],
 .theme-two [data-colour="1"] > .colour-div,
 .theme-two .month-tab[data-color="1"] {
-  background-color: #212529; /* GREEN */
+  background-color: #edf8b1; /* GREEN */
 }
 .theme-two [data-colour="2"] > .color-col,
 .theme-two li[data-colour="2"],
 .theme-two [data-colour="2"] > .colour-div,
 .theme-two .month-tab[data-color="2"] {
-  background-color: #212529; /* ORANGE */
+  background-color: #c7e9b4; /* ORANGE */
 }
 .theme-two [data-colour="3"] > .color-col,
 .theme-two li[data-colour="3"],
 .theme-two [data-colour="3"] > .colour-div,
 .theme-two .month-tab[data-color="3"] {
-  background-color: #212529; /* BLUE */
+  background-color: #7fcdbb; /* BLUE */
 }
 .theme-two [data-colour="4"] > .color-col,
 .theme-two li[data-colour="4"],
 .theme-two [data-colour="4"] > .colour-div,
 .theme-two .month-tab[data-color="4"] {
-  background-color: #212529; /* RED */
+  background-color: #41b6c4; /* RED */
 }
 .theme-two [data-colour="5"] > .color-col,
 .theme-two li[data-colour="5"],
 .theme-two [data-colour="5"] > .colour-div,
 .theme-two .month-tab[data-color="5"] {
-  background-color: #212529; /* PURPLE */
+  background-color: #1d91c0; /* PURPLE */
 }
 .theme-two [data-colour="6"] > .color-col,
 .theme-two li[data-colour="6"],
 .theme-two [data-colour="6"] > .colour-div,
 .theme-two .month-tab[data-color="6"] {
-  background-color: #212529; /* YELLOW */
+  background-color: #225ea8; /* YELLOW */
 }
 .theme-two [data-colour="7"] > .color-col,
 .theme-two li[data-colour="7"],
 .theme-two [data-colour="7"] > .colour-div,
 .theme-two .month-tab[data-color="7"] {
-  background-color: #212529; /* GRAY */
+  background-color: #253494; /* GRAY */
 }
 .theme-two [data-colour="8"] > .color-col,
 .theme-two li[data-colour="8"],
 .theme-two [data-colour="8"] > .colour-div,
 .theme-two .month-tab[data-color="8"] {
-  background-color: #212529; /* DARK GRAY */
+  background-color: #081d58; /* DARK GRAY */
 }
 
 /* Additional allocation options */

@@ -100,11 +100,6 @@ if ($_SESSION['authentication'] != 1) {
 
         console.log(email);
 
-
-        var email = "<?php echo ($_SESSION['email']); ?>";
-
-        console.log(email);
-
         var theme = <?php echo ($_SESSION['theme']); ?>;
 
         console.log(theme);

@@ -16,6 +16,18 @@ $(document).ready(function() {
       });
   });
 
+    $(document).click(function(event) { 
+      if(!$(event.target).closest('#usermenu').length) {
+          if($('#usermenu').is(":visible")) {
+              $('#usermenu').hide();
+          }
+      }        
+  });
+
+  usermenubutton.click(function(event){
+    event.stopPropagation();
+  });
+
   usermenubutton.on("click", function() {
     event.preventDefault();
     var pos = event.pageX - userMenu.width();
