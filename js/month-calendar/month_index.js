@@ -1,19 +1,14 @@
+function getClientsAndConsultants() {
+  return $.get("php/getConsultantsAndClients.php");
+}
 
-  setUpMonthCalendar();
+function setUpMonthCalendar(theme) {
+  getClientsAndConsultants().done(function(data) {
+    //Store consultant and client arrays recieved from server
+    var databaseResults = JSON.parse(data);
 
-  function getClientsAndConsultants() {
-    return $.get("php/getConsultantsAndClients.php");
-  }
-
-  function setUpMonthCalendar(theme) {
-    getClientsAndConsultants().done(function(data) {
-      //Store consultant and client arrays recieved from server
-      var databaseResults = JSON.parse(data);
-
-      MonthClientsModule.init(databaseResults.clients);
-      MonthConsultantsModule.init(databaseResults.consultants);
-      ThemeModule.init();
-
-    });
-  }
-
+    MonthClientsModule.init(databaseResults.clients);
+    MonthConsultantsModule.init(databaseResults.consultants);
+    ThemeModule.init(theme, $("#consultanttablebody"), $("#clienttablebody"));
+  });
+}

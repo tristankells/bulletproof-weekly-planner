@@ -24,6 +24,8 @@ if ($_SESSION['authentication'] != 1) {
     <script src="js/month-calendar/MonthConsultantsModule.js"></script>
     <script src="js/month-calendar/month_index.js"></script>
     <script src="js/UserSetting.js"></script>
+    <script src="js/ThemeModule.js"></script>
+    <script src="js/reset-password/ResetPasswordModule.js"></script>
 </head>
 <script>
 
@@ -91,7 +93,22 @@ if ($_SESSION['authentication'] != 1) {
         </div>
     </div>
 
+<script type="text/javascript">
+    $(document).ready(function() {
 
+        var email = "<?php echo ($_SESSION['email']); ?>";
+
+        console.log(email);
+
+        var theme = <?php echo ($_SESSION['theme']); ?>;
+
+        console.log(theme);
+        DateModule.init();
+        ResetPasswordModule.init();
+
+        setUpMonthCalendar(theme);
+});
+</script>
 </body>
 
 </html>
