@@ -39,7 +39,6 @@ $(document).ready(function() {
         location.href = "./reset-password.php";
         break;
       default:
-        alert("nothing");
     }
   });
 });

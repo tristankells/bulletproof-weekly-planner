@@ -22,7 +22,9 @@ if ($_SESSION['authentication'] != 1) {
     <script src="js/manage-calendar/ManageClientModule.js"></script>
     <script src="js/manage-calendar/ManageConsultantModule.js"></script>
     <script src="js/manage-calendar/manage_index.js"></script>
+    <script src="js/reset-password/ResetPasswordModule.js"></script>
     <script src="js/UserSetting.js"></script>
+    <script src="js/ThemeModule.js"></script>
     <link rel="stylesheet" href="style/style.css">
 </head>
 
@@ -141,11 +143,9 @@ if ($_SESSION['authentication'] != 1) {
         var theme = <?php echo ($_SESSION['theme']); ?>;
 
         console.log(theme);
-        DateModule.init();
         ResetPasswordModule.init();
-        
-        setUpMonthCalendar(theme);
 
+        setupManagePage(theme);
 });
 </script>
 </body>
