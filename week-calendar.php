@@ -8,7 +8,7 @@ if ($_SESSION['authentication'] != 1) {
 <html>
 
 <head>
-    <title>Bulletproof: Weekly Team Management</title>
+    <title>Bulletproof</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
@@ -142,7 +142,8 @@ if ($_SESSION['authentication'] != 1) {
                 <div class="manage-table-header">Clients</div>
                 <table class="table table-dark table-striped client-table" id="clientstable">
                     <thead id="clienttablehead">
-                        <th style="letter-spacing: 1px; text-align: center; width: 15%;" colspan="2">Client</th>
+                        <th style="letter-spacing: 1px; text-align: center; width: 15%;">Client</th>
+                        <th></th>
                         <th style="letter-spacing: 1px; text-align: center; width: 15%; text-align: center;">Abbreviation</th>
                         <th style="letter-spacing: 1px; width: 70%;">Consultant</th>
                     </thead>
