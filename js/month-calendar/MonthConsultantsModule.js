@@ -17,8 +17,8 @@ var MonthConsultantsModule = (function() {
     var $row = getConsultantRow(consultant.id); //Add consultant id to row
     $row.append(getConsultantNameCol(consultant.name)); //Add client name colunm
 
-    var week = 1;
-    for (week; week <= 4; week++) {
+    var week = 0;
+    for (week; week <= 3; week++) {
       $row.append(getConsultantAllocationsCol(consultant.allocations, week));
     }
 
@@ -44,7 +44,7 @@ var MonthConsultantsModule = (function() {
     var weekAllocations = getAllocationsForWeek(allocations, week);
     //All consultants allocations for this week which are not null
     var weekAllocationsNoNull = getAllClientAllocations(weekAllocations);
- //All consultants allocations for this week which are not null and have a uniqueID
+    //All consultants allocations for this week which are not null and have a uniqueID
     var listOfUniqueClientAllocations = getArrayOfUniqueClientAllocations(
       weekAllocationsNoNull
     );
@@ -63,6 +63,11 @@ var MonthConsultantsModule = (function() {
   }
 
   function getAllocationsForWeek(allocations, week) {
+    //If today is saturday or sunday, look at next week
+    const today = new Date().getDay();
+    if (today == 6 || today == 0) {
+      week += 1;
+    }
     return allocations.filter(allocation => {
       //Store allocation time created
       const timeCreated = new Date(allocation.timeCreated);
@@ -81,7 +86,10 @@ var MonthConsultantsModule = (function() {
 
   //Return all allocations which are unique (one allocations for each unique client ID)
   function getArrayOfUniqueClientAllocations(allocations) {
-    return allocations.filter((e, i) => allocations.findIndex(a => a["clientID"] === e["clientID"]) === i);
+    return allocations.filter(
+      (e, i) =>
+        allocations.findIndex(a => a["clientID"] === e["clientID"]) === i
+    );
   }
 
   // Render client tab color and format with abbreviated client name
@@ -107,7 +115,6 @@ var MonthConsultantsModule = (function() {
     );
     DOM.$consultanttablebody.html($placeholderRow);
   }
-  
 
   /*=========== public methods ==========*/
 
