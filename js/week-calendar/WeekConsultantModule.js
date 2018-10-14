@@ -168,9 +168,6 @@ var WeekConsultantModule = (function() {
           $(this).remove();
 
           functionname(thisbutton);
-
-          console.log(functionname);
-          console.log(thisbutton);
         });
     });
     $(".cancelAction, .fa-close").click(function() {
@@ -200,8 +197,6 @@ var WeekConsultantModule = (function() {
     var thisWeeksConsultants = WeekConsultantStorageModule.getConsultantsWeeksAllocations(
       global.week - 1
     );
-
-    // console.log(thisWeeksConsultants);
 
     DOM.$consultantsTableBody.find("tr").each((index, element) => {
       copyPreviousWeekAllocations(
@@ -453,13 +448,16 @@ var WeekConsultantModule = (function() {
 
     //Get timestamp and format to MYSQL datetime
     timeCreated.setDate(timeCreated.getDate() + global.week * 7);
-    timeCreated = new Date(timeCreated.getTime());
+    //timeCreated = new Date(timeCreated.getTime());
 
     //If it is saturday or sunday, allocation date is moved to the following week
     if (timeCreated.getDay() == 6 || timeCreated.getDay() == 0) {
       timeCreated.setDate(timeCreated.getDate() + 7);
     }
-
+    //Offset timezone differential
+    timeCreated.setHours(
+      timeCreated.getHours() - timeCreated.getTimezoneOffset() / 60
+    );
     allocation["timeCreated"] = timeCreated
       .toJSON()
       .slice(0, 19)
