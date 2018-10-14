@@ -44,14 +44,22 @@ var WeekConsultantModule = (function() {
     });
 
     DOM.$consultantsTableBody.on("click", ".copy-consultant-btn", function() {
-      Confirm(
-        "Copy Row",
-        "This will copy the previous weeks row, are you sure you want to do this?",
-        "Yes",
-        "Cancel",
-        handleCopyConsultantClick,
-        $(this)
-      );
+      if (
+        confirm(
+          "This will copy the previous weeks row, are you sure you want to do this?"
+        )
+      ) {
+        handleCopyConsultantClick($(this));
+      }
+
+      // Confirm(
+      //   "Copy Row",
+      //   "This will copy the previous weeks row, are you sure you want to do this?",
+      //   "Yes",
+      //   "Cancel",
+      //   handleCopyConsultantClick,
+      //   $(this)
+      // );
     });
 
     DOM.$clientMenu.on("click", "li", function() {
@@ -106,14 +114,21 @@ var WeekConsultantModule = (function() {
     });
 
     DOM.$copyAllBtn.on("click", function() {
-      Confirm(
-        "Copy All",
-        "This will copy all allocations from the previous week, are you sure you want to do this?",
-        "Yes",
-        "Cancel",
-        handleCopyTableClick,
-        null
-      );
+      if (
+        confirm(
+          "This will copy all allocations from the previous week, are you sure you want to do this?"
+        )
+      ) {
+        handleCopyTableClick();
+      }
+      // Confirm(
+      //   "Copy All",
+      //   "This will copy all allocations from the previous week, are you sure you want to do this?",
+      //   "Yes",
+      //   "Cancel",
+      //   handleCopyTableClick,
+      //   null
+      // );
     });
   }
 
