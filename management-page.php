@@ -7,7 +7,7 @@ if ($_SESSION['authentication'] != 1) {
 <html>
 
 <head>
-    <title>Bulletproof</title>
+    <title>Bulletproof: Weekly Team Management</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
@@ -98,7 +98,7 @@ if ($_SESSION['authentication'] != 1) {
                         </td>
                     </tr>
                 </table>
-                <div class="clear-button-container">
+                <div class="manage__page-delete-button-container">
                     <button id="removeallconsultantsbutton" class="clear-all-btn">Delete All Consultants</button>
                 </div>
 </div>
@@ -129,7 +129,7 @@ if ($_SESSION['authentication'] != 1) {
                         </td>
                     </tr>
                 </table>
-                <div class="clear-button-container ml-2">
+                <div class="manage__page-delete-button-container ml-2">
                     <button id="removeallclientsbutton" class="clear-all-btn">Delete All Clients</button>
                 </div>
 </div>
