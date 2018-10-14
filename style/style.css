@@ -373,6 +373,13 @@ body {
   margin-top: 30px;
 }
 
+.manage__page-delete-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
 .clear-all-btn {
   font-family: Lato, sans-serif;
   font-size: 15px;
