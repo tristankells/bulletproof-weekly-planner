@@ -21,7 +21,7 @@ var WeekConsultantModule = (function() {
   }
   // bind events
   function bindEvents() {
-    //Bind sortalbe to consultant table
+    //Bind sortable to consultant table
     DOM.$consultantsTableBody.sortable({
       update: function() {
         handlePositionChange($(this));

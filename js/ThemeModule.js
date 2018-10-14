@@ -22,6 +22,9 @@ var ThemeModule = (function() {
 
       $(".colour-menu").removeClass("theme-one");
       $(".colour-menu").addClass("theme-two");
+
+      $("#clientmenu").removeClass("theme-one");
+      $("#clientmenu").addClass("theme-two");
     } else {
       theme = 0;
       DOM.$consultantTable.removeClass("theme-two");
@@ -32,6 +35,9 @@ var ThemeModule = (function() {
 
       $(".colour-menu").removeClass("theme-two");
       $(".colour-menu").addClass("theme-one");
+
+      $("#clientmenu").removeClass("theme-two");
+      $("#clientmenu").addClass("theme-one");
     }
 
     updateThemeInDB(theme).done(function(data) {
@@ -56,6 +62,7 @@ var ThemeModule = (function() {
       DOM.$consultantTable.addClass("theme-one");
       DOM.$clientTable.addClass("theme-one");
       $(".colour-menu").addClass("theme-one");
+      $("#clientmenu").addClass("theme-one");
     }
 
     //If theme is set to 1, add the theme-two class to both tables
@@ -64,6 +71,7 @@ var ThemeModule = (function() {
       DOM.$consultantTable.addClass("theme-two");
       DOM.$clientTable.addClass("theme-two");
       $(".colour-menu").addClass("theme-two");
+      $("#clientmenu").addClass("theme-two");
     }
   }
 
