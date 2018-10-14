@@ -8,7 +8,7 @@ if ($_SESSION['authentication'] != 1) {
 <html>
 
 <head>
-    <title>Glance: Week Views</title>
+    <title>Bulletproof</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
@@ -53,12 +53,12 @@ if ($_SESSION['authentication'] != 1) {
         <li data-action="3"><label for="one">Colorblind Mode &nbsp; <input type="checkbox" id="one" /></label></li>
         <li data-action="4">Register A New User Account</li>
     </ul>
-    <div class="alert alert-info alert-dismissible fade show" role="alert">
+    <!-- <div class="alert alert-info alert-dismissible fade show" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
   </button>
   <strong>Hi there! Welcome to Glance.</strong> &nbsp;&nbsp;Heres a tip! Right click on any allocation to change client or set leave :)
-</div>
+</div> -->
     <div class="container-fluid">
         <div id="navigationBar" class="row">
             <div id="top-logo-div" class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
