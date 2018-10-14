@@ -25,8 +25,8 @@ if ($conn->query($query) === true) {
             $consultant =
                 [
                 "id" => $row["id"],
-                "full_name" => $row["full_name"],
-                "job_title" => $row["job_title"],
+                "name" => $row["full_name"],
+                "role" => $row["job_title"],
                 "board_position" => $row["board_position"],
             ];
         }
