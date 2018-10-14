@@ -75,8 +75,6 @@ var WeekClientsModule = (function() {
         .html(client["who"])
     );
 
-
-
     DOM.$clienttablebody.append($rowElement);
   }
 
@@ -106,11 +104,44 @@ var WeekClientsModule = (function() {
     if (clients.length > 0) {
       populateClientMenu(clients);
       render(clients);
+      addDraggableToTable();
     } else {
       //Redirect to managment page if the application has no clients
       window.location.replace("management-page.php");
       renderPlaceHolderText();
     }
+  }
+
+  function addDraggableToTable() {
+    function saveNewClientPositions() {
+      var positions = [];
+      $(".client-updated").each(function() {
+        positions.push([$(this).prop("id"), $(this).attr("data-position")]);
+        $(this).removeClass("client-updated");
+      });
+      $.post(
+        "php/clients/updateClientPositions.php",
+        {
+          positions: positions
+        },
+        function() {}
+      );
+    }
+
+    $("#clienttablebody").sortable({
+      update: function(event, ui) {
+        $(this)
+          .children()
+          .each(function(index) {
+            if ($(this).attr("data-position") != index + 1) {
+              $(this)
+                .attr("data-position", index + 1)
+                .addClass("client-updated");
+            }
+          });
+        saveNewClientPositions();
+      }
+    });
   }
 
   /*=========== export public methods ==========*/

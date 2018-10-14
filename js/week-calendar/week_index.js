@@ -20,19 +20,5 @@ function initialiseTables(theme) {
     //Using the jquery UI library, makes items within tbody elements sortable
     //THE START OF POSITION TRACKING FUNCTIONALITY NEED TO BE EXPANDED UPON
     //https://www.youtube.com/watch?v=V1nYMDoSCXY
-    $("#clienttablebody").sortable({
-      update: function(event, ui) {
-        $(this)
-          .children()
-          .each(function(index) {
-            if ($(this).attr("data-position") != index + 1) {
-              $(this)
-                .attr("data-position", index + 1)
-                .addClass("client-updated");
-            }
-          });
-        saveNewClientPositions();
-      }
-    });
   });
 }

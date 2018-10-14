@@ -25,7 +25,8 @@ var WeekConsultantModule = (function() {
     DOM.$consultantsTableBody.sortable({
       update: function() {
         handlePositionChange($(this));
-      }
+      },
+      handle: ".handle"
     });
 
     //Bind menu to allocation col right click
@@ -43,10 +44,15 @@ var WeekConsultantModule = (function() {
     });
 
     DOM.$consultantsTableBody.on("click", ".copy-consultant-btn", function() {
-        Confirm('Copy Row', 'This will copy the previous weeks row, are you sure you want to do this?', 
-        'Yes', 'Cancel', handleCopyConsultantClick, $(this))
+      Confirm(
+        "Copy Row",
+        "This will copy the previous weeks row, are you sure you want to do this?",
+        "Yes",
+        "Cancel",
+        handleCopyConsultantClick,
+        $(this)
+      );
     });
-
 
     DOM.$clientMenu.on("click", "li", function() {
       handleClientMenuClick($(this));
@@ -100,46 +106,66 @@ var WeekConsultantModule = (function() {
     });
 
     DOM.$copyAllBtn.on("click", function() {
-        Confirm('Copy All', 'This will copy all allocations from the previous week, are you sure you want to do this?', 
-        'Yes', 'Cancel', handleCopyTableClick, null)
+      Confirm(
+        "Copy All",
+        "This will copy all allocations from the previous week, are you sure you want to do this?",
+        "Yes",
+        "Cancel",
+        handleCopyTableClick,
+        null
+      );
     });
   }
 
-  function Confirm(title, msg, $true, $false, functionname, thisbutton) { /*change*/
-    var $content =  "<div class='dialog-overlay'>" +
-                    "<div class='dialog'><header>" +
-                     " <h3> " + title + " </h3> " +
-                     "<i class='fa fa-close'></i>" +
-                 "</header>" +
-                 "<div class='dialog-msg'>" +
-                     " <p> " + msg + " </p> " +
-                 "</div>" +
-                 "<footer>" +
-                     "<div class='controls'>" +
-                         " <button class='button button-danger doAction'>" + $true + "</button> " +
-                         " <button class='button button-default cancelAction'>" + $false + "</button> " +
-                     "</div>" +
-                 "</footer>" +
-              "</div>" +
-            "</div>";
-     $('body').prepend($content);
+  function Confirm(title, msg, $true, $false, functionname, thisbutton) {
+    /*change*/
+    var $content =
+      "<div class='dialog-overlay'>" +
+      "<div class='dialog'><header>" +
+      " <h3> " +
+      title +
+      " </h3> " +
+      "<i class='fa fa-close'></i>" +
+      "</header>" +
+      "<div class='dialog-msg'>" +
+      " <p> " +
+      msg +
+      " </p> " +
+      "</div>" +
+      "<footer>" +
+      "<div class='controls'>" +
+      " <button class='button button-danger doAction'>" +
+      $true +
+      "</button> " +
+      " <button class='button button-default cancelAction'>" +
+      $false +
+      "</button> " +
+      "</div>" +
+      "</footer>" +
+      "</div>" +
+      "</div>";
+    $("body").prepend($content);
 
-  $('.doAction').click(function () {
-    $(this).parents('.dialog-overlay').fadeOut(500, function () {
-      $(this).remove();
+    $(".doAction").click(function() {
+      $(this)
+        .parents(".dialog-overlay")
+        .fadeOut(500, function() {
+          $(this).remove();
 
-      functionname(thisbutton);
+          functionname(thisbutton);
 
-      console.log(functionname);
-      console.log(thisbutton);
+          console.log(functionname);
+          console.log(thisbutton);
+        });
     });
-  });
-$('.cancelAction, .fa-close').click(function () {
-    $(this).parents('.dialog-overlay').fadeOut(500, function () {
-      $(this).remove();
+    $(".cancelAction, .fa-close").click(function() {
+      $(this)
+        .parents(".dialog-overlay")
+        .fadeOut(500, function() {
+          $(this).remove();
+        });
     });
-  });
-}
+  }
 
   function handleCopyConsultantClick($copyConsultantButton) {
     const $consultantRow = $copyConsultantButton.closest("tr");
@@ -564,7 +590,7 @@ $('.cancelAction, .fa-close').click(function () {
             .append(
               $("<a></a>")
                 .attr("href", "#")
-                .append($("<i></i>").addClass("fas fa-ellipsis-v"))
+                .append($("<i></i>").addClass("fas fa-ellipsis-v handle"))
             )
         )
     );

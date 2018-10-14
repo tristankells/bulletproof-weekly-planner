@@ -173,20 +173,7 @@ if ($_SESSION['authentication'] != 1) {
   initialiseTables(theme);
 
 
-  function saveNewClientPositions() {
-    var positions = [];
-    $(".client-updated").each(function() {
-      positions.push([$(this).prop("id"), $(this).attr("data-position")]);
-      $(this).removeClass("client-updated");
-    });
-    $.post(
-      "php/clients/updateClientPositions.php",
-      {
-        positions: positions
-      },
-      function() {}
-    );
-  }
+
 });
 
 
