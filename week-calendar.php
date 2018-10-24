@@ -16,7 +16,6 @@ if ($_SESSION['authentication'] != 1) {
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="manifest" href="manifest.json">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="js/DateModule.js"></script>
     <script src="js/week-calendar/WeekAllocationModule.js"></script>
@@ -28,11 +27,9 @@ if ($_SESSION['authentication'] != 1) {
     <script src="js/ThemeModule.js"></script>
     <script src="js/InfoModule.js"></script>
     <script src="js/ConfirmModule.js"></script>
-    
     <script src="js/reset-password/ResetPasswordModule.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
         crossorigin="anonymous">
-    <link rel="manifest" href="js/manifest.json">
     <link rel="stylesheet" href="style/style.css">
 </head>
 
