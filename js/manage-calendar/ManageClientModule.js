@@ -37,7 +37,7 @@ var ClientModule = (function() {
 
     DOM.$clienttablebody.on("click", ".remove-client-btn", function(e) {
       ConfirmModule.Confirm(
-        "Delete All",
+        "Delete Client",
         "This will delete <span class='confirm-name'>" +
           $(e.target)
             .closest("tr")
