@@ -22,10 +22,10 @@
     }
 
     .login-subheader-container {
-        max-width: 389px;
+        max-width: 384px;
         margin: auto;
         padding-bottom: 20px;
-        padding-left: 3px;
+        padding-left: 4px;
     }
 
     .login-subheader {
@@ -113,7 +113,7 @@
     }
 
     .form a:hover {
-        color: rgb(197, 46, 46);
+        color: rgb(37, 102, 97);
     }
 
     .message {
