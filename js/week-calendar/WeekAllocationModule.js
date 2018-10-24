@@ -13,7 +13,7 @@ var WeekAllocationModule = (function() {
     $clientAbbreviationDiv = $("<div></div>").addClass("client-div");
 
     $clientAbbreviationSpan = $("<span></span>")
-      .addClass("client-span")
+      .addClass("client-span no-select")
       .html(clientAbbreviation);
 
     return $clientAbbreviationDiv.append($clientAbbreviationSpan);
@@ -26,7 +26,9 @@ var WeekAllocationModule = (function() {
     $officeStatusDiv = $("<div></div>").addClass("location-div");
 
     if (officeStatus == 1) {
-      $officeStatusDiv.append($("<i></i>").addClass("fas fa-plane status-icon"));
+      $officeStatusDiv.append(
+        $("<i></i>").addClass("fas fa-plane status-icon")
+      );
     }
 
     if (officeStatus == 2) {
@@ -34,7 +36,9 @@ var WeekAllocationModule = (function() {
     }
 
     if (officeStatus == 4) {
-      $officeStatusDiv.append($("<i></i>").addClass("fas fa-handshake status-icon"));
+      $officeStatusDiv.append(
+        $("<i></i>").addClass("fas fa-handshake status-icon")
+      );
     }
 
     return $officeStatusDiv;
@@ -69,13 +73,15 @@ var WeekAllocationModule = (function() {
 
     //If the allocation is NOT LEAVE, then render the allocation divs
     if (allocation["officeStatus"] != 3) {
-      if (allocation["officeStatus"] !=5) {
+      if (allocation["officeStatus"] != 5) {
         $allocationTd.append(getAllocationDiv(allocation));
       }
     }
 
     if (allocation["officeStatus"] == 5) {
-      $allocationTd.append($("<i></i>").addClass("fas fa-laptop fa-2x laptop-icon"));
+      $allocationTd.append(
+        $("<i></i>").addClass("fas fa-laptop fa-2x laptop-icon")
+      );
     }
 
     return $allocationTd;
