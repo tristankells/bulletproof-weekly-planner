@@ -57,16 +57,15 @@ if ($_SESSION['authentication'] != 1) {
         <li data-action="3"><label for="one">Colorblind Mode &nbsp; <input type="checkbox" id="one" /></label></li>
         <li data-action="4">Register A New User Account</li>
     </ul>
-    <div class="centered-pop-window" id="infoPopup">
-    <p>To allocate a consultant to a client, left click on allocation slot.
-    To speficy the office status for an allocation slot, right click on the slot.</p>
+    <div class="info-popup" id="infoPopup">
+        <div class="info-popup__header">
+            INFORMATION
+        </div>
+    <p>- To allocate a consultant to a client, left click or tap on an allocation slot.</p>
+    <p>- To specify the office status or select leave for an allocation slot, right click on the slot. (Long press on a mobile device)</p>
+    <p>- Colourblind mode can be activated in the top right settings menu.</p>
+    <p>- To re-order consultants drag them as desired using the three dot icon to the left of their name.</p>
     </div>
-    <!-- <div class="alert alert-info alert-dismissible fade show" role="alert">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-    <span aria-hidden="true">&times;</span>
-  </button>
-  <strong>Hi there! Welcome to Glance.</strong> &nbsp;&nbsp;Heres a tip! Right click on any allocation to change client or set leave :)
-</div> -->
     <div class="container-fluid">
         <div id="navigationBar" class="row">
             <div id="top-logo-div" class="col-lg-3 col-md-3 col-sm-3 col-xs-3">
@@ -141,7 +140,7 @@ if ($_SESSION['authentication'] != 1) {
                     <button id="resetallocationbutton" class="clear-all-btn">Clear Table
                         <i class="remove-add-btn fas fa-trash-alt"></i>
                     </button>
-                    <button id="infoBtn" class="clear-all-btn"><i class="fas fa-info" ></i></button>
+                    <button id="infoBtn" class="info-btn">Info <i class="fas fa-info" ></i></button>
                     <p style="font-size: 10px; color: lightgray; float: right; text-align: right;">
                     Last Updated<br/>Time: <span id=lastUpdatedTime>10:00pm</span><br/>Date: <span id="lastUpdatedDate">10/02/2018 </span></p>
                 </div>
