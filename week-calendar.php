@@ -25,6 +25,8 @@ if ($_SESSION['authentication'] != 1) {
     <script src="js/week-calendar/week_index.js"></script>
     <script src="js/UserSetting.js"></script>
     <script src="js/ThemeModule.js"></script>
+    <script src="js/InfoModule.js"></script>
+    <script src="js/ConfirmModule.js"></script>
     <script src="js/reset-password/ResetPasswordModule.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
         crossorigin="anonymous">
@@ -53,6 +55,10 @@ if ($_SESSION['authentication'] != 1) {
         <li data-action="3"><label for="one">Colorblind Mode &nbsp; <input type="checkbox" id="one" /></label></li>
         <li data-action="4">Register A New User Account</li>
     </ul>
+    <div class="centered-pop-window" id="infoPopup">
+    <p>To allocate a consultant to a client, left click on allocation slot.
+    To speficy the office status for an allocation slot, right click on the slot.</p>
+    </div>
     <!-- <div class="alert alert-info alert-dismissible fade show" role="alert">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close">
     <span aria-hidden="true">&times;</span>
@@ -75,7 +81,7 @@ if ($_SESSION['authentication'] != 1) {
             </div>
 
             <div class="text-right col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                
+
                 <div>
                     <span class="user-email"><?php echo (explode("@", $_SESSION['email'])[0]); ?></span>
                     <i id="usermenubutton" class="settings-icon-top fas fa-cog fa-2x"></i>
@@ -133,9 +139,9 @@ if ($_SESSION['authentication'] != 1) {
                     <button id="resetallocationbutton" class="clear-all-btn">Clear Table
                         <i class="remove-add-btn fas fa-trash-alt"></i>
                     </button>
+                    <button id="infoBtn" class="clear-all-btn"><i class="fas fa-info" ></i></button>
                     <p style="font-size: 10px; color: lightgray; float: right; text-align: right;">
                     Last Updated<br/>Time: <span id=lastUpdatedTime>10:00pm</span><br/>Date: <span id="lastUpdatedDate">10/02/2018 </span></p>
-
                 </div>
             </div>
             <div class="col-lg-12 mx-auto mb-5" id="clientsdiv">
