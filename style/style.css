@@ -13,8 +13,6 @@
   margin: 30px;
 }
 
-
-
 /********************************** Login Page END **********************************/
 
 /* ALERTS */
@@ -1070,4 +1068,8 @@ table td {
   top: 30%;
   background-color: rgb(208, 201, 201);
   z-index: 999999;
+}
+.confirm-name {
+  font-weight: bold;
+  text-decoration: underline;
 }

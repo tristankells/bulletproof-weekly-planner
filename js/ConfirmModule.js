@@ -44,18 +44,15 @@ var ConfirmModule = (function() {
     );
   }
 
-  /***** Functional Funcions  *****/
-  function hideDisplay() {
-    $(".dialog-overlay").hide();
-  }
+
 
   function bindConfirmBtns(confirmFunction, element) {
     $(".doAction").click(function() {
-      hideDisplay();
+      $(".dialog-overlay").hide();
       confirmFunction(element);
     });
     $(".cancelAction, .fa-close").click(function() {
-      hideDisplay();
+      $(".dialog-overlay").hide();
     });
   }
 

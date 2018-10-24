@@ -35,7 +35,11 @@ var ConsultantModule = (function() {
     DOM.$consultanttablebody.on("click", ".remove-consultant-btn", function() {
       ConfirmModule.Confirm(
         "Delete Consultant",
-        "This will delete this consultant and all associated allocations, are you sure you want to do this?",
+        "This will delete <span class='confirm-name'>" +
+          $(this)
+            .closest("tr")
+            .attr("data-name") +
+          "</span> and all associated allocations, are you sure you want to do this?",
         "Yes",
         "Cancel",
         deleteConsultant,

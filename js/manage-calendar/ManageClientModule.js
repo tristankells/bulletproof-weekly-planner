@@ -38,7 +38,11 @@ var ClientModule = (function() {
     DOM.$clienttablebody.on("click", ".remove-client-btn", function(e) {
       ConfirmModule.Confirm(
         "Delete All",
-        "This will delete this client and thier associated allocations, are you sure you want to do this?",
+        "This will delete <span class='confirm-name'>" +
+          $(e.target)
+            .closest("tr")
+            .attr("data-name") +
+          "</span> and all associated allocations, are you sure you want to do this?",
         "Yes",
         "Cancel",
         deleteClient,
