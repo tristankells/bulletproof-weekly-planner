@@ -64,7 +64,7 @@ if ($_SESSION['authentication'] != 1) {
     <p>- To allocate a consultant to a client, left click or tap on an allocation slot.</p>
     <p>- To specify the office status or select leave for an allocation slot, right click on the slot. (Long press on a mobile device)</p>
     <p>- Colourblind mode can be activated in the top right settings menu.</p>
-    <p>- To re-order consultants drag them as desired using the three dot icon to the left of their name.</p>
+    <p>- To re-order consultants drag them as desired using the drag icon to the right of their name.</p>
     </div>
     <div class="container-fluid">
         <div id="navigationBar" class="row">

@@ -565,7 +565,7 @@ var WeekConsultantModule = (function() {
             .append(
               $("<a></a>")
                 .attr("href", "#")
-                .append($("<i></i>").addClass("fas fa-ellipsis-v handle"))
+                .append($("<i></i>").addClass("fas fa-arrows-alt-v handle"))
             )
         )
     );
