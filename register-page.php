@@ -34,6 +34,9 @@
     <div class="container-fluid login-page" id="background">
         <div class="row-fluid logo">
             <img class="logo-image" src="img/bulletproof-logo-white.png">
+            <div class="login-subheader-container">
+                <div class="login-subheader">WEEKLY PLANNER</div>
+            </div>
         </div>
         <div class="form">
             <div class="register-form">
