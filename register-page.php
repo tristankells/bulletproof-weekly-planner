@@ -1,4 +1,8 @@
-
+<?php session_start();
+if ($_SESSION['authentication'] != 1) {
+    header("Location: ./Error.php");
+}
+?>
     <!DOCTYPE html>
 <html>
 
@@ -21,11 +25,11 @@
     <script src="js/login-screen/login_index.js"></script>
     <script>
     $(document).ready(function () {
-        <?php if(isset($_SESSION['message'])) {
-    echo "var message = '".$_SESSION['message']."';";
+        <?php if (isset($_SESSION['message'])) {
+    echo "var message = '" . $_SESSION['message'] . "';";
     echo "alert(message);";
     unset($_SESSION['message']);
-} ?>
+}?>
 });
 </script>
 </head>
