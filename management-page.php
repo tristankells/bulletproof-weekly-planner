@@ -25,6 +25,7 @@ if ($_SESSION['authentication'] != 1) {
     <script src="js/reset-password/ResetPasswordModule.js"></script>
     <script src="js/UserSetting.js"></script>
     <script src="js/ThemeModule.js"></script>
+    <script src="js/ConfirmModule.js"></script>
     <link rel="stylesheet" href="style/style.css">
 </head>
 
@@ -62,7 +63,7 @@ if ($_SESSION['authentication'] != 1) {
                 </nav>
             </div>
             <div class="text-right col-lg-3 col-md-3 col-sm-3 col-xs-3">
-                
+
                 <div>
                     <span class="user-email"><?php echo (explode("@", $_SESSION['email'])[0]); ?></span>
                     <i id="usermenubutton" class="settings-icon-top fas fa-cog fa-2x"></i>
@@ -99,7 +100,7 @@ if ($_SESSION['authentication'] != 1) {
                     </tr>
                 </table>
                 <div class="manage__page-delete-button-container">
-                    <button id="removeallconsultantsbutton" class="clear-all-btn">Delete All Consultants</button>
+                    <button id="removeallconsultantsbutton" class="clear-all-btn">Delete All Consultants   <i class="fas fa-trash-alt"></i></button>
                 </div>
 </div>
             <div class="col-lg-5 col-md-10 col-sm-10 mb-5 mx-auto main-div-background">
@@ -130,7 +131,7 @@ if ($_SESSION['authentication'] != 1) {
                     </tr>
                 </table>
                 <div class="manage__page-delete-button-container ml-2">
-                    <button id="removeallclientsbutton" class="clear-all-btn">Delete All Clients</button>
+                    <button id="removeallclientsbutton" class="clear-all-btn">Delete All Clients  <i class="fas fa-trash-alt"></i></button>
                 </div>
 </div>
 

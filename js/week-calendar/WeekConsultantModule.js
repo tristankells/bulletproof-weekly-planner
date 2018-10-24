@@ -46,7 +46,11 @@ var WeekConsultantModule = (function() {
     DOM.$consultantsTableBody.on("click", ".copy-consultant-btn", function() {
       ConfirmModule.Confirm(
         "Copy Row",
-        "This will copy the previous weeks row, are you sure you want to do this?",
+        "This will copy <span class='confirm-name'>" +
+          $(this)
+            .parents("tr")
+            .attr("data-name") +
+          "'s</span> allocations from the previous week to this week, are you sure you want to do this?",
         "Yes",
         "Cancel",
         handleCopyConsultantClick,
@@ -108,7 +112,7 @@ var WeekConsultantModule = (function() {
     DOM.$copyAllBtn.on("click", function() {
       ConfirmModule.Confirm(
         "Copy All",
-        "This will copy all allocations from the previous week, are you sure you want to do this?",
+        "This will copy all allocations from the previous week to this week, are you sure you want to do this?",
         "Yes",
         "Cancel",
         handleCopyTableClick,
@@ -359,7 +363,9 @@ var WeekConsultantModule = (function() {
   function handleClearConsultantAllocationsClick($consultantRow) {
     ConfirmModule.Confirm(
       "Delete All",
-      "This will delete all allocations for this consultant this week, are you sure you want to do this?",
+      "This will delete all allocations for <span class='confirm-name'>" +
+        $consultantRow.attr("data-name") +
+        "</span> this week, are you sure you want to do this?",
       "Yes",
       "Cancel",
       clearConsultantAllocations,

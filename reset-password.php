@@ -40,7 +40,7 @@ if ($_SESSION['authentication'] != 1) {
                     <ul>
                         <li><a href="week-calendar.php">Week</a></li>
                         <li><a href="month-calendar.php">Month</a></li>
-                        <li><a class="highlight-current-page" href="management-page.php">Manage</a></li>
+                        <li><a href="management-page.php">Manage</a></li>
                     </ul>
                 </nav>
             </div>

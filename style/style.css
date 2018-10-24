@@ -13,8 +13,6 @@
   margin: 30px;
 }
 
-
-
 /********************************** Login Page END **********************************/
 
 /* ALERTS */
@@ -1129,5 +1127,11 @@ table td {
   color: white;
   cursor: pointer;
   border: 1px solid rgb(64, 151, 147);
+}
+
+
+.confirm-name {
+  font-weight: bold;
+  text-decoration: underline;
 }
 
