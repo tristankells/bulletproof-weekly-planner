@@ -33,9 +33,14 @@ var ConsultantModule = (function() {
     });
 
     DOM.$consultanttablebody.on("click", ".remove-consultant-btn", function() {
-      if (confirm("Press OK to delete consultant information")) {
-        deleteConsultant($(this).closest("tr"));
-      }
+      ConfirmModule.Confirm(
+        "Delete Consultant",
+        "This will delete this consultant and all associated allocations, are you sure you want to do this?",
+        "Yes",
+        "Cancel",
+        deleteConsultant,
+        $(this).closest("tr")
+      );
     });
 
     DOM.$consultanttablebody.on("blur", ".consultant-name-input", function() {
@@ -59,9 +64,14 @@ var ConsultantModule = (function() {
     });
 
     DOM.$removeAllConsultantsButton.click(function() {
-      if (confirm("Press OK to delete all consultant information")) {
-        deleteAllConsultants();
-      }
+      ConfirmModule.Confirm(
+        "Delete All",
+        "This will delete all consultants and thier associated allocations, are you sure you want to do this?",
+        "Yes",
+        "Cancel",
+        deleteAllConsultants,
+        null
+      );
     });
   }
 
@@ -87,12 +97,12 @@ var ConsultantModule = (function() {
     //Add consultant role colunm
     $rowElement.append(
       $("<td></td>")
-      .addClass("white-bg")
-      .append(
-        $("<input></input>")
-          .addClass("consultant-role-input")
-          .val(consultant["role"])
-      )
+        .addClass("white-bg")
+        .append(
+          $("<input></input>")
+            .addClass("consultant-role-input")
+            .val(consultant["role"])
+        )
     );
 
     //Add remove consultant button

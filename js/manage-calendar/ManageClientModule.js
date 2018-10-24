@@ -36,9 +36,14 @@ var ClientModule = (function() {
     });
 
     DOM.$clienttablebody.on("click", ".remove-client-btn", function(e) {
-      if (confirm("Press OK to delete client information")) {
-        deleteClient($(e.target).closest("tr"));
-      }
+      ConfirmModule.Confirm(
+        "Delete All",
+        "This will delete this client and thier associated allocations, are you sure you want to do this?",
+        "Yes",
+        "Cancel",
+        deleteClient,
+        $(e.target).closest("tr")
+      );
     });
 
     DOM.$clienttablebody.on("blur", ".client-name-input", function() {
@@ -75,9 +80,14 @@ var ClientModule = (function() {
     });
 
     DOM.$removeAllClientsButton.click(function() {
-      if (confirm("Press OK to delete all client information")) {
-        deleteAllClients();
-      }
+      ConfirmModule.Confirm(
+        "Delete All",
+        "This will delete all clients and thier associated allocations, are you sure you want to do this?",
+        "Yes",
+        "Cancel",
+        deleteAllClients,
+        null
+      );
     });
   }
 
