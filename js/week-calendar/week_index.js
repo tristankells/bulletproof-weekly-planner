@@ -15,7 +15,7 @@ function initialiseTables(theme) {
     WeekConsultantModule.init(consultants);
 
     ThemeModule.init(theme, $("#consultantstablebody"), $("#clientstable"));
-    $();
+    InfoModule.init();
 
     //Using the jquery UI library, makes items within tbody elements sortable
     //THE START OF POSITION TRACKING FUNCTIONALITY NEED TO BE EXPANDED UPON

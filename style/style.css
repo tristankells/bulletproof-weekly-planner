@@ -1061,4 +1061,13 @@ table td {
 .transparent-bg {
   background-color: #434d57;
 }
-
+.centered-pop-window {
+  display: none;
+  position: fixed;
+  height: 10%;
+  width: 40%;
+  left: 30%;
+  top: 30%;
+  background-color: rgb(208, 201, 201);
+  z-index: 999999;
+}

@@ -44,22 +44,14 @@ var WeekConsultantModule = (function() {
     });
 
     DOM.$consultantsTableBody.on("click", ".copy-consultant-btn", function() {
-      if (
-        confirm(
-          "This will copy the previous weeks row, are you sure you want to do this?"
-        )
-      ) {
-        handleCopyConsultantClick($(this));
-      }
-
-      // Confirm(
-      //   "Copy Row",
-      //   "This will copy the previous weeks row, are you sure you want to do this?",
-      //   "Yes",
-      //   "Cancel",
-      //   handleCopyConsultantClick,
-      //   $(this)
-      // );
+      ConfirmModule.Confirm(
+        "Copy Row",
+        "This will copy the previous weeks row, are you sure you want to do this?",
+        "Yes",
+        "Cancel",
+        handleCopyConsultantClick,
+        $(this)
+      );
     });
 
     DOM.$clientMenu.on("click", "li", function() {
@@ -114,68 +106,14 @@ var WeekConsultantModule = (function() {
     });
 
     DOM.$copyAllBtn.on("click", function() {
-      if (
-        confirm(
-          "This will copy all allocations from the previous week, are you sure you want to do this?"
-        )
-      ) {
-        handleCopyTableClick();
-      }
-      // Confirm(
-      //   "Copy All",
-      //   "This will copy all allocations from the previous week, are you sure you want to do this?",
-      //   "Yes",
-      //   "Cancel",
-      //   handleCopyTableClick,
-      //   null
-      // );
-    });
-  }
-
-  function Confirm(title, msg, $true, $false, functionname, thisbutton) {
-    /*change*/
-    var $content =
-      "<div class='dialog-overlay'>" +
-      "<div class='dialog'><header>" +
-      " <h3> " +
-      title +
-      " </h3> " +
-      "<i class='fa fa-close'></i>" +
-      "</header>" +
-      "<div class='dialog-msg'>" +
-      " <p> " +
-      msg +
-      " </p> " +
-      "</div>" +
-      "<footer>" +
-      "<div class='controls'>" +
-      " <button class='button button-danger doAction'>" +
-      $true +
-      "</button> " +
-      " <button class='button button-default cancelAction'>" +
-      $false +
-      "</button> " +
-      "</div>" +
-      "</footer>" +
-      "</div>" +
-      "</div>";
-    $("body").prepend($content);
-
-    $(".doAction").click(function() {
-      $(this)
-        .parents(".dialog-overlay")
-        .fadeOut(500, function() {
-          $(this).remove();
-
-          functionname(thisbutton);
-        });
-    });
-    $(".cancelAction, .fa-close").click(function() {
-      $(this)
-        .parents(".dialog-overlay")
-        .fadeOut(500, function() {
-          $(this).remove();
-        });
+      ConfirmModule.Confirm(
+        "Copy All",
+        "This will copy all allocations from the previous week, are you sure you want to do this?",
+        "Yes",
+        "Cancel",
+        handleCopyTableClick,
+        null
+      );
     });
   }
 
@@ -379,56 +317,74 @@ var WeekConsultantModule = (function() {
     updateAllocation($allocationCol);
   }
 
+  function deleteAllAllocationsThisWeek() {
+    //Empty all the consultants allocations
+    $("#consultantstablebody > tr").each(function() {
+      $(this)
+        .find(".allocation-col")
+        .each(function(index) {
+          $(this).replaceWith(
+            WeekAllocationModule.getAllocationTd(index, false)
+          );
+        });
+    });
+
+    //Empty all the client who columns
+    $("#clienttablebody > tr").each(function() {
+      $(this)
+        .find(".who-column")
+        .html("");
+    });
+
+    updateClientsWhoCols();
+
+    //Post request
+    clearAllAllocationsInDB({
+      monday: DateModule.getMondayString(global.week),
+      sunday: DateModule.getSundayString(global.week)
+    }).done();
+  }
+
   function handleClearAllAllocationsClick() {
-    if (confirm("Press OK to delete ALL allocation information")) {
-      //Empty all the consultants allocations
-      $("#consultantstablebody > tr").each(function() {
-        $(this)
-          .find(".allocation-col")
-          .each(function(index) {
-            $(this).replaceWith(
-              WeekAllocationModule.getAllocationTd(index, false)
-            );
-          });
-      });
-
-      //Empty all the client who columns
-      $("#clienttablebody > tr").each(function() {
-        $(this)
-          .find(".who-column")
-          .html("");
-      });
-
-      updateClientsWhoCols();
-
-      //Post request
-      clearAllAllocationsInDB({
-        monday: DateModule.getMondayString(global.week),
-        sunday: DateModule.getSundayString(global.week)
-      }).done();
-    }
+    ConfirmModule.Confirm(
+      "Delete All",
+      "This will delete all allocations from this week, are you sure you want to do this?",
+      "Yes",
+      "Cancel",
+      deleteAllAllocationsThisWeek,
+      null
+    );
   }
 
   function handleClearConsultantAllocationsClick($consultantRow) {
-    if (confirm("Press OK to delete consultant allocation information")) {
-      var id = 0;
+    ConfirmModule.Confirm(
+      "Delete All",
+      "This will delete all allocations for this consultant this week, are you sure you want to do this?",
+      "Yes",
+      "Cancel",
+      clearConsultantAllocations,
+      $consultantRow
+    );
+  }
 
-      id = $consultantRow.attr("data-id");
+  function clearConsultantAllocations($consultantRow) {
+    var id = 0;
 
-      //Empty all the consultants allocations
-      $consultantRow.find(".allocation-col").each(function(index) {
-        $(this).replaceWith(WeekAllocationModule.getAllocationTd(index, false));
-      });
+    id = $consultantRow.attr("data-id");
 
-      updateClientsWhoCols();
+    //Empty all the consultants allocations
+    $consultantRow.find(".allocation-col").each(function(index) {
+      $(this).replaceWith(WeekAllocationModule.getAllocationTd(index, false));
+    });
 
-      //Post request
-      clearConsutlantAllocationsIDB({
-        id: id,
-        monday: DateModule.getMondayString(global.week),
-        sunday: DateModule.getSundayString(global.week)
-      }).done(data => console.log(data));
-    }
+    updateClientsWhoCols();
+
+    //Post request
+    clearConsutlantAllocationsIDB({
+      id: id,
+      monday: DateModule.getMondayString(global.week),
+      sunday: DateModule.getSundayString(global.week)
+    }).done(data => console.log(data));
   }
 
   function updateAllocation($allocationCol) {
