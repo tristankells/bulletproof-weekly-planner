@@ -1,5 +1,5 @@
 
-    @import url("https://fonts.googleapis.com/css?family=Montserrat:100,400,700,900");
+    @import url("https://fonts.googleapis.com/css?family=Montserrat:100,400,500,700,900");
 
     .login-page {
         width: 100%;
@@ -12,17 +12,17 @@
     .logo {
         margin: 15px auto 5px;
         background-color: rgba(0, 0, 0, 0.171);
-        max-width: 360px;
+        max-width: 460px;
         border-radius: 25px;
     }
 
     .logo-image {
-        max-width: 300px;
+        max-width: 400px;
         padding: 20px 0px 0px 0px;
     }
 
     .login-subheader-container {
-        max-width: 289px;
+        max-width: 389px;
         margin: auto;
         padding-bottom: 20px;
         padding-left: 3px;
@@ -31,14 +31,14 @@
     .login-subheader {
         font-family: Montserrat, sans-serif;
         font-weight: 600;
-        font-size: 0.8em;
-        letter-spacing: 4px;
-        color: #808080;
+        font-size: 1em;
+        letter-spacing: 6px;
+        color: #686868;
         text-align: center;
         vertical-align: -webkit-baseline-middle;
         background-color: white;
         box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
-        padding: 1px;
+        padding: 2px;
         mix-blend-mode: lighten;
         
     }
@@ -52,7 +52,7 @@
         position: relative;
         z-index: 1;
         background: #FFFFFF;
-        max-width: 360px;
+        max-width: 460px;
         margin: 15px auto 100px;
         padding: 45px;
         text-align: center;
