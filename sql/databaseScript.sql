@@ -51,7 +51,7 @@ CREATE TABLE `user_profile` (
   `login_password` char(60) CHARACTER SET latin1 COLLATE latin1_bin NOT NULL,
   `external_type` varchar(16) NOT NULL,
   `external_id` varchar(64) NOT NULL,
-  'theme'  office_status int default 0
+  'theme' int default 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
