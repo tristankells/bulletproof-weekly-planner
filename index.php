@@ -99,7 +99,7 @@ if ($gClient->getAccessToken()) {
                     <input id='email-input' type="text" placeholder="email" />
                     <input id='password-input' type="password" placeholder="password" />
                     <button type='submit' id='login-button'>Login</button>
-                    <input style="float:left; width: 10%; margin: 10px 0 15px 0;" id='staying_logged' type="checkbox"/> 
+                    <input style="float:left; width: 10%; margin: 10px 0 15px 0;" id='stayingLoggedIn' type="checkbox"/> 
                     <p style="font-size: 10px; width: 90%; margin: 10px 0 15px 0; text-align: left;">Keep me signed in</p>
 					<!-- <div><?php echo $output; ?></div> -->
                 </form>

@@ -4,6 +4,7 @@ var RegisterModule = (function() {
   var DOM = {};
 
   /* =================== private methods ================= */
+
   // cache DOM elements
   function cacheDom() {
     DOM.$registerButton = $("#register-button");
@@ -14,31 +15,34 @@ var RegisterModule = (function() {
     DOM.$emailInput = $("#register-email-input");
     DOM.$registerFormButton = $(".register-form-btn");
   }
+
   // bind events
   function bindEvents() {
     DOM.$registerButton.click(handleRegisterButtonClick);
     DOM.$registerFormButton.click(function() {
-      animateLoginFormTransition(
+      SharedLoginFunctionsModule.animateLoginFormTransition(
         $(this)
           .closest("div")
           .add(".register-form")
       );
     });
   }
-  // handle click events
+
+  // handle event when register button clicked
   function handleRegisterButtonClick() {
-    var dynamicData = {};
+    //Store the data entred by the user into the registeration form
+    var registrationData = {
+      firstName: DOM.$firstNameInput.val(),
+      lastName: DOM.$lastNameInput.val(),
+      password: DOM.$passwordInput.val(),
+      rePassword: DOM.$rePasswordInput.val(),
+      email: DOM.$emailInput.val()
+    };
 
-    dynamicData["firstName"] = DOM.$firstNameInput.val();
-    dynamicData["lastName"] = DOM.$lastNameInput.val();
-    dynamicData["password"] = DOM.$passwordInput.val();
-    dynamicData["rePassword"] = DOM.$rePasswordInput.val();
-    dynamicData["email"] = DOM.$emailInput.val();
-
-    if (checkNoInputIsEmpty(dynamicData)) {
-      if (isEmail(dynamicData["email"])) {
-        if (dynamicData["password"] == dynamicData["rePassword"]) {
-          attemptRegisterNewUser(dynamicData).done(function(data) {
+    if (checkNoInputIsEmpty(registrationData)) {
+      if (isEmail(registrationData["email"])) {
+        if (registrationData["password"] == registrationData["rePassword"]) {
+          attemptRegisterNewUser(registrationData).done(function(data) {
             if (data == "success") {
               alert(
                 "Success. New user account created. Navigating back to your account"
@@ -61,8 +65,8 @@ var RegisterModule = (function() {
     }
   }
 
+  //Return true if each element in the array is not empty
   function checkNoInputIsEmpty(dynamicData) {
-    var x = 0;
     for (x in dynamicData) {
       if (dynamicData[x].length == 0) {
         return false;
@@ -72,7 +76,6 @@ var RegisterModule = (function() {
   }
 
   /* =================== private AJAX methods ================= */
-
   function attemptRegisterNewUser(dynamicData) {
     return $.post("php/user-profile/register.php", {
       dynamicData: dynamicData
@@ -81,17 +84,10 @@ var RegisterModule = (function() {
 
   /* =================== public methods ================== */
   // main init method
-  function init(SharedFunctions) {
+  function init() {
     cacheDom();
     bindEvents();
-    isEmail = SharedFunctions.isEmail;
-    animateLoginFormTransition = SharedFunctions.animateLoginFormTransition;
   }
-
-  //Inherited function from login-screen/app.js
-  function animateLoginFormTransition() {}
-
-  function isEmail() {}
 
   /* =============== export public methods =============== */
   return {

@@ -1,5 +1,6 @@
 var ResetLostPasswordModule = (function() {
   "use strict";
+
   // placeholder for cached DOM elements
   var DOM = {};
 
@@ -10,59 +11,45 @@ var ResetLostPasswordModule = (function() {
     DOM.$resetEmailInput = $("#reset-email-input");
     DOM.$resetFormButton = $(".reset-form-btn");
   }
+
   // bind events
   function bindEvents() {
     DOM.$resetPasswordBtn.click(handleResetPasswordButtonClick);
-
     DOM.$resetFormButton.click(function() {
-      animateLoginFormTransition(
+      SharedLoginFunctionsModule.animateLoginFormTransition(
         $(this)
           .closest("div")
           .add(".reset-form")
       );
     });
   }
-  // handle click events
-  function handleResetPasswordButtonClick() {
-    var email = "";
 
-    email = DOM.$resetEmailInput.val();
-    if (isEmail(email)) {
+  // handle reset password button click
+  function handleResetPasswordButtonClick() {
+    var email = DOM.$resetEmailInput.val();
+    if (SharedLoginFunctionsModule.isEmail(email)) {
       alert("Email adress is valid");
       resetPasswordDB(email).done(function(data) {
-        alert(data);
       });
     } else {
       alert("Please enter a valid email address");
     }
   }
 
-  function isEmail() {}
-
-  function animateLoginFormTransition() {}
-
   /* =================== private AJAX methods ================= */
-
   function resetPasswordDB(email) {
     return $.post("php/user-profile/forgottenPassword.php", { email: email });
   }
 
   /* =================== public methods ================== */
   // main init method
-  function init(SharedFunctions) {
+  function init() {
     cacheDom();
     bindEvents();
-    isEmail = SharedFunctions.isEmail;
-    animateLoginFormTransition = SharedFunctions.animateLoginFormTransition;
   }
-
-  //Inherited function from login-screen/app.js
-
 
   /* =============== export public methods =============== */
   return {
-    init: init,
-    isEmail: isEmail,
-    animateLoginFormTransition: animateLoginFormTransition
+    init: init
   };
 })();
