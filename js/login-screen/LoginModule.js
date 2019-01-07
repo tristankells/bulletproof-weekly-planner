@@ -17,6 +17,7 @@ var LoginModule = (function() {
   // bind events
   function bindEvents() {
     DOM.$loginForm.submit(function(e) {
+   
       e.preventDefault(e);
       handleLoginButtonClick();
     });
@@ -34,8 +35,10 @@ var LoginModule = (function() {
   function handleLoginButtonClick() {
     attemptLoginDB(retrieveLoginInfoEntered()).done(function(data) {
       if (data == "success") {
+        console.log("Login Yes");
         window.location.href = "week-calendar.php";
       } else {
+        console.log("Login No");
         DOM.$emailInput.val("");
         DOM.$passwordInput.val("");
       }
